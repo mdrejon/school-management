@@ -1,5 +1,5 @@
 /*=====================================================
-Template Name   : Eduka
+Template Name   : WexNix 
 Description     : School, College, University And Courses HTML5 Template
 Author          : LunarTemp
 Version         : 1.0
@@ -19,7 +19,7 @@ Version         : 1.0
         $subMenu.toggleClass('show');
 
         $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
-            $('.dropdown-submenu .show').removeClass('show');
+            $('.wexnix_dropdown-submenu .show').removeClass('show');
         });
         return false;
     });
@@ -34,12 +34,12 @@ Version         : 1.0
 
 
     // navbar Search
-    if ($('.search-box-outer').length) {
-        $('.search-box-outer').on('click', function () {
-            $('body').addClass('search-active');
+    if ($('.wexnix_search-box-outer').length) {
+        $('.wexnix_search-box-outer').on('click', function () {
+            $('body').addClass('wexnix_search-active');
         });
-        $('.close-search').on('click', function () {
-            $('body').removeClass('search-active');
+        $('.wexnix_close-search').on('click', function () {
+            $('body').removeClass('wexnix_search-active');
         });
     }
 
@@ -49,7 +49,7 @@ Version         : 1.0
 
 
     // hero slider
-    $('.hero-slider').owlCarousel({
+    $('.wexnix_hero-slider').owlCarousel({
         loop: true,
         nav: true,
         dots: false,
@@ -96,7 +96,7 @@ Version         : 1.0
 
 
     // testimonial-slider
-    $('.testimonial-slider').owlCarousel({
+    $('.wexnix_testimonial-slider').owlCarousel({
         loop: true,
         margin: 10,
         nav: false,
@@ -117,7 +117,7 @@ Version         : 1.0
 
 
     // event-slider
-    $('.event-slider').owlCarousel({
+    $('.wexnix_event-slider').owlCarousel({
         loop: true,
         margin: 25,
         nav: true,
@@ -142,7 +142,7 @@ Version         : 1.0
 
 
     // department-slider
-    $('.department-slider').owlCarousel({
+    $('.wexnix_department-slider').owlCarousel({
         loop: true,
         margin: 25,
         nav: true,
@@ -167,7 +167,7 @@ Version         : 1.0
 
 
     // partner-slider
-    $('.partner-slider').owlCarousel({
+    $('.wexnix_partner-slider').owlCarousel({
         loop: true,
         margin: 70,
         nav: false,
@@ -189,29 +189,29 @@ Version         : 1.0
 
     // preloader
     $(window).on('load', function () {
-        $(".preloader").fadeOut("slow");
+        $(".wexnix_preloader").fadeOut("slow");
     });
 
 
     // fun fact counter
-    $('.counter').countTo();
-    $('.counter-box').appear(function () {
-        $('.counter').countTo();
+    $('.wexnix_counter').countTo();
+    $('.wexnix_counter-box').appear(function () {
+        $('.wexnix_counter').countTo();
     }, {
         accY: -100
     });
 
 
     // magnific popup init
-    $(".popup-gallery").magnificPopup({
-        delegate: '.popup-img',
+    $(".wexnix_popup-gallery").magnificPopup({
+        delegate: '.wexnix_popup-img',
         type: 'image',
         gallery: {
             enabled: true
         },
     });
 
-    $(".popup-youtube, .popup-vimeo, .popup-gmaps").magnificPopup({
+    $(".wexnix_popup-youtube, .wexnix_popup-vimeo, .wexnix_popup-gmaps").magnificPopup({
         type: "iframe",
         mainClass: "mfp-fade",
         removalDelay: 160,
@@ -248,20 +248,20 @@ Version         : 1.0
 
     // project filter
     $(window).on('load', function () {
-        if ($(".filter-box").children().length > 0) {
-            $(".filter-box").isotope({
-                itemSelector: '.filter-item',
+        if ($(".wexnix_filter-box").children().length > 0) {
+            $(".wexnix_filter-box").isotope({
+                itemSelector: '.wexnix_filter-item',
                 masonry: {
                     columnWidth: 1
                 },
             });
 
-            $('.filter-btn').on('click', 'li', function () {
+            $('.wexnix_filter-btn').on('click', 'li', function () {
                 var filterValue = $(this).attr('data-filter');
-                $(".filter-box").isotope({ filter: filterValue });
+                $(".wexnix_filter-box").isotope({ filter: filterValue });
             });
 
-            $(".filter-btn li").each(function () {
+            $(".wexnix_filter-btn li").each(function () {
                 $(this).on("click", function () {
                     $(this).siblings("li.active").removeClass("active");
                     $(this).addClass("active");
