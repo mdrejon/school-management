@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@yield('meta_description', config('app.name') . ' - School Management')">
+    <meta name="keywords" content="">
+
+    <!-- title -->
+    <title>@yield('title', config('app.name', 'School') . ' - Home')</title>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="/frontend/assets/img/logo/favicon.png">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/frontend/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/frontend/assets/css/all-fontawesome.min.css">
+    <link rel="stylesheet" href="/frontend/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/frontend/assets/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="/frontend/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+
+    {{-- Sizing/coloring for inline Lucide <svg> icons — the original theme's
+         icon boxes only ever styled <img>, so these dynamic icon slots
+         (counter strip, "Why Choose Us" feature boxes, course sidebar
+         features) need their own rules. --}}
+    <style>
+        .wexnix_counter-box .wexnix_icon svg { width: 60px; height: 60px; }
+        .wexnix_choose-item-icon svg { width: 45px; height: 45px; color: #fff; }
+        .wexnix_course-feature-list a svg { width: 18px; height: 18px; color: var(--theme-color2); vertical-align: -4px; margin-right: 4px; }
+        .wexnix_course-feature-list a img { width: 18px; height: 18px; vertical-align: -4px; margin-right: 4px; }
+    </style>
+</head>
+
+<body>
+
+    <!-- preloader -->
+    <div class="wexnix_preloader">
+        <div class="wexnix_loader-book">
+            <div class="wexnix_loader-book-page"></div>
+            <div class="wexnix_loader-book-page"></div>
+            <div class="wexnix_loader-book-page"></div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+
+    <!-- header area -->
+    <header class="wexnix_header">
+        <!-- header top -->
+        <div class="wexnix_header-top">
+            <div class="container">
+                <div class="wexnix_header-top-wrap">
+                    <div class="wexnix_header-top-left">
+                        <div class="wexnix_header-top-social">
+                            <span>Follow Us: </span>
+                            @if ($siteSettings->facebook_url)
+                                <a href="{{ $siteSettings->facebook_url }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                            @endif
+                            @if ($siteSettings->instagram_url)
+                                <a href="{{ $siteSettings->instagram_url }}" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                            @endif
+                            @if ($siteSettings->youtube_url)
+                                <a href="{{ $siteSettings->youtube_url }}" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+                            @endif
+                            @if ($siteSettings->whatsapp_url)
+                                <a href="{{ $siteSettings->whatsapp_url }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="wexnix_header-top-right">
+                        <div class="wexnix_header-top-contact">
+                            <ul>
+                                @if ($siteSettings->address)
+                                    <li>
+                                        <a href="#"><i class="fas fa-location-dot"></i> {{ $siteSettings->address }}</a>
+                                    </li>
+                                @endif
+                                @if ($siteSettings->email)
+                                    <li>
+                                        <a href="mailto:{{ $siteSettings->email }}"><i class="fas fa-envelope"></i> {{ $siteSettings->email }}</a>
+                                    </li>
+                                @endif
+                                @if ($siteSettings->phone)
+                                    <li>
+                                        <a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone-volume"></i> {{ $siteSettings->phone }}</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                        <div class="wexnix_header-lang">
+                            <a href="#" class="active">EN</a>
+                            <a href="#">BN</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- header middle -->
+        <div class="wexnix_header-middle">
+            <div class="container">
+                <div class="wexnix_header-middle-wrap">
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}">
+                    </a>
+                    <div class="wexnix_header-middle-right">
+                        <form class="wexnix_header-search-form" action="#">
+                            <input type="search" name="search-field" placeholder="Search Here...">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                        <a href="application-form.html" class="wexnix_theme-btn"><span
+                                class="fas fa-pencil"></span>Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header middle end -->
+
+        <div class="wexnix_main-navigation">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container position-relative">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="wexnix_navbar-toggler-mobile-icon"><i class="fas fa-bars"></i></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="main_nav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link active" href="{{ route('home') }}">Home</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">About</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="about.html">About Us</a></li>
+                                    <li><a class="dropdown-item" href="history.html">History</a></li>
+                                    <li><a class="dropdown-item" href="donor-list.html">Founder &amp; Doner List</a></li>
+                                    <li><a class="dropdown-item" href="mission-vision.html">Our Vision</a></li>
+                                    <li><a class="dropdown-item" href="campus-tour.html">Campus Tour</a></li>
+                                    <li><a class="dropdown-item" href="achievements.html">Achievements</a></li>
+                                    <li><a class="dropdown-item" href="chairman-speech.html">Honorable Chairman</a></li>
+                                    <li><a class="dropdown-item" href="governing-body.html">Governing Body</a></li>
+                                    <li><a class="dropdown-item" href="ex-governing-body.html">EX Governing Body</a></li>
+                                    <li><a class="dropdown-item" href="principal-speech.html">Our Principal</a></li>
+                                    <li><a class="dropdown-item" href="ex-principals.html">Our EX Principal</a></li>
+                                    <li><a class="dropdown-item" href="administrators.html">Administrators</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Information</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="permission-recognition-letter.html">Teaching Permission &amp; Recognition Letter</a></li>
+                                    <li><a class="dropdown-item" href="nationalization.html">Nationalization</a></li>
+                                    <li><a class="dropdown-item" href="statistics-report.html">Statistics Report</a></li>
+                                    <li><a class="dropdown-item" href="govt-approval-letter.html">Govt. Approval Letter</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Academic</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="class-schedule.html">Class Schedule</a></li>
+                                    <li><a class="dropdown-item" href="teacher.html">Our Teachers</a></li>
+                                    <li><a class="dropdown-item" href="former-teachers.html">Former Teachers</a></li>
+                                    <li><a class="dropdown-item" href="staffs.html">Our Staffs</a></li>
+                                    <li><a class="dropdown-item" href="former-staffs.html">Former Staffs</a></li>
+                                    <li><a class="dropdown-item" href="academic-rules.html">Academic Rules</a></li>
+                                    <li><a class="dropdown-item" href="academic-calendar.html">Academic Calendar</a></li>
+                                    <li><a class="dropdown-item" href="attendance-sheet.html">Attendance Sheet</a></li>
+                                    <li><a class="dropdown-item" href="#">Leave Information</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admission</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="why-study.html">Why Study ?</a></li>
+                                    <li><a class="dropdown-item" href="how-to-apply.html">How to apply</a></li>
+                                    <li><a class="dropdown-item" href="admission-test.html">Admission Test</a></li>
+                                    <li><a class="dropdown-item" href="admission-policy.html">Admission Policy</a></li>
+                                    <li><a class="dropdown-item" href="registration-system.html">Registration System</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="student-list.html">Student List</a></li>
+                                    <li><a class="dropdown-item" href="tuition-fee.html">Tution Fees</a></li>
+                                    <li><a class="dropdown-item" href="mobile-banking.html">Mobile Banking</a></li>
+                                    <li><a class="dropdown-item" href="daily-activities.html">Daily Activities</a></li>
+                                    <li><a class="dropdown-item" href="exam-schedule.html">Exam Schedule</a></li>
+                                    <li><a class="dropdown-item" href="student-uniform.html">Student Uniform</a></li>
+                                    <li><a class="dropdown-item" href="exam-system.html">Exam System</a></li>
+                                    <li><a class="dropdown-item" href="rules-regulation.html">Rules and Regulation</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Facilities</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="library.html">Library</a></li>
+                                    <li><a class="dropdown-item" href="play-ground.html">Play Ground</a></li>
+                                    <li><a class="dropdown-item" href="physics-lab.html">Physics Lab</a></li>
+                                    <li><a class="dropdown-item" href="biology-lab.html">Biology Lab</a></li>
+                                    <li><a class="dropdown-item" href="ict-lab.html">ICT Lab</a></li>
+                                    <li><a class="dropdown-item" href="chemistry-lab.html">Chemistry Lab</a></li>
+                                    <li><a class="dropdown-item" href="extra-activities.html">Extra Activities</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Result</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="result.html">Exam Result</a></li>
+                                    <li><a class="dropdown-item" href="search-result.html">Academic Result</a></li>
+                                    <li><a class="dropdown-item" href="evaluation-result.html">Evaluation Result</a></li>
+                                    <li><a class="dropdown-item" href="board-exam-result.html">Board Exam Result</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Others</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="notice.html">Notice</a></li>
+                                    <li><a class="dropdown-item" href="news.html">News</a></li>
+                                    <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
+                                    <li><a class="dropdown-item" href="event.html">Event</a></li>
+                                    <li><a class="dropdown-item" href="routine.html">Routine</a></li>
+                                    <li><a class="dropdown-item" href="download.html">Download</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pages</a>
+                                <ul class="dropdown-menu fade-down">
+                                    <li><a class="dropdown-item" href="course.html">Courses</a></li>
+                                    <li><a class="dropdown-item" href="course-single.html">Course Single</a></li>
+                                    <li><a class="dropdown-item" href="academic.html">Academic</a></li>
+                                    <li><a class="dropdown-item" href="academic-single.html">Academic Single</a></li>
+                                    <li><a class="dropdown-item" href="facility.html">Facility</a></li>
+                                    <li><a class="dropdown-item" href="teacher-single.html">Teacher Single</a></li>
+                                    <li><a class="dropdown-item" href="event-single.html">Event Single</a></li>
+                                    <li><a class="dropdown-item" href="portfolio.html">Portfolio</a></li>
+                                    <li><a class="dropdown-item" href="portfolio-single.html">Portfolio Single</a></li>
+                                    <li><a class="dropdown-item" href="blog.html">Blog</a></li>
+                                    <li><a class="dropdown-item" href="blog-single.html">Blog Single</a></li>
+                                    <li><a class="dropdown-item" href="application-form.html">Application Form</a></li>
+                                    <li><a class="dropdown-item" href="pricing.html">Pricing Plan</a></li>
+                                    <li><a class="dropdown-item" href="testimonial.html">Testimonials</a></li>
+                                    <li><a class="dropdown-item" href="faq.html">Faq</a></li>
+                                    <li><a class="dropdown-item" href="login.html">Login</a></li>
+                                    <li><a class="dropdown-item" href="register.html">Register</a></li>
+                                    <li><a class="dropdown-item" href="terms.html">Terms Of Service</a></li>
+                                    <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                                    <li><a class="dropdown-item" href="404.html">404 Error</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- notice marquee -->
+        <div class="wexnix_notice-marquee">
+            <div class="container">
+                <div class="wexnix_notice-marquee-wrap">
+                    <span class="wexnix_notice-label">Notice</span>
+                    <div class="wexnix_marquee-viewport">
+                        <div class="wexnix_marquee-track">
+                            <span>Welcome to our school website — new admissions are now open.</span>
+                            <span>Annual sports day will be held next month.</span>
+                            <span>Mid-term examination routine has been published.</span>
+                            <span>School will remain closed on the upcoming holiday.</span>
+                            <span>Welcome to our school website — new admissions are now open.</span>
+                            <span>Annual sports day will be held next month.</span>
+                            <span>Mid-term examination routine has been published.</span>
+                            <span>School will remain closed on the upcoming holiday.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- notice marquee end -->
+    </header>
+    <!-- header area end -->
+
+
+    <!-- popup search -->
+    <div class="wexnix_search-popup">
+        <button class="wexnix_close-search"><span class="fas fa-times"></span></button>
+        <form action="#">
+            <div class="wexnix_form-group">
+                <input type="search" name="search-field" placeholder="Search Here..." required>
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <!-- popup search end -->
+
+
+
+    @yield('content')
+
+
+
+    <!-- footer area -->
+    <footer class="wexnix_footer-area">
+        <div class="wexnix_footer-shape">
+            <img src="/frontend/assets/img/shape/03.png" alt="">
+        </div>
+        <div class="wexnix_footer-widget">
+            <div class="container">
+                <div class="row wexnix_footer-widget-wrapper pt-100 pb-70">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="wexnix_footer-widget-box wexnix_about-us">
+                            <a href="{{ route('home') }}" class="wexnix_footer-logo">
+                                <img src="{{ $siteSettings->footer_logo_url ?? '/frontend/assets/img/logo/logo-light.png' }}" alt="{{ $siteSettings->site_name }}">
+                            </a>
+                            @if ($siteSettings->footer_about)
+                                <p class="mb-3">
+                                    {{ $siteSettings->footer_about }}
+                                </p>
+                            @endif
+                            <ul class="wexnix_footer-contact">
+                                @if ($siteSettings->phone)
+                                    <li><a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone"></i>{{ $siteSettings->phone }}</a></li>
+                                @endif
+                                @if ($siteSettings->address)
+                                    <li><i class="fas fa-map-marker-alt"></i>{{ $siteSettings->address }}</li>
+                                @endif
+                                @if ($siteSettings->email)
+                                    <li><a href="mailto:{{ $siteSettings->email }}"><i
+                                                class="fas fa-envelope"></i>{{ $siteSettings->email }}</a></li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-2">
+                        <div class="wexnix_footer-widget-box wexnix_list">
+                            <h4 class="wexnix_footer-widget-title">Quick Links</h4>
+                            <ul class="wexnix_footer-list">
+                                <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> FAQ's</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Testimonials</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Terms Of Service</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Privacy policy</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Update News</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="wexnix_footer-widget-box wexnix_list">
+                            <h4 class="wexnix_footer-widget-title">Our Campus</h4>
+                            <ul class="wexnix_footer-list">
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Campus Safety</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Student Activities</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Academic Department</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Planning & Administration</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Office Of The Chancellor</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Facility Services</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="wexnix_footer-widget-box wexnix_list">
+                            <h4 class="wexnix_footer-widget-title">Newsletter</h4>
+                            <div class="wexnix_footer-newsletter">
+                                <p>Subscribe Our Newsletter To Get Latest Update And News</p>
+                                <div class="wexnix_subscribe-form">
+                                    <form action="#">
+                                        <input type="email" class="form-control" placeholder="Your Email">
+                                        <button class="wexnix_theme-btn" type="submit">
+                                            Subscribe Now <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wexnix_copyright">
+            <div class="container">
+                <div class="wexnix_copyright-wrapper">
+                    <div class="row">
+                        <div class="col-md-6 align-self-center">
+                            <p class="wexnix_copyright-text">
+                                &copy; Copyright <span id="date"></span> <a href="{{ route('home') }}"> {{ $siteSettings->site_name }} </a> {{ $siteSettings->copyright_text ?? 'All Rights Reserved.' }}
+                            </p>
+                        </div>
+                        <div class="col-md-6 align-self-center">
+                            <ul class="wexnix_footer-social">
+                                @if ($siteSettings->facebook_url)
+                                    <li><a href="{{ $siteSettings->facebook_url }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a></li>
+                                @endif
+                                @if ($siteSettings->linkedin_url)
+                                    <li><a href="{{ $siteSettings->linkedin_url }}" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a></li>
+                                @endif
+                                @if ($siteSettings->whatsapp_url)
+                                    <li><a href="{{ $siteSettings->whatsapp_url }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a></li>
+                                @endif
+                                @if ($siteSettings->youtube_url)
+                                    <li><a href="{{ $siteSettings->youtube_url }}" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a></li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer area end -->
+
+
+    <!-- scroll-top -->
+    <a href="#" id="scroll-top"><i class="fas fa-arrow-up"></i></a>
+    <!-- scroll-top end -->
+
+
+    <!-- js -->
+    <script src="/frontend/assets/js/jquery-3.7.1.min.js"></script>
+    <script src="/frontend/assets/js/modernizr.min.js"></script>
+    <script src="/frontend/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/frontend/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="/frontend/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="/frontend/assets/js/isotope.pkgd.min.js"></script>
+    <script src="/frontend/assets/js/jquery.appear.min.js"></script>
+    <script src="/frontend/assets/js/jquery.easing.min.js"></script>
+    <script src="/frontend/assets/js/owl.carousel.min.js"></script>
+    <script src="/frontend/assets/js/counter-up.js"></script>
+    <script src="/frontend/assets/js/wow.min.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+
+</body>
+
