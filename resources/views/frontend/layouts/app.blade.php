@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ $currentLanguage?->direction ?? 'ltr' }}">
 
 <head>
     <!-- meta tags -->
@@ -33,6 +33,8 @@
         .wexnix_course-feature-list a svg { width: 18px; height: 18px; color: var(--theme-color2); vertical-align: -4px; margin-right: 4px; }
         .wexnix_course-feature-list a img { width: 18px; height: 18px; vertical-align: -4px; margin-right: 4px; }
     </style>
+
+    @stack('styles')
 </head>
 
 <body>
@@ -92,8 +94,9 @@
                             </ul>
                         </div>
                         <div class="wexnix_header-lang">
-                            <a href="#" class="active">EN</a>
-                            <a href="#">BN</a>
+                            @foreach ($languages as $lang)
+                                <a href="{{ route('language.switch', $lang->code) }}" class="{{ app()->getLocale() === $lang->code ? 'active' : '' }}">{{ strtoupper($lang->code) }}</a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -108,8 +111,8 @@
                         <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}">
                     </a>
                     <div class="wexnix_header-middle-right">
-                        <form class="wexnix_header-search-form" action="#">
-                            <input type="search" name="search-field" placeholder="Search Here...">
+                        <form class="wexnix_header-search-form" action="{{ route('search') }}" method="GET">
+                            <input type="search" name="q" placeholder="Search Here...">
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </form>
                         <a href="application-form.html" class="wexnix_theme-btn"><span
@@ -129,128 +132,9 @@
                     </button>
                     <div class="collapse navbar-collapse" id="main_nav">
                         <ul class="navbar-nav">
-                            <li class="nav-item"><a class="nav-link active" href="{{ route('home') }}">Home</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">About</a>
-                                <ul class="dropdown-menu wexnix_fade-down">
-                                    <li><a class="dropdown-item" href="about.html">About Us</a></li>
-                                    <li><a class="dropdown-item" href="history.html">History</a></li>
-                                    <li><a class="dropdown-item" href="donor-list.html">Founder &amp; Doner List</a></li>
-                                    <li><a class="dropdown-item" href="mission-vision.html">Our Vision</a></li>
-                                    <li><a class="dropdown-item" href="campus-tour.html">Campus Tour</a></li>
-                                    <li><a class="dropdown-item" href="achievements.html">Achievements</a></li>
-                                    <li><a class="dropdown-item" href="chairman-speech.html">Honorable Chairman</a></li>
-                                    <li><a class="dropdown-item" href="governing-body.html">Governing Body</a></li>
-                                    <li><a class="dropdown-item" href="ex-governing-body.html">EX Governing Body</a></li>
-                                    <li><a class="dropdown-item" href="principal-speech.html">Our Principal</a></li>
-                                    <li><a class="dropdown-item" href="ex-principals.html">Our EX Principal</a></li>
-                                    <li><a class="dropdown-item" href="administrators.html">Administrators</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Information</a>
-                                <ul class="dropdown-menu wexnix_fade-down">
-                                    <li><a class="dropdown-item" href="permission-recognition-letter.html">Teaching Permission &amp; Recognition Letter</a></li>
-                                    <li><a class="dropdown-item" href="nationalization.html">Nationalization</a></li>
-                                    <li><a class="dropdown-item" href="statistics-report.html">Statistics Report</a></li>
-                                    <li><a class="dropdown-item" href="govt-approval-letter.html">Govt. Approval Letter</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Academic</a>
-                                <ul class="dropdown-menu wexnix_fade-down">
-                                    <li><a class="dropdown-item" href="class-schedule.html">Class Schedule</a></li>
-                                    <li><a class="dropdown-item" href="teacher.html">Our Teachers</a></li>
-                                    <li><a class="dropdown-item" href="former-teachers.html">Former Teachers</a></li>
-                                    <li><a class="dropdown-item" href="staffs.html">Our Staffs</a></li>
-                                    <li><a class="dropdown-item" href="former-staffs.html">Former Staffs</a></li>
-                                    <li><a class="dropdown-item" href="academic-rules.html">Academic Rules</a></li>
-                                    <li><a class="dropdown-item" href="academic-calendar.html">Academic Calendar</a></li>
-                                    <li><a class="dropdown-item" href="attendance-sheet.html">Attendance Sheet</a></li>
-                                    <li><a class="dropdown-item" href="#">Leave Information</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admission</a>
-                                <ul class="dropdown-menu wexnix_fade-down">
-                                    <li><a class="dropdown-item" href="why-study.html">Why Study ?</a></li>
-                                    <li><a class="dropdown-item" href="how-to-apply.html">How to apply</a></li>
-                                    <li><a class="dropdown-item" href="admission-test.html">Admission Test</a></li>
-                                    <li><a class="dropdown-item" href="admission-policy.html">Admission Policy</a></li>
-                                    <li><a class="dropdown-item" href="registration-system.html">Registration System</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student</a>
-                                <ul class="dropdown-menu wexnix_fade-down">
-                                    <li><a class="dropdown-item" href="student-list.html">Student List</a></li>
-                                    <li><a class="dropdown-item" href="tuition-fee.html">Tution Fees</a></li>
-                                    <li><a class="dropdown-item" href="mobile-banking.html">Mobile Banking</a></li>
-                                    <li><a class="dropdown-item" href="daily-activities.html">Daily Activities</a></li>
-                                    <li><a class="dropdown-item" href="exam-schedule.html">Exam Schedule</a></li>
-                                    <li><a class="dropdown-item" href="student-uniform.html">Student Uniform</a></li>
-                                    <li><a class="dropdown-item" href="exam-system.html">Exam System</a></li>
-                                    <li><a class="dropdown-item" href="rules-regulation.html">Rules and Regulation</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Facilities</a>
-                                <ul class="dropdown-menu wexnix_fade-down">
-                                    <li><a class="dropdown-item" href="library.html">Library</a></li>
-                                    <li><a class="dropdown-item" href="play-ground.html">Play Ground</a></li>
-                                    <li><a class="dropdown-item" href="physics-lab.html">Physics Lab</a></li>
-                                    <li><a class="dropdown-item" href="biology-lab.html">Biology Lab</a></li>
-                                    <li><a class="dropdown-item" href="ict-lab.html">ICT Lab</a></li>
-                                    <li><a class="dropdown-item" href="chemistry-lab.html">Chemistry Lab</a></li>
-                                    <li><a class="dropdown-item" href="extra-activities.html">Extra Activities</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Result</a>
-                                <ul class="dropdown-menu wexnix_fade-down">
-                                    <li><a class="dropdown-item" href="result.html">Exam Result</a></li>
-                                    <li><a class="dropdown-item" href="search-result.html">Academic Result</a></li>
-                                    <li><a class="dropdown-item" href="evaluation-result.html">Evaluation Result</a></li>
-                                    <li><a class="dropdown-item" href="board-exam-result.html">Board Exam Result</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Others</a>
-                                <ul class="dropdown-menu wexnix_fade-down">
-                                    <li><a class="dropdown-item" href="notice.html">Notice</a></li>
-                                    <li><a class="dropdown-item" href="news.html">News</a></li>
-                                    <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-                                    <li><a class="dropdown-item" href="event.html">Event</a></li>
-                                    <li><a class="dropdown-item" href="routine.html">Routine</a></li>
-                                    <li><a class="dropdown-item" href="download.html">Download</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pages</a>
-                                <ul class="dropdown-menu fade-down">
-                                    <li><a class="dropdown-item" href="course.html">Courses</a></li>
-                                    <li><a class="dropdown-item" href="course-single.html">Course Single</a></li>
-                                    <li><a class="dropdown-item" href="academic.html">Academic</a></li>
-                                    <li><a class="dropdown-item" href="academic-single.html">Academic Single</a></li>
-                                    <li><a class="dropdown-item" href="facility.html">Facility</a></li>
-                                    <li><a class="dropdown-item" href="teacher-single.html">Teacher Single</a></li>
-                                    <li><a class="dropdown-item" href="event-single.html">Event Single</a></li>
-                                    <li><a class="dropdown-item" href="portfolio.html">Portfolio</a></li>
-                                    <li><a class="dropdown-item" href="portfolio-single.html">Portfolio Single</a></li>
-                                    <li><a class="dropdown-item" href="blog.html">Blog</a></li>
-                                    <li><a class="dropdown-item" href="blog-single.html">Blog Single</a></li>
-                                    <li><a class="dropdown-item" href="application-form.html">Application Form</a></li>
-                                    <li><a class="dropdown-item" href="pricing.html">Pricing Plan</a></li>
-                                    <li><a class="dropdown-item" href="testimonial.html">Testimonials</a></li>
-                                    <li><a class="dropdown-item" href="faq.html">Faq</a></li>
-                                    <li><a class="dropdown-item" href="login.html">Login</a></li>
-                                    <li><a class="dropdown-item" href="register.html">Register</a></li>
-                                    <li><a class="dropdown-item" href="terms.html">Terms Of Service</a></li>
-                                    <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
-                                    <li><a class="dropdown-item" href="404.html">404 Error</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                            @foreach ($headerMenuItems as $item)
+                                @include('frontend.partials.menu-item', ['item' => $item, 'depth' => 0])
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -258,25 +142,25 @@
         </div>
 
         <!-- notice marquee -->
-        <div class="wexnix_notice-marquee">
-            <div class="container">
-                <div class="wexnix_notice-marquee-wrap">
-                    <span class="wexnix_notice-label">Notice</span>
-                    <div class="wexnix_marquee-viewport">
-                        <div class="wexnix_marquee-track">
-                            <span>Welcome to our school website — new admissions are now open.</span>
-                            <span>Annual sports day will be held next month.</span>
-                            <span>Mid-term examination routine has been published.</span>
-                            <span>School will remain closed on the upcoming holiday.</span>
-                            <span>Welcome to our school website — new admissions are now open.</span>
-                            <span>Annual sports day will be held next month.</span>
-                            <span>Mid-term examination routine has been published.</span>
-                            <span>School will remain closed on the upcoming holiday.</span>
+        @if (\App\Models\ModuleSetting::isEnabled('notices') && $marqueeNotices->count())
+            <div class="wexnix_notice-marquee">
+                <div class="container">
+                    <div class="wexnix_notice-marquee-wrap">
+                        <span class="wexnix_notice-label">{{ $noticePageSettings->marquee_label ?: 'Notice' }}</span>
+                        <div class="wexnix_marquee-viewport">
+                            <div class="wexnix_marquee-track">
+                                @foreach ($marqueeNotices as $notice)
+                                    <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->title }}</a></span>
+                                @endforeach
+                                @foreach ($marqueeNotices as $notice)
+                                    <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->title }}</a></span>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
         <!-- notice marquee end -->
     </header>
     <!-- header area end -->
@@ -285,9 +169,9 @@
     <!-- popup search -->
     <div class="wexnix_search-popup">
         <button class="wexnix_close-search"><span class="fas fa-times"></span></button>
-        <form action="#">
+        <form action="{{ route('search') }}" method="GET">
             <div class="wexnix_form-group">
-                <input type="search" name="search-field" placeholder="Search Here..." required>
+                <input type="search" name="q" placeholder="Search Here..." required>
                 <button type="submit"><i class="fas fa-search"></i></button>
             </div>
         </form>
@@ -334,35 +218,29 @@
                     </div>
                     <div class="col-md-6 col-lg-2">
                         <div class="wexnix_footer-widget-box wexnix_list">
-                            <h4 class="wexnix_footer-widget-title">Quick Links</h4>
+                            <h4 class="wexnix_footer-widget-title">{{ $siteSettings->footer_quick_links_title ?: 'Quick Links' }}</h4>
                             <ul class="wexnix_footer-list">
-                                <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> FAQ's</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Testimonials</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Terms Of Service</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Privacy policy</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Update News</a></li>
+                                @foreach ($siteSettings->footerQuickLinkItems() as $link)
+                                    <li><a href="{{ $link['url'] }}"><i class="fas fa-caret-right"></i> {{ $link['label'] }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="wexnix_footer-widget-box wexnix_list">
-                            <h4 class="wexnix_footer-widget-title">Our Campus</h4>
+                            <h4 class="wexnix_footer-widget-title">{{ $siteSettings->footer_campus_title ?: 'Our Campus' }}</h4>
                             <ul class="wexnix_footer-list">
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Campus Safety</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Student Activities</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Academic Department</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Planning & Administration</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Office Of The Chancellor</a></li>
-                                <li><a href="#"><i class="fas fa-caret-right"></i> Facility Services</a></li>
+                                @foreach ($siteSettings->footerCampusLinkItems() as $link)
+                                    <li><a href="{{ $link['url'] }}"><i class="fas fa-caret-right"></i> {{ $link['label'] }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="wexnix_footer-widget-box wexnix_list">
-                            <h4 class="wexnix_footer-widget-title">Newsletter</h4>
+                            <h4 class="wexnix_footer-widget-title">{{ $siteSettings->footer_newsletter_title ?: 'Newsletter' }}</h4>
                             <div class="wexnix_footer-newsletter">
-                                <p>Subscribe Our Newsletter To Get Latest Update And News</p>
+                                <p>{{ $siteSettings->footer_newsletter_text ?: 'Subscribe Our Newsletter To Get Latest Update And News' }}</p>
                                 <div class="wexnix_subscribe-form">
                                     <form action="#">
                                         <input type="email" class="form-control" placeholder="Your Email">

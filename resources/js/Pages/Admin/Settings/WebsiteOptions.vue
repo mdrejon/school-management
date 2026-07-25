@@ -31,6 +31,15 @@ const normalizeInstituteInfo = (items) =>
         value: { ...emptyTranslatable(), ...item.value },
     }));
 
+// Footer link columns: label is translatable, url is a plain freeform
+// string the admin types directly (not a route/model picker like the
+// header's MenuItem) — these are just two flat footer columns, no submenus.
+const normalizeFooterLinks = (items) =>
+    (items ?? []).map((item) => ({
+        label: { ...emptyTranslatable(), ...item.label },
+        url: item.url ?? '',
+    }));
+
 // Default icon for newly-added repeater rows before the admin picks one —
 // a generic Lucide icon, replaced via IconPicker (library search or upload).
 const defaultIcon = () => ({ source: 'lucide', value: 'circle' });
@@ -67,14 +76,27 @@ const normalizeAboutItems = (items) =>
 const sections = [
     { key: 'general', label: 'General', icon: 'pi pi-building', description: 'Site name and logos.' },
     { key: 'header', label: 'Header', icon: 'pi pi-align-left', description: "Address, phone, email, and social links shown in the site header — the footer reuses these too." },
-    { key: 'footer', label: 'Footer', icon: 'pi pi-align-justify', description: "The footer's about text and copyright line." },
+    { key: 'footer', label: 'Footer', icon: 'pi pi-align-justify', description: "The footer's about text, copyright line, Quick Links / Our Campus columns, and Newsletter heading." },
     { key: 'school', label: 'School Profile', icon: 'pi pi-verified', description: 'Homepage stat strips: institute details under the slider, and the counter/CTA band further down.' },
-    { key: 'choose', label: 'Why Choose Us', icon: 'pi pi-check-circle', description: 'The "Why Choose Us" block with feature boxes and a side image.' },
-    { key: 'about', label: 'About Us', icon: 'pi pi-info-circle', description: 'The "About Us" block with photos, an experience badge, feature items, and a quote.' },
-    { key: 'skill', label: 'Our Skills', icon: 'pi pi-chart-bar', description: 'The enrollment card and "Our Skills" progress bars.' },
-    { key: 'video', label: 'Video Section', icon: 'pi pi-video', description: 'The "Latest Video" block further down the homepage.' },
-    { key: 'offer', label: 'Offer Banner', icon: 'pi pi-megaphone', description: 'The promotional banner ("Our 20% Offer...") further down the homepage.' },
+    { key: 'choose', label: 'Why Choose Us', icon: 'pi pi-check-circle', description: 'The "Why Choose Us" block with feature boxes and a side image.', module: 'choose' },
+    { key: 'about', label: 'About Us', icon: 'pi pi-info-circle', description: 'The "About Us" block with photos, an experience badge, feature items, and a quote.', module: 'about' },
+    { key: 'skill', label: 'Our Skills', icon: 'pi pi-chart-bar', description: 'The enrollment card and "Our Skills" progress bars.', module: 'skill' },
+    { key: 'video', label: 'Video Section', icon: 'pi pi-video', description: 'The "Latest Video" block further down the homepage.', module: 'video' },
+    { key: 'offer', label: 'Offer Banner', icon: 'pi pi-megaphone', description: 'The promotional banner ("Our 20% Offer...") further down the homepage.', module: 'offer' },
+    { key: 'principal', label: 'Our Principal', icon: 'pi pi-user', description: 'The current principal\'s photo, message, and the /principal page\'s breadcrumb & SEO.', module: 'principal' },
+    { key: 'ex-principal', label: 'Ex-Principal', icon: 'pi pi-user-minus', description: 'The former principal\'s photo, message, and the /ex-principals page\'s breadcrumb & SEO.', module: 'ex_principal' },
+    { key: 'contact', label: 'Contact Page', icon: 'pi pi-envelope', description: 'Office hours, the "Get In Touch" form intro/image/map, and the /contact page\'s breadcrumb & SEO.', module: 'contact' },
 ];
+// A tab with no `module` key always shows (General/Header/Footer/School
+// aren't tied to any single Site Configuration toggle). Tabs tied to a
+// module a developer disabled there disappear from here too, same as the
+// sidebar — the fields underneath stay in the database either way, so
+// re-enabling the module brings whatever was already entered right back.
+const visibleSections = computed(() => {
+    const enabledModules = page.props.enabledModules ?? [];
+
+    return sections.filter((section) => !section.module || enabledModules.includes(section.module));
+});
 const activeSection = computed(() => sections.find((s) => s.key === activeSectionKey.value));
 const activeSectionKey = ref('general');
 
@@ -96,6 +118,13 @@ const chooseImagePreview = ref(props.settings.choose_image_url);
 const aboutImage1Preview = ref(props.settings.about_image_1_url);
 const aboutImage2Preview = ref(props.settings.about_image_2_url);
 const aboutImage3Preview = ref(props.settings.about_image_3_url);
+const aboutPageBreadcrumbPreview = ref(props.settings.about_page_breadcrumb_image_url);
+const principalPhotoPreview = ref(props.settings.principal_photo_url);
+const principalPageBreadcrumbPreview = ref(props.settings.principal_page_breadcrumb_image_url);
+const exPrincipalPhotoPreview = ref(props.settings.ex_principal_photo_url);
+const exPrincipalPageBreadcrumbPreview = ref(props.settings.ex_principal_page_breadcrumb_image_url);
+const contactImagePreview = ref(props.settings.contact_image_url);
+const contactPageBreadcrumbPreview = ref(props.settings.contact_page_breadcrumb_image_url);
 
 const form = useForm({
     logo: null,
@@ -111,6 +140,12 @@ const form = useForm({
     linkedin_url: props.settings.linkedin_url ?? '',
     footer_about: { ...emptyTranslatable(), ...props.settings.footer_about },
     copyright_text: { ...emptyTranslatable(), ...props.settings.copyright_text },
+    footer_quick_links_title: { ...emptyTranslatable(), ...props.settings.footer_quick_links_title },
+    footer_quick_links: normalizeFooterLinks(props.settings.footer_quick_links),
+    footer_campus_title: { ...emptyTranslatable(), ...props.settings.footer_campus_title },
+    footer_campus_links: normalizeFooterLinks(props.settings.footer_campus_links),
+    footer_newsletter_title: { ...emptyTranslatable(), ...props.settings.footer_newsletter_title },
+    footer_newsletter_text: { ...emptyTranslatable(), ...props.settings.footer_newsletter_text },
     institute_info: normalizeInstituteInfo(props.settings.institute_info),
     cta_stats: normalizeCtaStats(props.settings.cta_stats),
     partner_logos: normalizePartnerLogos(props.settings.partner_logos),
@@ -155,6 +190,46 @@ const form = useForm({
     about_badge_icon: props.settings.about_badge_icon ?? defaultIcon(),
     about_badge_text: { ...emptyTranslatable(), ...props.settings.about_badge_text },
     about_items: normalizeAboutItems(props.settings.about_items),
+    about_page_breadcrumb_image: null,
+    about_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.about_page_breadcrumb_title },
+    about_page_seo_title: { ...emptyTranslatable(), ...props.settings.about_page_seo_title },
+    about_page_seo_description: { ...emptyTranslatable(), ...props.settings.about_page_seo_description },
+    about_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.about_page_seo_keywords },
+    principal_photo: null,
+    principal_name: { ...emptyTranslatable(), ...props.settings.principal_name },
+    principal_designation: { ...emptyTranslatable(), ...props.settings.principal_designation },
+    principal_message: { ...emptyTranslatable(), ...props.settings.principal_message },
+    principal_page_breadcrumb_image: null,
+    principal_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.principal_page_breadcrumb_title },
+    principal_page_seo_title: { ...emptyTranslatable(), ...props.settings.principal_page_seo_title },
+    principal_page_seo_description: { ...emptyTranslatable(), ...props.settings.principal_page_seo_description },
+    principal_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.principal_page_seo_keywords },
+    ex_principal_photo: null,
+    ex_principal_name: { ...emptyTranslatable(), ...props.settings.ex_principal_name },
+    ex_principal_designation: { ...emptyTranslatable(), ...props.settings.ex_principal_designation },
+    ex_principal_message: { ...emptyTranslatable(), ...props.settings.ex_principal_message },
+    ex_principal_page_breadcrumb_image: null,
+    ex_principal_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.ex_principal_page_breadcrumb_title },
+    ex_principal_page_seo_title: { ...emptyTranslatable(), ...props.settings.ex_principal_page_seo_title },
+    ex_principal_page_seo_description: { ...emptyTranslatable(), ...props.settings.ex_principal_page_seo_description },
+    ex_principal_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.ex_principal_page_seo_keywords },
+    contact_address_label: { ...emptyTranslatable(), ...props.settings.contact_address_label },
+    contact_address_value: { ...emptyTranslatable(), ...props.settings.contact_address_value },
+    contact_phone_label: { ...emptyTranslatable(), ...props.settings.contact_phone_label },
+    contact_phone_value: { ...emptyTranslatable(), ...props.settings.contact_phone_value },
+    contact_email_label: { ...emptyTranslatable(), ...props.settings.contact_email_label },
+    contact_email_value: { ...emptyTranslatable(), ...props.settings.contact_email_value },
+    contact_open_time_label: { ...emptyTranslatable(), ...props.settings.contact_open_time_label },
+    contact_open_time: { ...emptyTranslatable(), ...props.settings.contact_open_time },
+    contact_form_title: { ...emptyTranslatable(), ...props.settings.contact_form_title },
+    contact_form_description: { ...emptyTranslatable(), ...props.settings.contact_form_description },
+    contact_image: null,
+    contact_map_embed_url: props.settings.contact_map_embed_url ?? '',
+    contact_page_breadcrumb_image: null,
+    contact_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.contact_page_breadcrumb_title },
+    contact_page_seo_title: { ...emptyTranslatable(), ...props.settings.contact_page_seo_title },
+    contact_page_seo_description: { ...emptyTranslatable(), ...props.settings.contact_page_seo_description },
+    contact_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.contact_page_seo_keywords },
 });
 
 activeLang.value = defaultLangCode.value;
@@ -184,6 +259,20 @@ const addInstituteInfoItem = () => {
 };
 const removeInstituteInfoItem = (index) => {
     form.institute_info.splice(index, 1);
+};
+
+const addFooterQuickLink = () => {
+    form.footer_quick_links.push({ label: emptyTranslatable(), url: '' });
+};
+const removeFooterQuickLink = (index) => {
+    form.footer_quick_links.splice(index, 1);
+};
+
+const addFooterCampusLink = () => {
+    form.footer_campus_links.push({ label: emptyTranslatable(), url: '' });
+};
+const removeFooterCampusLink = (index) => {
+    form.footer_campus_links.splice(index, 1);
 };
 
 const addCtaStatItem = () => {
@@ -291,7 +380,7 @@ const submit = () => {
             <nav class="w-full md:w-60 shrink-0 md:sticky md:top-6">
                 <div class="flex md:flex-col gap-1 overflow-x-auto md:overflow-visible rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm">
                     <button
-                        v-for="section in sections"
+                        v-for="section in visibleSections"
                         :key="section.key"
                         type="button"
                         class="group flex items-center gap-3 rounded-lg px-3.5 py-2.5 text-sm text-left whitespace-nowrap transition-colors w-full"
@@ -442,6 +531,109 @@ const submit = () => {
                                     Copyright line is shown at the end, e.g. "© 2026 {{ form.site_name[defaultLangCode] || 'Your School' }} — {{ form.copyright_text[defaultLangCode] || 'All Rights Reserved.' }}"
                                 </p>
                             </div>
+                        </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <div class="flex items-center justify-between mb-3">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-slate-800">Quick Links column</h3>
+                                    <p class="text-xs text-slate-400 mt-0.5">Column heading and its list of links.</p>
+                                </div>
+                                <Button label="Add link" icon="pi pi-plus" text size="small" @click="addFooterQuickLink" />
+                            </div>
+
+                            <div class="max-w-sm mb-4">
+                                <label class="block text-xs font-medium text-slate-600 mb-1.5">Column heading</label>
+                                <InputText v-model="form.footer_quick_links_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Quick Links" />
+                            </div>
+
+                            <p v-if="!form.footer_quick_links.length" class="text-sm text-slate-400">No links yet — add one above.</p>
+                            <div v-else class="flex flex-col gap-3">
+                                <div
+                                    v-for="(item, index) in form.footer_quick_links"
+                                    :key="index"
+                                    class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-3 sm:items-start rounded-lg border border-slate-100 p-3"
+                                >
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Label</label>
+                                        <InputText
+                                            v-model="item.label[activeLang]"
+                                            :dir="currentLang?.direction"
+                                            class="w-full"
+                                            :placeholder="currentLang?.is_default ? 'Required, e.g. About Us' : 'Optional'"
+                                        />
+                                        <p v-if="form.errors[`footer_quick_links.${index}.label.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`footer_quick_links.${index}.label.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">URL</label>
+                                        <InputText v-model="item.url" class="w-full" placeholder="/about or https://..." />
+                                        <p v-if="form.errors[`footer_quick_links.${index}.url`]" class="text-xs text-red-500 mt-1">{{ form.errors[`footer_quick_links.${index}.url`] }}</p>
+                                    </div>
+                                    <div class="flex sm:items-end sm:justify-end">
+                                        <Button icon="pi pi-trash" text rounded severity="danger" @click="removeFooterQuickLink(index)" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <div class="flex items-center justify-between mb-3">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-slate-800">Our Campus column</h3>
+                                    <p class="text-xs text-slate-400 mt-0.5">Column heading and its list of links.</p>
+                                </div>
+                                <Button label="Add link" icon="pi pi-plus" text size="small" @click="addFooterCampusLink" />
+                            </div>
+
+                            <div class="max-w-sm mb-4">
+                                <label class="block text-xs font-medium text-slate-600 mb-1.5">Column heading</label>
+                                <InputText v-model="form.footer_campus_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Our Campus" />
+                            </div>
+
+                            <p v-if="!form.footer_campus_links.length" class="text-sm text-slate-400">No links yet — add one above.</p>
+                            <div v-else class="flex flex-col gap-3">
+                                <div
+                                    v-for="(item, index) in form.footer_campus_links"
+                                    :key="index"
+                                    class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto] gap-3 sm:items-start rounded-lg border border-slate-100 p-3"
+                                >
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Label</label>
+                                        <InputText
+                                            v-model="item.label[activeLang]"
+                                            :dir="currentLang?.direction"
+                                            class="w-full"
+                                            :placeholder="currentLang?.is_default ? 'Required, e.g. Campus Safety' : 'Optional'"
+                                        />
+                                        <p v-if="form.errors[`footer_campus_links.${index}.label.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`footer_campus_links.${index}.label.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">URL</label>
+                                        <InputText v-model="item.url" class="w-full" placeholder="/about or https://..." />
+                                        <p v-if="form.errors[`footer_campus_links.${index}.url`]" class="text-xs text-red-500 mt-1">{{ form.errors[`footer_campus_links.${index}.url`] }}</p>
+                                    </div>
+                                    <div class="flex sm:items-end sm:justify-end">
+                                        <Button icon="pi pi-trash" text rounded severity="danger" @click="removeFooterCampusLink(index)" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Newsletter column</h3>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Column heading</label>
+                                    <InputText v-model="form.footer_newsletter_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Newsletter" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Description text</label>
+                                    <Textarea v-model="form.footer_newsletter_text[activeLang]" :dir="currentLang?.direction" rows="2" class="w-full" placeholder="Subscribe Our Newsletter To Get Latest Update And News" />
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-3">
+                                The subscribe form itself isn't wired up to anything yet — only this heading and description are editable here.
+                            </p>
                         </section>
                     </div>
 
@@ -794,6 +986,44 @@ const submit = () => {
                                 </div>
                             </div>
                         </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">About Page — Breadcrumb &amp; SEO</h3>
+                            <p class="text-xs text-slate-400 mb-4">Shown on the dedicated <code>/about</code> page — separate from the "About Us" homepage block above.</p>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb background image</label>
+                                    <ImageDropzone
+                                        :preview-url="aboutPageBreadcrumbPreview"
+                                        hint="Shown behind the page title"
+                                        width-class="w-full sm:w-80" height-class="h-32"
+                                        @select="(file) => onAboutImageSelected('about_page_breadcrumb_image', aboutPageBreadcrumbPreview, file)"
+                                        @remove="() => onAboutImageRemoved('about_page_breadcrumb_image', aboutPageBreadcrumbPreview)"
+                                    />
+                                    <p v-if="form.errors.about_page_breadcrumb_image" class="text-xs text-red-500 mt-1">{{ form.errors.about_page_breadcrumb_image }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb title</label>
+                                    <InputText v-model="form.about_page_breadcrumb_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. About Us" />
+                                    <p v-if="form.errors[`about_page_breadcrumb_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`about_page_breadcrumb_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta title</label>
+                                    <InputText v-model="form.about_page_seo_title[activeLang]" :dir="currentLang?.direction" class="w-full" />
+                                    <p v-if="form.errors[`about_page_seo_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`about_page_seo_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta description</label>
+                                    <Textarea v-model="form.about_page_seo_description[activeLang]" :dir="currentLang?.direction" rows="3" class="w-full" />
+                                    <p v-if="form.errors[`about_page_seo_description.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`about_page_seo_description.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta keywords</label>
+                                    <InputText v-model="form.about_page_seo_keywords[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="comma, separated, keywords" />
+                                    <p v-if="form.errors[`about_page_seo_keywords.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`about_page_seo_keywords.${activeLang}`] }}</p>
+                                </div>
+                            </div>
+                        </section>
                     </div>
 
                     <!-- Our Skills -->
@@ -995,6 +1225,286 @@ const submit = () => {
                                     @remove="onOfferBackgroundRemoved"
                                 />
                                 <p v-if="form.errors.offer_background" class="text-xs text-red-500 mt-1">{{ form.errors.offer_background }}</p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Our Principal -->
+                    <div v-show="activeSectionKey === 'principal'" class="flex flex-col gap-5">
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Profile</h3>
+                            <div class="flex flex-col sm:flex-row gap-6">
+                                <div class="w-full sm:w-48 shrink-0">
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Photo</label>
+                                    <ImageDropzone
+                                        :preview-url="principalPhotoPreview"
+                                        hint="Portrait photo"
+                                        width-class="w-full" height-class="h-40"
+                                        @select="(file) => onAboutImageSelected('principal_photo', principalPhotoPreview, file)"
+                                        @remove="() => onAboutImageRemoved('principal_photo', principalPhotoPreview)"
+                                    />
+                                    <p v-if="form.errors.principal_photo" class="text-xs text-red-500 mt-1">{{ form.errors.principal_photo }}</p>
+                                </div>
+                                <div class="flex-1 flex flex-col gap-4 max-w-lg">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Name</label>
+                                        <InputText v-model="form.principal_name[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Mohammad Rafiqul Islam" />
+                                        <p v-if="form.errors[`principal_name.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`principal_name.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Designation</label>
+                                        <InputText v-model="form.principal_designation[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Principal" />
+                                        <p v-if="form.errors[`principal_designation.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`principal_designation.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Message</label>
+                                        <Textarea v-model="form.principal_message[activeLang]" :dir="currentLang?.direction" rows="6" class="w-full" placeholder="Principal's message to visitors..." />
+                                        <p v-if="form.errors[`principal_message.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`principal_message.${activeLang}`] }}</p>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Contact details shown on the page reuse the address/phone/email set under General → Header.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Page — Breadcrumb &amp; SEO</h3>
+                            <p class="text-xs text-slate-400 mb-4">Shown on the dedicated <code>/principal</code> page.</p>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb background image</label>
+                                    <ImageDropzone
+                                        :preview-url="principalPageBreadcrumbPreview"
+                                        hint="Shown behind the page title"
+                                        width-class="w-full sm:w-80" height-class="h-32"
+                                        @select="(file) => onAboutImageSelected('principal_page_breadcrumb_image', principalPageBreadcrumbPreview, file)"
+                                        @remove="() => onAboutImageRemoved('principal_page_breadcrumb_image', principalPageBreadcrumbPreview)"
+                                    />
+                                    <p v-if="form.errors.principal_page_breadcrumb_image" class="text-xs text-red-500 mt-1">{{ form.errors.principal_page_breadcrumb_image }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb title</label>
+                                    <InputText v-model="form.principal_page_breadcrumb_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Our Principal" />
+                                    <p v-if="form.errors[`principal_page_breadcrumb_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`principal_page_breadcrumb_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta title</label>
+                                    <InputText v-model="form.principal_page_seo_title[activeLang]" :dir="currentLang?.direction" class="w-full" />
+                                    <p v-if="form.errors[`principal_page_seo_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`principal_page_seo_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta description</label>
+                                    <Textarea v-model="form.principal_page_seo_description[activeLang]" :dir="currentLang?.direction" rows="3" class="w-full" />
+                                    <p v-if="form.errors[`principal_page_seo_description.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`principal_page_seo_description.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta keywords</label>
+                                    <InputText v-model="form.principal_page_seo_keywords[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="comma, separated, keywords" />
+                                    <p v-if="form.errors[`principal_page_seo_keywords.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`principal_page_seo_keywords.${activeLang}`] }}</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Ex-Principal -->
+                    <div v-show="activeSectionKey === 'ex-principal'" class="flex flex-col gap-5">
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Profile</h3>
+                            <div class="flex flex-col sm:flex-row gap-6">
+                                <div class="w-full sm:w-48 shrink-0">
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Photo</label>
+                                    <ImageDropzone
+                                        :preview-url="exPrincipalPhotoPreview"
+                                        hint="Portrait photo"
+                                        width-class="w-full" height-class="h-40"
+                                        @select="(file) => onAboutImageSelected('ex_principal_photo', exPrincipalPhotoPreview, file)"
+                                        @remove="() => onAboutImageRemoved('ex_principal_photo', exPrincipalPhotoPreview)"
+                                    />
+                                    <p v-if="form.errors.ex_principal_photo" class="text-xs text-red-500 mt-1">{{ form.errors.ex_principal_photo }}</p>
+                                </div>
+                                <div class="flex-1 flex flex-col gap-4 max-w-lg">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Name</label>
+                                        <InputText v-model="form.ex_principal_name[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Abdul Hamid Chowdhury" />
+                                        <p v-if="form.errors[`ex_principal_name.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`ex_principal_name.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Designation</label>
+                                        <InputText v-model="form.ex_principal_designation[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Former Principal" />
+                                        <p v-if="form.errors[`ex_principal_designation.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`ex_principal_designation.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Message</label>
+                                        <Textarea v-model="form.ex_principal_message[activeLang]" :dir="currentLang?.direction" rows="6" class="w-full" placeholder="A message from the former principal..." />
+                                        <p v-if="form.errors[`ex_principal_message.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`ex_principal_message.${activeLang}`] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Page — Breadcrumb &amp; SEO</h3>
+                            <p class="text-xs text-slate-400 mb-4">Shown on the dedicated <code>/ex-principals</code> page.</p>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb background image</label>
+                                    <ImageDropzone
+                                        :preview-url="exPrincipalPageBreadcrumbPreview"
+                                        hint="Shown behind the page title"
+                                        width-class="w-full sm:w-80" height-class="h-32"
+                                        @select="(file) => onAboutImageSelected('ex_principal_page_breadcrumb_image', exPrincipalPageBreadcrumbPreview, file)"
+                                        @remove="() => onAboutImageRemoved('ex_principal_page_breadcrumb_image', exPrincipalPageBreadcrumbPreview)"
+                                    />
+                                    <p v-if="form.errors.ex_principal_page_breadcrumb_image" class="text-xs text-red-500 mt-1">{{ form.errors.ex_principal_page_breadcrumb_image }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb title</label>
+                                    <InputText v-model="form.ex_principal_page_breadcrumb_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Our EX Principal" />
+                                    <p v-if="form.errors[`ex_principal_page_breadcrumb_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`ex_principal_page_breadcrumb_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta title</label>
+                                    <InputText v-model="form.ex_principal_page_seo_title[activeLang]" :dir="currentLang?.direction" class="w-full" />
+                                    <p v-if="form.errors[`ex_principal_page_seo_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`ex_principal_page_seo_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta description</label>
+                                    <Textarea v-model="form.ex_principal_page_seo_description[activeLang]" :dir="currentLang?.direction" rows="3" class="w-full" />
+                                    <p v-if="form.errors[`ex_principal_page_seo_description.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`ex_principal_page_seo_description.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta keywords</label>
+                                    <InputText v-model="form.ex_principal_page_seo_keywords[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="comma, separated, keywords" />
+                                    <p v-if="form.errors[`ex_principal_page_seo_keywords.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`ex_principal_page_seo_keywords.${activeLang}`] }}</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Contact Page -->
+                    <div v-show="activeSectionKey === 'contact'" class="flex flex-col gap-5">
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Office info cards</h3>
+                            <p class="text-xs text-slate-400 mb-4">Dedicated to this page — both the card's label (e.g. "Office Address") and its value are per-language, so wording can differ by language rather than just being translated.</p>
+                            <div class="flex flex-col gap-5">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Address — Label</label>
+                                        <InputText v-model="form.contact_address_label[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Office Address" />
+                                        <p v-if="form.errors[`contact_address_label.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_address_label.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Address — Value</label>
+                                        <InputText v-model="form.contact_address_value[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="City, Country" />
+                                        <p v-if="form.errors[`contact_address_value.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_address_value.${activeLang}`] }}</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Phone — Label</label>
+                                        <InputText v-model="form.contact_phone_label[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Call Us" />
+                                        <p v-if="form.errors[`contact_phone_label.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_phone_label.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Phone — Value</label>
+                                        <InputText v-model="form.contact_phone_value[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="+880 1712-345678" />
+                                        <p v-if="form.errors[`contact_phone_value.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_phone_value.${activeLang}`] }}</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Email — Label</label>
+                                        <InputText v-model="form.contact_email_label[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Email Us" />
+                                        <p v-if="form.errors[`contact_email_label.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_email_label.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Email — Value</label>
+                                        <InputText v-model="form.contact_email_value[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="info@example.com" />
+                                        <p v-if="form.errors[`contact_email_value.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_email_value.${activeLang}`] }}</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Open Time — Label</label>
+                                        <InputText v-model="form.contact_open_time_label[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Open Time" />
+                                        <p v-if="form.errors[`contact_open_time_label.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_open_time_label.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Open Time — Value</label>
+                                        <InputText v-model="form.contact_open_time[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Mon - Sat (10.00AM - 05.30PM)" />
+                                        <p v-if="form.errors[`contact_open_time.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_open_time.${activeLang}`] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Content</h3>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Form title</label>
+                                    <InputText v-model="form.contact_form_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Get In Touch" />
+                                    <p v-if="form.errors[`contact_form_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_form_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Form description</label>
+                                    <Textarea v-model="form.contact_form_description[activeLang]" :dir="currentLang?.direction" rows="3" class="w-full" />
+                                    <p v-if="form.errors[`contact_form_description.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_form_description.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Side image</label>
+                                    <ImageDropzone
+                                        :preview-url="contactImagePreview"
+                                        hint="Shown beside the form"
+                                        width-class="w-full sm:w-80" height-class="h-40"
+                                        @select="(file) => onAboutImageSelected('contact_image', contactImagePreview, file)"
+                                        @remove="() => onAboutImageRemoved('contact_image', contactImagePreview)"
+                                    />
+                                    <p v-if="form.errors.contact_image" class="text-xs text-red-500 mt-1">{{ form.errors.contact_image }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Map embed URL</label>
+                                    <InputText v-model="form.contact_map_embed_url" class="w-full" placeholder="https://www.google.com/maps?q=...&output=embed" />
+                                    <p class="text-xs text-slate-400 mt-1">The <code>src</code> of a Google Maps embed iframe — open Google Maps, Share → Embed a map, copy the URL inside <code>src="..."</code>.</p>
+                                    <p v-if="form.errors.contact_map_embed_url" class="text-xs text-red-500 mt-1">{{ form.errors.contact_map_embed_url }}</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Page — Breadcrumb &amp; SEO</h3>
+                            <p class="text-xs text-slate-400 mb-4">Shown on the dedicated <code>/contact</code> page.</p>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb background image</label>
+                                    <ImageDropzone
+                                        :preview-url="contactPageBreadcrumbPreview"
+                                        hint="Shown behind the page title"
+                                        width-class="w-full sm:w-80" height-class="h-32"
+                                        @select="(file) => onAboutImageSelected('contact_page_breadcrumb_image', contactPageBreadcrumbPreview, file)"
+                                        @remove="() => onAboutImageRemoved('contact_page_breadcrumb_image', contactPageBreadcrumbPreview)"
+                                    />
+                                    <p v-if="form.errors.contact_page_breadcrumb_image" class="text-xs text-red-500 mt-1">{{ form.errors.contact_page_breadcrumb_image }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb title</label>
+                                    <InputText v-model="form.contact_page_breadcrumb_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Contact Us" />
+                                    <p v-if="form.errors[`contact_page_breadcrumb_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_page_breadcrumb_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta title</label>
+                                    <InputText v-model="form.contact_page_seo_title[activeLang]" :dir="currentLang?.direction" class="w-full" />
+                                    <p v-if="form.errors[`contact_page_seo_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_page_seo_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta description</label>
+                                    <Textarea v-model="form.contact_page_seo_description[activeLang]" :dir="currentLang?.direction" rows="3" class="w-full" />
+                                    <p v-if="form.errors[`contact_page_seo_description.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_page_seo_description.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta keywords</label>
+                                    <InputText v-model="form.contact_page_seo_keywords[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="comma, separated, keywords" />
+                                    <p v-if="form.errors[`contact_page_seo_keywords.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`contact_page_seo_keywords.${activeLang}`] }}</p>
+                                </div>
                             </div>
                         </section>
                     </div>

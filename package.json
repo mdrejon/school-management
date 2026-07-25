@@ -26,6 +26,8 @@
         "chart.js": "^4.5.1",
         "primeicons": "^8.0.0",
         "primevue": "^4.5.5",
-        "quill": "^2.0.3"
+        "quill": "^2.0.3",
+        "sortablejs": "^1.15.7",
+        "vuedraggable": "^4.1.0"
     }
 }

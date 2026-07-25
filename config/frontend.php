@@ -30,6 +30,8 @@ return [
         'gallery' => 'gallery-v1',
         'event' => 'event-v1',
         'department' => 'department-v1',
+        'blog' => 'blog-v1',
+        'testimonial' => 'testimonial-v1',
     ],
 
 ];

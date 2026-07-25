@@ -47,6 +47,30 @@ class SiteSettingSeeder extends Seeder
                 'bn' => 'সর্বস্বত্ব সংরক্ষিত।',
                 'ar' => 'جميع الحقوق محفوظة.',
             ],
+            'footer_quick_links_title' => ['en' => 'Quick Links', 'bn' => 'দ্রুত লিঙ্ক', 'ar' => 'روابط سريعة'],
+            'footer_quick_links' => [
+                ['label' => ['en' => 'About Us', 'bn' => 'আমাদের সম্পর্কে', 'ar' => 'من نحن'], 'url' => '/about'],
+                ['label' => ['en' => "FAQ's", 'bn' => 'সাধারণ প্রশ্ন', 'ar' => 'الأسئلة الشائعة'], 'url' => '/faq'],
+                ['label' => ['en' => 'Testimonials', 'bn' => 'প্রশংসাপত্র', 'ar' => 'الشهادات'], 'url' => '/testimonials'],
+                ['label' => ['en' => 'Terms Of Service', 'bn' => 'সেবার শর্তাবলী', 'ar' => 'شروط الخدمة'], 'url' => '#'],
+                ['label' => ['en' => 'Privacy policy', 'bn' => 'গোপনীয়তা নীতি', 'ar' => 'سياسة الخصوصية'], 'url' => '#'],
+                ['label' => ['en' => 'Update News', 'bn' => 'সাম্প্রতিক সংবাদ', 'ar' => 'آخر الأخبار'], 'url' => '#'],
+            ],
+            'footer_campus_title' => ['en' => 'Our Campus', 'bn' => 'আমাদের ক্যাম্পাস', 'ar' => 'حرمنا الجامعي'],
+            'footer_campus_links' => [
+                ['label' => ['en' => 'Campus Safety', 'bn' => 'ক্যাম্পাস নিরাপত্তা', 'ar' => 'سلامة الحرم الجامعي'], 'url' => '#'],
+                ['label' => ['en' => 'Student Activities', 'bn' => 'শিক্ষার্থী কার্যক্রম', 'ar' => 'أنشطة الطلاب'], 'url' => '#'],
+                ['label' => ['en' => 'Academic Department', 'bn' => 'একাডেমিক বিভাগ', 'ar' => 'القسم الأكاديمي'], 'url' => '#'],
+                ['label' => ['en' => 'Planning & Administration', 'bn' => 'পরিকল্পনা ও প্রশাসন', 'ar' => 'التخطيط والإدارة'], 'url' => '#'],
+                ['label' => ['en' => 'Office Of The Chancellor', 'bn' => 'চ্যান্সেলরের কার্যালয়', 'ar' => 'مكتب المستشار'], 'url' => '#'],
+                ['label' => ['en' => 'Facility Services', 'bn' => 'সুবিধা পরিষেবা', 'ar' => 'خدمات المرافق'], 'url' => '#'],
+            ],
+            'footer_newsletter_title' => ['en' => 'Newsletter', 'bn' => 'নিউজলেটার', 'ar' => 'النشرة الإخبارية'],
+            'footer_newsletter_text' => [
+                'en' => 'Subscribe Our Newsletter To Get Latest Update And News',
+                'bn' => 'সর্বশেষ আপডেট এবং সংবাদ পেতে আমাদের নিউজলেটার সাবস্ক্রাইব করুন',
+                'ar' => 'اشترك في نشرتنا الإخبارية للحصول على آخر التحديثات والأخبار',
+            ],
             'institute_info' => [
                 [
                     'label' => ['en' => 'Institute EIIN', 'bn' => 'ইনস্টিটিউট EIIN', 'ar' => 'رقم EIIN للمعهد'],

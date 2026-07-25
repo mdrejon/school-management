@@ -1,5 +1,6 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
 import menu from '@/admin-menu';
 
 defineProps({
@@ -7,6 +8,23 @@ defineProps({
         type: Function,
         default: () => {},
     },
+});
+
+const page = usePage();
+
+// A menu item with no `module` key is always shown (e.g. Pages, Menus) —
+// only items tied to a module a developer disabled in Site Configuration
+// get filtered out, hiding the feature from the admin entirely rather than
+// just leaving a broken/pointless link in place.
+const visibleMenu = computed(() => {
+    const enabledModules = page.props.enabledModules ?? [];
+
+    return menu
+        .map((group) => ({
+            ...group,
+            items: group.items.filter((item) => !item.module || enabledModules.includes(item.module)),
+        }))
+        .filter((group) => group.items.length > 0);
 });
 
 const isActive = (routeName) => route().current(routeName) || route().current(`${routeName}.*`);
@@ -25,7 +43,7 @@ const isActive = (routeName) => route().current(routeName) || route().current(`$
         </div>
 
         <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-6">
-            <div v-for="(group, index) in menu" :key="index">
+            <div v-for="(group, index) in visibleMenu" :key="index">
                 <div
                     v-if="group.label"
                     class="px-3 mb-2 text-[11px] font-semibold tracking-wider text-slate-500 uppercase"

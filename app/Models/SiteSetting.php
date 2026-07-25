@@ -41,6 +41,42 @@ class SiteSetting extends Model
         'about_quote',
         'about_button_text',
         'about_badge_text',
+        'about_page_breadcrumb_title',
+        'about_page_seo_title',
+        'about_page_seo_description',
+        'about_page_seo_keywords',
+        'principal_name',
+        'principal_designation',
+        'principal_message',
+        'principal_page_breadcrumb_title',
+        'principal_page_seo_title',
+        'principal_page_seo_description',
+        'principal_page_seo_keywords',
+        'ex_principal_name',
+        'ex_principal_designation',
+        'ex_principal_message',
+        'ex_principal_page_breadcrumb_title',
+        'ex_principal_page_seo_title',
+        'ex_principal_page_seo_description',
+        'ex_principal_page_seo_keywords',
+        'contact_open_time',
+        'contact_open_time_label',
+        'contact_address_label',
+        'contact_address_value',
+        'contact_phone_label',
+        'contact_phone_value',
+        'contact_email_label',
+        'contact_email_value',
+        'contact_form_title',
+        'contact_form_description',
+        'contact_page_breadcrumb_title',
+        'contact_page_seo_title',
+        'contact_page_seo_description',
+        'contact_page_seo_keywords',
+        'footer_quick_links_title',
+        'footer_campus_title',
+        'footer_newsletter_title',
+        'footer_newsletter_text',
     ];
 
     protected $fillable = [
@@ -94,6 +130,52 @@ class SiteSetting extends Model
         'about_image_2',
         'about_image_3',
         'about_items',
+        'about_page_breadcrumb_image',
+        'about_page_breadcrumb_title',
+        'about_page_seo_title',
+        'about_page_seo_description',
+        'about_page_seo_keywords',
+        'principal_photo',
+        'principal_name',
+        'principal_designation',
+        'principal_message',
+        'principal_page_breadcrumb_image',
+        'principal_page_breadcrumb_title',
+        'principal_page_seo_title',
+        'principal_page_seo_description',
+        'principal_page_seo_keywords',
+        'ex_principal_photo',
+        'ex_principal_name',
+        'ex_principal_designation',
+        'ex_principal_message',
+        'ex_principal_page_breadcrumb_image',
+        'ex_principal_page_breadcrumb_title',
+        'ex_principal_page_seo_title',
+        'ex_principal_page_seo_description',
+        'ex_principal_page_seo_keywords',
+        'contact_open_time',
+        'contact_open_time_label',
+        'contact_address_label',
+        'contact_address_value',
+        'contact_phone_label',
+        'contact_phone_value',
+        'contact_email_label',
+        'contact_email_value',
+        'contact_form_title',
+        'contact_form_description',
+        'contact_image',
+        'contact_map_embed_url',
+        'contact_page_breadcrumb_image',
+        'contact_page_breadcrumb_title',
+        'contact_page_seo_title',
+        'contact_page_seo_description',
+        'contact_page_seo_keywords',
+        'footer_quick_links_title',
+        'footer_quick_links',
+        'footer_campus_title',
+        'footer_campus_links',
+        'footer_newsletter_title',
+        'footer_newsletter_text',
     ];
 
     protected $casts = [
@@ -104,11 +186,16 @@ class SiteSetting extends Model
         'skill_items' => 'array',
         'about_badge_icon' => 'array',
         'about_items' => 'array',
+        'footer_quick_links' => 'array',
+        'footer_campus_links' => 'array',
     ];
 
     protected $appends = [
         'logo_url', 'footer_logo_url', 'video_thumbnail_url', 'offer_background_url', 'choose_image_url',
-        'about_image_1_url', 'about_image_2_url', 'about_image_3_url',
+        'about_image_1_url', 'about_image_2_url', 'about_image_3_url', 'about_page_breadcrumb_image_url',
+        'principal_photo_url', 'principal_page_breadcrumb_image_url',
+        'ex_principal_photo_url', 'ex_principal_page_breadcrumb_image_url',
+        'contact_image_url', 'contact_page_breadcrumb_image_url',
     ];
 
     protected static function booted(): void
@@ -156,6 +243,82 @@ class SiteSetting extends Model
     public function getAboutImage3UrlAttribute(): ?string
     {
         return $this->about_image_3 ? '/storage/'.ltrim($this->about_image_3, '/') : null;
+    }
+
+    public function getAboutPageBreadcrumbImageUrlAttribute(): ?string
+    {
+        return $this->about_page_breadcrumb_image ? '/storage/'.ltrim($this->about_page_breadcrumb_image, '/') : null;
+    }
+
+    public function getPrincipalPhotoUrlAttribute(): ?string
+    {
+        return $this->principal_photo ? '/storage/'.ltrim($this->principal_photo, '/') : null;
+    }
+
+    public function getPrincipalPageBreadcrumbImageUrlAttribute(): ?string
+    {
+        return $this->principal_page_breadcrumb_image ? '/storage/'.ltrim($this->principal_page_breadcrumb_image, '/') : null;
+    }
+
+    public function getExPrincipalPhotoUrlAttribute(): ?string
+    {
+        return $this->ex_principal_photo ? '/storage/'.ltrim($this->ex_principal_photo, '/') : null;
+    }
+
+    public function getExPrincipalPageBreadcrumbImageUrlAttribute(): ?string
+    {
+        return $this->ex_principal_page_breadcrumb_image ? '/storage/'.ltrim($this->ex_principal_page_breadcrumb_image, '/') : null;
+    }
+
+    public function getContactImageUrlAttribute(): ?string
+    {
+        return $this->contact_image ? '/storage/'.ltrim($this->contact_image, '/') : null;
+    }
+
+    public function getContactPageBreadcrumbImageUrlAttribute(): ?string
+    {
+        return $this->contact_page_breadcrumb_image ? '/storage/'.ltrim($this->contact_page_breadcrumb_image, '/') : null;
+    }
+
+    /**
+     * Footer "Quick Links" column rows resolved to plain strings for the
+     * given locale — same shape/fallback as instituteInfoItems(), except
+     * `url` is a plain (not translatable) freeform string the admin types
+     * directly, not a route/model picker like MenuItem's — simpler than
+     * reusing the header's WordPress-style menu builder for what's just
+     * two flat footer columns with no submenus.
+     */
+    public function footerQuickLinkItems(?string $locale = null): array
+    {
+        $locale ??= app()->getLocale();
+        $default = Language::defaultLanguage()?->code ?? config('app.fallback_locale');
+
+        return collect($this->footer_quick_links ?? [])
+            ->map(fn (array $item) => [
+                'label' => $item['label'][$locale] ?? $item['label'][$default] ?? '',
+                'url' => $item['url'] ?? '#',
+            ])
+            ->filter(fn (array $item) => $item['label'] !== '')
+            ->values()
+            ->all();
+    }
+
+    /**
+     * Footer "Our Campus" column rows — same shape as footerQuickLinkItems().
+     */
+    public function footerCampusLinkItems(?string $locale = null): array
+    {
+        $locale ??= app()->getLocale();
+        $default = Language::defaultLanguage()?->code ?? config('app.fallback_locale');
+
+        return collect($this->footer_campus_links ?? [])
+            ->map(fn (array $item) => [
+                'label' => $item['label'][$locale] ?? $item['label'][$default] ?? '',
+                'url' => $item['url'] ?? '#',
+            ])
+            ->filter(fn (array $item) => $item['label'] !== '')
+            ->values()
+            ->all();
     }
 
     /**

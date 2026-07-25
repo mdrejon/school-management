@@ -81,7 +81,12 @@ class SiteSettingController extends Controller
             unset($data['choose_image']);
         }
 
-        foreach (['about_image_1', 'about_image_2', 'about_image_3'] as $field) {
+        foreach ([
+            'about_image_1', 'about_image_2', 'about_image_3', 'about_page_breadcrumb_image',
+            'principal_photo', 'principal_page_breadcrumb_image',
+            'ex_principal_photo', 'ex_principal_page_breadcrumb_image',
+            'contact_image', 'contact_page_breadcrumb_image',
+        ] as $field) {
             if ($request->hasFile($field)) {
                 if ($settings->{$field}) {
                     Storage::disk('public')->delete($settings->{$field});
