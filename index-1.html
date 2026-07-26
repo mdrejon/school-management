@@ -23,6 +23,166 @@
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <!-- home sidebar layout css (index-1 only) -->
+    <style>
+        .wexnix_home-content-area>.container>.row {
+            row-gap: 40px;
+        }
+
+        .wexnix_home-sidebar {
+            position: sticky;
+            top: 110px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .wexnix_sidebar-widget {
+            background: var(--color-white);
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .wexnix_sidebar-widget-title {
+            background: var(--theme-color);
+            color: var(--color-white);
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .wexnix_sidebar-widget-title.wexnix_sidebar-title-alt {
+            background: var(--theme-color2);
+        }
+
+        .wexnix_sidebar-notice-list {
+            list-style: none;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .wexnix_sidebar-notice-list li {
+            display: flex;
+            gap: 12px;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-info-color);
+        }
+
+        .wexnix_sidebar-notice-list li:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .wexnix_sidebar-notice-icon {
+            flex: 0 0 36px;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            background: var(--theme-color-light);
+            color: var(--theme-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .wexnix_sidebar-notice-content a {
+            display: block;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--color-dark);
+            transition: var(--transition2);
+        }
+
+        .wexnix_sidebar-notice-content a:hover {
+            color: var(--theme-color2);
+        }
+
+        .wexnix_sidebar-notice-content span {
+            display: block;
+            font-size: 12px;
+            font-style: italic;
+            color: var(--body-text-color);
+            margin-top: 3px;
+        }
+
+        .wexnix_sidebar-widget-footer {
+            padding: 0 20px 20px;
+            text-align: right;
+        }
+
+        .wexnix_sidebar-widget-footer a {
+            font-weight: 600;
+            font-style: italic;
+            font-size: 14px;
+            color: var(--theme-color2);
+        }
+
+        .wexnix_sidebar-person {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .wexnix_sidebar-person-img {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--theme-color-light);
+        }
+
+        .wexnix_sidebar-person-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .wexnix_sidebar-person-name {
+            margin-bottom: 2px;
+            font-size: 18px;
+        }
+
+        .wexnix_sidebar-person-role {
+            display: block;
+            color: var(--theme-color2);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .wexnix_sidebar-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--color-white);
+            background: var(--theme-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: var(--transition2);
+        }
+
+        .wexnix_sidebar-more:hover {
+            background: var(--theme-color2);
+            color: var(--color-white);
+        }
+
+        @media (max-width: 991px) {
+            .wexnix_home-sidebar {
+                position: static;
+                margin-top: 60px;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -395,93 +555,198 @@
         <!-- institute info strip end -->
 
 
-        <!-- about area -->
-        <div class="wexnix_about-area py-120">
+        <!-- home content + sidebar layout -->
+        <div class="wexnix_home-content-area">
             <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="wexnix_about-left wow fadeInLeft" data-wow-delay=".25s">
-                            <div class="wexnix_about-img">
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <img class="wexnix_img-1" src="assets/img/about/01.jpg" alt="">
-                                        <div class="wexnix_about-experience mt-4">
-                                            <div class="wexnix_about-experience-icon">
-                                                <img src="assets/img/icon/exchange-idea.svg" alt="">
+                <div class="row g-4">
+                    <div class="col-lg-8 wexnix_home-main-col">
+
+                        <!-- about area -->
+                        <div class="wexnix_about-area py-120">
+                            <div class="container">
+                                <div class="row g-4 align-items-center">
+                                
+                                    <div class="col-lg-12">
+                                        <div class="wexnix_about-right wow fadeInRight" data-wow-delay=".25s">
+                                            <div class="wexnix_site-heading mb-3">
+                                                <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> About Us</span>
+                                                <h2 class="wexnix_site-title">
+                                                    Our WexNix tion System <span>Inspires</span> You More.
+                                                </h2>
                                             </div>
-                                            <b class="text-start">30 Years Of <br> Quality Service</b>
+                                            <p class="wexnix_about-text">
+                                                There are many variations of passages available but the majority have suffered
+                                                alteration in some form by injected humour randomised words which don't look even
+                                                slightly believable. If you are going to use passage.
+                                            </p>
+                                            <div class="wexnix_about-content">
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <div class="wexnix_about-item">
+                                                            <div class="wexnix_about-item-icon">
+                                                                <img src="assets/img/icon/open-book.svg" alt="">
+                                                            </div>
+                                                            <div class="wexnix_about-item-content">
+                                                                <h5>WexNix tion Services</h5>
+                                                                <p>It is a long established fact that reader will to using content.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="wexnix_about-item">
+                                                            <div class="wexnix_about-item-icon">
+                                                                <img src="assets/img/icon/global-education.svg" alt="">
+                                                            </div>
+                                                            <div class="wexnix_about-item-content">
+                                                                <h5>International Hubs</h5>
+                                                                <p>It is a long established fact that reader will to using content.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="wexnix_about-quote">
+                                                            <p>It is a long established fact that a reader will be distracted by the
+                                                                content of
+                                                                a page when looking at its reader for the long words layout.</p>
+                                                            <i class="fas fa-quote-right"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="wexnix_about-bottom">
+                                                <a href="about.html" class="wexnix_theme-btn">Discover More<i
+                                                        class="fas fa-arrow-right-long"></i></a>
+                                                <div class="wexnix_about-phone">
+                                                    <div class="wexnix_icon"><i class="fas fa-headset"></i></div>
+                                                    <div class="wexnix_number">
+                                                        <span>Call Now</span>
+                                                        <h6><a href="tel:+8801712345678">+880 1712-345678</a></h6>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <img class="wexnix_img-2" src="assets/img/about/02.jpg" alt="">
-                                        <img class="wexnix_img-3 mt-4" src="assets/img/about/03.jpg" alt="">
+                                    <div class="col-lg-12">
+                                        <div class="wexnix_about-left wow fadeInLeft" data-wow-delay=".25s">
+                                            <div class="wexnix_about-img">
+                                                <div class="row g-4">
+                                                    <div class="col-md-6">
+                                                        <img class="wexnix_img-1" src="assets/img/about/01.jpg" alt="">
+                                                        <div class="wexnix_about-experience mt-4">
+                                                            <div class="wexnix_about-experience-icon">
+                                                                <img src="assets/img/icon/exchange-idea.svg" alt="">
+                                                            </div>
+                                                            <b class="text-start">30 Years Of <br> Quality Service</b>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <img class="wexnix_img-2" src="assets/img/about/02.jpg" alt="">
+                                                        <img class="wexnix_img-3 mt-4" src="assets/img/about/03.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- about area end -->
+
                     </div>
-                    <div class="col-lg-6">
-                        <div class="wexnix_about-right wow fadeInRight" data-wow-delay=".25s">
-                            <div class="wexnix_site-heading mb-3">
-                                <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> About Us</span>
-                                <h2 class="wexnix_site-title">
-                                    Our WexNix tion System <span>Inspires</span> You More.
-                                </h2>
+                    <!-- home main col end -->
+
+                    <div class="col-lg-4 py-120">
+                        <aside class="wexnix_home-sidebar">
+
+                            <!-- notice board widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-rss"></i> Notice Board</h4>
+                                <ul class="wexnix_sidebar-notice-list">
+                                    <li>
+                                        <span class="wexnix_sidebar-notice-icon"><i class="fas fa-file-alt"></i></span>
+                                        <div class="wexnix_sidebar-notice-content">
+                                            <a href="notice.html">Class Party Notice 2026</a>
+                                            <span>Tuesday, June 2, 2026</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="wexnix_sidebar-notice-icon"><i class="fas fa-file-alt"></i></span>
+                                        <div class="wexnix_sidebar-notice-content">
+                                            <a href="notice.html">Eid-Ul-Adha Notice 2026</a>
+                                            <span>Tuesday, May 19, 2026</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="wexnix_sidebar-notice-icon"><i class="fas fa-file-alt"></i></span>
+                                        <div class="wexnix_sidebar-notice-content">
+                                            <a href="notice.html">Final Exam Notice 2025-2026</a>
+                                            <span>Thursday, May 7, 2026</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="wexnix_sidebar-notice-icon"><i class="fas fa-file-alt"></i></span>
+                                        <div class="wexnix_sidebar-notice-content">
+                                            <a href="notice.html">Notice For May-June Tuition Fees</a>
+                                            <span>Thursday, May 7, 2026</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="wexnix_sidebar-widget-footer">
+                                    <a href="notice.html">Read more <i class="fas fa-arrow-right-long"></i></a>
+                                </div>
                             </div>
-                            <p class="wexnix_about-text">
-                                There are many variations of passages available but the majority have suffered
-                                alteration in some form by injected humour randomised words which don't look even
-                                slightly believable. If you are going to use passage.
-                            </p>
-                            <div class="wexnix_about-content">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="wexnix_about-item">
-                                            <div class="wexnix_about-item-icon">
-                                                <img src="assets/img/icon/open-book.svg" alt="">
-                                            </div>
-                                            <div class="wexnix_about-item-content">
-                                                <h5>WexNix tion Services</h5>
-                                                <p>It is a long established fact that reader will to using content.</p>
-                                            </div>
-                                        </div>
-                                        <div class="wexnix_about-item">
-                                            <div class="wexnix_about-item-icon">
-                                                <img src="assets/img/icon/global-education.svg" alt="">
-                                            </div>
-                                            <div class="wexnix_about-item-content">
-                                                <h5>International Hubs</h5>
-                                                <p>It is a long established fact that reader will to using content.</p>
-                                            </div>
-                                        </div>
+                            <!-- notice board widget end -->
+
+                            <!-- our principal widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-user-tie"></i> Our Principal</h4>
+                                <div class="wexnix_sidebar-person">
+                                    <div class="wexnix_sidebar-person-img">
+                                        <img src="assets/img/team/03.jpg" alt="Our Principal">
                                     </div>
-                                    <div class="col-md-5">
-                                        <div class="wexnix_about-quote">
-                                            <p>It is a long established fact that a reader will be distracted by the
-                                                content of
-                                                a page when looking at its reader for the long words layout.</p>
-                                            <i class="fas fa-quote-right"></i>
-                                        </div>
+                                    <h5 class="wexnix_sidebar-person-name">Mohammad Rafiqul Islam</h5>
+                                    <span class="wexnix_sidebar-person-role">Principal</span>
+                                    <div>
+                                        <a href="principal-speech.html" class="wexnix_sidebar-more">Read More <i class="fas fa-arrow-right-long"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="wexnix_about-bottom">
-                                <a href="about.html" class="wexnix_theme-btn">Discover More<i
-                                        class="fas fa-arrow-right-long"></i></a>
-                                <div class="wexnix_about-phone">
-                                    <div class="wexnix_icon"><i class="fas fa-headset"></i></div>
-                                    <div class="wexnix_number">
-                                        <span>Call Now</span>
-                                        <h6><a href="tel:+8801712345678">+880 1712-345678</a></h6>
+                            <!-- our principal widget end -->
+
+                            <!-- our vice principal widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title wexnix_sidebar-title-alt"><i class="fas fa-user-tie"></i> Our Vice Principal</h4>
+                                <div class="wexnix_sidebar-person">
+                                    <div class="wexnix_sidebar-person-img">
+                                        <img src="assets/img/team/04.jpg" alt="Our Vice Principal">
+                                    </div>
+                                    <h5 class="wexnix_sidebar-person-name">Dennis A. Pruitt</h5>
+                                    <span class="wexnix_sidebar-person-role">Vice Principal</span>
+                                    <div>
+                                        <a href="#" class="wexnix_sidebar-more">Read More <i class="fas fa-arrow-right-long"></i></a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <!-- our vice principal widget end -->
+
+                            <!-- national anthem widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-music"></i> National Anthem</h4>
+                                <div class="wexnix_sidebar-audio">
+                                    <audio controls style="width: 100%;">
+                                        <source src="assets/audio/Anthem.ogg" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                            <!-- national anthem widget end -->
+
+                        </aside>
                     </div>
+                    <!-- home sidebar col end -->
+
                 </div>
             </div>
         </div>
-        <!-- about area end -->
+        <!-- home content + sidebar layout end -->
 
 
         <!-- counter area -->
