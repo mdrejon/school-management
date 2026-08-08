@@ -8,6 +8,7 @@ use App\Models\Department;
 use App\Models\Event;
 use App\Models\Facility;
 use App\Models\Faq;
+use App\Models\Founder;
 use App\Models\GalleryImage;
 use App\Models\Language;
 use App\Models\Menu;
@@ -69,6 +70,7 @@ class DatabaseSeeder extends Seeder
         $this->seedIfEmpty(BlogPost::class, BlogPostSeeder::class);
         $this->seedIfEmpty(Testimonial::class, TestimonialSeeder::class);
         $this->seedIfEmpty(Faq::class, FaqSeeder::class);
+        $this->seedIfEmpty(Founder::class, FounderDonorSeeder::class);
         $this->seedIfEmpty(Role::class, RoleAndPermissionSeeder::class);
     }
 

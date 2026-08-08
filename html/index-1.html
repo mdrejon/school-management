@@ -1,0 +1,2537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- title -->
+    <title>WexNix - School, College, University And Courses HTML5 Template</title>
+
+    <!-- favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/logo/favicon.png">
+
+    <!-- css -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- home sidebar layout css (index-1 only) -->
+    <style>
+        .wexnix_hero-single {
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+
+        .wexnix_home-content-area>.container>.row {
+            row-gap: 40px;
+        }
+
+        .wexnix_home-sidebar {
+            position: sticky;
+            top: 110px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .wexnix_sidebar-widget {
+            background: var(--color-white);
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .wexnix_sidebar-widget-title {
+            background: var(--theme-color);
+            color: var(--color-white);
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .wexnix_sidebar-widget-title.wexnix_sidebar-title-alt {
+            background: var(--theme-color2);
+        }
+
+        .wexnix_sidebar-notice-list {
+            list-style: none;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .wexnix_sidebar-notice-list li {
+            display: flex;
+            gap: 12px;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-info-color);
+        }
+
+        .wexnix_sidebar-notice-list li:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .wexnix_sidebar-notice-icon {
+            flex: 0 0 36px;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            background: var(--theme-color-light);
+            color: var(--theme-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .wexnix_sidebar-notice-content a {
+            display: block;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--color-dark);
+            transition: var(--transition2);
+        }
+
+        .wexnix_sidebar-notice-content a:hover {
+            color: var(--theme-color2);
+        }
+
+        .wexnix_sidebar-notice-content span {
+            display: block;
+            font-size: 12px;
+            font-style: italic;
+            color: var(--body-text-color);
+            margin-top: 3px;
+        }
+
+        .wexnix_sidebar-widget-footer {
+            padding: 0 20px 20px;
+            text-align: right;
+        }
+
+        .wexnix_sidebar-widget-footer a {
+            font-weight: 600;
+            font-style: italic;
+            font-size: 14px;
+            color: var(--theme-color2);
+        }
+
+        .wexnix_sidebar-person {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .wexnix_sidebar-person-img {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--theme-color-light);
+        }
+
+        .wexnix_sidebar-person-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .wexnix_sidebar-person-name {
+            margin-bottom: 2px;
+            font-size: 18px;
+        }
+
+        .wexnix_sidebar-person-role {
+            display: block;
+            color: var(--theme-color2);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .wexnix_sidebar-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--color-white);
+            background: var(--theme-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: var(--transition2);
+        }
+
+        .wexnix_sidebar-more:hover {
+            background: var(--theme-color2);
+            color: var(--color-white);
+        }
+
+        .wexnix_sidebar-link-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--theme-color2);
+            color: var(--color-white);
+            padding: 16px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition2);
+        }
+
+        .wexnix_sidebar-link-btn:hover {
+            background: var(--theme-color);
+            color: var(--color-white);
+        }
+
+        .wexnix_sidebar-links-list {
+            list-style: none;
+            margin: 0;
+            padding: 15px 20px;
+        }
+
+        .wexnix_sidebar-links-list li {
+            border-bottom: 1px dashed var(--border-info-color);
+        }
+
+        .wexnix_sidebar-links-list li:last-child {
+            border-bottom: none;
+        }
+
+        .wexnix_sidebar-links-list li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-dark);
+            transition: var(--transition2);
+        }
+
+        .wexnix_sidebar-links-list li a i {
+            font-size: 11px;
+            color: var(--theme-color2);
+        }
+
+        .wexnix_sidebar-links-list li a:hover {
+            color: var(--theme-color2);
+            padding-left: 4px;
+        }
+
+        @media (max-width: 991px) {
+            .wexnix_home-sidebar {
+                position: static;
+                margin-top: 60px;
+            }
+        }
+
+        .container-fluid {
+            padding: 0 40px;
+        }
+
+        /* nested container-fluid inside the home main column already sits
+           inside the outer container-fluid's 40px gutter, so drop the
+           duplicate side padding to avoid squeezing the column further */
+        .wexnix_home-main-col .container-fluid {
+            padding: 0;
+        }
+
+        /* the main column is only 9/12 wide once the sidebar is present
+           (>=992px), so scale headings/spacing down to fit instead of
+           wrapping awkwardly */
+        @media (min-width: 992px) {
+            .wexnix_home-main-col .wexnix_site-title {
+                font-size: 34px;
+            }
+
+            .wexnix_home-main-col .wexnix_site-title-tagline {
+                font-size: 15px;
+                letter-spacing: 2px;
+            }
+
+            .wexnix_home-main-col .wexnix_site-heading {
+                margin-bottom: 25px;
+            }
+
+            .wexnix_home-main-col .py-120 {
+                padding: 70px 0;
+            }
+
+            .wexnix_home-main-col .wexnix_about-text {
+                font-size: 15px;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1399px) {
+            .wexnix_home-main-col .wexnix_site-title {
+                font-size: 28px;
+            }
+
+            .wexnix_home-main-col .py-120 {
+                padding: 50px 0;
+            }
+        }
+
+        .wexnix_team-area {
+            position: relative;
+            z-index: 1;
+            background: var(--theme-bg-light);
+        }
+
+        .wexnix_team-area::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url(assets/img/shape/01.webp);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        .wexnix_home-content-area {
+            padding-bottom: 80px;
+        }
+
+        .wexnix_sidebar-calendar {
+            padding: 20px;
+        }
+
+        .wexnix_sidebar-calendar-head {
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--color-dark);
+            margin-bottom: 12px;
+        }
+
+        .wexnix_sidebar-calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            text-align: center;
+        }
+
+        .wexnix_cal-dow {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--theme-color2);
+            padding-bottom: 6px;
+        }
+
+        .wexnix_cal-day {
+            font-size: 13px;
+            padding: 6px 0;
+            border-radius: 50%;
+            color: var(--body-text-color);
+            position: relative;
+        }
+
+        .wexnix_cal-day.wexnix_cal-empty {
+            visibility: hidden;
+        }
+
+        .wexnix_cal-day.wexnix_cal-event {
+            color: var(--theme-color2);
+            font-weight: 700;
+        }
+
+        .wexnix_cal-day.wexnix_cal-event::after {
+            content: "";
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--theme-color2);
+        }
+
+        .wexnix_cal-day.wexnix_cal-today {
+            background: var(--theme-color);
+            color: var(--color-white);
+            font-weight: 700;
+        }
+
+        .wexnix_sidebar-calendar-legend {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--body-text-color);
+        }
+
+        .wexnix_dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+
+        .wexnix_dot-event {
+            background: var(--theme-color2);
+        }
+
+        .wexnix_dot-today {
+            background: var(--theme-color);
+        }
+
+        .wexnix_sidebar-event-list {
+            list-style: none;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .wexnix_sidebar-event-list li {
+            display: flex;
+            gap: 14px;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-info-color);
+        }
+
+        .wexnix_sidebar-event-list li:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .wexnix_sidebar-event-date {
+            flex: 0 0 50px;
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: var(--theme-color-light);
+            color: var(--theme-color2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .wexnix_sidebar-event-date span {
+            font-size: 18px;
+            color: var(--theme-color);
+        }
+
+        .wexnix_sidebar-event-content a {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--color-dark);
+            transition: var(--transition2);
+        }
+
+        .wexnix_sidebar-event-content a:hover {
+            color: var(--theme-color2);
+        }
+
+        .wexnix_sidebar-event-content span {
+            display: block;
+            font-size: 12px;
+            color: var(--body-text-color);
+            margin-top: 3px;
+        }
+
+        .wexnix_sidebar-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding: 20px;
+        }
+
+        .wexnix_sidebar-gallery a {
+            display: block;
+            border-radius: 6px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+        }
+
+        .wexnix_sidebar-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition2);
+        }
+
+        .wexnix_sidebar-gallery a:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- preloader -->
+    <div class="wexnix_preloader">
+        <div class="wexnix_loader-book">
+            <div class="wexnix_loader-book-page"></div>
+            <div class="wexnix_loader-book-page"></div>
+            <div class="wexnix_loader-book-page"></div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+
+    <!-- header area -->
+    <header class="wexnix_header">
+        <!-- header top -->
+        <div class="wexnix_header-top">
+            <div class="container-fluid">
+                <div class="wexnix_header-top-wrap">
+                    <div class="wexnix_header-top-left">
+                        <div class="wexnix_header-top-social">
+                            <span>Follow Us: </span>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="wexnix_header-top-right">
+                        <div class="wexnix_header-top-contact">
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fas fa-location-dot"></i> Chittagong, Bangladesh</a>
+                                </li>
+                                <li>
+                                    <a href="mailto:info@example.com"><i class="fas fa-envelope"></i>
+                                        info@example.com</a>
+                                </li>
+                                <li>
+                                    <a href="tel:+8801712345678"><i class="fas fa-phone-volume"></i> +880
+                                        1712-345678</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="wexnix_header-lang">
+                            <a href="#" class="active">EN</a>
+                            <a href="#">BN</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- header middle -->
+        <div class="wexnix_header-middle">
+            <div class="container-fluid">
+                <div class="wexnix_header-middle-wrap">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/img/logo/logo.png" alt="logo">
+                    </a>
+                    <div class="wexnix_header-middle-right">
+                        <form class="wexnix_header-search-form" action="#">
+                            <input type="search" name="search-field" placeholder="Search Here...">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                        <a href="application-form.html" class="wexnix_theme-btn"><span
+                                class="fas fa-pencil"></span>Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header middle end -->
+
+        <div class="wexnix_main-navigation">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid position-relative">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="wexnix_navbar-toggler-mobile-icon"><i class="fas fa-bars"></i></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="main_nav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Home</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="index.html">Home v1</a></li>
+                                    <li><a class="dropdown-item active" href="index-1.html">Home v2</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">About</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="about.html">About Us</a></li>
+                                    <li><a class="dropdown-item" href="history.html">History</a></li>
+                                    <li><a class="dropdown-item" href="donor-list.html">Founder &amp; Doner List</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="mission-vision.html">Our Vision</a></li>
+                                    <li><a class="dropdown-item" href="campus-tour.html">Campus Tour</a></li>
+                                    <li><a class="dropdown-item" href="achievements.html">Achievements</a></li>
+                                    <li><a class="dropdown-item" href="chairman-speech.html">Honorable Chairman</a></li>
+                                    <li><a class="dropdown-item" href="governing-body.html">Governing Body</a></li>
+                                    <li><a class="dropdown-item" href="ex-governing-body.html">EX Governing Body</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="principal-speech.html">Our Principal</a></li>
+                                    <li><a class="dropdown-item" href="ex-principals.html">Our EX Principal</a></li>
+                                    <li><a class="dropdown-item" href="administrators.html">Administrators</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Information</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="permission-recognition-letter.html">Teaching
+                                            Permission &amp; Recognition Letter</a></li>
+                                    <li><a class="dropdown-item" href="nationalization.html">Nationalization</a></li>
+                                    <li><a class="dropdown-item" href="statistics-report.html">Statistics Report</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="govt-approval-letter.html">Govt. Approval
+                                            Letter</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Academic</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="class-schedule.html">Class Schedule</a></li>
+                                    <li><a class="dropdown-item" href="teacher.html">Our Teachers</a></li>
+                                    <li><a class="dropdown-item" href="former-teachers.html">Former Teachers</a></li>
+                                    <li><a class="dropdown-item" href="staffs.html">Our Staffs</a></li>
+                                    <li><a class="dropdown-item" href="former-staffs.html">Former Staffs</a></li>
+                                    <li><a class="dropdown-item" href="academic-rules.html">Academic Rules</a></li>
+                                    <li><a class="dropdown-item" href="academic-calendar.html">Academic Calendar</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="attendance-sheet.html">Attendance Sheet</a></li>
+                                    <li><a class="dropdown-item" href="#">Leave Information</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Admission</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="why-study.html">Why Study ?</a></li>
+                                    <li><a class="dropdown-item" href="how-to-apply.html">How to apply</a></li>
+                                    <li><a class="dropdown-item" href="admission-test.html">Admission Test</a></li>
+                                    <li><a class="dropdown-item" href="admission-policy.html">Admission Policy</a></li>
+                                    <li><a class="dropdown-item" href="registration-system.html">Registration System</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Student</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="student-list.html">Student List</a></li>
+                                    <li><a class="dropdown-item" href="tuition-fee.html">Tution Fees</a></li>
+                                    <li><a class="dropdown-item" href="mobile-banking.html">Mobile Banking</a></li>
+                                    <li><a class="dropdown-item" href="daily-activities.html">Daily Activities</a></li>
+                                    <li><a class="dropdown-item" href="exam-schedule.html">Exam Schedule</a></li>
+                                    <li><a class="dropdown-item" href="student-uniform.html">Student Uniform</a></li>
+                                    <li><a class="dropdown-item" href="exam-system.html">Exam System</a></li>
+                                    <li><a class="dropdown-item" href="rules-regulation.html">Rules and Regulation</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Facilities</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="library.html">Library</a></li>
+                                    <li><a class="dropdown-item" href="play-ground.html">Play Ground</a></li>
+                                    <li><a class="dropdown-item" href="physics-lab.html">Physics Lab</a></li>
+                                    <li><a class="dropdown-item" href="biology-lab.html">Biology Lab</a></li>
+                                    <li><a class="dropdown-item" href="ict-lab.html">ICT Lab</a></li>
+                                    <li><a class="dropdown-item" href="chemistry-lab.html">Chemistry Lab</a></li>
+                                    <li><a class="dropdown-item" href="extra-activities.html">Extra Activities</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Result</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="result.html">Exam Result</a></li>
+                                    <li><a class="dropdown-item" href="search-result.html">Academic Result</a></li>
+                                    <li><a class="dropdown-item" href="evaluation-result.html">Evaluation Result</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="board-exam-result.html">Board Exam Result</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Others</a>
+                                <ul class="dropdown-menu wexnix_fade-down">
+                                    <li><a class="dropdown-item" href="notice.html">Notice</a></li>
+                                    <li><a class="dropdown-item" href="news.html">News</a></li>
+                                    <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
+                                    <li><a class="dropdown-item" href="event.html">Event</a></li>
+                                    <li><a class="dropdown-item" href="routine.html">Routine</a></li>
+                                    <li><a class="dropdown-item" href="download.html">Download</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Pages</a>
+                                <ul class="dropdown-menu fade-down">
+                                    <li><a class="dropdown-item" href="course.html">Courses</a></li>
+                                    <li><a class="dropdown-item" href="course-single.html">Course Single</a></li>
+                                    <li><a class="dropdown-item" href="academic.html">Academic</a></li>
+                                    <li><a class="dropdown-item" href="academic-single.html">Academic Single</a></li>
+                                    <li><a class="dropdown-item" href="facility.html">Facility</a></li>
+                                    <li><a class="dropdown-item" href="teacher-single.html">Teacher Single</a></li>
+                                    <li><a class="dropdown-item" href="event-single.html">Event Single</a></li>
+                                    <li><a class="dropdown-item" href="portfolio.html">Portfolio</a></li>
+                                    <li><a class="dropdown-item" href="portfolio-single.html">Portfolio Single</a></li>
+                                    <li><a class="dropdown-item" href="blog.html">Blog</a></li>
+                                    <li><a class="dropdown-item" href="blog-single.html">Blog Single</a></li>
+                                    <li><a class="dropdown-item" href="application-form.html">Application Form</a></li>
+                                    <li><a class="dropdown-item" href="pricing.html">Pricing Plan</a></li>
+                                    <li><a class="dropdown-item" href="testimonial.html">Testimonials</a></li>
+                                    <li><a class="dropdown-item" href="faq.html">Faq</a></li>
+                                    <li><a class="dropdown-item" href="login.html">Login</a></li>
+                                    <li><a class="dropdown-item" href="register.html">Register</a></li>
+                                    <li><a class="dropdown-item" href="terms.html">Terms Of Service</a></li>
+                                    <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
+                                    <li><a class="dropdown-item" href="404.html">404 Error</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- notice marquee -->
+        <div class="wexnix_notice-marquee">
+            <div class="container-fluid">
+                <div class="wexnix_notice-marquee-wrap">
+                    <span class="wexnix_notice-label">Notice</span>
+                    <div class="wexnix_marquee-viewport">
+                        <div class="wexnix_marquee-track">
+                            <span>Welcome to our school website — new admissions are now open.</span>
+                            <span>Annual sports day will be held next month.</span>
+                            <span>Mid-term examination routine has been published.</span>
+                            <span>School will remain closed on the upcoming holiday.</span>
+                            <span>Welcome to our school website — new admissions are now open.</span>
+                            <span>Annual sports day will be held next month.</span>
+                            <span>Mid-term examination routine has been published.</span>
+                            <span>School will remain closed on the upcoming holiday.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- notice marquee end -->
+    </header>
+    <!-- header area end -->
+
+
+    <!-- popup search -->
+    <div class="wexnix_search-popup">
+        <button class="wexnix_close-search"><span class="fas fa-times"></span></button>
+        <form action="#">
+            <div class="wexnix_form-group">
+                <input type="search" name="search-field" placeholder="Search Here..." required>
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <!-- popup search end -->
+
+
+    <main class="wexnix_main">
+
+        <!-- hero slider -->
+        <div class="wexnix_hero-section">
+            <div class="wexnix_hero-slider owl-carousel wexnix_owl-theme">
+                <div class="wexnix_hero-single" style="background: url(assets/img/slider/slider-1.jpg)">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-lg-7">
+                                <div class="wexnix_hero-content">
+                                    <h6 class="wexnix_hero-sub-title" data-animation="fadeInDown" data-delay=".25s">
+                                        <i class="fas fa-book-open-reader"></i>Welcome To WexNix !
+                                    </h6>
+                                    <h1 class="wexnix_hero-title" data-animation="fadeInRight" data-delay=".50s">
+                                        Start Your Beautiful And <span>Bright</span> Future
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-delay=".75s">
+                                        There are many variations of passages orem psum available but the majority have
+                                        suffered alteration in some repeat predefined chunks form
+                                        injected humour.
+                                    </p>
+                                    <div class="wexnix_hero-btn" data-animation="fadeInUp" data-delay="1s">
+                                        <a href="about.html" class="wexnix_theme-btn">About More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                        <a href="contact.html" class="wexnix_theme-btn wexnix_theme-btn2">Learn More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wexnix_hero-single" style="background: url(assets/img/slider/slider-2.jpg)">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-lg-7">
+                                <div class="wexnix_hero-content">
+                                    <h6 class="wexnix_hero-sub-title" data-animation="fadeInDown" data-delay=".25s">
+                                        <i class="fas fa-book-open-reader"></i>Welcome To WexNix !
+                                    </h6>
+                                    <h1 class="wexnix_hero-title" data-animation="fadeInRight" data-delay=".50s">
+                                        Start Your Beautiful And <span>Bright</span> Future
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-delay=".75s">
+                                        There are many variations of passages orem psum available but the majority have
+                                        suffered alteration in some repeat predefined chunks form
+                                        injected humour.
+                                    </p>
+                                    <div class="wexnix_hero-btn" data-animation="fadeInUp" data-delay="1s">
+                                        <a href="about.html" class="wexnix_theme-btn">About More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                        <a href="contact.html" class="wexnix_theme-btn wexnix_theme-btn2">Learn More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wexnix_hero-single" style="background: url(assets/img/slider/slider-3.jpg)">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-lg-7">
+                                <div class="wexnix_hero-content">
+                                    <h6 class="wexnix_hero-sub-title" data-animation="fadeInDown" data-delay=".25s">
+                                        <i class="fas fa-book-open-reader"></i>Welcome To WexNix !
+                                    </h6>
+                                    <h1 class="wexnix_hero-title" data-animation="fadeInRight" data-delay=".50s">
+                                        Start Your Beautiful And <span>Bright</span> Future
+                                    </h1>
+                                    <p data-animation="fadeInLeft" data-delay=".75s">
+                                        There are many variations of passages orem psum available but the majority have
+                                        suffered alteration in some repeat predefined chunks form
+                                        injected humour.
+                                    </p>
+                                    <div class="wexnix_hero-btn" data-animation="fadeInUp" data-delay="1s">
+                                        <a href="about.html" class="wexnix_theme-btn">About More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                        <a href="contact.html" class="wexnix_theme-btn wexnix_theme-btn2">Learn More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- hero slider end -->
+
+
+
+        <!-- institute info strip -->
+        <div class="wexnix_institute-info-area">
+            <div class="row g-0 text-center">
+                <div class="col-6 col-lg-3" style="background: var(--theme-color2);">
+                    <div class="py-4 text-white">
+                        <h6 class="text-uppercase mb-1">Institute EIIN</h6>
+                        <h2 class="mb-0 text-white">123456</h2>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" style="background: var(--theme-color);">
+                    <div class="py-4 text-white">
+                        <h6 class="text-uppercase mb-1">Institution Code</h6>
+                        <h2 class="mb-0 text-white">987654321</h2>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" style="background: var(--theme-color2);">
+                    <div class="py-4 text-white">
+                        <h6 class="text-uppercase mb-1">Center Code</h6>
+                        <h2 class="mb-0 text-white">101</h2>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3" style="background: var(--theme-color);">
+                    <div class="py-4 text-white">
+                        <h6 class="text-uppercase mb-1">Estd Year</h6>
+                        <h2 class="mb-0 text-white">1985</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- institute info strip end -->
+
+
+        <!-- home content + sidebar layout -->
+        <div class="wexnix_home-content-area">
+            <div class="container-fluid">
+                <div class="row g-4">
+                    <div class="col-lg-9 wexnix_home-main-col">
+
+                        <!-- about area -->
+                        <div class="wexnix_about-area py-120">
+                            <div class="container">
+                                <div class="row g-4 align-items-center">
+
+                                    <div class="col-lg-6">
+                                        <div class="wexnix_about-left wow fadeInLeft" data-wow-delay=".25s">
+                                            <div class="wexnix_about-img">
+                                                <div class="row g-4">
+                                                    <div class="col-md-6">
+                                                        <img class="wexnix_img-1" src="assets/img/about/01.jpg" alt="">
+                                                        <div class="wexnix_about-experience mt-4">
+                                                            <div class="wexnix_about-experience-icon">
+                                                                <img src="assets/img/icon/exchange-idea.svg" alt="">
+                                                            </div>
+                                                            <b class="text-start">30 Years Of <br> Quality Service</b>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <img class="wexnix_img-2" src="assets/img/about/02.jpg" alt="">
+                                                        <img class="wexnix_img-3 mt-4" src="assets/img/about/03.jpg"
+                                                            alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="wexnix_about-right wow fadeInRight" data-wow-delay=".25s">
+                                            <div class="wexnix_site-heading mb-3">
+                                                <span class="wexnix_site-title-tagline"><i
+                                                        class="fas fa-book-open-reader"></i> About Us</span>
+                                                <h2 class="wexnix_site-title">
+                                                    Our WexNix tion System <span>Inspires</span> You More.
+                                                </h2>
+                                            </div>
+                                            <p class="wexnix_about-text">
+                                                There are many variations of passages available but the majority have
+                                                suffered
+                                                alteration in some form by injected humour randomised words which don't
+                                                look even
+                                                slightly believable. If you are going to use passage.
+                                            </p>
+                                            <div class="wexnix_about-content">
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <div class="wexnix_about-item">
+                                                            <div class="wexnix_about-item-icon">
+                                                                <img src="assets/img/icon/open-book.svg" alt="">
+                                                            </div>
+                                                            <div class="wexnix_about-item-content">
+                                                                <h5>WexNix tion Services</h5>
+                                                                <p>It is a long established fact that reader will to
+                                                                    using content.</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="wexnix_about-item">
+                                                            <div class="wexnix_about-item-icon">
+                                                                <img src="assets/img/icon/global-education.svg" alt="">
+                                                            </div>
+                                                            <div class="wexnix_about-item-content">
+                                                                <h5>International Hubs</h5>
+                                                                <p>It is a long established fact that reader will to
+                                                                    using content.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="wexnix_about-quote">
+                                                            <p>It is a long established fact that a reader will be
+                                                                distracted by the
+                                                                content of
+                                                                a page when looking at its reader for the long words
+                                                                layout.</p>
+                                                            <i class="fas fa-quote-right"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="wexnix_about-bottom">
+                                                <a href="about.html" class="wexnix_theme-btn">Discover More<i
+                                                        class="fas fa-arrow-right-long"></i></a>
+                                                <div class="wexnix_about-phone">
+                                                    <div class="wexnix_icon"><i class="fas fa-headset"></i></div>
+                                                    <div class="wexnix_number">
+                                                        <span>Call Now</span>
+                                                        <h6><a href="tel:+8801712345678">+880 1712-345678</a></h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- about area end -->
+
+                        <!-- counter area -->
+                        <div class="wexnix_counter-area pt-60 pb-60">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="wexnix_counter-box">
+                                            <div class="wexnix_icon">
+                                                <img src="assets/img/icon/course.svg" alt="">
+                                            </div>
+                                            <div>
+                                                <span class="wexnix_counter" data-count="+" data-to="500"
+                                                    data-speed="3000">500</span>
+                                                <h6 class="wexnix_title">+ Total Cources </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="wexnix_counter-box">
+                                            <div class="wexnix_icon">
+                                                <img src="assets/img/icon/graduation.svg" alt="">
+                                            </div>
+                                            <div>
+                                                <span class="wexnix_counter" data-count="+" data-to="1900"
+                                                    data-speed="3000">1900</span>
+                                                <h6 class="wexnix_title">+ Our Students</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="wexnix_counter-box">
+                                            <div class="wexnix_icon">
+                                                <img src="assets/img/icon/teacher-2.svg" alt="">
+                                            </div>
+                                            <div>
+                                                <span class="wexnix_counter" data-count="+" data-to="750"
+                                                    data-speed="3000">750</span>
+                                                <h6 class="wexnix_title">+ Skilled Lecturers</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="wexnix_counter-box">
+                                            <div class="wexnix_icon">
+                                                <img src="assets/img/icon/award.svg" alt="">
+                                            </div>
+                                            <div>
+                                                <span class="wexnix_counter" data-count="+" data-to="30"
+                                                    data-speed="3000">30</span>
+                                                <h6 class="wexnix_title">+ Win Awards</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- counter area end -->
+
+
+                        <!-- course-area -->
+                        <div class="wexnix_course-area py-120">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-6 mx-auto">
+                                        <div class="wexnix_site-heading text-center">
+                                            <span class="wexnix_site-title-tagline"><i
+                                                    class="fas fa-book-open-reader"></i> Our Courses</span>
+                                            <h2 class="wexnix_site-title">Let's Check Our <span>Courses</span></h2>
+                                            <p>It is a long established fact that a reader will be distracted by the
+                                                readable content of
+                                                a page when looking at its layout.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="wexnix_course-item wow fadeInUp" data-wow-delay=".25s">
+                                            <div class="wexnix_course-img">
+                                                <span class="wexnix_course-tag"><i class="fas fa-bookmark"></i>
+                                                    Drama</span>
+                                                <img src="assets/img/course/01.jpg" alt="">
+                                                <a href="course-single.html" class="btn"><i class="fas fa-link"></i></a>
+                                            </div>
+                                            <div class="wexnix_course-content">
+                                                <div class="wexnix_course-meta">
+                                                    <span class="wexnix_course-meta-left"><i class="fas fa-book"></i> 10
+                                                        Lessons</span>
+                                                    <div class="wexnix_course-rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <span>(4.0)</span>
+                                                    </div>
+                                                </div>
+                                                <h4 class="wexnix_course-title">
+                                                    <a href="course-single.html">Acting And Drama</a>
+                                                </h4>
+                                                <p class="wexnix_course-text">
+                                                    There are many variations of passages orem psum available but the
+                                                    majority have
+                                                    suffer alteration in some form by injected.
+                                                </p>
+                                                <div class="wexnix_course-bottom">
+                                                    <div class="wexnix_course-bottom-left">
+                                                        <span><i class="fas fa-users"></i>75 Seats</span>
+                                                        <span><i class="fas fa-clock"></i>04 Years</span>
+                                                    </div>
+                                                    <span class="wexnix_course-price">$750</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="wexnix_course-item wow fadeInUp" data-wow-delay=".50s">
+                                            <div class="wexnix_course-img">
+                                                <span class="wexnix_course-tag"><i class="fas fa-bookmark"></i>
+                                                    Design</span>
+                                                <img src="assets/img/course/02.jpg" alt="">
+                                                <a href="course-single.html" class="btn"><i class="fas fa-link"></i></a>
+                                            </div>
+                                            <div class="wexnix_course-content">
+                                                <div class="wexnix_course-meta">
+                                                    <span class="wexnix_course-meta-left"><i class="fas fa-book"></i> 10
+                                                        Lessons</span>
+                                                    <div class="wexnix_course-rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <span>(4.0)</span>
+                                                    </div>
+                                                </div>
+                                                <h4 class="wexnix_course-title">
+                                                    <a href="course-single.html">Art And Design</a>
+                                                </h4>
+                                                <p class="wexnix_course-text">
+                                                    There are many variations of passages orem psum available but the
+                                                    majority have
+                                                    suffer alteration in some form by injected.
+                                                </p>
+                                                <div class="wexnix_course-bottom">
+                                                    <div class="wexnix_course-bottom-left">
+                                                        <span><i class="fas fa-users"></i>75 Seats</span>
+                                                        <span><i class="fas fa-clock"></i>04 Years</span>
+                                                    </div>
+                                                    <span class="wexnix_course-price">$750</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="wexnix_course-item wow fadeInUp" data-wow-delay=".75s">
+                                            <div class="wexnix_course-img">
+                                                <span class="wexnix_course-tag"><i class="fas fa-bookmark"></i>
+                                                    Science</span>
+                                                <img src="assets/img/course/03.jpg" alt="">
+                                                <a href="course-single.html" class="btn"><i class="fas fa-link"></i></a>
+                                            </div>
+                                            <div class="wexnix_course-content">
+                                                <div class="wexnix_course-meta">
+                                                    <span class="wexnix_course-meta-left"><i class="fas fa-book"></i> 10
+                                                        Lessons</span>
+                                                    <div class="wexnix_course-rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <span>(4.0)</span>
+                                                    </div>
+                                                </div>
+                                                <h4 class="wexnix_course-title">
+                                                    <a href="course-single.html">Biology And Conservation</a>
+                                                </h4>
+                                                <p class="wexnix_course-text">
+                                                    There are many variations of passages orem psum available but the
+                                                    majority have
+                                                    suffer alteration in some form by injected.
+                                                </p>
+                                                <div class="wexnix_course-bottom">
+                                                    <div class="wexnix_course-bottom-left">
+                                                        <span><i class="fas fa-users"></i>75 Seats</span>
+                                                        <span><i class="fas fa-clock"></i>04 Years</span>
+                                                    </div>
+                                                    <span class="wexnix_course-price">$750</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="wexnix_course-item wow fadeInUp" data-wow-delay=".25s">
+                                            <div class="wexnix_course-img">
+                                                <span class="wexnix_course-tag"><i class="fas fa-bookmark"></i>
+                                                    Science</span>
+                                                <img src="assets/img/course/04.jpg" alt="">
+                                                <a href="course-single.html" class="btn"><i class="fas fa-link"></i></a>
+                                            </div>
+                                            <div class="wexnix_course-content">
+                                                <div class="wexnix_course-meta">
+                                                    <span class="wexnix_course-meta-left"><i class="fas fa-book"></i> 10
+                                                        Lessons</span>
+                                                    <div class="wexnix_course-rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <span>(4.0)</span>
+                                                    </div>
+                                                </div>
+                                                <h4 class="wexnix_course-title">
+                                                    <a href="course-single.html">Science And Engineering</a>
+                                                </h4>
+                                                <p class="wexnix_course-text">
+                                                    There are many variations of passages orem psum available but the
+                                                    majority have
+                                                    suffer alteration in some form by injected.
+                                                </p>
+                                                <div class="wexnix_course-bottom">
+                                                    <div class="wexnix_course-bottom-left">
+                                                        <span><i class="fas fa-users"></i>75 Seats</span>
+                                                        <span><i class="fas fa-clock"></i>04 Years</span>
+                                                    </div>
+                                                    <span class="wexnix_course-price">$750</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="wexnix_course-item wow fadeInUp" data-wow-delay=".50s">
+                                            <div class="wexnix_course-img">
+                                                <span class="wexnix_course-tag"><i class="fas fa-bookmark"></i>
+                                                    Health</span>
+                                                <img src="assets/img/course/05.jpg" alt="">
+                                                <a href="course-single.html" class="btn"><i class="fas fa-link"></i></a>
+                                            </div>
+                                            <div class="wexnix_course-content">
+                                                <div class="wexnix_course-meta">
+                                                    <span class="wexnix_course-meta-left"><i class="fas fa-book"></i> 10
+                                                        Lessons</span>
+                                                    <div class="wexnix_course-rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <span>(4.0)</span>
+                                                    </div>
+                                                </div>
+                                                <h4 class="wexnix_course-title">
+                                                    <a href="course-single.html">Health Administration</a>
+                                                </h4>
+                                                <p class="wexnix_course-text">
+                                                    There are many variations of passages orem psum available but the
+                                                    majority have
+                                                    suffer alteration in some form by injected.
+                                                </p>
+                                                <div class="wexnix_course-bottom">
+                                                    <div class="wexnix_course-bottom-left">
+                                                        <span><i class="fas fa-users"></i>75 Seats</span>
+                                                        <span><i class="fas fa-clock"></i>04 Years</span>
+                                                    </div>
+                                                    <span class="wexnix_course-price">$750</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="wexnix_course-item wow fadeInUp" data-wow-delay=".75s">
+                                            <div class="wexnix_course-img">
+                                                <span class="wexnix_course-tag"><i class="fas fa-bookmark"></i>
+                                                    Finance</span>
+                                                <img src="assets/img/course/06.jpg" alt="">
+                                                <a href="course-single.html" class="btn"><i class="fas fa-link"></i></a>
+                                            </div>
+                                            <div class="wexnix_course-content">
+                                                <div class="wexnix_course-meta">
+                                                    <span class="wexnix_course-meta-left"><i class="fas fa-book"></i> 10
+                                                        Lessons</span>
+                                                    <div class="wexnix_course-rating">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <span>(4.0)</span>
+                                                    </div>
+                                                </div>
+                                                <h4 class="wexnix_course-title">
+                                                    <a href="course-single.html">Accounting And Finance</a>
+                                                </h4>
+                                                <p class="wexnix_course-text">
+                                                    There are many variations of passages orem psum available but the
+                                                    majority have
+                                                    suffer alteration in some form by injected.
+                                                </p>
+                                                <div class="wexnix_course-bottom">
+                                                    <div class="wexnix_course-bottom-left">
+                                                        <span><i class="fas fa-users"></i>75 Seats</span>
+                                                        <span><i class="fas fa-clock"></i>04 Years</span>
+                                                    </div>
+                                                    <span class="wexnix_course-price">$750</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- course-area -->
+
+
+                        <!-- video-area -->
+                        <div class="wexnix_video-area">
+                            <div class="container-fluid">
+                                <div class="row g-4">
+                                    <div class="col-lg-4 wow fadeInLeft" data-wow-delay=".25s">
+                                        <div class="wexnix_site-heading mb-3">
+                                            <span class="wexnix_site-title-tagline"><i
+                                                    class="fas fa-book-open-reader"></i> Latest Video</span>
+                                            <h2 class="wexnix_site-title">
+                                                Let's Check Our <span>Latest</span> Video
+                                            </h2>
+                                        </div>
+                                        <p class="wexnix_about-text">
+                                            There are many variations of passages available but the majority have
+                                            suffered
+                                            alteration in some form by injected humour look even slightly believable.
+                                        </p>
+                                        <a href="about.html" class="wexnix_theme-btn mt-30">Learn More<i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                    </div>
+                                    <div class="col-lg-8 wow fadeInRight" data-wow-delay=".25s">
+                                        <div class="wexnix_video-content"
+                                            style="background-image: url(assets/img/video/01.jpg);">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-12">
+                                                    <div class="wexnix_video-wrapper">
+                                                        <a class="wexnix_play-btn wexnix_popup-youtube"
+                                                            href="https://www.youtube.com/watch?v=ckHzmP1evNU">
+                                                            <i class="fas fa-play"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- video-area end -->
+
+                    </div>
+                    <!-- home main col end -->
+
+                    <div class="col-lg-3  " style="padding: 50px 0px;">
+                        <aside class="wexnix_home-sidebar">
+
+                            <!-- notice board widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-rss"></i> Notice Board</h4>
+                                <ul class="wexnix_sidebar-notice-list">
+                                    <li>
+                                        <span class="wexnix_sidebar-notice-icon"><i class="fas fa-file-alt"></i></span>
+                                        <div class="wexnix_sidebar-notice-content">
+                                            <a href="notice.html">Class Party Notice 2026</a>
+                                            <span>Tuesday, June 2, 2026</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="wexnix_sidebar-notice-icon"><i class="fas fa-file-alt"></i></span>
+                                        <div class="wexnix_sidebar-notice-content">
+                                            <a href="notice.html">Eid-Ul-Adha Notice 2026</a>
+                                            <span>Tuesday, May 19, 2026</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="wexnix_sidebar-notice-icon"><i class="fas fa-file-alt"></i></span>
+                                        <div class="wexnix_sidebar-notice-content">
+                                            <a href="notice.html">Final Exam Notice 2025-2026</a>
+                                            <span>Thursday, May 7, 2026</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <span class="wexnix_sidebar-notice-icon"><i class="fas fa-file-alt"></i></span>
+                                        <div class="wexnix_sidebar-notice-content">
+                                            <a href="notice.html">Notice For May-June Tuition Fees</a>
+                                            <span>Thursday, May 7, 2026</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="wexnix_sidebar-widget-footer">
+                                    <a href="notice.html">Read more <i class="fas fa-arrow-right-long"></i></a>
+                                </div>
+                            </div>
+                            <!-- notice board widget end -->
+
+                            <!-- hon'ble minister widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-user-tie"></i> Hon'ble
+                                    Minister</h4>
+                                <div class="wexnix_sidebar-person">
+                                    <div class="wexnix_sidebar-person-img">
+                                        <img src="assets/img/Minister.jpeg" alt="Hon'ble Minister">
+                                    </div>
+                                    <h5 class="wexnix_sidebar-person-name">Dr. A N M Ehsanul Hoque Milon</h5>
+                                    <span class="wexnix_sidebar-person-role">Hon'ble Minister, Ministry of
+                                        Education</span>
+                                    <div>
+                                        <a href="#" class="wexnix_sidebar-more">See More <i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- hon'ble minister widget end -->
+
+                            <!-- secretary widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title wexnix_sidebar-title-alt"><i
+                                        class="fas fa-user-tie"></i> Secretary</h4>
+                                <div class="wexnix_sidebar-person">
+                                    <div class="wexnix_sidebar-person-img">
+                                        <img src="assets/img/Secretary.jpeg" alt="Secretary">
+                                    </div>
+                                    <h5 class="wexnix_sidebar-person-name">Abdul Khaleque</h5>
+                                    <span class="wexnix_sidebar-person-role">Secretary, Secondary and Higher
+                                        Education Division</span>
+                                    <div>
+                                        <a href="#" class="wexnix_sidebar-more">See More <i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- secretary widget end -->
+
+                            <!-- our principal widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-user-tie"></i> Our Principal
+                                </h4>
+                                <div class="wexnix_sidebar-person">
+                                    <div class="wexnix_sidebar-person-img">
+                                        <img src="assets/img/team/03.jpg" alt="Our Principal">
+                                    </div>
+                                    <h5 class="wexnix_sidebar-person-name">Mohammad Rafiqul Islam</h5>
+                                    <span class="wexnix_sidebar-person-role">Principal</span>
+                                    <div>
+                                        <a href="principal-speech.html" class="wexnix_sidebar-more">Read More <i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- our principal widget end -->
+
+                            <!-- our vice principal widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title wexnix_sidebar-title-alt"><i
+                                        class="fas fa-user-tie"></i> Our Vice Principal</h4>
+                                <div class="wexnix_sidebar-person">
+                                    <div class="wexnix_sidebar-person-img">
+                                        <img src="assets/img/team/04.jpg" alt="Our Vice Principal">
+                                    </div>
+                                    <h5 class="wexnix_sidebar-person-name">Dennis A. Pruitt</h5>
+                                    <span class="wexnix_sidebar-person-role">Vice Principal</span>
+                                    <div>
+                                        <a href="#" class="wexnix_sidebar-more">Read More <i
+                                                class="fas fa-arrow-right-long"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- our vice principal widget end -->
+
+                            <!-- exam / result quick link widget -->
+                            <!-- <div class="wexnix_sidebar-widget">
+                                <a href="#" class="wexnix_sidebar-link-btn"><i class="fas fa-file-invoice"></i>
+                                    Exam Related Info / Control Room</a>
+                            </div> -->
+                            <!-- exam / result quick link widget end -->
+
+                            <!-- important links widget -->
+                            <!-- <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-link"></i> Important Links
+                                </h4>
+                                <ul class="wexnix_sidebar-links-list">
+                                    <li><a href="#"><i class="fas fa-chevron-right"></i> Ministry of Education</a>
+                                    </li>
+                                    <li><a href="#"><i class="fas fa-chevron-right"></i> Education Board</a></li>
+                                    <li><a href="#"><i class="fas fa-chevron-right"></i> Directorate of Secondary
+                                            &amp; Higher Education</a></li>
+                                    <li><a href="#"><i class="fas fa-chevron-right"></i> BANBEIS</a></li>
+                                    <li><a href="#"><i class="fas fa-chevron-right"></i> Result Portal</a></li>
+                                </ul>
+                            </div> -->
+                            <!-- important links widget end -->
+
+                            <!-- academic calendar widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-calendar-alt"></i> Academic
+                                    Calendar</h4>
+                                <div class="wexnix_sidebar-calendar">
+                                    <div class="wexnix_sidebar-calendar-head">July 2026</div>
+                                    <div class="wexnix_sidebar-calendar-grid">
+                                        <span class="wexnix_cal-dow">Mo</span>
+                                        <span class="wexnix_cal-dow">Tu</span>
+                                        <span class="wexnix_cal-dow">We</span>
+                                        <span class="wexnix_cal-dow">Th</span>
+                                        <span class="wexnix_cal-dow">Fr</span>
+                                        <span class="wexnix_cal-dow">Sa</span>
+                                        <span class="wexnix_cal-dow">Su</span>
+
+                                        <span class="wexnix_cal-day wexnix_cal-empty"></span>
+                                        <span class="wexnix_cal-day wexnix_cal-empty"></span>
+                                        <span class="wexnix_cal-day">1</span>
+                                        <span class="wexnix_cal-day">2</span>
+                                        <span class="wexnix_cal-day">3</span>
+                                        <span class="wexnix_cal-day wexnix_cal-event">4</span>
+                                        <span class="wexnix_cal-day">5</span>
+
+                                        <span class="wexnix_cal-day">6</span>
+                                        <span class="wexnix_cal-day">7</span>
+                                        <span class="wexnix_cal-day">8</span>
+                                        <span class="wexnix_cal-day">9</span>
+                                        <span class="wexnix_cal-day">10</span>
+                                        <span class="wexnix_cal-day">11</span>
+                                        <span class="wexnix_cal-day">12</span>
+
+                                        <span class="wexnix_cal-day">13</span>
+                                        <span class="wexnix_cal-day">14</span>
+                                        <span class="wexnix_cal-day">15</span>
+                                        <span class="wexnix_cal-day wexnix_cal-event">16</span>
+                                        <span class="wexnix_cal-day">17</span>
+                                        <span class="wexnix_cal-day">18</span>
+                                        <span class="wexnix_cal-day">19</span>
+
+                                        <span class="wexnix_cal-day">20</span>
+                                        <span class="wexnix_cal-day">21</span>
+                                        <span class="wexnix_cal-day">22</span>
+                                        <span class="wexnix_cal-day">23</span>
+                                        <span class="wexnix_cal-day">24</span>
+                                        <span class="wexnix_cal-day">25</span>
+                                        <span class="wexnix_cal-day wexnix_cal-today">26</span>
+
+                                        <span class="wexnix_cal-day">27</span>
+                                        <span class="wexnix_cal-day">28</span>
+                                        <span class="wexnix_cal-day">29</span>
+                                        <span class="wexnix_cal-day wexnix_cal-event">30</span>
+                                        <span class="wexnix_cal-day">31</span>
+                                        <span class="wexnix_cal-day wexnix_cal-empty"></span>
+                                        <span class="wexnix_cal-day wexnix_cal-empty"></span>
+                                    </div>
+                                    <div class="wexnix_sidebar-calendar-legend">
+                                        <span><i class="wexnix_dot wexnix_dot-event"></i> Event</span>
+                                        <span><i class="wexnix_dot wexnix_dot-today"></i> Today</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- academic calendar widget end -->
+
+                            <!-- upcoming events widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title wexnix_sidebar-title-alt"><i
+                                        class="fas fa-calendar-check"></i> Upcoming Events</h4>
+                                <ul class="wexnix_sidebar-event-list">
+                                    <li>
+                                        <div class="wexnix_sidebar-event-date"><span>04</span>Jul</div>
+                                        <div class="wexnix_sidebar-event-content">
+                                            <a href="event-single.html">High School Program 2026</a>
+                                            <span><i class="fas fa-map-marker-alt"></i> Chittagong, Bangladesh</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="wexnix_sidebar-event-date"><span>16</span>Jul</div>
+                                        <div class="wexnix_sidebar-event-content">
+                                            <a href="event-single.html">Mid-Term Examination</a>
+                                            <span><i class="fas fa-map-marker-alt"></i> School Campus</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="wexnix_sidebar-event-date"><span>30</span>Jul</div>
+                                        <div class="wexnix_sidebar-event-content">
+                                            <a href="event-single.html">Annual Sports Day</a>
+                                            <span><i class="fas fa-map-marker-alt"></i> School Playground</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="wexnix_sidebar-widget-footer">
+                                    <a href="event.html">Read more <i class="fas fa-arrow-right-long"></i></a>
+                                </div>
+                            </div>
+                            <!-- upcoming events widget end -->
+
+                            <!-- photo gallery widget -->
+                            <!-- <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-images"></i> Photo Gallery
+                                </h4>
+                                <div class="wexnix_sidebar-gallery">
+                                    <a href="gallery.html"><img src="assets/img/gallery/01.jpg" alt="Gallery"></a>
+                                    <a href="gallery.html"><img src="assets/img/gallery/02.jpg" alt="Gallery"></a>
+                                    <a href="gallery.html"><img src="assets/img/gallery/03.jpg" alt="Gallery"></a>
+                                    <a href="gallery.html"><img src="assets/img/gallery/04.jpg" alt="Gallery"></a>
+                                    <a href="gallery.html"><img src="assets/img/gallery/05.jpg" alt="Gallery"></a>
+                                    <a href="gallery.html"><img src="assets/img/gallery/06.jpg" alt="Gallery"></a>
+                                </div>
+                            </div> -->
+                            <!-- photo gallery widget end -->
+
+                            <!-- national anthem widget -->
+                            <div class="wexnix_sidebar-widget">
+                                <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-music"></i> National Anthem
+                                </h4>
+                                <div class="wexnix_sidebar-audio">
+                                    <audio controls style="width: 100%;">
+                                        <source src="assets/audio/Anthem.ogg" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                            <!-- national anthem widget end -->
+
+                        </aside>
+                    </div>
+                    <!-- home sidebar col end -->
+
+                </div>
+            </div>
+        </div>
+        <!-- home content + sidebar layout end -->
+
+        <!-- team-area -->
+        <div class="wexnix_team-area py-120">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="wexnix_site-heading text-center">
+                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> Our
+                                Teachers</span>
+                            <h2 class="wexnix_site-title">Meet With Our <span>Teachers</span></h2>
+                            <p>It is a long established fact that a reader will be distracted by the readable content of
+                                a page when looking at its layout.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="wexnix_team-item wow fadeInUp" data-wow-delay=".25s">
+                            <div class="wexnix_team-img">
+                                <img src="assets/img/team/01.jpg" alt="thumb">
+                            </div>
+                            <div class="wexnix_team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </div>
+                            <div class="wexnix_team-content">
+                                <div class="wexnix_team-bio">
+                                    <h5><a href="teacher-single.html">Angela T. Vigil</a></h5>
+                                    <span>Associate Professor</span>
+                                </div>
+                            </div>
+                            <span class="wexnix_team-social-btn"><i class="fas fa-share-nodes"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="wexnix_team-item wow fadeInUp" data-wow-delay=".50s">
+                            <div class="wexnix_team-img">
+                                <img src="assets/img/team/02.jpg" alt="thumb">
+                            </div>
+                            <div class="wexnix_team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </div>
+                            <div class="wexnix_team-content">
+                                <div class="wexnix_team-bio">
+                                    <h5><a href="teacher-single.html">Frank A. Mitchell</a></h5>
+                                    <span>Associate Professor</span>
+                                </div>
+                            </div>
+                            <span class="wexnix_team-social-btn"><i class="fas fa-share-nodes"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="wexnix_team-item wow fadeInUp" data-wow-delay=".75s">
+                            <div class="wexnix_team-img">
+                                <img src="assets/img/team/03.jpg" alt="thumb">
+                            </div>
+                            <div class="wexnix_team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </div>
+                            <div class="wexnix_team-content">
+                                <div class="wexnix_team-bio">
+                                    <h5><a href="teacher-single.html">Susan D. Lunsford</a></h5>
+                                    <span>CEO & Founder</span>
+                                </div>
+                            </div>
+                            <span class="wexnix_team-social-btn"><i class="fas fa-share-nodes"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="wexnix_team-item wow fadeInUp" data-wow-delay="1s">
+                            <div class="wexnix_team-img">
+                                <img src="assets/img/team/04.jpg" alt="thumb">
+                            </div>
+                            <div class="wexnix_team-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </div>
+                            <div class="wexnix_team-content">
+                                <div class="wexnix_team-bio">
+                                    <h5><a href="teacher-single.html">Dennis A. Pruitt</a></h5>
+                                    <span>Associate Professor</span>
+                                </div>
+                            </div>
+                            <span class="wexnix_team-social-btn"><i class="fas fa-share-nodes"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- team-area end -->
+
+
+        <!-- choose-area -->
+        <div class="wexnix_choose-area pt-80 pb-80">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="wexnix_choose-content wow fadeInUp" data-wow-delay=".25s">
+                            <div class="wexnix_choose-content-info">
+                                <div class="wexnix_site-heading mb-0">
+                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> Why
+                                        Choose Us</span>
+                                    <h2 class="wexnix_site-title text-white mb-10">We Are Expert & <span>Do Our
+                                            Best</span> For Your Goal</h2>
+                                    <p class="text-white">
+                                        It is a long established fact that a reader will be distracted by the readable
+                                        content of a page when many desktop and web page editors looking at its
+                                        layout.
+                                    </p>
+                                </div>
+                                <div class="wexnix_choose-content-wrap">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <div class="wexnix_choose-item">
+                                                <div class="wexnix_choose-item-icon">
+                                                    <img src="assets/img/icon/teacher-2.svg" alt="">
+                                                </div>
+                                                <div class="wexnix_choose-item-info">
+                                                    <h4>Expert Teachers</h4>
+                                                    <p>There are many variation of the suffered.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="wexnix_choose-item">
+                                                <div class="wexnix_choose-item-icon">
+                                                    <img src="assets/img/icon/course-material.svg" alt="">
+                                                </div>
+                                                <div class="wexnix_choose-item-info">
+                                                    <h4>Courses Material</h4>
+                                                    <p>There are many variation of the suffered.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="wexnix_choose-item">
+                                                <div class="wexnix_choose-item-icon">
+                                                    <img src="assets/img/icon/online-course.svg" alt="">
+                                                </div>
+                                                <div class="wexnix_choose-item-info">
+                                                    <h4>Online Courses</h4>
+                                                    <p>There are many variation of the suffered.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="wexnix_choose-item">
+                                                <div class="wexnix_choose-item-icon">
+                                                    <img src="assets/img/icon/money.svg" alt="">
+                                                </div>
+                                                <div class="wexnix_choose-item-info">
+                                                    <h4>Affordable Price</h4>
+                                                    <p>There are many variation of the suffered.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="wexnix_choose-img wow fadeInRight" data-wow-delay=".25s">
+                            <img src="assets/img/choose/01.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- choose-area end -->
+
+
+        <!-- gallery-area -->
+        <div class="wexnix_gallery-area py-120">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="wexnix_site-heading text-center">
+                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i>
+                                Gallery</span>
+                            <h2 class="wexnix_site-title">Our Photo <span>Gallery</span></h2>
+                            <p>It is a long established fact that a reader will be distracted by the readable content of
+                                a page when looking at its layout.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row wexnix_popup-gallery">
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay=".25s">
+                        <div class="wexnix_gallery-item">
+                            <div class="wexnix_gallery-img">
+                                <img src="assets/img/gallery/01.jpg" alt="">
+                            </div>
+                            <div class="wexnix_gallery-content">
+                                <a class="wexnix_popup-img wexnix_gallery-link" href="assets/img/gallery/01.jpg"><i
+                                        class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="wexnix_gallery-item">
+                            <div class="wexnix_gallery-img">
+                                <img src="assets/img/gallery/02.jpg" alt="">
+                            </div>
+                            <div class="wexnix_gallery-content">
+                                <a class="wexnix_popup-img wexnix_gallery-link" href="assets/img/gallery/02.jpg"><i
+                                        class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay=".50s">
+                        <div class="wexnix_gallery-item">
+                            <div class="wexnix_gallery-img">
+                                <img src="assets/img/gallery/03.jpg" alt="">
+                            </div>
+                            <div class="wexnix_gallery-content">
+                                <a class="wexnix_popup-img wexnix_gallery-link" href="assets/img/gallery/03.jpg"><i
+                                        class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="wexnix_gallery-item">
+                            <div class="wexnix_gallery-img">
+                                <img src="assets/img/gallery/04.jpg" alt="">
+                            </div>
+                            <div class="wexnix_gallery-content">
+                                <a class="wexnix_popup-img wexnix_gallery-link" href="assets/img/gallery/04.jpg"><i
+                                        class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow fadeInUp" data-wow-delay=".75s">
+                        <div class="wexnix_gallery-item">
+                            <div class="wexnix_gallery-img">
+                                <img src="assets/img/gallery/05.jpg" alt="">
+                            </div>
+                            <div class="wexnix_gallery-content">
+                                <a class="wexnix_popup-img wexnix_gallery-link" href="assets/img/gallery/05.jpg"><i
+                                        class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="wexnix_gallery-item">
+                            <div class="wexnix_gallery-img">
+                                <img src="assets/img/gallery/06.jpg" alt="">
+                            </div>
+                            <div class="wexnix_gallery-content">
+                                <a class="wexnix_popup-img wexnix_gallery-link" href="assets/img/gallery/06.jpg"><i
+                                        class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- gallery-area end -->
+
+
+        <!-- cta-area -->
+        <div class="wexnix_cta-area">
+            <div class="container-fluid">
+                <div class="wexnix_cta-wrapper">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 ms-lg-auto">
+                            <div class="wexnix_cta-content">
+                                <h1>Our 20% Offer Running - Join Today For Your Course</h1>
+                                <p>There are many variations of passages available but the majority have suffered
+                                    alteration in some form by injected humour randomised words which don't look even
+                                    slightly believable.</p>
+                                <div class="wexnix_cta-btn">
+                                    <a href="application-form.html" class="wexnix_theme-btn">Apply Now<i
+                                            class="fas fa-arrow-right-long"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- cta-area end -->
+
+
+        <!-- event area -->
+        <div class="wexnix_event-area wexnix_bg py-120">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="wexnix_site-heading text-center">
+                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i>
+                                Events</span>
+                            <h2 class="wexnix_site-title">Our Upcoming <span>Events</span></h2>
+                            <p>It is a long established fact that a reader will be distracted by the readable content of
+                                a page when looking at its layout.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wexnix_event-slider owl-carousel wexnix_owl-theme">
+                    <div class="wexnix_event-item">
+                        <div class="wexnix_event-location">
+                            <span><i class="fas fa-map-marker-alt"></i> Chittagong, Bangladesh</span>
+                        </div>
+                        <div class="wexnix_event-img">
+                            <img src="assets/img/event/01.jpg" alt="">
+                        </div>
+                        <div class="wexnix_event-info">
+                            <div class="wexnix_event-meta">
+                                <span class="wexnix_event-date"><i class="fas fa-calendar-alt"></i>16 June, 2024</span>
+                                <span class="wexnix_event-time"><i class="fas fa-clock"></i>10.00AM - 04.00PM</span>
+                            </div>
+                            <h4 class="wexnix_event-title"><a href="event-single.html">High School Program 2024</a></h4>
+                            <p>There are many variations of passages the majority have some injected humour.</p>
+                            <div class="wexnix_event-btn">
+                                <a href="event-single.html" class="wexnix_theme-btn">Join Event<i
+                                        class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wexnix_event-item">
+                        <div class="wexnix_event-location">
+                            <span><i class="fas fa-map-marker-alt"></i> Chittagong, Bangladesh</span>
+                        </div>
+                        <div class="wexnix_event-img">
+                            <img src="assets/img/event/02.jpg" alt="">
+                        </div>
+                        <div class="wexnix_event-info">
+                            <div class="wexnix_event-meta">
+                                <span class="wexnix_event-date"><i class="fas fa-calendar-alt"></i>16 June, 2024</span>
+                                <span class="wexnix_event-time"><i class="fas fa-clock"></i>10.00AM - 04.00PM</span>
+                            </div>
+                            <h4 class="wexnix_event-title"><a href="event-single.html">High School Program 2024</a></h4>
+                            <p>There are many variations of passages the majority have some injected humour.</p>
+                            <div class="wexnix_event-btn">
+                                <a href="event-single.html" class="wexnix_theme-btn">Join Event<i
+                                        class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wexnix_event-item">
+                        <div class="wexnix_event-location">
+                            <span><i class="fas fa-map-marker-alt"></i> Chittagong, Bangladesh</span>
+                        </div>
+                        <div class="wexnix_event-img">
+                            <img src="assets/img/event/03.jpg" alt="">
+                        </div>
+                        <div class="wexnix_event-info">
+                            <div class="wexnix_event-meta">
+                                <span class="wexnix_event-date"><i class="fas fa-calendar-alt"></i>16 June, 2024</span>
+                                <span class="wexnix_event-time"><i class="fas fa-clock"></i>10.00AM - 04.00PM</span>
+                            </div>
+                            <h4 class="wexnix_event-title"><a href="event-single.html">High School Program 2024</a></h4>
+                            <p>There are many variations of passages the majority have some injected humour.</p>
+                            <div class="wexnix_event-btn">
+                                <a href="event-single.html" class="wexnix_theme-btn">Join Event<i
+                                        class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wexnix_event-item">
+                        <div class="wexnix_event-location">
+                            <span><i class="fas fa-map-marker-alt"></i> Chittagong, Bangladesh</span>
+                        </div>
+                        <div class="wexnix_event-img">
+                            <img src="assets/img/event/04.jpg" alt="">
+                        </div>
+                        <div class="wexnix_event-info">
+                            <div class="wexnix_event-meta">
+                                <span class="wexnix_event-date"><i class="fas fa-calendar-alt"></i>16 June, 2024</span>
+                                <span class="wexnix_event-time"><i class="fas fa-clock"></i>10.00AM - 04.00PM</span>
+                            </div>
+                            <h4 class="wexnix_event-title"><a href="event-single.html">High School Program 2024</a></h4>
+                            <p>There are many variations of passages the majority have some injected humour.</p>
+                            <div class="wexnix_event-btn">
+                                <a href="event-single.html" class="wexnix_theme-btn">Join Event<i
+                                        class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- event area end -->
+
+
+        <!-- enroll area-->
+        <div class="wexnix_enroll-area pt-80 pb-80">
+            <div class="container-fluid">
+                <div class="col-lg-12">
+                    <div class="row g-5 align-items-center">
+                        <div class="col-lg-6">
+                            <div class="wexnix_enroll-left wow fadeInLeft" data-wow-delay=".25s">
+                                <div class="wexnix_enroll-form">
+                                    <div class="wexnix_enroll-form-header">
+                                        <h3>Start Your Enrollment</h3>
+                                        <p>We are variations of passages the have suffered.</p>
+                                    </div>
+                                    <form action="#">
+                                        <div class="wexnix_form-group">
+                                            <input type="text" name="name" class="form-control" placeholder="Your Name">
+                                        </div>
+                                        <div class="wexnix_form-group">
+                                            <input type="email" name="email" class="form-control"
+                                                placeholder="Email Address">
+                                        </div>
+                                        <div class="wexnix_form-group">
+                                            <select class="form-select" name="service">
+                                                <option value="">Choose Course</option>
+                                                <option value="1">Art And Design</option>
+                                                <option value="2">Acting And Drama</option>
+                                                <option value="3">Accounting And Finance</option>
+                                                <option value="4">Biology And Conservation</option>
+                                                <option value="5">Science And Engineering</option>
+                                                <option value="6">Health Administration</option>
+                                            </select>
+                                        </div>
+                                        <div class="wexnix_form-group">
+                                            <textarea name="message" class="form-control" placeholder="Type Message"
+                                                rows="4"></textarea>
+                                        </div>
+                                        <button class="wexnix_theme-btn">Enroll Now<i
+                                                class="fas fa-arrow-right-long"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="wexnix_enroll-right wow fadeInUp" data-wow-delay=".25s">
+                                <div class="wexnix_skill-content">
+                                    <div class="wexnix_site-heading mb-3">
+                                        <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i>
+                                            Our Skills</span>
+                                        <h2 class="wexnix_site-title text-white">
+                                            Explore Your <span>Creativity And Talent</span> With Us
+                                        </h2>
+                                    </div>
+                                    <p class="text-white">
+                                        There are many variations of passages available but the majority have suffered
+                                        alteration in some form by injected humour randomised words which don't look
+                                        even
+                                        slightly believable. If you are going to use passage you need sure there
+                                        anything
+                                        embarrassing first true generator on the Internet.
+                                    </p>
+                                    <div class="wexnix_skills-section">
+                                        <div class="wexnix_progress-box">
+                                            <h5>Our Students <span class="wexnix_pull-right">85%</span></h5>
+                                            <div class="progress" data-value="85">
+                                                <div class="progress-bar" role="progressbar"></div>
+                                            </div>
+                                        </div>
+                                        <div class="wexnix_progress-box">
+                                            <h5>Our Teachers <span class="wexnix_pull-right">65%</span></h5>
+                                            <div class="progress" data-value="65">
+                                                <div class="progress-bar" role="progressbar"></div>
+                                            </div>
+                                        </div>
+                                        <div class="wexnix_progress-box">
+                                            <h5>Our Courses <span class="wexnix_pull-right">75%</span></h5>
+                                            <div class="progress" data-value="75">
+                                                <div class="progress-bar" role="progressbar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="contact.html" class="wexnix_theme-btn mt-5">Learn More<i
+                                            class="fas fa-arrow-right-long"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- enroll area end -->
+
+
+        <!-- department area -->
+        <div class="wexnix_department-area wexnix_bg py-120">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="wexnix_site-heading text-center">
+                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i>
+                                Department</span>
+                            <h2 class="wexnix_site-title">Browse Our <span>Department</span></h2>
+                            <p>It is a long established fact that a reader will be distracted by the readable content of
+                                a page when looking at its layout.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wexnix_department-slider owl-carousel wexnix_owl-theme">
+                    <div class="wexnix_department-item">
+                        <div class="wexnix_department-icon">
+                            <img src="assets/img/icon/monitor.svg" alt="">
+                        </div>
+                        <div class="wexnix_department-info">
+                            <h4 class="wexnix_department-title"><a href="academic-single.html">Business And Finance</a>
+                            </h4>
+                            <p>There are many variations of passages the majority have some injected humour.</p>
+                            <div class="wexnix_department-btn">
+                                <a href="academic-single.html">Read More<i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wexnix_department-item">
+                        <div class="wexnix_department-icon">
+                            <img src="assets/img/icon/law.svg" alt="">
+                        </div>
+                        <div class="wexnix_department-info">
+                            <h4 class="wexnix_department-title"><a href="academic-single.html">Law And Criminology</a>
+                            </h4>
+                            <p>There are many variations of passages the majority have some injected humour.</p>
+                            <div class="wexnix_department-btn">
+                                <a href="academic-single.html">Read More<i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wexnix_department-item">
+                        <div class="wexnix_department-icon">
+                            <img src="assets/img/icon/data.svg" alt="">
+                        </div>
+                        <div class="wexnix_department-info">
+                            <h4 class="wexnix_department-title"><a href="academic-single.html">IT And Data Science</a>
+                            </h4>
+                            <p>There are many variations of passages the majority have some injected humour.</p>
+                            <div class="wexnix_department-btn">
+                                <a href="academic-single.html">Read More<i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wexnix_department-item">
+                        <div class="wexnix_department-icon">
+                            <img src="assets/img/icon/health.svg" alt="">
+                        </div>
+                        <div class="wexnix_department-info">
+                            <h4 class="wexnix_department-title"><a href="academic-single.html">Health And Medicine</a>
+                            </h4>
+                            <p>There are many variations of passages the majority have some injected humour.</p>
+                            <div class="wexnix_department-btn">
+                                <a href="academic-single.html">Read More<i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wexnix_department-item">
+                        <div class="wexnix_department-icon">
+                            <img src="assets/img/icon/art.svg" alt="">
+                        </div>
+                        <div class="wexnix_department-info">
+                            <h4 class="wexnix_department-title"><a href="academic-single.html">Art And Design</a></h4>
+                            <p>There are many variations of passages the majority have some injected humour.</p>
+                            <div class="wexnix_department-btn">
+                                <a href="academic-single.html">Read More<i class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- department area end -->
+
+
+        <!-- testimonial area -->
+        <div class="wexnix_testimonial-area wexnix_ts-bg pt-80 pb-80">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="wexnix_site-heading text-center">
+                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i>
+                                Testimonials</span>
+                            <h2 class="wexnix_site-title text-white">What Our Students <span>Say's</span></h2>
+                            <p class="text-white">It is a long established fact that a reader will be distracted by the
+                                readable content of
+                                a page when looking at its layout.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wexnix_testimonial-slider owl-carousel wexnix_owl-theme">
+                    <div class="wexnix_testimonial-item">
+                        <div class="wexnix_testimonial-rate">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="wexnix_testimonial-quote">
+                            <p>
+                                There are many variations of tend to repeat chunks some all form necessary injected for
+                                the going are humour words.
+                            </p>
+                        </div>
+                        <div class="wexnix_testimonial-content">
+                            <div class="wexnix_testimonial-author-img">
+                                <img src="assets/img/testimonial/01.jpg" alt="">
+                            </div>
+                            <div class="wexnix_testimonial-author-info">
+                                <h4>Anthony Nicoll</h4>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                        <span class="wexnix_testimonial-quote-icon"><i class="fas fa-quote-right"></i></span>
+                    </div>
+                    <div class="wexnix_testimonial-item">
+                        <div class="wexnix_testimonial-rate">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="wexnix_testimonial-quote">
+                            <p>
+                                There are many variations of tend to repeat chunks some all form necessary injected for
+                                the going are humour words.
+                            </p>
+                        </div>
+                        <div class="wexnix_testimonial-content">
+                            <div class="wexnix_testimonial-author-img">
+                                <img src="assets/img/testimonial/02.jpg" alt="">
+                            </div>
+                            <div class="wexnix_testimonial-author-info">
+                                <h4>Richard Lock</h4>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                        <span class="wexnix_testimonial-quote-icon"><i class="fas fa-quote-right"></i></span>
+                    </div>
+                    <div class="wexnix_testimonial-item">
+                        <div class="wexnix_testimonial-rate">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="wexnix_testimonial-quote">
+                            <p>
+                                There are many variations of tend to repeat chunks some all form necessary injected for
+                                the going are humour words.
+                            </p>
+                        </div>
+                        <div class="wexnix_testimonial-content">
+                            <div class="wexnix_testimonial-author-img">
+                                <img src="assets/img/testimonial/03.jpg" alt="">
+                            </div>
+                            <div class="wexnix_testimonial-author-info">
+                                <h4>Randal Grand</h4>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                        <span class="wexnix_testimonial-quote-icon"><i class="fas fa-quote-right"></i></span>
+                    </div>
+                    <div class="wexnix_testimonial-item">
+                        <div class="wexnix_testimonial-rate">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="wexnix_testimonial-quote">
+                            <p>
+                                There are many variations of tend to repeat chunks some all form necessary injected for
+                                the going are humour words.
+                            </p>
+                        </div>
+                        <div class="wexnix_testimonial-content">
+                            <div class="wexnix_testimonial-author-img">
+                                <img src="assets/img/testimonial/04.jpg" alt="">
+                            </div>
+                            <div class="wexnix_testimonial-author-info">
+                                <h4>Edward Miles</h4>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                        <span class="wexnix_testimonial-quote-icon"><i class="fas fa-quote-right"></i></span>
+                    </div>
+                    <div class="wexnix_testimonial-item">
+                        <div class="wexnix_testimonial-rate">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="wexnix_testimonial-quote">
+                            <p>
+                                There are many variations of tend to repeat chunks some all form necessary injected for
+                                the going are humour words.
+                            </p>
+                        </div>
+                        <div class="wexnix_testimonial-content">
+                            <div class="wexnix_testimonial-author-img">
+                                <img src="assets/img/testimonial/05.jpg" alt="">
+                            </div>
+                            <div class="wexnix_testimonial-author-info">
+                                <h4>Ninal Gordon</h4>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                        <span class="wexnix_testimonial-quote-icon"><i class="fas fa-quote-right"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- testimonial area end -->
+
+
+        <!-- blog area -->
+        <div class="wexnix_blog-area py-120">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="wexnix_site-heading text-center">
+                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> Our
+                                Blog</span>
+                            <h2 class="wexnix_site-title">Latest News & <span>Blog</span></h2>
+                            <p>It is a long established fact that a reader will be distracted by the readable content of
+                                a page when looking at its layout.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="wexnix_blog-item wow fadeInUp" data-wow-delay=".25s">
+                            <div class="wexnix_blog-date"><i class="fas fa-calendar-alt"></i> June 18, 2024</div>
+                            <div class="wexnix_blog-item-img">
+                                <img src="assets/img/blog/01.jpg" alt="Thumb">
+                            </div>
+                            <div class="wexnix_blog-item-info">
+                                <div class="wexnix_blog-item-meta">
+                                    <ul>
+                                        <li><a href="#"><i class="fas fa-user-circle"></i> By Alicia Davis</a></li>
+                                        <li><a href="#"><i class="fas fa-comments"></i> 03 Comments</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="wexnix_blog-title">
+                                    <a href="blog-single.html">There are many variations passage have suffered
+                                        available.</a>
+                                </h4>
+                                <a class="wexnix_theme-btn" href="blog-single.html">Read More<i
+                                        class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="wexnix_blog-item wow fadeInUp" data-wow-delay=".50s">
+                            <div class="wexnix_blog-date"><i class="fas fa-calendar-alt"></i> June 18, 2024</div>
+                            <div class="wexnix_blog-item-img">
+                                <img src="assets/img/blog/02.jpg" alt="Thumb">
+                            </div>
+                            <div class="wexnix_blog-item-info">
+                                <div class="wexnix_blog-item-meta">
+                                    <ul>
+                                        <li><a href="#"><i class="fas fa-user-circle"></i> By Alicia Davis</a></li>
+                                        <li><a href="#"><i class="fas fa-comments"></i> 03 Comments</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="wexnix_blog-title">
+                                    <a href="blog-single.html">There are many variations passage have suffered
+                                        available.</a>
+                                </h4>
+                                <a class="wexnix_theme-btn" href="blog-single.html">Read More<i
+                                        class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="wexnix_blog-item wow fadeInUp" data-wow-delay=".75s">
+                            <div class="wexnix_blog-date"><i class="fas fa-calendar-alt"></i> June 18, 2024</div>
+                            <div class="wexnix_blog-item-img">
+                                <img src="assets/img/blog/03.jpg" alt="Thumb">
+                            </div>
+                            <div class="wexnix_blog-item-info">
+                                <div class="wexnix_blog-item-meta">
+                                    <ul>
+                                        <li><a href="#"><i class="fas fa-user-circle"></i> By Alicia Davis</a></li>
+                                        <li><a href="#"><i class="fas fa-comments"></i> 03 Comments</a></li>
+                                    </ul>
+                                </div>
+                                <h4 class="wexnix_blog-title">
+                                    <a href="blog-single.html">There are many variations passage have suffered
+                                        available.</a>
+                                </h4>
+                                <a class="wexnix_theme-btn" href="blog-single.html">Read More<i
+                                        class="fas fa-arrow-right-long"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- blog area end -->
+
+
+        <!-- partner area -->
+        <div class="wexnix_partner-area wexnix_bg pt-50 pb-50">
+            <div class="container-fluid">
+                <div class="wexnix_partner-wrapper wexnix_partner-slider owl-carousel wexnix_owl-theme">
+                    <img src="assets/img/partner/02.png" alt="thumb">
+                    <img src="assets/img/partner/03.png" alt="thumb">
+                    <img src="assets/img/partner/04.png" alt="thumb">
+                    <img src="assets/img/partner/02.png" alt="thumb">
+                    <img src="assets/img/partner/03.png" alt="thumb">
+                    <img src="assets/img/partner/04.png" alt="thumb">
+                </div>
+            </div>
+        </div>
+        <!-- partner area end -->
+
+    </main>
+
+
+    <!-- footer area -->
+    <footer class="wexnix_footer-area">
+        <div class="wexnix_footer-shape">
+            <img src="assets/img/shape/03.png" alt="">
+        </div>
+        <div class="wexnix_footer-widget">
+            <div class="container-fluid">
+                <div class="row wexnix_footer-widget-wrapper pt-100 pb-70">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="wexnix_footer-widget-box wexnix_about-us">
+                            <a href="#" class="wexnix_footer-logo">
+                                <img src="assets/img/logo/logo-light.png" alt="">
+                            </a>
+                            <p class="mb-3">
+                                We are many variations of passages available but the majority have suffered alteration
+                                in some form by injected humour words believable.
+                            </p>
+                            <ul class="wexnix_footer-contact">
+                                <li><a href="tel:+8801712345678"><i class="fas fa-phone"></i>+880 1712-345678</a></li>
+                                <li><i class="fas fa-map-marker-alt"></i>Chittagong, Bangladesh</li>
+                                <li><a href="mailto:info@example.com"><i
+                                            class="fas fa-envelope"></i>info@example.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-2">
+                        <div class="wexnix_footer-widget-box wexnix_list">
+                            <h4 class="wexnix_footer-widget-title">Quick Links</h4>
+                            <ul class="wexnix_footer-list">
+                                <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> FAQ's</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Testimonials</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Terms Of Service</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Privacy policy</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Update News</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="wexnix_footer-widget-box wexnix_list">
+                            <h4 class="wexnix_footer-widget-title">Our Campus</h4>
+                            <ul class="wexnix_footer-list">
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Campus Safety</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Student Activities</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Academic Department</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Planning & Administration</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Office Of The Chancellor</a></li>
+                                <li><a href="#"><i class="fas fa-caret-right"></i> Facility Services</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="wexnix_footer-widget-box wexnix_list">
+                            <h4 class="wexnix_footer-widget-title">Newsletter</h4>
+                            <div class="wexnix_footer-newsletter">
+                                <p>Subscribe Our Newsletter To Get Latest Update And News</p>
+                                <div class="wexnix_subscribe-form">
+                                    <form action="#">
+                                        <input type="email" class="form-control" placeholder="Your Email">
+                                        <button class="wexnix_theme-btn" type="submit">
+                                            Subscribe Now <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wexnix_copyright">
+            <div class="container-fluid">
+                <div class="wexnix_copyright-wrapper">
+                    <div class="row">
+                        <div class="col-md-6 align-self-center">
+                            <p class="wexnix_copyright-text">
+                                &copy; Copyright <span id="date"></span> <a href="#"> WexNix </a> All Rights Reserved.
+                            </p>
+                        </div>
+                        <div class="col-md-6 align-self-center">
+                            <ul class="wexnix_footer-social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
+                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer area end -->
+
+
+    <!-- scroll-top -->
+    <a href="#" id="scroll-top"><i class="fas fa-arrow-up"></i></a>
+    <!-- scroll-top end -->
+
+
+    <!-- js -->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/modernizr.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/jquery.appear.min.js"></script>
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/counter-up.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

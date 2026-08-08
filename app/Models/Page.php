@@ -60,6 +60,11 @@ class Page extends Model
         return $slug;
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     public function getBreadcrumbImageUrlAttribute(): ?string
     {
         return $this->breadcrumb_image ? '/storage/'.ltrim($this->breadcrumb_image, '/') : null;

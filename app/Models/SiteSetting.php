@@ -77,10 +77,23 @@ class SiteSetting extends Model
         'footer_campus_title',
         'footer_newsletter_title',
         'footer_newsletter_text',
+        'sidebar_notice_title',
+        'sidebar_minister_name',
+        'sidebar_minister_role',
+        'sidebar_minister_button_text',
+        'sidebar_secretary_name',
+        'sidebar_secretary_role',
+        'sidebar_secretary_button_text',
+        'sidebar_principal_button_text',
+        'sidebar_vice_principal_name',
+        'sidebar_vice_principal_role',
+        'sidebar_vice_principal_button_text',
+        'sidebar_calendar_title',
     ];
 
     protected $fillable = [
         'site_name',
+        'homepage_template',
         'logo',
         'footer_logo',
         'address',
@@ -176,6 +189,31 @@ class SiteSetting extends Model
         'footer_campus_links',
         'footer_newsletter_title',
         'footer_newsletter_text',
+        'sidebar_notice_show',
+        'sidebar_notice_title',
+        'sidebar_notice_limit',
+        'sidebar_minister_show',
+        'sidebar_minister_photo',
+        'sidebar_minister_name',
+        'sidebar_minister_role',
+        'sidebar_minister_button_text',
+        'sidebar_minister_button_url',
+        'sidebar_secretary_show',
+        'sidebar_secretary_photo',
+        'sidebar_secretary_name',
+        'sidebar_secretary_role',
+        'sidebar_secretary_button_text',
+        'sidebar_secretary_button_url',
+        'sidebar_principal_show',
+        'sidebar_principal_button_text',
+        'sidebar_vice_principal_show',
+        'sidebar_vice_principal_photo',
+        'sidebar_vice_principal_name',
+        'sidebar_vice_principal_role',
+        'sidebar_vice_principal_button_text',
+        'sidebar_vice_principal_button_url',
+        'sidebar_calendar_show',
+        'sidebar_calendar_title',
     ];
 
     protected $casts = [
@@ -188,6 +226,13 @@ class SiteSetting extends Model
         'about_items' => 'array',
         'footer_quick_links' => 'array',
         'footer_campus_links' => 'array',
+        'sidebar_notice_show' => 'boolean',
+        'sidebar_notice_limit' => 'integer',
+        'sidebar_minister_show' => 'boolean',
+        'sidebar_secretary_show' => 'boolean',
+        'sidebar_principal_show' => 'boolean',
+        'sidebar_vice_principal_show' => 'boolean',
+        'sidebar_calendar_show' => 'boolean',
     ];
 
     protected $appends = [
@@ -196,6 +241,7 @@ class SiteSetting extends Model
         'principal_photo_url', 'principal_page_breadcrumb_image_url',
         'ex_principal_photo_url', 'ex_principal_page_breadcrumb_image_url',
         'contact_image_url', 'contact_page_breadcrumb_image_url',
+        'sidebar_minister_photo_url', 'sidebar_secretary_photo_url', 'sidebar_vice_principal_photo_url',
     ];
 
     protected static function booted(): void
@@ -278,6 +324,21 @@ class SiteSetting extends Model
     public function getContactPageBreadcrumbImageUrlAttribute(): ?string
     {
         return $this->contact_page_breadcrumb_image ? '/storage/'.ltrim($this->contact_page_breadcrumb_image, '/') : null;
+    }
+
+    public function getSidebarMinisterPhotoUrlAttribute(): ?string
+    {
+        return $this->sidebar_minister_photo ? '/storage/'.ltrim($this->sidebar_minister_photo, '/') : null;
+    }
+
+    public function getSidebarSecretaryPhotoUrlAttribute(): ?string
+    {
+        return $this->sidebar_secretary_photo ? '/storage/'.ltrim($this->sidebar_secretary_photo, '/') : null;
+    }
+
+    public function getSidebarVicePrincipalPhotoUrlAttribute(): ?string
+    {
+        return $this->sidebar_vice_principal_photo ? '/storage/'.ltrim($this->sidebar_vice_principal_photo, '/') : null;
     }
 
     /**

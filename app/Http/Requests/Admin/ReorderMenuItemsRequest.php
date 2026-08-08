@@ -28,9 +28,19 @@ class ReorderMenuItemsRequest extends FormRequest
     {
         return [
             'items' => ['required', 'array'],
-            'items.*.id' => ['required', 'integer', 'exists:menu_items,id'],
-            'items.*.parent_id' => ['nullable', 'integer', 'exists:menu_items,id'],
+            'items.*.id' => ['required'],
+            'items.*.parent_id' => ['nullable'],
             'items.*.sort_order' => ['required', 'integer'],
+            'items.*.menu_id' => ['nullable', 'integer'],
+            'items.*.type' => ['nullable', 'string'],
+            'items.*.label' => ['nullable', 'array'],
+            'items.*.url' => ['nullable', 'string'],
+            'items.*.route_name' => ['nullable', 'string'],
+            'items.*.linkable_type' => ['nullable', 'string'],
+            'items.*.linkable_id' => ['nullable'],
+            'items.*.target' => ['nullable', 'string'],
+            'items.*.is_active' => ['nullable', 'boolean'],
+            'items.*.is_new' => ['nullable', 'boolean'],
         ];
     }
 }

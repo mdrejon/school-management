@@ -75,14 +75,19 @@ const submit = () => {
 
         <Card v-if="page" class="shadow-sm mb-4 border-l-4 border-l-indigo-400">
             <template #content>
-                <div class="flex items-center justify-between gap-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <p class="text-sm font-semibold text-slate-800">Page content</p>
-                        <p class="text-xs text-slate-500">Build and edit this page's body visually — drag-and-drop blocks, edit text in place.</p>
+                        <p class="text-sm font-semibold text-slate-800">Page content & actions</p>
+                        <p class="text-xs text-slate-500">Build and edit this page's body visually or view it live on the frontend.</p>
                     </div>
-                    <a :href="route('admin.cms.pages.builder.edit', page.id)" target="_blank">
-                        <Button label="Open Visual Builder" icon="pi pi-external-link" iconPos="right" as="span" />
-                    </a>
+                    <div class="flex items-center gap-2">
+                        <a :href="route('pages.show', page.slug)" target="_blank">
+                            <Button label="View Frontend Page" icon="pi pi-eye" severity="secondary" outlined as="span" />
+                        </a>
+                        <a :href="route('admin.cms.pages.builder.edit', page.id)" target="_blank">
+                            <Button label="Open Visual Builder" icon="pi pi-external-link" iconPos="right" as="span" />
+                        </a>
+                    </div>
                 </div>
             </template>
         </Card>

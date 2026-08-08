@@ -2,18 +2,23 @@
 
 use App\Http\Controllers\Admin\BlogPageSettingController;
 use App\Http\Controllers\Admin\BlogPostController;
+use App\Http\Controllers\Admin\CampusTourPageSettingController;
+use App\Http\Controllers\Admin\ClassScheduleController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\CoursePageSettingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DepartmentPageSettingController;
+use App\Http\Controllers\Admin\DonorController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\EventPageSettingController;
 use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\FacilityPageSettingController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FaqPageSettingController;
+use App\Http\Controllers\Admin\FounderController;
+use App\Http\Controllers\Admin\FounderDonorPageSettingController;
 use App\Http\Controllers\Admin\GalleryImageController;
 use App\Http\Controllers\Admin\GalleryPageSettingController;
 use App\Http\Controllers\Admin\LanguageController;
@@ -26,6 +31,7 @@ use App\Http\Controllers\Admin\PageVisualBuilderController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\PortfolioPageSettingController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\VisionMissionPageSettingController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TeacherController;
@@ -260,6 +266,51 @@ Route::middleware([
         Route::put('/', [FaqPageSettingController::class, 'update'])->name('update');
     });
 
+    Route::prefix('cms/founders-donors')->name('cms.founders-donors.')->middleware('module:founders_donors')->group(function () {
+        Route::get('/', [FounderController::class, 'index'])->name('index')->middleware('permission:founders_donors.view');
+
+        Route::prefix('founders')->name('founders.')->group(function () {
+            Route::post('/', [FounderController::class, 'store'])->name('store')->middleware('permission:founders_donors.create');
+            Route::put('/{founder}', [FounderController::class, 'update'])->name('update')->middleware('permission:founders_donors.edit');
+            Route::patch('/{founder}/toggle', [FounderController::class, 'toggleActive'])->name('toggle')->middleware('permission:founders_donors.edit');
+            Route::patch('/{founder}/move-up', [FounderController::class, 'moveUp'])->name('moveUp')->middleware('permission:founders_donors.edit');
+            Route::patch('/{founder}/move-down', [FounderController::class, 'moveDown'])->name('moveDown')->middleware('permission:founders_donors.edit');
+            Route::delete('/{founder}', [FounderController::class, 'destroy'])->name('destroy')->middleware('permission:founders_donors.delete');
+        });
+
+        Route::prefix('donors')->name('donors.')->group(function () {
+            Route::post('/', [DonorController::class, 'store'])->name('store')->middleware('permission:founders_donors.create');
+            Route::put('/{donor}', [DonorController::class, 'update'])->name('update')->middleware('permission:founders_donors.edit');
+            Route::patch('/{donor}/toggle', [DonorController::class, 'toggleActive'])->name('toggle')->middleware('permission:founders_donors.edit');
+            Route::patch('/{donor}/move-up', [DonorController::class, 'moveUp'])->name('moveUp')->middleware('permission:founders_donors.edit');
+            Route::patch('/{donor}/move-down', [DonorController::class, 'moveDown'])->name('moveDown')->middleware('permission:founders_donors.edit');
+            Route::delete('/{donor}', [DonorController::class, 'destroy'])->name('destroy')->middleware('permission:founders_donors.delete');
+        });
+
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::put('/', [FounderDonorPageSettingController::class, 'update'])->name('update')->middleware('permission:founders_donors.edit');
+        });
+    });
+
+    Route::prefix('cms/class-schedules')->name('cms.class-schedules.')->group(function () {
+        Route::get('/', [ClassScheduleController::class, 'index'])->name('index');
+        Route::post('/', [ClassScheduleController::class, 'store'])->name('store');
+        Route::put('/settings', [ClassScheduleController::class, 'updatePageSettings'])->name('settings.update');
+        Route::put('/{classSchedule}', [ClassScheduleController::class, 'update'])->name('update');
+        Route::patch('/{classSchedule}/toggle', [ClassScheduleController::class, 'toggleActive'])->name('toggle');
+        Route::delete('/{classSchedule}', [ClassScheduleController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('cms/vision-mission')->name('cms.vision-mission.')->group(function () {
+        Route::get('/', [VisionMissionPageSettingController::class, 'edit'])->name('edit');
+        Route::put('/', [VisionMissionPageSettingController::class, 'update'])->name('update');
+    });
+
+    Route::prefix('cms/campus-tour')->name('cms.campus-tour.')->group(function () {
+        Route::get('/', [CampusTourPageSettingController::class, 'edit'])->name('edit');
+        Route::put('/', [CampusTourPageSettingController::class, 'update'])->name('update');
+    });
+
     Route::prefix('cms/pages')->name('cms.pages.')->group(function () {
         Route::get('/', [PageController::class, 'index'])->name('index')->middleware('permission:pages.view');
         Route::get('/create', [PageController::class, 'create'])->name('create')->middleware('permission:pages.create');
@@ -284,6 +335,7 @@ Route::middleware([
         Route::get('/linkables', [MenuController::class, 'searchLinkables'])->name('linkables')->middleware('permission:menus.view');
         Route::post('/items', [MenuController::class, 'storeItem'])->name('items.store')->middleware('permission:menus.create');
         Route::put('/items/{menuItem}', [MenuController::class, 'updateItem'])->name('items.update')->middleware('permission:menus.edit');
+        Route::patch('/items/{menuItem}/toggle', [MenuController::class, 'toggleItem'])->name('items.toggle')->middleware('permission:menus.edit');
         Route::delete('/items/{menuItem}', [MenuController::class, 'destroyItem'])->name('items.destroy')->middleware('permission:menus.delete');
         Route::patch('/reorder', [MenuController::class, 'reorder'])->name('reorder')->middleware('permission:menus.edit');
     });

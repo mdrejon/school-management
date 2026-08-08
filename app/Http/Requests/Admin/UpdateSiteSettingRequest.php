@@ -27,6 +27,7 @@ class UpdateSiteSettingRequest extends FormRequest
         $default = Language::defaultLanguage()?->code ?? 'en';
 
         return [
+            'homepage_template' => ['nullable', 'string', 'in:default,index-1'],
             'logo' => ['nullable', 'image', 'max:2048'],
             'footer_logo' => ['nullable', 'image', 'max:2048'],
 
@@ -197,6 +198,37 @@ class UpdateSiteSettingRequest extends FormRequest
             'contact_page_seo_title.*' => ['nullable', 'string', 'max:150'],
             'contact_page_seo_description.*' => ['nullable', 'string', 'max:500'],
             'contact_page_seo_keywords.*' => ['nullable', 'string', 'max:255'],
+
+            'sidebar_notice_show' => ['nullable', 'boolean'],
+            'sidebar_notice_title.*' => ['nullable', 'string', 'max:150'],
+            'sidebar_notice_limit' => ['nullable', 'integer', 'between:1,20'],
+
+            'sidebar_minister_show' => ['nullable', 'boolean'],
+            'sidebar_minister_photo' => ['nullable', 'image', 'max:2048'],
+            'sidebar_minister_name.*' => ['nullable', 'string', 'max:150'],
+            'sidebar_minister_role.*' => ['nullable', 'string', 'max:150'],
+            'sidebar_minister_button_text.*' => ['nullable', 'string', 'max:100'],
+            'sidebar_minister_button_url' => ['nullable', 'string', 'max:255'],
+
+            'sidebar_secretary_show' => ['nullable', 'boolean'],
+            'sidebar_secretary_photo' => ['nullable', 'image', 'max:2048'],
+            'sidebar_secretary_name.*' => ['nullable', 'string', 'max:150'],
+            'sidebar_secretary_role.*' => ['nullable', 'string', 'max:150'],
+            'sidebar_secretary_button_text.*' => ['nullable', 'string', 'max:100'],
+            'sidebar_secretary_button_url' => ['nullable', 'string', 'max:255'],
+
+            'sidebar_principal_show' => ['nullable', 'boolean'],
+            'sidebar_principal_button_text.*' => ['nullable', 'string', 'max:100'],
+
+            'sidebar_vice_principal_show' => ['nullable', 'boolean'],
+            'sidebar_vice_principal_photo' => ['nullable', 'image', 'max:2048'],
+            'sidebar_vice_principal_name.*' => ['nullable', 'string', 'max:150'],
+            'sidebar_vice_principal_role.*' => ['nullable', 'string', 'max:150'],
+            'sidebar_vice_principal_button_text.*' => ['nullable', 'string', 'max:100'],
+            'sidebar_vice_principal_button_url' => ['nullable', 'string', 'max:255'],
+
+            'sidebar_calendar_show' => ['nullable', 'boolean'],
+            'sidebar_calendar_title.*' => ['nullable', 'string', 'max:150'],
         ];
     }
 

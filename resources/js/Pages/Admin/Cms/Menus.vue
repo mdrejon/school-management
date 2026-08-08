@@ -30,6 +30,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    cmsPages: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const page = usePage();
@@ -93,6 +97,10 @@ const deleteItem = (node) => {
     router.delete(route('admin.cms.menus.items.destroy', node.id), { preserveScroll: true });
 };
 
+const toggleItem = (node) => {
+    router.patch(route('admin.cms.menus.items.toggle', node.id), {}, { preserveScroll: true });
+};
+
 /* ------------------------------------------------------------------ */
 /* Add items panel                                                      */
 /* ------------------------------------------------------------------ */
@@ -138,6 +146,88 @@ const addBuiltInRoute = (routeName, title) => {
         is_active: true,
     }, { preserveScroll: true });
 };
+
+const addCmsPageItem = (pageItem) => {
+    const label = emptyTranslatable();
+    const pageTitle = pageItem.title[defaultLangCode.value] ?? Object.values(pageItem.title ?? {})[0] ?? pageItem.slug;
+    label[defaultLangCode.value] = pageTitle;
+    router.post(route('admin.cms.menus.items.store'), {
+        menu_id: props.menu.id,
+        parent_id: null,
+        type: 'model',
+        label,
+        linkable_type: 'page',
+        linkable_id: pageItem.id,
+        target: '_self',
+        is_active: true,
+    }, { preserveScroll: true });
+};
+
+/* ------------------------------------------------------------------ */
+/* Drag-and-Drop Clone Generators (Left Sidebar to Right Tree)        */
+/* ------------------------------------------------------------------ */
+
+const prepareCmsPageClone = (pageItem) => {
+    const label = emptyTranslatable();
+    const pageTitle = pageItem.title[defaultLangCode.value] ?? Object.values(pageItem.title ?? {})[0] ?? pageItem.slug;
+    label[defaultLangCode.value] = pageTitle;
+    return {
+        id: 'new-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+        menu_id: props.menu.id,
+        parent_id: null,
+        type: 'model',
+        label,
+        linkable_type: 'page',
+        linkable_id: pageItem.id,
+        target: '_self',
+        is_active: true,
+        children: [],
+        is_new: true,
+    };
+};
+
+const prepareBuiltInRouteClone = (item) => {
+    const label = emptyTranslatable();
+    label[defaultLangCode.value] = item.title;
+    return {
+        id: 'new-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+        menu_id: props.menu.id,
+        parent_id: null,
+        type: 'route',
+        label,
+        route_name: item.routeName,
+        target: '_self',
+        is_active: true,
+        children: [],
+        is_new: true,
+    };
+};
+
+const prepareModuleClone = (record) => {
+    const label = emptyTranslatable();
+    label[defaultLangCode.value] = record.title;
+    return {
+        id: 'new-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+        menu_id: props.menu.id,
+        parent_id: null,
+        type: 'model',
+        label,
+        linkable_type: addTab.value,
+        linkable_id: record.id,
+        target: '_self',
+        is_active: true,
+        children: [],
+        is_new: true,
+    };
+};
+
+const builtInRoutesList = computed(() => {
+    return Object.entries(props.builtInRoutes).map(([routeName, title]) => ({
+        id: routeName,
+        routeName,
+        title,
+    }));
+});
 
 // Module items (Course/Teacher/Event/Department/Notice)
 const linkableSearch = ref('');
@@ -197,9 +287,9 @@ const targetOptions = [
             department, or notice, drag to reorder, and drag onto another item to nest it as a submenu.
         </p>
 
-        <div class="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6">
             <!-- Add items -->
-            <Card class="shadow-sm">
+            <Card class="shadow-sm lg:sticky lg:top-6 lg:self-start">
                 <template #title>
                     <div class="text-base font-semibold">Add menu items</div>
                 </template>
@@ -234,10 +324,60 @@ const targetOptions = [
                             </TabPanel>
 
                             <TabPanel value="pages">
-                                <div class="flex flex-col gap-2">
-                                    <div v-for="(title, routeName) in builtInRoutes" :key="routeName" class="flex items-center justify-between gap-2 rounded border border-slate-100 px-2 py-1.5">
-                                        <span class="text-sm text-slate-700">{{ title }}</span>
-                                        <Button icon="pi pi-plus" text rounded size="small" @click="addBuiltInRoute(routeName, title)" />
+                                <div class="flex flex-col gap-4">
+                                    <!-- Dynamic CMS Pages -->
+                                    <div v-if="cmsPages.length" class="flex flex-col gap-2">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Dynamic CMS Pages</span>
+                                            <span class="text-[11px] text-indigo-600 font-medium">Drag to place anywhere</span>
+                                        </div>
+                                        <draggable
+                                            :list="cmsPages"
+                                            item-key="id"
+                                            :group="{ name: 'menu-items', pull: 'clone', put: false }"
+                                            :clone="prepareCmsPageClone"
+                                            :sort="false"
+                                            class="flex flex-col gap-2"
+                                        >
+                                            <template #item="{ element: pageItem }">
+                                                <div class="flex items-center justify-between gap-2 rounded border border-indigo-100 bg-indigo-50/50 px-2.5 py-2 cursor-grab active:cursor-grabbing hover:border-indigo-300 transition-colors">
+                                                    <div class="flex items-center gap-2 overflow-hidden">
+                                                        <i class="pi pi-bars text-slate-400 text-xs shrink-0" />
+                                                        <div class="flex flex-col overflow-hidden">
+                                                            <span class="text-sm font-medium text-slate-800 truncate">{{ pageItem.title[defaultLangCode] ?? Object.values(pageItem.title)[0] }}</span>
+                                                            <span class="text-[11px] text-slate-400 font-mono">/{{ pageItem.slug }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <Button icon="pi pi-plus" text rounded size="small" title="Add to Menu" @click="addCmsPageItem(pageItem)" />
+                                                </div>
+                                            </template>
+                                        </draggable>
+                                    </div>
+
+                                    <!-- System Pages -->
+                                    <div class="flex flex-col gap-2">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">System Pages</span>
+                                            <span class="text-[11px] text-indigo-600 font-medium">Drag to place anywhere</span>
+                                        </div>
+                                        <draggable
+                                            :list="builtInRoutesList"
+                                            item-key="id"
+                                            :group="{ name: 'menu-items', pull: 'clone', put: false }"
+                                            :clone="prepareBuiltInRouteClone"
+                                            :sort="false"
+                                            class="flex flex-col gap-2"
+                                        >
+                                            <template #item="{ element: item }">
+                                                <div class="flex items-center justify-between gap-2 rounded border border-slate-100 bg-white px-2.5 py-2 cursor-grab active:cursor-grabbing hover:border-slate-300 transition-colors">
+                                                    <div class="flex items-center gap-2 overflow-hidden">
+                                                        <i class="pi pi-bars text-slate-400 text-xs shrink-0" />
+                                                        <span class="text-sm text-slate-700 font-medium truncate">{{ item.title }}</span>
+                                                    </div>
+                                                    <Button icon="pi pi-plus" text rounded size="small" title="Add to Menu" @click="addBuiltInRoute(item.routeName, item.title)" />
+                                                </div>
+                                            </template>
+                                        </draggable>
                                     </div>
                                 </div>
                             </TabPanel>
@@ -247,11 +387,25 @@ const targetOptions = [
                                     <InputText v-model="linkableSearch" class="w-full" :placeholder="`Search ${label}...`" @input="searchLinkables" />
                                     <p v-if="linkableLoading" class="text-xs text-slate-400">Searching…</p>
                                     <p v-else-if="!linkableResults.length" class="text-xs text-slate-400">No results.</p>
-                                    <div v-else class="flex flex-col gap-2 max-h-72 overflow-y-auto">
-                                        <div v-for="record in linkableResults" :key="record.id" class="flex items-center justify-between gap-2 rounded border border-slate-100 px-2 py-1.5">
-                                            <span class="text-sm text-slate-700 truncate">{{ record.title }}</span>
-                                            <Button icon="pi pi-plus" text rounded size="small" @click="addModuleItem(key, record)" />
-                                        </div>
+                                    <div v-else class="max-h-72 overflow-y-auto pr-1">
+                                        <draggable
+                                            :list="linkableResults"
+                                            item-key="id"
+                                            :group="{ name: 'menu-items', pull: 'clone', put: false }"
+                                            :clone="prepareModuleClone"
+                                            :sort="false"
+                                            class="flex flex-col gap-2"
+                                        >
+                                            <template #item="{ element: record }">
+                                                <div class="flex items-center justify-between gap-2 rounded border border-slate-100 bg-white px-2.5 py-2 cursor-grab active:cursor-grabbing hover:border-slate-300 transition-colors">
+                                                    <div class="flex items-center gap-2 overflow-hidden">
+                                                        <i class="pi pi-bars text-slate-400 text-xs shrink-0" />
+                                                        <span class="text-sm text-slate-700 font-medium truncate">{{ record.title }}</span>
+                                                    </div>
+                                                    <Button icon="pi pi-plus" text rounded size="small" title="Add to Menu" @click="addModuleItem(key, record)" />
+                                                </div>
+                                            </template>
+                                        </draggable>
                                     </div>
                                 </div>
                             </TabPanel>
@@ -278,7 +432,7 @@ const targetOptions = [
                         class="flex flex-col gap-2"
                     >
                         <template #item="{ element }">
-                            <MenuItemNode :node="element" :languages="languages" :default-lang-code="defaultLangCode" @save="saveItem" @delete="deleteItem" />
+                            <MenuItemNode :node="element" :languages="languages" :default-lang-code="defaultLangCode" @save="saveItem" @delete="deleteItem" @toggle="toggleItem" />
                         </template>
                     </draggable>
                 </template>

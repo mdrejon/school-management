@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import ImageDropzone from '@/Components/Admin/ImageDropzone.vue';
@@ -11,6 +11,7 @@ import Textarea from 'primevue/textarea';
 import Tabs from 'primevue/tabs';
 import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
+import ToggleSwitch from 'primevue/toggleswitch';
 
 const props = defineProps({
     settings: {
@@ -74,9 +75,10 @@ const normalizeAboutItems = (items) =>
     }));
 
 const sections = [
-    { key: 'general', label: 'General', icon: 'pi pi-building', description: 'Site name and logos.' },
+    { key: 'general', label: 'General', icon: 'pi pi-building', description: 'Site name, homepage layout template, and logos.' },
     { key: 'header', label: 'Header', icon: 'pi pi-align-left', description: "Address, phone, email, and social links shown in the site header — the footer reuses these too." },
     { key: 'footer', label: 'Footer', icon: 'pi pi-align-justify', description: "The footer's about text, copyright line, Quick Links / Our Campus columns, and Newsletter heading." },
+    { key: 'sidebar', label: 'Homepage Sidebar', icon: 'pi pi-bars', description: 'Widgets, titles, photos, links, and show/hide options for the Home v2 sidebar.' },
     { key: 'school', label: 'School Profile', icon: 'pi pi-verified', description: 'Homepage stat strips: institute details under the slider, and the counter/CTA band further down.' },
     { key: 'choose', label: 'Why Choose Us', icon: 'pi pi-check-circle', description: 'The "Why Choose Us" block with feature boxes and a side image.', module: 'choose' },
     { key: 'about', label: 'About Us', icon: 'pi pi-info-circle', description: 'The "About Us" block with photos, an experience badge, feature items, and a quote.', module: 'about' },
@@ -92,13 +94,8 @@ const sections = [
 // module a developer disabled there disappear from here too, same as the
 // sidebar — the fields underneath stay in the database either way, so
 // re-enabling the module brings whatever was already entered right back.
-const visibleSections = computed(() => {
-    const enabledModules = page.props.enabledModules ?? [];
-
-    return sections.filter((section) => !section.module || enabledModules.includes(section.module));
-});
-const activeSection = computed(() => sections.find((s) => s.key === activeSectionKey.value));
 const activeSectionKey = ref('general');
+const activeSection = computed(() => sections.find((s) => s.key === activeSectionKey.value));
 
 // One shared language tab across every section — picked once at the top of
 // the content area, so every translatable field/card below (across every
@@ -125,8 +122,12 @@ const exPrincipalPhotoPreview = ref(props.settings.ex_principal_photo_url);
 const exPrincipalPageBreadcrumbPreview = ref(props.settings.ex_principal_page_breadcrumb_image_url);
 const contactImagePreview = ref(props.settings.contact_image_url);
 const contactPageBreadcrumbPreview = ref(props.settings.contact_page_breadcrumb_image_url);
+const sidebarMinisterPhotoPreview = ref(props.settings.sidebar_minister_photo_url);
+const sidebarSecretaryPhotoPreview = ref(props.settings.sidebar_secretary_photo_url);
+const sidebarVicePrincipalPhotoPreview = ref(props.settings.sidebar_vice_principal_photo_url);
 
 const form = useForm({
+    homepage_template: props.settings.homepage_template ?? 'default',
     logo: null,
     footer_logo: null,
     site_name: { ...emptyTranslatable(), ...props.settings.site_name },
@@ -230,6 +231,48 @@ const form = useForm({
     contact_page_seo_title: { ...emptyTranslatable(), ...props.settings.contact_page_seo_title },
     contact_page_seo_description: { ...emptyTranslatable(), ...props.settings.contact_page_seo_description },
     contact_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.contact_page_seo_keywords },
+    sidebar_notice_show: Boolean(props.settings.sidebar_notice_show ?? true),
+    sidebar_notice_title: { ...emptyTranslatable(), ...props.settings.sidebar_notice_title },
+    sidebar_notice_limit: props.settings.sidebar_notice_limit ?? 4,
+    sidebar_minister_show: Boolean(props.settings.sidebar_minister_show ?? true),
+    sidebar_minister_photo: null,
+    sidebar_minister_name: { ...emptyTranslatable(), ...props.settings.sidebar_minister_name },
+    sidebar_minister_role: { ...emptyTranslatable(), ...props.settings.sidebar_minister_role },
+    sidebar_minister_button_text: { ...emptyTranslatable(), ...props.settings.sidebar_minister_button_text },
+    sidebar_minister_button_url: props.settings.sidebar_minister_button_url ?? '',
+    sidebar_secretary_show: Boolean(props.settings.sidebar_secretary_show ?? true),
+    sidebar_secretary_photo: null,
+    sidebar_secretary_name: { ...emptyTranslatable(), ...props.settings.sidebar_secretary_name },
+    sidebar_secretary_role: { ...emptyTranslatable(), ...props.settings.sidebar_secretary_role },
+    sidebar_secretary_button_text: { ...emptyTranslatable(), ...props.settings.sidebar_secretary_button_text },
+    sidebar_secretary_button_url: props.settings.sidebar_secretary_button_url ?? '',
+    sidebar_principal_show: Boolean(props.settings.sidebar_principal_show ?? true),
+    sidebar_principal_button_text: { ...emptyTranslatable(), ...props.settings.sidebar_principal_button_text },
+    sidebar_vice_principal_show: Boolean(props.settings.sidebar_vice_principal_show ?? true),
+    sidebar_vice_principal_photo: null,
+    sidebar_vice_principal_name: { ...emptyTranslatable(), ...props.settings.sidebar_vice_principal_name },
+    sidebar_vice_principal_role: { ...emptyTranslatable(), ...props.settings.sidebar_vice_principal_role },
+    sidebar_vice_principal_button_text: { ...emptyTranslatable(), ...props.settings.sidebar_vice_principal_button_text },
+    sidebar_vice_principal_button_url: props.settings.sidebar_vice_principal_button_url ?? '',
+    sidebar_calendar_show: Boolean(props.settings.sidebar_calendar_show ?? true),
+    sidebar_calendar_title: { ...emptyTranslatable(), ...props.settings.sidebar_calendar_title },
+});
+
+const visibleSections = computed(() => {
+    const enabledModules = page.props.enabledModules ?? [];
+
+    return sections.filter((section) => {
+        if (section.key === 'sidebar' && form.homepage_template !== 'index-1') {
+            return false;
+        }
+        return !section.module || enabledModules.includes(section.module);
+    });
+});
+
+watch(() => form.homepage_template, (newVal) => {
+    if (newVal !== 'index-1' && activeSectionKey.value === 'sidebar') {
+        activeSectionKey.value = 'general';
+    }
 });
 
 activeLang.value = defaultLangCode.value;
@@ -361,6 +404,36 @@ const removeAboutItem = (index) => {
     form.about_items.splice(index, 1);
 };
 
+const onSidebarMinisterPhotoSelected = (file) => {
+    form.sidebar_minister_photo = file;
+    form.clearErrors('sidebar_minister_photo');
+    sidebarMinisterPhotoPreview.value = URL.createObjectURL(file);
+};
+const onSidebarMinisterPhotoRemoved = () => {
+    form.sidebar_minister_photo = null;
+    sidebarMinisterPhotoPreview.value = null;
+};
+
+const onSidebarSecretaryPhotoSelected = (file) => {
+    form.sidebar_secretary_photo = file;
+    form.clearErrors('sidebar_secretary_photo');
+    sidebarSecretaryPhotoPreview.value = URL.createObjectURL(file);
+};
+const onSidebarSecretaryPhotoRemoved = () => {
+    form.sidebar_secretary_photo = null;
+    sidebarSecretaryPhotoPreview.value = null;
+};
+
+const onSidebarVicePrincipalPhotoSelected = (file) => {
+    form.sidebar_vice_principal_photo = file;
+    form.clearErrors('sidebar_vice_principal_photo');
+    sidebarVicePrincipalPhotoPreview.value = URL.createObjectURL(file);
+};
+const onSidebarVicePrincipalPhotoRemoved = () => {
+    form.sidebar_vice_principal_photo = null;
+    sidebarVicePrincipalPhotoPreview.value = null;
+};
+
 const submit = () => {
     form.transform((data) => ({ ...data, _method: 'put' })).post(route('admin.settings.website.update'), {
         forceFormData: true,
@@ -415,6 +488,41 @@ const submit = () => {
                     <!-- General -->
                     <div v-show="activeSectionKey === 'general'" class="flex flex-col gap-5">
                         <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-1">Homepage Layout Template</h3>
+                            <p class="text-xs text-slate-500 mb-4">Choose which layout template version to display on the public website home page.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
+                                <label
+                                    class="relative flex flex-col p-4 cursor-pointer rounded-xl border-2 transition-all"
+                                    :class="form.homepage_template === 'default' ? 'border-indigo-600 bg-indigo-50/30' : 'border-slate-200 hover:border-slate-300'"
+                                >
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-2 font-semibold text-sm text-slate-800">
+                                            <i class="pi pi-desktop text-indigo-600" />
+                                            <span>Default Layout (Home v1)</span>
+                                        </div>
+                                        <input type="radio" v-model="form.homepage_template" value="default" class="text-indigo-600 focus:ring-indigo-500" />
+                                    </div>
+                                    <p class="text-xs text-slate-500">Standard full-width sections layout across the homepage.</p>
+                                </label>
+
+                                <label
+                                    class="relative flex flex-col p-4 cursor-pointer rounded-xl border-2 transition-all"
+                                    :class="form.homepage_template === 'index-1' ? 'border-indigo-600 bg-indigo-50/30' : 'border-slate-200 hover:border-slate-300'"
+                                >
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-2 font-semibold text-sm text-slate-800">
+                                            <i class="pi pi-bars text-indigo-600" />
+                                            <span>Sidebar Layout (Home v2)</span>
+                                        </div>
+                                        <input type="radio" v-model="form.homepage_template" value="index-1" class="text-indigo-600 focus:ring-indigo-500" />
+                                    </div>
+                                    <p class="text-xs text-slate-500">Layout with right sidebar (Notices, Principal message, Calendar, Minister card).</p>
+                                </label>
+                            </div>
+                            <p v-if="form.errors.homepage_template" class="text-xs text-red-500 mt-2">{{ form.errors.homepage_template }}</p>
+                        </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
                             <h3 class="text-sm font-semibold text-slate-800 mb-3">Site name</h3>
                             <div class="max-w-md">
                                 <InputText
@@ -452,6 +560,209 @@ const submit = () => {
                                     />
                                     <p v-if="form.errors.footer_logo" class="text-xs text-red-500 mt-1">{{ form.errors.footer_logo }}</p>
                                 </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Homepage Sidebar -->
+                    <div v-show="activeSectionKey === 'sidebar'" class="flex flex-col gap-5">
+                        <div class="rounded-xl border border-indigo-100 bg-indigo-50/40 p-4 text-sm text-indigo-900 flex items-center gap-3">
+                            <i class="pi pi-info-circle text-indigo-600 text-lg shrink-0" />
+                            <span>These options manage all widgets displayed in the right sidebar when <strong>Home v2 (Sidebar Layout)</strong> is selected.</span>
+                        </div>
+
+                        <!-- Notice Board Widget -->
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-slate-800">Notice Board Widget</h3>
+                                    <p class="text-xs text-slate-400">Sidebar notice board displaying active site notices.</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-medium text-slate-600">{{ form.sidebar_notice_show ? 'Visible' : 'Hidden' }}</span>
+                                    <ToggleSwitch v-model="form.sidebar_notice_show" />
+                                </div>
+                            </div>
+                            <div v-show="form.sidebar_notice_show" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Widget Title</label>
+                                    <InputText v-model="form.sidebar_notice_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Notice Board" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Max Notices Limit</label>
+                                    <InputText v-model.number="form.sidebar_notice_limit" type="number" min="1" max="20" class="w-full" placeholder="4" />
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Hon'ble Minister Widget -->
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-slate-800">Hon'ble Minister Widget</h3>
+                                    <p class="text-xs text-slate-400">Featured card for the Education Minister.</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-medium text-slate-600">{{ form.sidebar_minister_show ? 'Visible' : 'Hidden' }}</span>
+                                    <ToggleSwitch v-model="form.sidebar_minister_show" />
+                                </div>
+                            </div>
+                            <div v-show="form.sidebar_minister_show" class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Photo</label>
+                                    <ImageDropzone
+                                        :preview-url="sidebarMinisterPhotoPreview"
+                                        hint="Drag & drop a photo, or click to browse"
+                                        width-class="w-full sm:w-64" height-class="h-32"
+                                        @select="onSidebarMinisterPhotoSelected"
+                                        @remove="onSidebarMinisterPhotoRemoved"
+                                    />
+                                    <p v-if="form.errors.sidebar_minister_photo" class="text-xs text-red-500 mt-1">{{ form.errors.sidebar_minister_photo }}</p>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Name</label>
+                                        <InputText v-model="form.sidebar_minister_name[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Dr. A N M Ehsanul Hoque Milon" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Designation / Role</label>
+                                        <InputText v-model="form.sidebar_minister_role[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Hon'ble Minister, Ministry of Education" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Button Text</label>
+                                        <InputText v-model="form.sidebar_minister_button_text[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="See More" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Button URL</label>
+                                        <InputText v-model="form.sidebar_minister_button_url" class="w-full" placeholder="https://..." />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Secretary Widget -->
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-slate-800">Secretary Widget</h3>
+                                    <p class="text-xs text-slate-400">Featured card for the Education Secretary.</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-medium text-slate-600">{{ form.sidebar_secretary_show ? 'Visible' : 'Hidden' }}</span>
+                                    <ToggleSwitch v-model="form.sidebar_secretary_show" />
+                                </div>
+                            </div>
+                            <div v-show="form.sidebar_secretary_show" class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Photo</label>
+                                    <ImageDropzone
+                                        :preview-url="sidebarSecretaryPhotoPreview"
+                                        hint="Drag & drop a photo, or click to browse"
+                                        width-class="w-full sm:w-64" height-class="h-32"
+                                        @select="onSidebarSecretaryPhotoSelected"
+                                        @remove="onSidebarSecretaryPhotoRemoved"
+                                    />
+                                    <p v-if="form.errors.sidebar_secretary_photo" class="text-xs text-red-500 mt-1">{{ form.errors.sidebar_secretary_photo }}</p>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Name</label>
+                                        <InputText v-model="form.sidebar_secretary_name[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Abdul Khaleque" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Designation / Role</label>
+                                        <InputText v-model="form.sidebar_secretary_role[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Secretary, Secondary & Higher Education Division" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Button Text</label>
+                                        <InputText v-model="form.sidebar_secretary_button_text[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="See More" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Button URL</label>
+                                        <InputText v-model="form.sidebar_secretary_button_url" class="w-full" placeholder="https://..." />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Our Principal Widget -->
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-slate-800">Our Principal Widget</h3>
+                                    <p class="text-xs text-slate-400">Featured card for Principal (photo/name/role are set in Our Principal tab).</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-medium text-slate-600">{{ form.sidebar_principal_show ? 'Visible' : 'Hidden' }}</span>
+                                    <ToggleSwitch v-model="form.sidebar_principal_show" />
+                                </div>
+                            </div>
+                            <div v-show="form.sidebar_principal_show" class="max-w-xs">
+                                <label class="block text-xs font-medium text-slate-600 mb-1.5">Button Text</label>
+                                <InputText v-model="form.sidebar_principal_button_text[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Read More" />
+                            </div>
+                        </section>
+
+                        <!-- Our Vice Principal Widget -->
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-slate-800">Our Vice Principal Widget</h3>
+                                    <p class="text-xs text-slate-400">Featured card for the Vice Principal.</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-medium text-slate-600">{{ form.sidebar_vice_principal_show ? 'Visible' : 'Hidden' }}</span>
+                                    <ToggleSwitch v-model="form.sidebar_vice_principal_show" />
+                                </div>
+                            </div>
+                            <div v-show="form.sidebar_vice_principal_show" class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Photo</label>
+                                    <ImageDropzone
+                                        :preview-url="sidebarVicePrincipalPhotoPreview"
+                                        hint="Drag & drop a photo, or click to browse"
+                                        width-class="w-full sm:w-64" height-class="h-32"
+                                        @select="onSidebarVicePrincipalPhotoSelected"
+                                        @remove="onSidebarVicePrincipalPhotoRemoved"
+                                    />
+                                    <p v-if="form.errors.sidebar_vice_principal_photo" class="text-xs text-red-500 mt-1">{{ form.errors.sidebar_vice_principal_photo }}</p>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Name</label>
+                                        <InputText v-model="form.sidebar_vice_principal_name[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Dennis A. Pruitt" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Designation / Role</label>
+                                        <InputText v-model="form.sidebar_vice_principal_role[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Vice Principal" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Button Text</label>
+                                        <InputText v-model="form.sidebar_vice_principal_button_text[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Read More" />
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Button URL</label>
+                                        <InputText v-model="form.sidebar_vice_principal_button_url" class="w-full" placeholder="https://..." />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Academic Calendar Widget -->
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-slate-800">Academic Calendar Widget</h3>
+                                    <p class="text-xs text-slate-400">Monthly calendar widget showing today & upcoming events.</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-medium text-slate-600">{{ form.sidebar_calendar_show ? 'Visible' : 'Hidden' }}</span>
+                                    <ToggleSwitch v-model="form.sidebar_calendar_show" />
+                                </div>
+                            </div>
+                            <div v-show="form.sidebar_calendar_show" class="max-w-xs">
+                                <label class="block text-xs font-medium text-slate-600 mb-1.5">Widget Title</label>
+                                <InputText v-model="form.sidebar_calendar_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Academic Calendar" />
                             </div>
                         </section>
                     </div>

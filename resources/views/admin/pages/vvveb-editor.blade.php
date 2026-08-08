@@ -56,6 +56,41 @@
     #filemanager .file-actions .delete,
     #filemanager .file-actions .rename,
     #filemanager .file-actions .duplicate { display: none !important; }
+
+    /* Clean Top Panel Layout & Native 35px Height Alignment */
+    #vvveb-builder #top-panel {
+      height: 35px;
+      line-height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    #vvveb-builder #top-panel > div {
+      display: flex;
+      align-items: center;
+    }
+    #vvveb-builder #top-panel .btn {
+      height: 26px;
+      padding: 0 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      line-height: 1;
+      margin: 0;
+    }
+    #vvveb-builder #top-panel .btn-preview-url {
+      height: 24px;
+      padding: 0 8px;
+      font-size: 11px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
   </style>
 </head>
 
@@ -214,15 +249,13 @@
 
           <div class="btn-group">
 
-            <div class="me-2">
-
+            <div class="d-inline-flex align-items-center gap-2 me-2">
               <button class="btn btn-light btn-dark-mode" data-vvveb-action="darkMode">
-                <!-- i class="la la-adjust la-lg"></i -->
                 <i class="la la-sun"></i>
               </button>
 
-              <a href="#" class="btn btn-light px-1 btn-preview-url" target="_blank" title="View page">
-                <i class="la la-external-link-alt"></i>
+              <a href="{{ route('pages.show', $page->slug) }}" class="btn btn-outline-secondary btn-sm btn-preview-url" target="_blank" title="View page on frontend">
+                <i class="la la-external-link-alt"></i> <span>View Page</span>
               </a>
 
               <div class="btn-group responsive-btns" role="group">
@@ -2426,6 +2459,157 @@
 
   <!-- blocks-->
   <script src="libs/builder/blocks-bootstrap4.js"></script>
+
+  <!-- Our own blocks, kept out of the vendored blocks-bootstrap4.js file so
+       an upstream Vvveb.js update never overwrites them. Registered the
+       exact same way the vendored file does it: push an id onto a
+       Vvveb.BlocksGroup[...] array, then Vvveb.Blocks.add() that id with a
+       name/thumbnail/html. To add another custom block later, copy the
+       Vvveb.Blocks.add(...) call below with a new id and push that id onto
+       schoolBlocks too — no other file needs to change. -->
+  <script>
+    Vvveb.BlocksGroup['School'] = ['school/history-timeline', 'school/feature-cards', 'school/text-content', 'school/call-to-action'];
+
+    Vvveb.Blocks.add('school/feature-cards', {
+        name: 'Feature Cards (2 Columns)',
+        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect width='300' height='200' fill='%23f8f9fa'/%3E%3Crect x='20' y='30' width='120' height='140' rx='6' fill='%23ffffff' stroke='%23dee2e6' stroke-width='2'/%3E%3Crect x='160' y='30' width='120' height='140' rx='6' fill='%23ffffff' stroke='%23dee2e6' stroke-width='2'/%3E%3C/svg%3E",
+        html: `
+<div class="row g-4 my-4">
+    <div class="col-md-6">
+        <div class="p-4 bg-light rounded-3 h-100 border">
+            <h5 class="fw-bold text-primary mb-2"><i class="fas fa-graduation-cap me-2"></i>Quality Education</h5>
+            <p class="mb-0 text-secondary">Building strong values and knowledge for every learner through modern curricula and experienced educators.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="p-4 bg-light rounded-3 h-100 border">
+            <h5 class="fw-bold text-primary mb-2"><i class="fas fa-users me-2"></i>Future Ready</h5>
+            <p class="mb-0 text-secondary">Preparing students to excel in a rapidly changing world with critical thinking and hands-on skills.</p>
+        </div>
+    </div>
+</div>
+`
+    });
+
+    Vvveb.Blocks.add('school/text-content', {
+        name: 'Structured Text Section',
+        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect width='300' height='200' fill='%23f8f9fa'/%3E%3Crect x='30' y='30' width='160' height='16' rx='3' fill='%230d6efd'/%3E%3Crect x='30' y='60' width='240' height='8' rx='2' fill='%23ced4da'/%3E%3Crect x='30' y='76' width='220' height='8' rx='2' fill='%23ced4da'/%3E%3Crect x='30' y='92' width='200' height='8' rx='2' fill='%23ced4da'/%3E%3C/svg%3E",
+        html: `
+<div class="wexnix_terms-content my-4">
+    <h3 class="mb-3">Section Title Heading</h3>
+    <p class="lead mb-3">Add a highlighted lead text introducing the key points of this section.</p>
+    <p>Detailed information and background content goes here. You can add links, bullet points, or formatted text as needed.</p>
+</div>
+`
+    });
+
+    Vvveb.Blocks.add('school/call-to-action', {
+        name: 'Call To Action Banner',
+        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect width='300' height='200' fill='%230f172a'/%3E%3Crect x='30' y='60' width='180' height='16' rx='3' fill='%23ffffff'/%3E%3Crect x='30' y='90' width='140' height='10' rx='2' fill='%2394a3b8'/%3E%3Crect x='30' y='120' width='80' height='24' rx='4' fill='%232563eb'/%3E%3C/svg%3E",
+        html: `
+<div class="p-5 bg-dark text-white rounded-4 my-5 text-center">
+    <h3 class="fw-bold mb-2 text-white">Admissions Open For New Academic Year</h3>
+    <p class="text-white-50 mb-4">Join our vibrant academic community and unlock a world of opportunities.</p>
+    <a href="/contact" class="btn btn-primary btn-lg px-4">Apply Now</a>
+</div>
+`
+    });
+
+    Vvveb.Blocks.add('school/history-timeline', {
+        name: 'History Timeline',
+        image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect width='300' height='200' fill='%23f8f9fa'/%3E%3Cline x1='40' y1='30' x2='40' y2='170' stroke='%23dee2e6' stroke-width='3'/%3E%3Ccircle cx='40' cy='40' r='7' fill='%23ffffff' stroke='%23e0902b' stroke-width='3'/%3E%3Crect x='60' y='34' width='170' height='10' rx='2' fill='%23ced4da'/%3E%3Ccircle cx='40' cy='100' r='7' fill='%23ffffff' stroke='%23e0902b' stroke-width='3'/%3E%3Crect x='60' y='94' width='140' height='10' rx='2' fill='%23ced4da'/%3E%3Ccircle cx='40' cy='160' r='7' fill='%23ffffff' stroke='%23e0902b' stroke-width='3'/%3E%3Crect x='60' y='154' width='190' height='10' rx='2' fill='%23ced4da'/%3E%3C/svg%3E",
+        html: `
+<section class="wexnix-history-timeline py-5">
+	<div class="container">
+		<div class="text-center mb-5">
+			<span class="d-inline-block text-uppercase fw-semibold mb-2" style="letter-spacing:1px;color:#e0902b;">Our Journey</span>
+			<h2 class="fw-bold">School History</h2>
+			<p class="text-muted mx-auto" style="max-width:600px;">A brief look back at the milestones that shaped our school into what it is today.</p>
+		</div>
+		<div class="wexnix-history-timeline__track">
+			<div class="wexnix-history-timeline__item">
+				<div class="wexnix-history-timeline__year">1985</div>
+				<div class="wexnix-history-timeline__content">
+					<h5>School Founded</h5>
+					<p>Our school opened its doors with a handful of classrooms and a mission to provide quality education to the local community.</p>
+				</div>
+			</div>
+			<div class="wexnix-history-timeline__item">
+				<div class="wexnix-history-timeline__year">1998</div>
+				<div class="wexnix-history-timeline__content">
+					<h5>Campus Expansion</h5>
+					<p>A new academic building and science laboratories were added to accommodate a growing student body.</p>
+				</div>
+			</div>
+			<div class="wexnix-history-timeline__item">
+				<div class="wexnix-history-timeline__year">2010</div>
+				<div class="wexnix-history-timeline__content">
+					<h5>National Accreditation</h5>
+					<p>The school earned national accreditation, recognizing its academic standards and facilities.</p>
+				</div>
+			</div>
+			<div class="wexnix-history-timeline__item">
+				<div class="wexnix-history-timeline__year">Today</div>
+				<div class="wexnix-history-timeline__content">
+					<h5>A Growing Legacy</h5>
+					<p>Today we continue to build on decades of tradition, preparing students for a bright and successful future.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<style>
+.wexnix-history-timeline__track {
+	position: relative;
+	max-width: 800px;
+	margin: 0 auto;
+	padding-left: 40px;
+}
+.wexnix-history-timeline__track::before {
+	content: "";
+	position: absolute;
+	left: 9px;
+	top: 6px;
+	bottom: 6px;
+	width: 2px;
+	background: #e0902b;
+}
+.wexnix-history-timeline__item {
+	position: relative;
+	padding-bottom: 32px;
+}
+.wexnix-history-timeline__item:last-child {
+	padding-bottom: 0;
+}
+.wexnix-history-timeline__item::before {
+	content: "";
+	position: absolute;
+	left: -40px;
+	top: 4px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #fff;
+	border: 3px solid #e0902b;
+}
+.wexnix-history-timeline__year {
+	display: inline-block;
+	font-weight: 700;
+	color: #e0902b;
+	margin-bottom: 4px;
+}
+.wexnix-history-timeline__content h5 {
+	font-weight: 700;
+	margin-bottom: 6px;
+}
+.wexnix-history-timeline__content p {
+	color: #6b7280;
+	margin-bottom: 0;
+}
+</style>
+`,
+    });
+  </script>
 
   <!-- styles-->
   {{-- demo/landing/styles/styles.js omitted, same reason as above. --}}

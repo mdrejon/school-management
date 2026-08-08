@@ -64,10 +64,88 @@ class PageVisualBuilderController extends Controller
             return response('Invalid language file!', 422);
         }
 
-        $page->setTranslation('content', $lang, (string) $request->input('html', ''));
+        $page->setTranslation('content', $lang, $this->extractSavableContent((string) $request->input('html', '')));
         $page->save();
 
         return response('Page saved!');
+    }
+
+    /**
+     * Vvveb.Builder.getHtml() (vendored builder.js) always returns the
+     * WHOLE captured document — doctype + <html><head>...</head><body>...
+     * </body></html> — even though `content()` only ever gave it a body
+     * fragment to edit (vvveb-content-document.blade.php wraps it in a
+     * throwaway document just so the iframe can load the real theme
+     * stylesheets). That's Vvveb's own save contract, not something to
+     * patch in the vendored file — so this bridge has to pull just the
+     * real content back out before persisting it. Storing the whole
+     * document verbatim (as this used to do) means `pages/show.blade.php`'s
+     * `{!! $page->content !!}` dumps a second nested <html>/<body> inside
+     * the real one; browsers merge/hoist those per the HTML5 parsing spec,
+     * which is exactly how the editing canvas's own
+     * `<style>body { padding: 24px }</style>` helper rule (also added by
+     * vvveb-content-document.blade.php, meant only to give the WYSIWYG
+     * canvas breathing room) ends up styling the real, live page's <body>.
+     *
+     * Extracts from `[data-page-content-root]` (the `.container` div
+     * vvveb-content-document.blade.php wraps the editable content in,
+     * mirroring pages/show.blade.php's `.wexnix_page-builder.py-120 >
+     * .container` wrapper) rather than `<body>`'s direct children —
+     * without matching that wrapper depth, any selector Vvveb's style
+     * panel writes based on the live DOM position (e.g. "body > p", which
+     * IS true inside the editing iframe where content sits right in
+     * <body>) silently stops matching once the same content is rendered
+     * one level deeper inside that wrapper on the real page — a real case
+     * hit and fixed in this session. A data-attribute rather than an id:
+     * builder.js's getSelectorForElement() stops walking ancestors and
+     * anchors on "#id" the moment it finds one, so an id here would get
+     * baked into every selector as an anchor that only ever exists in
+     * this editing iframe. Falls back to `<body>`'s children if the
+     * marker isn't present (content saved before this fix existed).
+     */
+    protected function extractSavableContent(string $html): string
+    {
+        $html = trim($html);
+
+        if ($html === '') {
+            return '';
+        }
+
+        $dom = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML('<?xml encoding="utf-8" ?>'.$html, LIBXML_NOERROR | LIBXML_NOWARNING);
+        libxml_clear_errors();
+
+        // Vvveb's own style panel writes real, admin-authored CSS into this
+        // one <style id="vvvebjs-styles"> tag (see builder.js's
+        // StyleManager) — pull it out from wherever it currently sits (a
+        // fresh document has it in <head>; a page saved by this same method
+        // before will have it inside the extracted root already) so it's
+        // captured exactly once, never duplicated or silently dropped.
+        $customCss = '';
+        foreach (iterator_to_array($dom->getElementsByTagName('style')) as $styleNode) {
+            if ($styleNode->getAttribute('id') === 'vvvebjs-styles') {
+                $customCss = trim($styleNode->textContent);
+                $styleNode->parentNode->removeChild($styleNode);
+            }
+        }
+
+        $xpath = new \DOMXPath($dom);
+        $root = $xpath->query('//*[@data-page-content-root]')->item(0)
+            ?? $dom->getElementsByTagName('body')->item(0);
+
+        $rootHtml = $html;
+
+        if ($root) {
+            $rootHtml = '';
+            foreach ($root->childNodes as $child) {
+                $rootHtml .= $dom->saveHTML($child);
+            }
+        }
+
+        $styleTag = $customCss !== '' ? "<style id=\"vvvebjs-styles\">{$customCss}</style>\n" : '';
+
+        return trim($styleTag.trim($rootHtml));
     }
 
     /**

@@ -24,6 +24,10 @@ return [
     'blog' => ['label' => 'Blog', 'actions' => ['view', 'create', 'edit', 'delete']],
     'testimonials' => ['label' => 'Testimonials', 'actions' => ['view', 'create', 'edit', 'delete']],
     'faq' => ['label' => 'FAQ', 'actions' => ['view', 'create', 'edit', 'delete']],
+    // Covers both Founder and Donor CRUD (they share one admin page) plus
+    // that page's own settings — one resource, not two, since an admin
+    // thinks of "who can manage the Founder & Donor list" as one capability.
+    'founders_donors' => ['label' => 'Founder & Donor List', 'actions' => ['view', 'create', 'edit', 'delete']],
     'pages' => ['label' => 'Pages', 'actions' => ['view', 'create', 'edit', 'delete']],
     'menus' => ['label' => 'Menus', 'actions' => ['view', 'create', 'edit', 'delete']],
     'contact_messages' => ['label' => 'Contact Messages', 'actions' => ['view', 'edit', 'delete']],

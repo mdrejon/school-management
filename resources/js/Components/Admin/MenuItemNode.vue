@@ -24,11 +24,18 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(['save', 'delete']);
+const emit = defineEmits(['save', 'delete', 'toggle']);
 
 const expanded = ref(false);
 const activeLang = ref(props.defaultLangCode);
 const currentLang = computed(() => props.languages.find((lang) => lang.code === activeLang.value));
+
+// Collapse toggle for the children list — only meaningful once a node
+// already has children; an empty children list stays permanently visible
+// since it's still a valid drop target for nesting a new item under this
+// one (collapsing it would hide the only place to drop onto).
+const hasChildren = computed(() => (props.node.children ?? []).length > 0);
+const childrenCollapsed = ref(false);
 
 const typeBadge = computed(() => {
     if (props.node.type === 'custom') return 'Custom Link';
@@ -61,10 +68,24 @@ const save = () => {
     <div class="rounded-lg border border-slate-200 bg-white">
         <div class="flex items-center gap-2 p-2.5">
             <span class="wexnix-drag-handle cursor-move text-slate-400 px-1"><i class="pi pi-bars"></i></span>
+            <Button
+                v-if="hasChildren"
+                :icon="childrenCollapsed ? 'pi pi-chevron-right' : 'pi pi-chevron-down'"
+                text
+                rounded
+                size="small"
+                aria-label="Toggle submenu"
+                @click="childrenCollapsed = !childrenCollapsed"
+            />
             <div class="flex-1 min-w-0">
                 <span class="font-medium text-slate-800 text-sm">{{ defaultLabel }}</span>
                 <span class="ml-2 text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">{{ typeBadge }}</span>
-                <span v-if="!node.is_active" class="ml-2 text-xs px-2 py-0.5 rounded-full bg-red-50 text-red-500">Inactive</span>
+                <span v-if="node.is_new" class="ml-2 text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-medium">New</span>
+                <span v-if="hasChildren" class="ml-2 text-xs text-slate-400">{{ node.children.length }} item{{ node.children.length === 1 ? '' : 's' }}</span>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0" v-tooltip.top="node.is_active ? 'Visible on the site — click to hide' : 'Hidden from the site — click to show'">
+                <ToggleSwitch :model-value="node.is_active" @update:model-value="$emit('toggle', node)" />
+                <span class="text-xs" :class="node.is_active ? 'text-slate-500' : 'text-red-500'">{{ node.is_active ? 'Visible' : 'Hidden' }}</span>
             </div>
             <Button icon="pi pi-pencil" text rounded size="small" @click="expanded = !expanded" />
             <Button icon="pi pi-trash" text rounded size="small" severity="danger" @click="$emit('delete', node)" />
@@ -91,10 +112,6 @@ const save = () => {
                     <label class="block text-xs font-medium text-slate-600 mb-1">Open in</label>
                     <Select v-model="node.target" :options="targetOptions" option-label="label" option-value="value" class="w-full" placeholder="Same tab" />
                 </div>
-                <div class="flex items-center gap-2">
-                    <ToggleSwitch v-model="node.is_active" />
-                    <span class="text-sm text-slate-600">Active</span>
-                </div>
                 <div class="flex justify-end">
                     <Button label="Save item" size="small" :loading="saving" @click="save" />
                 </div>
@@ -102,6 +119,7 @@ const save = () => {
         </div>
 
         <draggable
+            v-show="!hasChildren || !childrenCollapsed"
             v-model="node.children"
             item-key="id"
             group="menu-items"
@@ -110,7 +128,7 @@ const save = () => {
             :class="node.children.length ? 'pt-2' : 'min-h-[10px]'"
         >
             <template #item="{ element }">
-                <MenuItemNode :node="element" :languages="languages" :default-lang-code="defaultLangCode" @save="(...args) => $emit('save', ...args)" @delete="$emit('delete', $event)" />
+                <MenuItemNode :node="element" :languages="languages" :default-lang-code="defaultLangCode" @save="(...args) => $emit('save', ...args)" @delete="$emit('delete', $event)" @toggle="$emit('toggle', $event)" />
             </template>
         </draggable>
     </div>

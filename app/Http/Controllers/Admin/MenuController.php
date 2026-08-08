@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\StoreMenuItemRequest;
 use App\Http\Requests\Admin\UpdateMenuItemRequest;
 use App\Models\Menu;
 use App\Models\MenuItem;
+use App\Models\Page;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,6 +27,11 @@ class MenuController extends Controller
             'items' => $menu->tree(onlyActive: false),
             'linkableTypes' => collect(MenuItem::linkableTypes())->map(fn ($config) => $config['label']),
             'builtInRoutes' => MenuItem::builtInRoutes(),
+            'cmsPages' => Page::where('is_active', true)->get()->map(fn ($p) => [
+                'id' => $p->id,
+                'title' => $p->title,
+                'slug' => $p->slug,
+            ]),
         ]);
     }
 
@@ -61,6 +67,19 @@ class MenuController extends Controller
     }
 
     /**
+     * Quick enable/disable straight from the tree row — a disabled item
+     * (and its whole subtree, per Menu::nest()'s onlyActive filtering)
+     * simply drops out of the public header, without needing to delete it
+     * or open the full edit panel just to flip one field.
+     */
+    public function toggleItem(MenuItem $menuItem): RedirectResponse
+    {
+        $menuItem->update(['is_active' => ! $menuItem->is_active]);
+
+        return back()->with('success', $menuItem->is_active ? 'Menu item enabled.' : 'Menu item disabled.');
+    }
+
+    /**
      * Persists the whole drag-and-drop tree in one go — the client
      * flattens its current state (every item's id/parent_id/sort_order)
      * and sends it after the admin clicks "Save Menu Structure".
@@ -68,15 +87,41 @@ class MenuController extends Controller
     public function reorder(ReorderMenuItemsRequest $request): RedirectResponse
     {
         DB::transaction(function () use ($request) {
+            $createdIdsMap = [];
+
             foreach ($request->validated('items') as $item) {
-                MenuItem::whereKey($item['id'])->update([
-                    'parent_id' => $item['parent_id'],
-                    'sort_order' => $item['sort_order'],
-                ]);
+                $parentId = $item['parent_id'] ?? null;
+                if (is_string($parentId) && isset($createdIdsMap[$parentId])) {
+                    $parentId = $createdIdsMap[$parentId];
+                } elseif (is_string($parentId) && str_starts_with($parentId, 'new-')) {
+                    $parentId = null;
+                }
+
+                if (! empty($item['is_new']) || (is_string($item['id']) && str_starts_with($item['id'], 'new-'))) {
+                    $newItem = MenuItem::create([
+                        'menu_id' => $item['menu_id'] ?? 1,
+                        'parent_id' => $parentId,
+                        'type' => $item['type'] ?? 'custom',
+                        'label' => $item['label'] ?? ['en' => 'New Item'],
+                        'url' => $item['url'] ?? null,
+                        'route_name' => $item['route_name'] ?? null,
+                        'linkable_type' => $item['linkable_type'] ?? null,
+                        'linkable_id' => $item['linkable_id'] ?? null,
+                        'target' => $item['target'] ?? '_self',
+                        'sort_order' => (int) $item['sort_order'],
+                        'is_active' => $item['is_active'] ?? true,
+                    ]);
+                    $createdIdsMap[$item['id']] = $newItem->id;
+                } else {
+                    MenuItem::whereKey($item['id'])->update([
+                        'parent_id' => $parentId,
+                        'sort_order' => (int) $item['sort_order'],
+                    ]);
+                }
             }
         });
 
-        return back()->with('success', 'Menu order saved.');
+        return back()->with('success', 'Menu structure saved.');
     }
 
     /**

@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\CampusTourController;
+use App\Http\Controllers\ClassScheduleController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FounderDonorController;
 use App\Http\Controllers\GalleryImageController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\NoticeController;
@@ -15,6 +18,7 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\VisionMissionController;
 use App\Models\BlogPageSetting;
 use App\Models\BlogPost;
 use App\Models\Course;
@@ -25,6 +29,8 @@ use App\Models\Event;
 use App\Models\EventPageSetting;
 use App\Models\GalleryImage;
 use App\Models\GalleryPageSetting;
+use App\Models\Notice;
+use App\Models\NoticePageSetting;
 use App\Models\Slider;
 use App\Models\Teacher;
 use App\Models\TeacherPageSetting;
@@ -50,6 +56,7 @@ Route::get('/', function () {
         'blogPageSettings' => BlogPageSetting::current(),
         'testimonials' => Testimonial::forHomepage(),
         'testimonialPageSettings' => TestimonialPageSetting::current(),
+        'sidebarNotices' => Notice::forMarquee(5),
     ]);
 })->name('home');
 
@@ -70,6 +77,10 @@ Route::middleware('module:contact')->group(function () {
 Route::middleware('module:principal')->get('/principal', function () {
     return view('frontend.principal');
 })->name('principal');
+
+Route::get('/class-schedule', [ClassScheduleController::class, 'index'])->name('class-schedule');
+Route::get('/mission-vision', [VisionMissionController::class, 'index'])->name('mission-vision');
+Route::get('/campus-tour', [CampusTourController::class, 'index'])->name('campus-tour');
 
 Route::middleware('module:ex_principal')->get('/ex-principals', function () {
     return view('frontend.ex-principal');
@@ -120,6 +131,8 @@ Route::middleware('module:blog')->group(function () {
 Route::middleware('module:testimonials')->get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
 
 Route::middleware('module:faq')->get('/faq', [FaqController::class, 'index'])->name('faq.index');
+
+Route::middleware('module:founders_donors')->get('/founders-donors', [FounderDonorController::class, 'index'])->name('founders-donors.index');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 

@@ -57,6 +57,7 @@ class MenuItem extends Model
             'event' => ['label' => 'Event', 'model' => Event::class, 'titleField' => 'title', 'route' => 'events.show'],
             'department' => ['label' => 'Department', 'model' => Department::class, 'titleField' => 'title', 'route' => 'departments.show'],
             'notice' => ['label' => 'Notice', 'model' => Notice::class, 'titleField' => 'title', 'route' => 'notices.show'],
+            'page' => ['label' => 'CMS Page', 'model' => Page::class, 'titleField' => 'title', 'route' => 'pages.show'],
         ];
     }
 

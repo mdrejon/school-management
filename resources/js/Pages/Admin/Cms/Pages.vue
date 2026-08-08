@@ -72,9 +72,12 @@ const confirmDelete = (row) => {
                             </template>
                         </Column>
 
-                        <Column header="" style="width: 140px">
+                        <Column header="" style="width: 170px">
                             <template #body="{ data }">
                                 <div class="flex items-center gap-1 justify-end">
+                                    <a :href="route('pages.show', data.slug)" target="_blank" title="View Frontend Page">
+                                        <Button icon="pi pi-eye" text rounded severity="secondary" as="span" />
+                                    </a>
                                     <a :href="route('admin.cms.pages.builder.edit', data.id)" target="_blank" title="Edit content visually">
                                         <Button icon="pi pi-objects-column" text rounded as="span" />
                                     </a>

@@ -42,4 +42,5 @@ return [
     'principal' => ['label' => 'Principal Page', 'section' => false, 'route' => true],
     'ex_principal' => ['label' => 'Ex-Principal Page', 'section' => false, 'route' => true],
     'contact' => ['label' => 'Contact Page', 'section' => false, 'route' => true],
+    'founders_donors' => ['label' => 'Founder & Donor List', 'section' => false, 'route' => true],
 ];

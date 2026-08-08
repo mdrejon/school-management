@@ -86,6 +86,7 @@ class SiteSettingController extends Controller
             'principal_photo', 'principal_page_breadcrumb_image',
             'ex_principal_photo', 'ex_principal_page_breadcrumb_image',
             'contact_image', 'contact_page_breadcrumb_image',
+            'sidebar_minister_photo', 'sidebar_secretary_photo', 'sidebar_vice_principal_photo',
         ] as $field) {
             if ($request->hasFile($field)) {
                 if ($settings->{$field}) {

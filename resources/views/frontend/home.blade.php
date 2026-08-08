@@ -15,6 +15,13 @@
         @endif
         <!-- institute info strip end -->
 
+        @if (($siteSettings->homepage_template ?? 'default') === 'index-1')
+            <!-- home content + sidebar layout (index-1) -->
+            <div class="wexnix_home-content-area">
+                <div class="container-fluid">
+                    <div class="row g-4">
+                        <div class="col-lg-9 wexnix_home-main-col">
+        @endif
 
         <!-- about area -->
         @if (\App\Models\ModuleSetting::showOnHomepage('about'))
@@ -106,6 +113,18 @@
         @endif
         <!-- blog area end -->
 
+        @if (($siteSettings->homepage_template ?? 'default') === 'index-1')
+                        </div>
+                        <!-- home main col end -->
+
+                        <div class="col-lg-3 py-5">
+                            @include('frontend.partials.home-sidebar')
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- home content area end -->
+        @endif
 
         <!-- partner area -->
         @if (\App\Models\ModuleSetting::showOnHomepage('partner'))

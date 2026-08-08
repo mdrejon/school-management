@@ -224,6 +224,60 @@ deliberate choice after the custom canvas didn't meet the bar wanted here.
     `langFromFile()` parses that back out of the `file` field Vvveb posts
     on save. This reuses Vvveb's own page-switcher as the language
     switcher rather than building a separate one.
+  - **`save()` must extract just the real content, not store Vvveb's posted
+    `html` verbatim.** `Vvveb.Builder.getHtml()` (vendored `builder.js`)
+    always returns the *whole* captured document — doctype +
+    `<html><head>...</head><body>...</body></html>` — even though
+    `content()` only ever gave it a body fragment to edit; the full
+    document wrapper is baked into Vvveb's own save contract, not
+    something to patch in the vendored file. Storing that whole string
+    into `Page::content` verbatim (an actual bug hit and fixed in this
+    session) means `pages/show.blade.php`'s `{!! $page->content !!}` dumps
+    a second nested `<html>`/`<body>` inside the real one — browsers merge
+    duplicate `<html>`/`<body>` attributes onto the real elements and
+    hoist stray `<link>`/`<style>` tags per the HTML5 parsing spec, which
+    is exactly how `vvveb-content-document.blade.php`'s own
+    `<style>body { padding: 24px }</style>` helper rule (added purely to
+    give the WYSIWYG editing canvas breathing room) ended up styling the
+    real, live page's `<body>` — plus every stylesheet got double-linked.
+    `save()` now runs the posted `html` through `extractSavableContent()`
+    (a `DOMDocument` parse, not regex) before persisting: pulls the real
+    `<style id="vvvebjs-styles">` tag out from wherever it currently sits
+    — a fresh document has it in `<head>`; a page this method already
+    cleaned once will have it inside the extracted `<body>` — so the
+    admin's own custom per-component CSS from Vvveb's style panel is
+    captured exactly once (never duplicated on repeated edit/save cycles,
+    never silently dropped), then keeps only `<body>`'s inner HTML plus
+    that one style tag. Verified via a direct round-trip test (extract →
+    reload into the editor document shape → extract again) confirming no
+    duplication and no data loss, then confirmed against a real corrupted
+    page in the database and cleaned it the same way.
+  - **The editing iframe's DOM shape must match production's, or styles
+    written through Vvveb's style panel silently don't apply.**
+    `vvveb-content-document.blade.php` wraps the editable content in the
+    exact same `.wexnix_page-builder.py-120 > .container` structure
+    `pages/show.blade.php` wraps it in (a real bug: an admin styled a
+    paragraph, Vvveb captured the rule as `body > p` since the paragraph
+    genuinely was a direct child of `<body>` in the old, unwrapped editing
+    document — but on the real page that same paragraph sits three levels
+    deeper inside that wrapper, so `body > p` never matched and the style
+    silently did nothing). The wrapper's marker for
+    `extractSavableContent()` to find and strip is a **data-attribute
+    (`data-page-content-root`), deliberately not an id** —
+    `Vvveb.Builder.getSelectorForElement()` (builder.js) walks up the
+    clicked element's ancestors building a `>`-joined selector, but stops
+    early the instant it hits an ancestor with an `id` and anchors the
+    whole selector on `#that-id`; an id on the wrapper would get baked
+    into every selector generated for anything inside it (`#wrapper-id >
+    p`), referencing an element that only exists in the editing iframe and
+    never in production — a subtler, permanent version of the same bug.
+    A plain data-attribute is invisible to that logic (only `.id` and
+    `.classList` are special-cased), so selectors correctly walk through
+    the wrapper's real classes instead (`.wexnix_page-builder.py-120 >
+    .container > p`) — the same classes that exist in production. The one
+    already-corrupted `body > p` rule in the database was rewritten to
+    match, and both the round-trip and the corrected style rendering on
+    the live page were verified before considering this fixed.
   - `upload(Request $request)` — stores to `Storage::disk('public')`,
     returns either the stored filename (`onlyFilename` — used by Vvveb's
     MediaModal gallery) or a full `/storage/...` path (used directly as
@@ -631,6 +685,54 @@ and `testimonial.html`) — so unlike the card/item split described above,
 there's just one bare `resources/views/frontend/testimonials/partials/
 item.blade.php`, included directly by both the section partial and the
 list page's own carousel wrapper, no grid-column variant needed at all.
+
+### Founder & Donor List (two curated lists, one shared page)
+
+`Founder`/`Donor`/`FounderDonorPageSetting` (from `html/donor-list.html`)
+follow the same Testimonial/FAQ shape (Dialog CRUD, manual `sort_order`,
+no slug/detail route) but are the first case of **two separate curated
+lists sharing one public page and one admin page**, since the reference
+template shows two distinct tables ("Founding Members", "Honorable
+Donors") under one heading rather than one repeated card type:
+
+- **Two models, not one type-flagged model** — `Founder`
+  (`name`/`designation`, translatable) and `Donor` (`name`/`contribution`,
+  translatable) are separate tables/models rather than one model with a
+  `type` column and a conditionally-labeled field, because their fields
+  mean genuinely different things (Designation vs. Contribution) and an
+  admin thinks of "add a founder" and "add a donor" as different actions,
+  not two variants of one form. `year` is a plain (non-translatable)
+  string on both, not an integer — the reference data is always a bare
+  4-digit year but a string leaves room for a range like "1918–1920"
+  without a schema change.
+- **One `FounderDonorPageSetting` singleton** covers both lists' shared
+  page chrome (`section_tagline`/`section_title`/`section_highlight`/
+  `section_description`, breadcrumb, SEO) plus two extra fields
+  (`founders_table_title`/`donors_table_title`) for each table's own
+  heading — same "extra fields belong on the singleton, not a second
+  model" precedent as `FaqPageSetting`'s CTA button fields.
+- **One combined admin page, three tabs** (`Admin/Cms/FoundersDonors.vue`
+  — Founding Members / Donors / Page Settings), each item list its own
+  `Dialog` CRUD, exactly like Testimonials.vue's two-tab shape extended to
+  three. `Admin\FounderController::index()` is the one route that renders
+  the whole page (supplying `founders`, `donors`, and `pageSettings`
+  together); `Admin\DonorController` only has Donor's own CRUD actions,
+  deliberately no `index()` of its own — there's only ever one page to
+  render, not two.
+- **One permission resource (`founders_donors`), not two** — `config/
+  permissions.php` gates Founder CRUD, Donor CRUD, and the settings update
+  all under the same `founders_donors.{view,create,edit,delete}` keys,
+  since an admin managing access thinks of "who can manage the Founder &
+  Donor list" as one capability, not "who can manage Founders" separately
+  from "who can manage Donors." Same reasoning as `testimonials` covering
+  both the Testimonial CRUD and `TestimonialPageSetting`'s update.
+  `config/modules.php`'s `founders_donors` key (the coarser kill-switch)
+  mirrors this same one-key-for-both-entities choice.
+- **Public route** `/founders-donors` (`FounderDonorController`,
+  `frontend.founders-donors.index`) renders both tables in one view, each
+  wrapped in `@if ($founders->count())`/`@if ($donors->count())` so an
+  empty list just omits that table rather than showing an empty one —
+  same empty-state spirit as every other list page in this app.
 
 ### Site Configuration (developer-level module kill switch)
 
