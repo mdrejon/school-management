@@ -36,12 +36,21 @@ class Teacher extends Model
         'skills',
         'is_active',
         'sort_order',
+        // HR fields
+        'user_id',
+        'department_id',
+        'gender',
+        'religion',
+        'blood_group',
+        'serial_no',
+        'joining_date',
     ];
 
     protected $casts = [
         'skills' => 'array',
         'is_active' => 'boolean',
         'sort_order' => 'integer',
+        'joining_date' => 'date',
     ];
 
     protected $appends = ['photo_url'];
@@ -97,5 +106,15 @@ class Teacher extends Model
     public static function forHomepage(int $limit = 4)
     {
         return static::where('is_active', true)->orderBy('sort_order')->limit($limit)->get();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }

@@ -1,0 +1,7 @@
+{
+    "Student": true,
+    "Staff": true,
+    "Academic": true,
+    "Teacher": true,
+    "Exam": true
+}

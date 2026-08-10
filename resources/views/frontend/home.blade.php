@@ -50,6 +50,19 @@
         @endif
         <!-- video-area end -->
 
+        @if (($siteSettings->homepage_template ?? 'default') === 'index-1')
+                        </div>
+                        <!-- home main col end -->
+
+                        <div class="col-lg-3 py-5">
+                            @include('frontend.partials.home-sidebar')
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- home content area end -->
+        @endif
+
 
         <!-- team-area -->
         @if (\App\Models\ModuleSetting::showOnHomepage('teachers'))
@@ -113,18 +126,6 @@
         @endif
         <!-- blog area end -->
 
-        @if (($siteSettings->homepage_template ?? 'default') === 'index-1')
-                        </div>
-                        <!-- home main col end -->
-
-                        <div class="col-lg-3 py-5">
-                            @include('frontend.partials.home-sidebar')
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- home content area end -->
-        @endif
 
         <!-- partner area -->
         @if (\App\Models\ModuleSetting::showOnHomepage('partner'))

@@ -1,17 +1,18 @@
 <script setup>
 import { ref } from 'vue';
 import { Link, router, useForm } from '@inertiajs/vue3';
-import ActionMessage from '@/Components/ActionMessage.vue';
-import FormSection from '@/Components/FormSection.vue';
+import Card from 'primevue/card';
+import InputText from 'primevue/inputtext';
+import Button from 'primevue/button';
+import Avatar from 'primevue/avatar';
+import { useToast } from 'primevue/usetoast';
 import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 
 const props = defineProps({
     user: Object,
 });
+
+const toast = useToast();
 
 const form = useForm({
     _method: 'PUT',
@@ -20,7 +21,6 @@ const form = useForm({
     photo: null,
 });
 
-const verificationLinkSent = ref(null);
 const photoPreview = ref(null);
 const photoInput = ref(null);
 
@@ -32,12 +32,11 @@ const updateProfileInformation = () => {
     form.post(route('user-profile-information.update'), {
         errorBag: 'updateProfileInformation',
         preserveScroll: true,
-        onSuccess: () => clearPhotoFileInput(),
+        onSuccess: () => {
+            clearPhotoFileInput();
+            toast.add({ severity: 'success', summary: 'Success', detail: 'Profile updated successfully', life: 3000 });
+        },
     });
-};
-
-const sendEmailVerification = () => {
-    verificationLinkSent.value = true;
 };
 
 const selectNewPhoto = () => {
@@ -46,26 +45,12 @@ const selectNewPhoto = () => {
 
 const updatePhotoPreview = () => {
     const photo = photoInput.value.files[0];
-
     if (! photo) return;
-
     const reader = new FileReader();
-
     reader.onload = (e) => {
         photoPreview.value = e.target.result;
     };
-
     reader.readAsDataURL(photo);
-};
-
-const deletePhoto = () => {
-    router.delete(route('current-user-photo.destroy'), {
-        preserveScroll: true,
-        onSuccess: () => {
-            photoPreview.value = null;
-            clearPhotoFileInput();
-        },
-    });
 };
 
 const clearPhotoFileInput = () => {
@@ -73,21 +58,26 @@ const clearPhotoFileInput = () => {
         photoInput.value.value = null;
     }
 };
+
+const userInitials = computed(() => {
+    if(!props.user.name) return 'U';
+    const parts = props.user.name.split(' ');
+    if (parts.length > 1) return parts[0][0] + parts[1][0];
+    return parts[0][0];
+});
+
+import { computed } from 'vue';
 </script>
 
 <template>
-    <FormSection @submitted="updateProfileInformation">
-        <template #title>
-            Profile Information
+    <Card class="shadow-sm border border-slate-100 rounded-xl bg-white overflow-hidden">
+        <template #header>
+            <div class="bg-[#0ea5e9] text-white px-4 py-3 font-semibold flex items-center gap-2">
+                <i class="pi pi-user text-sm" /> Profile Information
+            </div>
         </template>
-
-        <template #description>
-            Update your account's profile information and email address.
-        </template>
-
-        <template #form>
-            <!-- Profile Photo -->
-            <div v-if="$page.props.jetstream.managesProfilePhotos" class="col-span-6 sm:col-span-4">
+        <template #content>
+            <form @submit.prevent="updateProfileInformation">
                 <!-- Profile Photo File Input -->
                 <input
                     id="photo"
@@ -97,94 +87,40 @@ const clearPhotoFileInput = () => {
                     @change="updatePhotoPreview"
                 >
 
-                <InputLabel for="photo" value="Photo" />
-
-                <!-- Current Profile Photo -->
-                <div v-show="! photoPreview" class="mt-2">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full size-20 object-cover">
+                <div class="flex flex-col items-center justify-center mb-8 mt-4">
+                    <div class="relative group cursor-pointer" @click="selectNewPhoto">
+                        <Avatar v-if="!photoPreview && props.user.profile_photo_path" :image="user.profile_photo_url" shape="circle" class="w-32 h-32 text-4xl" />
+                        <Avatar v-else-if="photoPreview" :image="photoPreview" shape="circle" class="w-32 h-32 text-4xl" />
+                        <Avatar v-else :label="userInitials" shape="circle" class="w-32 h-32 text-4xl bg-blue-600 text-white" />
+                        
+                        <div class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i class="pi pi-camera text-white text-2xl" />
+                        </div>
+                    </div>
+                    
+                    <button type="button" @click="selectNewPhoto" class="mt-4 text-sm font-medium text-gray-700 hover:text-blue-600 flex items-center gap-2">
+                        <i class="pi pi-camera" /> Change Photo
+                    </button>
+                    <InputError :message="form.errors.photo" class="mt-2" />
                 </div>
 
-                <!-- New Profile Photo Preview -->
-                <div v-show="photoPreview" class="mt-2">
-                    <span
-                        class="block rounded-full size-20 bg-cover bg-no-repeat bg-center"
-                        :style="'background-image: url(\'' + photoPreview + '\');'"
-                    />
-                </div>
-
-                <SecondaryButton class="mt-2 me-2" type="button" @click.prevent="selectNewPhoto">
-                    Select A New Photo
-                </SecondaryButton>
-
-                <SecondaryButton
-                    v-if="user.profile_photo_path"
-                    type="button"
-                    class="mt-2"
-                    @click.prevent="deletePhoto"
-                >
-                    Remove Photo
-                </SecondaryButton>
-
-                <InputError :message="form.errors.photo" class="mt-2" />
-            </div>
-
-            <!-- Name -->
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Name" />
-                <TextInput
-                    id="name"
-                    v-model="form.name"
-                    type="text"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="name"
-                />
-                <InputError :message="form.errors.name" class="mt-2" />
-            </div>
-
-            <!-- Email -->
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="username"
-                />
-                <InputError :message="form.errors.email" class="mt-2" />
-
-                <div v-if="$page.props.jetstream.hasEmailVerification && user.email_verified_at === null">
-                    <p class="text-sm mt-2">
-                        Your email address is unverified.
-
-                        <Link
-                            :href="route('verification.send')"
-                            method="post"
-                            as="button"
-                            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            @click.prevent="sendEmailVerification"
-                        >
-                            Click here to re-send the verification email.
-                        </Link>
-                    </p>
-
-                    <div v-show="verificationLinkSent" class="mt-2 font-medium text-sm text-green-600">
-                        A new verification link has been sent to your email address.
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <InputText v-model="form.name" class="w-full" required />
+                        <InputError :message="form.errors.name" class="mt-2" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <InputText v-model="form.email" type="email" class="w-full" required />
+                        <InputError :message="form.errors.email" class="mt-2" />
                     </div>
                 </div>
-            </div>
-        </template>
 
-        <template #actions>
-            <ActionMessage :on="form.recentlySuccessful" class="me-3">
-                Saved.
-            </ActionMessage>
-
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
-            </PrimaryButton>
+                <div class="flex justify-end">
+                    <Button type="submit" label="Update Profile" icon="pi pi-lock" :loading="form.processing" class="bg-[#0ea5e9] border-none text-white hover:bg-sky-600" />
+                </div>
+            </form>
         </template>
-    </FormSection>
+    </Card>
 </template>

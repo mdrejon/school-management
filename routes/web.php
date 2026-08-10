@@ -144,6 +144,13 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
+        $user = auth()->user();
+        if ($user->hasRole('teacher')) {
+            return redirect()->route('teacher.dashboard');
+        }
+        if ($user->hasAnyRole(['admin', 'system_admin'])) {
+            return redirect()->route('admin.dashboard');
+        }
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });

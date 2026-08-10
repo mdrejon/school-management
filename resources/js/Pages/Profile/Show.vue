@@ -1,57 +1,48 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
-import DeleteUserForm from '@/Pages/Profile/Partials/DeleteUserForm.vue';
-import LogoutOtherBrowserSessionsForm from '@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue';
-import SectionBorder from '@/Components/SectionBorder.vue';
-import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue';
-import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue';
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
+import TeacherLayout from '@/Layouts/TeacherLayout.vue';
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
+import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue';
 
-defineProps({
-    confirmsTwoFactorAuthentication: Boolean,
-    sessions: Array,
+const page = usePage();
+const user = page.props.auth.user;
+
+// Assuming if user is not admin, they are a teacher for this context
+// Alternatively, check roles if Spatie is loaded
+const isTeacher = computed(() => {
+    if (user.roles && user.roles.length > 0) {
+        return user.roles.some(r => r.name.toLowerCase() === 'teacher');
+    }
+    // Fallback: check email or something if roles aren't populated, but roles should be.
+    return false;
+});
+
+const layout = computed(() => {
+    // We can't use dynamic component for layout easily in script setup with Vue 3 SFC if they are not imported,
+    // but we have both imported. We can just use v-if in template.
+    return isTeacher.value ? TeacherLayout : AdminLayout;
 });
 </script>
 
 <template>
-    <AppLayout title="Profile">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Profile
-            </h2>
-        </template>
+    <component :is="layout" title="Dashboard">
+        <div class="mb-4">
+            <h1 class="text-2xl font-bold text-gray-800">My Profile</h1>
+            <p class="text-sm text-gray-500">Home - Profile</p>
+        </div>
 
-        <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <div v-if="$page.props.jetstream.canUpdateProfileInformation">
-                    <UpdateProfileInformationForm :user="$page.props.auth.user" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Left Column: Profile Information -->
+            <div>
+                <UpdateProfileInformationForm :user="user" />
+            </div>
 
-                    <SectionBorder />
-                </div>
-
-                <div v-if="$page.props.jetstream.canUpdatePassword">
-                    <UpdatePasswordForm class="mt-10 sm:mt-0" />
-
-                    <SectionBorder />
-                </div>
-
-                <div v-if="$page.props.jetstream.canManageTwoFactorAuthentication">
-                    <TwoFactorAuthenticationForm
-                        :requires-confirmation="confirmsTwoFactorAuthentication"
-                        class="mt-10 sm:mt-0"
-                    />
-
-                    <SectionBorder />
-                </div>
-
-                <LogoutOtherBrowserSessionsForm :sessions="sessions" class="mt-10 sm:mt-0" />
-
-                <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
-                    <SectionBorder />
-
-                    <DeleteUserForm class="mt-10 sm:mt-0" />
-                </template>
+            <!-- Right Column: Update Password -->
+            <div>
+                <UpdatePasswordForm />
             </div>
         </div>
-    </AppLayout>
+    </component>
 </template>

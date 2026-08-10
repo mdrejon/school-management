@@ -360,6 +360,10 @@ Route::middleware([
         // 'academic.results' => ['results', 'Results'],
         // 'academic.attendance' => ['attendance', 'Attendance'],
 
+        'academic.syllabuses.index' => ['academic/syllabuses', 'Syllabus'],
+        'academic.assignments.index' => ['academic/assignments', 'Assignments'],
+        'coming.soon' => ['coming-soon', 'Coming Soon'],
+
         // 'people.students' => ['students', 'Students'],
         // 'people.teachers' => ['teachers', 'Teachers'],
         // 'people.staff' => ['staff', 'Staff'],
@@ -386,4 +390,41 @@ Route::middleware([
     foreach ($stubs as $name => [$uri, $title]) {
         Route::get("/{$uri}", fn () => Inertia::render('Admin/ComingSoon', ['title' => $title]))->name($name);
     }
+
+    Route::prefix('exam-startup')->name('exam-startup.')->group(function () {
+        Route::get('/', [\Modules\Exam\Http\Controllers\Admin\ExamStartupController::class, 'index'])->name('index');
+        Route::post('/codes', [\Modules\Exam\Http\Controllers\Admin\ExamStartupController::class, 'storeCodes'])->name('storeCodes');
+        Route::post('/grades', [\Modules\Exam\Http\Controllers\Admin\ExamStartupController::class, 'storeGrades'])->name('storeGrades');
+        Route::post('/exams', [\Modules\Exam\Http\Controllers\Admin\ExamStartupController::class, 'storeExams'])->name('storeExams');
+    });
+
+    Route::resource('exam-marks', \Modules\Exam\Http\Controllers\Admin\ExamMarkController::class)->except(['create', 'show', 'edit']);
+    Route::resource('exam-remarks', \Modules\Exam\Http\Controllers\Admin\ExamRemarkController::class)->except(['create', 'show', 'edit']);
+
+    Route::prefix('mark-input')->name('mark-input.')->group(function () {
+        Route::get('/', [\Modules\Exam\Http\Controllers\Admin\MarkInputController::class, 'index'])->name('index');
+        Route::get('/{classId}', [\Modules\Exam\Http\Controllers\Admin\MarkInputController::class, 'show'])->name('show');
+        Route::post('/fetch-students', [\Modules\Exam\Http\Controllers\Admin\MarkInputController::class, 'fetchStudents'])->name('fetchStudents');
+        Route::post('/store', [\Modules\Exam\Http\Controllers\Admin\MarkInputController::class, 'store'])->name('store');
+    });
+
+    Route::get('/subjects/{subject}/configs', [\Modules\Academic\Http\Controllers\Admin\SubjectController::class, 'configs'])->name('subjects.configs');
+    Route::post('/subjects/{subject}/configs', [\Modules\Academic\Http\Controllers\Admin\SubjectController::class, 'storeConfigs'])->name('subjects.storeConfigs');
+
+    // Class Routine
+    Route::prefix('class-routine')->name('class-routine.')->group(function () {
+        Route::get('/', [\Modules\Academic\Http\Controllers\Admin\ClassRoutineController::class, 'index'])->name('index');
+        Route::get('/manage/{classId}/{sectionId?}', [\Modules\Academic\Http\Controllers\Admin\ClassRoutineController::class, 'manage'])->name('manage');
+        Route::post('/store', [\Modules\Academic\Http\Controllers\Admin\ClassRoutineController::class, 'store'])->name('store');
+    });
+
+    Route::prefix('exam-result')->name('exam-result.')->group(function () {
+        Route::get('/', [\Modules\Exam\Http\Controllers\Admin\ExamResultController::class, 'index'])->name('index');
+        Route::post('/fetch-results', [\Modules\Exam\Http\Controllers\Admin\ExamResultController::class, 'fetchResults'])->name('fetchResults');
+    });
+
+    Route::prefix('grand-final-result')->name('grand-final-result.')->group(function () {
+        Route::get('/', [\Modules\Exam\Http\Controllers\Admin\GrandFinalResultController::class, 'index'])->name('index');
+        Route::post('/fetch-results', [\Modules\Exam\Http\Controllers\Admin\GrandFinalResultController::class, 'fetchResults'])->name('fetchResults');
+    });
 });

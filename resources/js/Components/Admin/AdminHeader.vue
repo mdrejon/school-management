@@ -7,6 +7,7 @@ import Menu from 'primevue/menu';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import InputText from 'primevue/inputtext';
+import axios from 'axios';
 
 defineProps({
     title: {
@@ -21,16 +22,18 @@ const page = usePage();
 const user = page.props.auth.user;
 
 const userMenu = ref();
-const userMenuItems = ref([
-    { label: 'Profile', icon: 'pi pi-user', route: 'profile.show' },
-    {
-        label: 'Log Out',
-        icon: 'pi pi-sign-out',
-        command: () => router.post(route('logout')),
-    },
-]);
-
 const toggleUserMenu = (event) => userMenu.value.toggle(event);
+
+const changeLanguage = () => {
+    // Implement language change functionality
+    console.log('Change language');
+};
+
+const logout = () => {
+    axios.post(route('logout')).then(() => {
+        window.location.href = '/';
+    });
+};
 </script>
 
 <template>
@@ -64,16 +67,36 @@ const toggleUserMenu = (event) => userMenu.value.toggle(event);
             <i class="pi pi-angle-down text-xs text-slate-400 hidden sm:block" />
         </button>
 
-        <Menu ref="userMenu" :model="userMenuItems" :popup="true">
-            <template #item="{ item, props }">
-                <Link v-if="item.route" :href="route(item.route)" v-bind="props.action">
-                    <span :class="item.icon" />
-                    <span class="ml-2">{{ item.label }}</span>
-                </Link>
-                <a v-else v-bind="props.action" @click="item.command">
-                    <span :class="item.icon" />
-                    <span class="ml-2">{{ item.label }}</span>
-                </a>
+        <Menu ref="userMenu" :model="[]" :popup="true" class="w-72 mt-2 p-0">
+            <template #start>
+                <div class="p-4 border-b border-slate-100 flex items-center gap-3">
+                    <Avatar :image="user.profile_photo_url" shape="circle" class="w-12 h-12" />
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-slate-800 text-sm">Hi, {{ user.name }}</span>
+                            <span class="bg-green-100 text-green-600 text-[10px] font-bold px-1.5 py-0.5 rounded">Pro</span>
+                        </div>
+                        <div class="text-xs text-slate-500">{{ user.email }}</div>
+                    </div>
+                </div>
+                <div class="p-2 space-y-1 border-b border-slate-100">
+                    <Link :href="page.url.startsWith('/teacher') && route().has('teacher.profile') ? route('teacher.profile') : route('profile.show')" class="flex items-center gap-3 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 rounded-lg">
+                        <span class="font-medium">My Profile</span>
+                    </Link>
+                </div>
+                <div class="p-2 space-y-1 border-b border-slate-100 flex justify-between items-center px-5">
+                    <span class="text-sm font-medium text-slate-700">Language</span>
+                    <button @click="changeLanguage" class="flex items-center gap-1 text-sm bg-gray-100 px-2 py-1 rounded">
+                        English <img src="https://flagcdn.com/w20/us.png" alt="English" class="w-4 h-3 rounded-sm" />
+                    </button>
+                </div>
+            </template>
+            <template #end>
+                <div class="p-2">
+                    <button @click="logout" class="w-full text-left flex items-center gap-3 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 rounded-lg">
+                        <span class="font-medium">Sign Out</span>
+                    </button>
+                </div>
             </template>
         </Menu>
     </header>
