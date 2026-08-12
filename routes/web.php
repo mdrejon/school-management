@@ -151,6 +151,9 @@ Route::middleware([
         if ($user->hasAnyRole(['admin', 'system_admin'])) {
             return redirect()->route('admin.dashboard');
         }
+        if ($user->hasRole('student')) {
+            return redirect()->route('student.dashboard');
+        }
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });

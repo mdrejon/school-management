@@ -19,3 +19,13 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::resource('students', StudentController::class);
 });
+
+Route::middleware(['auth', 'verified', 'role:student'])->prefix('student')->name('student.')->group(function () {
+    Route::get('dashboard', [\Modules\Student\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('assignments/submissions', [\Modules\Student\Http\Controllers\AssignmentController::class, 'submissions'])->name('assignments.submissions');
+    Route::resource('assignments', \Modules\Student\Http\Controllers\AssignmentController::class)->only(['index', 'create', 'store']);
+    Route::get('syllabus', [\Modules\Student\Http\Controllers\SyllabusController::class, 'index'])->name('syllabus.index');
+    Route::get('subjects', [\Modules\Student\Http\Controllers\SubjectController::class, 'index'])->name('subjects.index');
+    Route::get('class-routine', [\Modules\Student\Http\Controllers\ClassRoutineController::class, 'index'])->name('class-routine.index');
+    Route::get('exam-routine', [\Modules\Student\Http\Controllers\ExamRoutineController::class, 'index'])->name('exam-routine.index');
+});

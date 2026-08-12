@@ -30,7 +30,7 @@ class ClassRoutine extends Model
 
     public function subject()
     {
-        return $this->belongsTo(AcademicSubject::class, 'subject_id');
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 
     public function teacher()

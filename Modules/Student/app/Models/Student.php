@@ -43,4 +43,14 @@ class Student extends Model
     {
         return $this->hasMany(StudentMigration::class);
     }
+
+    public function academicClass()
+    {
+        return $this->belongsTo(\Modules\Academic\Models\AcademicClass::class, 'class_id');
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(\Modules\Academic\Models\Section::class, 'section_id');
+    }
 }
