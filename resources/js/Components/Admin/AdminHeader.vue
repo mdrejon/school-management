@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import Avatar from 'primevue/avatar';
 import OverlayBadge from 'primevue/overlaybadge';
@@ -34,6 +34,16 @@ const logout = () => {
         window.location.href = '/';
     });
 };
+
+const profileRoute = computed(() => {
+    if (page.url.startsWith('/student') && route().has('student.profile')) {
+        return route('student.profile');
+    }
+    if (page.url.startsWith('/teacher') && route().has('teacher.profile')) {
+        return route('teacher.profile');
+    }
+    return route('profile.show');
+});
 </script>
 
 <template>
@@ -80,7 +90,7 @@ const logout = () => {
                     </div>
                 </div>
                 <div class="p-2 space-y-1 border-b border-slate-100">
-                    <Link :href="page.url.startsWith('/teacher') && route().has('teacher.profile') ? route('teacher.profile') : route('profile.show')" class="flex items-center gap-3 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 rounded-lg">
+                    <Link :href="profileRoute" class="flex items-center gap-3 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 rounded-lg">
                         <span class="font-medium">My Profile</span>
                     </Link>
                 </div>

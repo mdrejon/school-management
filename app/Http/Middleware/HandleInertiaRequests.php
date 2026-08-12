@@ -45,6 +45,7 @@ class HandleInertiaRequests extends Middleware
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
             ],
+            'user_roles' => fn () => $request->user() ? $request->user()->roles->pluck('name')->map(fn($role) => strtolower($role)) : [],
         ];
     }
 }

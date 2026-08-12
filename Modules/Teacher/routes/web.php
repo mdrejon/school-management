@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Teacher\Http\Controllers\DashboardController;
 
-Route::middleware(['auth', 'verified'])->prefix('teacher')->name('teacher.')->group(function () {
+Route::middleware(['auth', 'verified', 'role:teacher'])->prefix('teacher')->name('teacher.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Profile

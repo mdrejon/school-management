@@ -3,26 +3,26 @@ import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import TeacherLayout from '@/Layouts/TeacherLayout.vue';
+import StudentLayout from '@/Layouts/StudentLayout.vue';
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
 import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue';
 
 const page = usePage();
 const user = page.props.auth.user;
+const userRoles = page.props.user_roles || [];
 
-// Assuming if user is not admin, they are a teacher for this context
-// Alternatively, check roles if Spatie is loaded
 const isTeacher = computed(() => {
-    if (user.roles && user.roles.length > 0) {
-        return user.roles.some(r => r.name.toLowerCase() === 'teacher');
-    }
-    // Fallback: check email or something if roles aren't populated, but roles should be.
-    return false;
+    return userRoles.includes('teacher');
+});
+
+const isStudent = computed(() => {
+    return userRoles.includes('student');
 });
 
 const layout = computed(() => {
-    // We can't use dynamic component for layout easily in script setup with Vue 3 SFC if they are not imported,
-    // but we have both imported. We can just use v-if in template.
-    return isTeacher.value ? TeacherLayout : AdminLayout;
+    if (isStudent.value) return StudentLayout;
+    if (isTeacher.value) return TeacherLayout;
+    return AdminLayout;
 });
 </script>
 
