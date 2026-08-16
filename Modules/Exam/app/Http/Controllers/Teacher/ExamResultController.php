@@ -10,7 +10,7 @@ use Modules\Exam\Models\GlobalExam;
 use Modules\Exam\Models\GlobalExamGrade;
 use Modules\Exam\Models\ExamStudentMark;
 use Modules\Student\Models\Student;
-use Modules\Academic\Models\AcademicSubject;
+use Modules\Academic\Models\Subject;
 
 class ExamResultController extends Controller
 {
@@ -18,7 +18,7 @@ class ExamResultController extends Controller
     {
         $classes = AcademicClass::all();
         $exams = GlobalExam::all();
-        $subjects = AcademicSubject::all();
+        $subjects = Subject::all();
         
         return Inertia::render('Teacher/Exam/ExamResult/Index', [
             'classes' => $classes,
@@ -58,7 +58,7 @@ class ExamResultController extends Controller
                     'student_id' => $mark->student->id ?? '',
                     'roll_no' => $mark->student->roll_no ?? '',
                     'name' => ($mark->student->first_name ?? '') . ' ' . ($mark->student->last_name ?? ''),
-                    'subject_name' => \Modules\Academic\Models\AcademicSubject::find($subjectId)->name ?? 'Unknown',
+                    'subject_name' => \Modules\Academic\Models\Subject::find($subjectId)->name ?? 'Unknown',
                     'exam_name' => $mark->exam->name ?? 'Unknown',
                     'total_marks' => 0,
                     'grade_point' => '0.00',

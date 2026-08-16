@@ -44,7 +44,7 @@ class ModuleSetting extends Model
      */
     public static function catalog(): array
     {
-        return config('modules');
+        return config('site_modules');
     }
 
     /**

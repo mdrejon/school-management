@@ -44,4 +44,13 @@ Route::middleware(['auth', 'verified'])->prefix('admin/academic')->name('admin.a
     Route::resource('student-categories', StudentCategoryController::class)->except(['show', 'create', 'edit']);
     Route::resource('departments', DepartmentController::class)->except(['show', 'create', 'edit']);
     Route::resource('signatures', SignatureController::class)->except(['show', 'create', 'edit']);
+    Route::resource('assignments', \Modules\Academic\Http\Controllers\Admin\AssignmentController::class)->except(['show']);
+    Route::get('syllabuses/{syllabus}/download', [\Modules\Academic\Http\Controllers\Admin\SyllabusController::class, 'download'])->name('syllabuses.download');
+    Route::resource('syllabuses', \Modules\Academic\Http\Controllers\Admin\SyllabusController::class)->except(['show', 'edit', 'update']);
+    Route::resource('resources', \Modules\Academic\Http\Controllers\Admin\ResourceController::class)->except(['show', 'edit', 'update']);
+    Route::resource('class-lessons', \Modules\Academic\Http\Controllers\Admin\ClassLessonController::class)->except(['show', 'edit', 'update']);
+    Route::get('prayers/{prayer}/download', [\Modules\Academic\Http\Controllers\Admin\PrayerController::class, 'download'])->name('prayers.download');
+    Route::resource('prayers', \Modules\Academic\Http\Controllers\Admin\PrayerController::class)->except(['show', 'edit', 'update']);
+    Route::get('behaviors/{behavior}/download', [\Modules\Academic\Http\Controllers\Admin\BehaviorController::class, 'download'])->name('behaviors.download');
+    Route::resource('behaviors', \Modules\Academic\Http\Controllers\Admin\BehaviorController::class)->except(['show']);
 });

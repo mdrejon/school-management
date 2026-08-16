@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Modules\Academic\Models\AcademicClass;
 use Modules\Academic\Models\AcademicGroup;
-use Modules\Academic\Models\AcademicSubject;
+use Modules\Academic\Models\Subject;
 use Modules\Exam\Models\GlobalExam;
 use Modules\Exam\Models\ExamMark;
 use Modules\Exam\Models\ExamStudentMark;
@@ -28,7 +28,7 @@ class MarkInputController extends Controller
         $class = AcademicClass::findOrFail($classId);
         $exams = GlobalExam::all();
         $groups = AcademicGroup::all();
-        $subjects = AcademicSubject::all();
+        $subjects = Subject::all();
         $markConfigs = ExamMark::all();
 
         return Inertia::render('Admin/Exam/MarkInput/Form', [

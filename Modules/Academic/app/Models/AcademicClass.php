@@ -19,4 +19,9 @@ class AcademicClass extends Model
     // {
     //     // return AcademicClassFactory::new();
     // }
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class, 'academic_class_id');
+    }
 }

@@ -27,14 +27,7 @@ const menu = [
             { label: 'Attendance Delete', icon: 'pi pi-trash', route: 'teacher.attendance.delete' },
         ]
     },
-    { 
-        label: 'Live Classes', 
-        icon: 'pi pi-video',
-        items: [
-            { label: 'Zoom Meeting', icon: 'pi pi-video', route: 'teacher.dashboard' },
-            { label: 'Google Meet', icon: 'pi pi-google', route: 'teacher.dashboard' },
-        ]
-    },
+
     { 
         label: 'Academics', 
         icon: 'pi pi-book',

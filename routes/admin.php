@@ -46,7 +46,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'role:admin',
+    'role:admin|system_admin',
 ])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -361,8 +361,8 @@ Route::middleware([
         // 'academic.results' => ['results', 'Results'],
         // 'academic.attendance' => ['attendance', 'Attendance'],
 
-        'academic.syllabuses.index' => ['academic/syllabuses', 'Syllabus'],
-        'academic.assignments.index' => ['academic/assignments', 'Assignments'],
+        
+        
         'coming.soon' => ['coming-soon', 'Coming Soon'],
 
         // 'people.students' => ['students', 'Students'],
@@ -409,8 +409,7 @@ Route::middleware([
         Route::post('/store', [\Modules\Exam\Http\Controllers\Admin\MarkInputController::class, 'store'])->name('store');
     });
 
-    Route::get('/subjects/{subject}/configs', [\Modules\Academic\Http\Controllers\Admin\SubjectController::class, 'configs'])->name('subjects.configs');
-    Route::post('/subjects/{subject}/configs', [\Modules\Academic\Http\Controllers\Admin\SubjectController::class, 'storeConfigs'])->name('subjects.storeConfigs');
+
 
     // Class Routine
     Route::prefix('class-routine')->name('class-routine.')->group(function () {

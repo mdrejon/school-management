@@ -35,6 +35,9 @@ export default [
             { label: 'Migration Pushback', icon: 'pi pi-history', route: 'admin.students.migration.pushback' },
             { label: 'Migrated List', icon: 'pi pi-list', route: 'admin.students.migrated-list' },
             { label: 'All Students view list', icon: 'pi pi-eye', route: 'admin.students.at-a-glance' },
+            { label: 'Student Attendance', icon: 'pi pi-calendar', route: 'admin.students.attendance.index' },
+            { label: 'Exam Attendance', icon: 'pi pi-calendar-times', route: 'admin.students.exam-attendance.index' },
+            { label: 'Attendance Report', icon: 'pi pi-chart-bar', route: 'admin.students.attendance-report.index' },
         ],
     },
     {
@@ -67,7 +70,7 @@ export default [
             { label: 'Vision & Mission', icon: 'pi pi-eye', route: 'admin.cms.vision-mission.edit' },
             { label: 'Campus Tour', icon: 'pi pi-compass', route: 'admin.cms.campus-tour.edit' },
             // { label: 'Downloads', icon: 'pi pi-download', route: 'admin.cms.downloads' },
-            { label: 'Menus', icon: 'pi pi-bars', route: 'admin.cms.menus.index' },
+
             { label: 'Contact Messages', icon: 'pi pi-envelope', route: 'admin.cms.contact-messages.index', module: 'contact' },
         ],
     },
@@ -99,13 +102,16 @@ export default [
     },
     */
     {
-        label: 'Routine Management',
+        label: 'Academic',
         icon: 'pi pi-calendar',
         items: [
             { label: 'Syllabus', icon: 'pi pi-caret-right', route: 'admin.academic.syllabuses.index' },
             { label: 'Assignments', icon: 'pi pi-caret-right', route: 'admin.academic.assignments.index' },
             { label: 'Class Routine', icon: 'pi pi-caret-right', route: 'admin.class-routine.index' },
-            { label: 'Exam Routine', icon: 'pi pi-caret-right', route: 'admin.coming.soon', routeParams: { type: 'exam-routine' } },
+            { label: 'Resources', icon: 'pi pi-caret-right', route: 'admin.academic.resources.index' },
+            { label: 'Class Lessons', icon: 'pi pi-caret-right', route: 'admin.academic.class-lessons.index' },
+            { label: 'Prayers', icon: 'pi pi-caret-right', route: 'admin.academic.prayers.index' },
+            { label: 'Behaviors', icon: 'pi pi-caret-right', route: 'admin.academic.behaviors.index' },
         ],
     },
     {
@@ -129,7 +135,7 @@ export default [
             { label: 'Languages', icon: 'pi pi-language', route: 'admin.settings.languages.index' },
             { label: 'Users & Roles', icon: 'pi pi-shield', route: 'admin.settings.users.index' },
             { label: 'Permissions', icon: 'pi pi-key', route: 'admin.settings.permissions.index' },
-            { label: 'General Settings', icon: 'pi pi-cog', route: 'admin.settings.general' },
+            { label: 'Menus', icon: 'pi pi-bars', route: 'admin.cms.menus.index' },
         ],
     },
 ];

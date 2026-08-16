@@ -18,6 +18,17 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::get('students/migrated-list', [StudentMigrationController::class, 'migratedList'])->name('students.migrated-list');
 
     Route::resource('students', StudentController::class);
+    
+    // Attendance
+    Route::get('attendance', [\Modules\Student\Http\Controllers\Admin\StudentAttendanceController::class, 'index'])->name('students.attendance.index');
+    Route::post('attendance', [\Modules\Student\Http\Controllers\Admin\StudentAttendanceController::class, 'store'])->name('students.attendance.store');
+    Route::get('attendance/delete', [\Modules\Student\Http\Controllers\Admin\StudentAttendanceController::class, 'deleteIndex'])->name('students.attendance.delete');
+    Route::delete('attendance', [\Modules\Student\Http\Controllers\Admin\StudentAttendanceController::class, 'destroy'])->name('students.attendance.destroy');
+
+    Route::get('exam-attendance', [\Modules\Student\Http\Controllers\Admin\ExamAttendanceController::class, 'index'])->name('students.exam-attendance.index');
+    Route::post('exam-attendance', [\Modules\Student\Http\Controllers\Admin\ExamAttendanceController::class, 'store'])->name('students.exam-attendance.store');
+
+    Route::get('attendance-report', [\Modules\Student\Http\Controllers\Admin\AttendanceReportController::class, 'index'])->name('students.attendance-report.index');
 });
 
 Route::middleware(['auth', 'verified', 'role:student'])->prefix('student')->name('student.')->group(function () {

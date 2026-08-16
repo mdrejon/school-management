@@ -64,7 +64,7 @@ const filters = ref({
 
                     <Column field="name" header="Name" sortable>
                         <template #body="{ data }">
-                            <span class="font-medium text-slate-900">{{ typeof data.name === 'object' ? data.name[Object.keys(data.name)[0]] : data.name }}</span>
+                            <span class="font-medium text-slate-900">{{ typeof data.name === 'object' ? (data.name['en'] || data.name[Object.keys(data.name)[0]]) : data.name }}</span>
                         </template>
                     </Column>
 
@@ -74,13 +74,13 @@ const filters = ref({
 
                     <Column field="department.title" header="Department" sortable>
                         <template #body="{ data }">
-                            {{ data.department ? data.department.title : '-' }}
+                            {{ data.department ? (typeof data.department.title === 'object' ? (data.department.title['en'] || data.department.title[Object.keys(data.department.title)[0]]) : data.department.title) : '-' }}
                         </template>
                     </Column>
 
                     <Column field="designation" header="Designation" sortable>
                         <template #body="{ data }">
-                            {{ typeof data.designation === 'object' ? data.designation[Object.keys(data.designation)[0]] : data.designation }}
+                            {{ typeof data.designation === 'object' ? (data.designation['en'] || data.designation[Object.keys(data.designation)[0]]) : data.designation }}
                         </template>
                     </Column>
 
