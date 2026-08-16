@@ -6,7 +6,7 @@ use Modules\Student\Http\Controllers\StudentController;
 use Modules\Student\Http\Controllers\StudentMigrationController;
 use Modules\Student\Http\Controllers\StudentReportController;
 
-Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin|system_admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('students/at-a-glance', [StudentReportController::class, 'atAGlance'])->name('students.at-a-glance');
     
     Route::get('students/migration', [StudentMigrationController::class, 'index'])->name('students.migration');

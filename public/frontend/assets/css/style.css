@@ -6583,6 +6583,10 @@ label {
   animation: marquee-scroll 25s linear infinite;
 }
 
+.wexnix_notice-marquee-wrap:hover .wexnix_marquee-track {
+  animation-play-state: paused;
+}
+
 .wexnix_marquee-track span{
   padding: 0 40px;
   position: relative;
