@@ -47,11 +47,10 @@ const confirmDelete = () => {
         icon: 'pi pi-exclamation-triangle',
         acceptClass: 'p-button-danger',
         accept: () => {
-            deleteForm.delete(route('teacher.attendance.destroy'), {
-                data: {
-                    date: typeof deleteForm.date === 'string' ? deleteForm.date : deleteForm.date.toISOString().slice(0, 10)
-                }
-            });
+            deleteForm.transform((data) => ({
+                ...data,
+                date: typeof data.date === 'string' ? data.date : (data.date ? data.date.toISOString().slice(0, 10) : '')
+            })).delete(route('teacher.attendance.destroy'));
         },
     });
 };

@@ -37,7 +37,7 @@ class BehaviorController extends Controller
         
         $sections = [];
         if ($request->class_id) {
-            $sections = Section::where('class_id', $request->class_id)->get();
+            $sections = Section::where('academic_class_id', $request->class_id)->get();
         }
 
         $students = [];
@@ -94,7 +94,7 @@ class BehaviorController extends Controller
         $classId = $request->class_id ?: $behavior->class_id;
         $sectionId = $request->section_id ?: $behavior->section_id;
 
-        $sections = Section::where('class_id', $classId)->get();
+        $sections = Section::where('academic_class_id', $classId)->get();
         
         $students = Student::where('class_id', $classId)
                            ->where('section_id', $sectionId)

@@ -54,28 +54,28 @@ const fetchSections = () => {
 
         <Card class="shadow-sm border border-slate-100 rounded-xl bg-white mb-6">
             <template #content>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
-                    <div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 items-end">
+                    <div class="lg:col-span-1">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Class</label>
                         <Dropdown v-model="searchForm.class_id" :options="classes" optionLabel="name" optionValue="id" placeholder="Select Class" class="w-full" @change="fetchSections" />
                     </div>
-                    <div>
+                    <div class="lg:col-span-1">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Section</label>
                         <Dropdown v-model="searchForm.section_id" :options="sections" optionLabel="name" optionValue="id" placeholder="Select Section" class="w-full" />
                     </div>
-                    <div>
+                    <div class="lg:col-span-1">
                         <label class="block text-sm font-medium text-gray-700 mb-1">From Date</label>
                         <Calendar v-model="searchForm.from_date" dateFormat="yy-mm-dd" showIcon class="w-full" />
                     </div>
-                    <div>
+                    <div class="lg:col-span-1">
                         <label class="block text-sm font-medium text-gray-700 mb-1">To Date</label>
                         <Calendar v-model="searchForm.to_date" dateFormat="yy-mm-dd" showIcon class="w-full" />
                     </div>
-                    <div class="lg:col-span-1">
+                    <div class="lg:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">% Greater-than (Optional)</label>
                         <div class="flex gap-2">
                             <InputNumber v-model="searchForm.percentage" placeholder="0" class="w-full" />
-                            <Button label="Search" @click="search" class="w-full md:w-auto bg-blue-500 border-none" />
+                            <Button label="Search" @click="search" class="w-full md:w-auto bg-blue-500 border-none shrink-0" />
                         </div>
                     </div>
                 </div>

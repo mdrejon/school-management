@@ -39,7 +39,7 @@ class ClassLessonController extends Controller
         
         $sections = [];
         if ($request->class_id) {
-            $sections = Section::where('class_id', $request->class_id)->get();
+            $sections = Section::where('academic_class_id', $request->class_id)->get();
         } else {
             $sections = Section::all();
         }
