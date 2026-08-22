@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Cms\AcademicCalendarController;
 use App\Http\Controllers\Admin\BlogPageSettingController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\CampusTourPageSettingController;
@@ -265,6 +266,14 @@ Route::middleware([
 
     Route::prefix('cms/faq-settings')->name('cms.faq.settings.')->middleware(['module:faq', 'permission:faq.edit'])->group(function () {
         Route::put('/', [FaqPageSettingController::class, 'update'])->name('update');
+    });
+
+    Route::prefix('cms/academic-calendars')->name('cms.academic-calendars.')->group(function () {
+        Route::get('/', [AcademicCalendarController::class, 'index'])->name('index')->middleware('permission:academic_calendar.view');
+        Route::post('/', [AcademicCalendarController::class, 'store'])->name('store')->middleware('permission:academic_calendar.create');
+        Route::put('/{academicCalendar}', [AcademicCalendarController::class, 'update'])->name('update')->middleware('permission:academic_calendar.edit');
+        Route::patch('/{academicCalendar}/toggle', [AcademicCalendarController::class, 'toggleActive'])->name('toggle')->middleware('permission:academic_calendar.edit');
+        Route::delete('/{academicCalendar}', [AcademicCalendarController::class, 'destroy'])->name('destroy')->middleware('permission:academic_calendar.delete');
     });
 
     Route::prefix('cms/founders-donors')->name('cms.founders-donors.')->middleware('module:founders_donors')->group(function () {

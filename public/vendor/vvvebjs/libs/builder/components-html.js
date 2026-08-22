@@ -590,7 +590,7 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 
 Vvveb.Components.extend("_base", "html/textareainput", {
 	nodes: ["textarea"],
-    name: "Text Area",
+    name: "Form Text Area",
     image: "icons/text_area.svg",
     html: '<textarea class="form-control"></textarea>',
 	properties: [{
@@ -862,6 +862,47 @@ Vvveb.Components.extend("_base", "html/button", {
 		inline:true,
         col:6,
 	}]
+});
+
+Vvveb.Components.extend("_base", "html/texteditor", {
+    name: "Text Editor",
+    nodes: ["p"],
+    image: "icons/paragraph.svg",
+    html: '<p>Double-click or use the sidebar to edit this rich text content...</p>',
+    properties: [{
+        name: "Content",
+        key: "content",
+        htmlAttr: "innerHTML",
+        inputtype: TextareaInput
+    }, {
+        name: "Text align",
+        key: "text-align",
+        htmlAttr: "class",
+        inline: false,
+        validValues: ["", "text-start", "text-center", "text-end"],
+        inputtype: RadioButtonInput,
+        data: {
+            extraclass: "btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "",
+                icon: "la la-times",
+                title: "None"
+            }, {
+                value: "text-start",
+                title: "Left",
+                icon: "la la-align-left",
+                checked: true,
+            }, {
+                value: "text-center",
+                title: "Center",
+                icon: "la la-align-center"
+            }, {
+                value: "text-end",
+                title: "Right",
+                icon: "la la-align-right"
+            }]
+        }
+    }]
 });
 
 Vvveb.Components.extend("_base", "html/paragraph", {
@@ -1491,7 +1532,6 @@ Vvveb.Components.extend("_base", "html/html", {
 /*
 Vvveb.ComponentsGroup['Base'] =
 ["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/link", "html/video", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted"];
-
 */
 
 Vvveb.Components.extend("_base", "html/iframe", {

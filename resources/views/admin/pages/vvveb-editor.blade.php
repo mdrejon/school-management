@@ -2632,19 +2632,18 @@
 Tinymce plugin
 Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist 
 -->
-
-  <!-- 
-<script src="libs/tinymce-dist/tinymce.min.js"></script>
-<script src="libs/builder/plugin-tinymce.js"></script>	
+<!--
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="libs/builder/plugin-tinymce.js"></script>
 -->
 
   <!-- 
 CKEditor plugin
 Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4/releases to libs/ckeditor or use the CDN
 -->
-  <!--
-<script src="libs/ckeditor/ckeditor.js"></script> <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
-<script src="libs/builder/plugin-ckeditor.js"></script>	
+<!--
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script src="libs/builder/plugin-ckeditor.js"></script>
 -->
 
   <!-- jszip - download page as zip -->

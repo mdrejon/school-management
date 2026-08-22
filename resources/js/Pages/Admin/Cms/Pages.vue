@@ -23,7 +23,7 @@ const confirm = useConfirm();
 const defaultText = (row, field) => row[field]?.[defaultLangCode.value] ?? Object.values(row[field] ?? {})[0] ?? '—';
 
 const toggleActive = (row) => {
-    router.patch(route('admin.cms.pages.toggle', row.id), {}, { preserveScroll: true });
+    router.patch(route('admin.cms.pages.toggle', row.slug), {}, { preserveScroll: true });
 };
 
 const confirmDelete = (row) => {
@@ -33,7 +33,7 @@ const confirmDelete = (row) => {
         icon: 'pi pi-exclamation-triangle',
         acceptProps: { label: 'Remove', severity: 'danger' },
         rejectProps: { label: 'Cancel', severity: 'secondary', outlined: true },
-        accept: () => router.delete(route('admin.cms.pages.destroy', row.id), { preserveScroll: true }),
+        accept: () => router.delete(route('admin.cms.pages.destroy', row.slug), { preserveScroll: true }),
     });
 };
 </script>
@@ -78,10 +78,10 @@ const confirmDelete = (row) => {
                                     <a :href="route('pages.show', data.slug)" target="_blank" title="View Frontend Page">
                                         <Button icon="pi pi-eye" text rounded severity="secondary" as="span" />
                                     </a>
-                                    <a :href="route('admin.cms.pages.builder.edit', data.id)" target="_blank" title="Edit content visually">
+                                    <a :href="route('admin.cms.pages.builder.edit', data.slug)" target="_blank" title="Edit content visually">
                                         <Button icon="pi pi-objects-column" text rounded as="span" />
                                     </a>
-                                    <Link :href="route('admin.cms.pages.edit', data.id)">
+                                    <Link :href="route('admin.cms.pages.edit', data.slug)">
                                         <Button icon="pi pi-pencil" text rounded as="span" title="Edit title/SEO" />
                                     </Link>
                                     <Button icon="pi pi-trash" text rounded severity="danger" @click="confirmDelete(data)" />

@@ -3,6 +3,16 @@ import { Head } from '@inertiajs/vue3';
 import StudentLayout from '@/Layouts/StudentLayout.vue';
 import Card from 'primevue/card';
 
+defineProps({
+    todayClasses: {
+        type: Number,
+        default: 0
+    },
+    assignmentsDue: {
+        type: Number,
+        default: 0
+    }
+});
 </script>
 
 <template>
@@ -17,7 +27,7 @@ import Card from 'primevue/card';
                     <div class="flex justify-between items-center">
                         <div>
                             <div class="text-slate-500 text-sm font-medium mb-1">Today's Classes</div>
-                            <div class="text-2xl font-bold text-slate-800">4</div>
+                            <div class="text-2xl font-bold text-slate-800">{{ todayClasses }}</div>
                         </div>
                         <div class="size-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
                             <i class="pi pi-book text-xl"></i>
@@ -31,7 +41,7 @@ import Card from 'primevue/card';
                     <div class="flex justify-between items-center">
                         <div>
                             <div class="text-slate-500 text-sm font-medium mb-1">Assignments Due</div>
-                            <div class="text-2xl font-bold text-slate-800">2</div>
+                            <div class="text-2xl font-bold text-slate-800">{{ assignmentsDue }}</div>
                         </div>
                         <div class="size-10 rounded-full bg-green-50 flex items-center justify-center text-green-500">
                             <i class="pi pi-file-edit text-xl"></i>

@@ -11,6 +11,7 @@ import Textarea from 'primevue/textarea';
 import Tabs from 'primevue/tabs';
 import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
+import Editor from 'primevue/editor';
 import ToggleSwitch from 'primevue/toggleswitch';
 
 const props = defineProps({
@@ -88,6 +89,9 @@ const sections = [
     { key: 'principal', label: 'Our Principal', icon: 'pi pi-user', description: 'The current principal\'s photo, message, and the /principal page\'s breadcrumb & SEO.', module: 'principal' },
     { key: 'ex-principal', label: 'Ex-Principal', icon: 'pi pi-user-minus', description: 'The former principal\'s photo, message, and the /ex-principals page\'s breadcrumb & SEO.', module: 'ex_principal' },
     { key: 'contact', label: 'Contact Page', icon: 'pi pi-envelope', description: 'Office hours, the "Get In Touch" form intro/image/map, and the /contact page\'s breadcrumb & SEO.', module: 'contact' },
+    { key: 'student-list', label: 'Student List', icon: 'pi pi-users', description: 'The /students page breadcrumb & SEO.' },
+    { key: 'tuition-fees', label: 'Tuition Fees', icon: 'pi pi-wallet', description: 'The /tuition-fees page content, breadcrumb & SEO.' },
+    { key: 'results', label: 'Result Pages', icon: 'pi pi-file-check', description: 'Breadcrumbs & SEO for Exam, Academic, Evaluation, and Board Exam Results pages.' },
 ];
 // A tab with no `module` key always shows (General/Header/Footer/School
 // aren't tied to any single Site Configuration toggle). Tabs tied to a
@@ -122,9 +126,25 @@ const exPrincipalPhotoPreview = ref(props.settings.ex_principal_photo_url);
 const exPrincipalPageBreadcrumbPreview = ref(props.settings.ex_principal_page_breadcrumb_image_url);
 const contactImagePreview = ref(props.settings.contact_image_url);
 const contactPageBreadcrumbPreview = ref(props.settings.contact_page_breadcrumb_image_url);
+const studentListPageBreadcrumbPreview = ref(props.settings.student_list_page_breadcrumb_image_url);
+const tuitionFeePageBreadcrumbPreview = ref(props.settings.tuition_fee_page_breadcrumb_image_url);
+const examResultPageBreadcrumbPreview = ref(props.settings.exam_result_page_breadcrumb_image_url);
+const academicResultPageBreadcrumbPreview = ref(props.settings.academic_result_page_breadcrumb_image_url);
+const evaluationResultPageBreadcrumbPreview = ref(props.settings.evaluation_result_page_breadcrumb_image_url);
+const boardExamResultPageBreadcrumbPreview = ref(props.settings.board_exam_result_page_breadcrumb_image_url);
 const sidebarMinisterPhotoPreview = ref(props.settings.sidebar_minister_photo_url);
 const sidebarSecretaryPhotoPreview = ref(props.settings.sidebar_secretary_photo_url);
 const sidebarVicePrincipalPhotoPreview = ref(props.settings.sidebar_vice_principal_photo_url);
+
+const onImageSelected = (field, previewRef, file) => {
+    form[field] = file;
+    previewRef.value = URL.createObjectURL(file);
+};
+
+const onImageRemoved = (field, previewRef) => {
+    form[field] = ''; // Send empty string to signal deletion
+    previewRef.value = null;
+};
 
 const form = useForm({
     homepage_template: props.settings.homepage_template ?? 'default',
@@ -214,6 +234,37 @@ const form = useForm({
     ex_principal_page_seo_title: { ...emptyTranslatable(), ...props.settings.ex_principal_page_seo_title },
     ex_principal_page_seo_description: { ...emptyTranslatable(), ...props.settings.ex_principal_page_seo_description },
     ex_principal_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.ex_principal_page_seo_keywords },
+    student_list_page_breadcrumb_image: null,
+    student_list_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.student_list_page_breadcrumb_title },
+    student_list_page_seo_title: { ...emptyTranslatable(), ...props.settings.student_list_page_seo_title },
+    student_list_page_seo_description: { ...emptyTranslatable(), ...props.settings.student_list_page_seo_description },
+    student_list_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.student_list_page_seo_keywords },
+    tuition_fee_page_breadcrumb_image: null,
+    tuition_fee_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.tuition_fee_page_breadcrumb_title },
+    tuition_fee_page_seo_title: { ...emptyTranslatable(), ...props.settings.tuition_fee_page_seo_title },
+    tuition_fee_page_seo_description: { ...emptyTranslatable(), ...props.settings.tuition_fee_page_seo_description },
+    tuition_fee_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.tuition_fee_page_seo_keywords },
+    tuition_fee_page_content: { ...emptyTranslatable(), ...props.settings.tuition_fee_page_content },
+    exam_result_page_breadcrumb_image: null,
+    exam_result_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.exam_result_page_breadcrumb_title },
+    exam_result_page_seo_title: { ...emptyTranslatable(), ...props.settings.exam_result_page_seo_title },
+    exam_result_page_seo_description: { ...emptyTranslatable(), ...props.settings.exam_result_page_seo_description },
+    exam_result_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.exam_result_page_seo_keywords },
+    academic_result_page_breadcrumb_image: null,
+    academic_result_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.academic_result_page_breadcrumb_title },
+    academic_result_page_seo_title: { ...emptyTranslatable(), ...props.settings.academic_result_page_seo_title },
+    academic_result_page_seo_description: { ...emptyTranslatable(), ...props.settings.academic_result_page_seo_description },
+    academic_result_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.academic_result_page_seo_keywords },
+    evaluation_result_page_breadcrumb_image: null,
+    evaluation_result_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.evaluation_result_page_breadcrumb_title },
+    evaluation_result_page_seo_title: { ...emptyTranslatable(), ...props.settings.evaluation_result_page_seo_title },
+    evaluation_result_page_seo_description: { ...emptyTranslatable(), ...props.settings.evaluation_result_page_seo_description },
+    evaluation_result_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.evaluation_result_page_seo_keywords },
+    board_exam_result_page_breadcrumb_image: null,
+    board_exam_result_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.board_exam_result_page_breadcrumb_title },
+    board_exam_result_page_seo_title: { ...emptyTranslatable(), ...props.settings.board_exam_result_page_seo_title },
+    board_exam_result_page_seo_description: { ...emptyTranslatable(), ...props.settings.board_exam_result_page_seo_description },
+    board_exam_result_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.board_exam_result_page_seo_keywords },
     contact_address_label: { ...emptyTranslatable(), ...props.settings.contact_address_label },
     contact_address_value: { ...emptyTranslatable(), ...props.settings.contact_address_value },
     contact_phone_label: { ...emptyTranslatable(), ...props.settings.contact_phone_label },
@@ -235,20 +286,24 @@ const form = useForm({
     sidebar_notice_title: { ...emptyTranslatable(), ...props.settings.sidebar_notice_title },
     sidebar_notice_limit: props.settings.sidebar_notice_limit ?? 4,
     sidebar_minister_show: Boolean(props.settings.sidebar_minister_show ?? true),
+    sidebar_minister_title: { ...emptyTranslatable(), ...props.settings.sidebar_minister_title },
     sidebar_minister_photo: null,
     sidebar_minister_name: { ...emptyTranslatable(), ...props.settings.sidebar_minister_name },
     sidebar_minister_role: { ...emptyTranslatable(), ...props.settings.sidebar_minister_role },
     sidebar_minister_button_text: { ...emptyTranslatable(), ...props.settings.sidebar_minister_button_text },
     sidebar_minister_button_url: props.settings.sidebar_minister_button_url ?? '',
     sidebar_secretary_show: Boolean(props.settings.sidebar_secretary_show ?? true),
+    sidebar_secretary_title: { ...emptyTranslatable(), ...props.settings.sidebar_secretary_title },
     sidebar_secretary_photo: null,
     sidebar_secretary_name: { ...emptyTranslatable(), ...props.settings.sidebar_secretary_name },
     sidebar_secretary_role: { ...emptyTranslatable(), ...props.settings.sidebar_secretary_role },
     sidebar_secretary_button_text: { ...emptyTranslatable(), ...props.settings.sidebar_secretary_button_text },
     sidebar_secretary_button_url: props.settings.sidebar_secretary_button_url ?? '',
     sidebar_principal_show: Boolean(props.settings.sidebar_principal_show ?? true),
+    sidebar_principal_title: { ...emptyTranslatable(), ...props.settings.sidebar_principal_title },
     sidebar_principal_button_text: { ...emptyTranslatable(), ...props.settings.sidebar_principal_button_text },
     sidebar_vice_principal_show: Boolean(props.settings.sidebar_vice_principal_show ?? true),
+    sidebar_vice_principal_title: { ...emptyTranslatable(), ...props.settings.sidebar_vice_principal_title },
     sidebar_vice_principal_photo: null,
     sidebar_vice_principal_name: { ...emptyTranslatable(), ...props.settings.sidebar_vice_principal_name },
     sidebar_vice_principal_role: { ...emptyTranslatable(), ...props.settings.sidebar_vice_principal_role },
@@ -262,7 +317,7 @@ const visibleSections = computed(() => {
     const enabledModules = page.props.enabledModules ?? [];
 
     return sections.filter((section) => {
-        if (section.key === 'sidebar' && form.homepage_template !== 'index-1') {
+        if (section.key === 'sidebar' && !['index-1', 'index-2'].includes(form.homepage_template)) {
             return false;
         }
         return !section.module || enabledModules.includes(section.module);
@@ -518,6 +573,20 @@ const submit = () => {
                                     </div>
                                     <p class="text-xs text-slate-500">Layout with right sidebar (Notices, Principal message, Calendar, Minister card).</p>
                                 </label>
+
+                                <label
+                                    class="relative flex flex-col p-4 cursor-pointer rounded-xl border-2 transition-all"
+                                    :class="form.homepage_template === 'index-2' ? 'border-indigo-600 bg-indigo-50/30' : 'border-slate-200 hover:border-slate-300'"
+                                >
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="flex items-center gap-2 font-semibold text-sm text-slate-800">
+                                            <i class="pi pi-th-large text-indigo-600" />
+                                            <span>Grid Layout (Home v3)</span>
+                                        </div>
+                                        <input type="radio" v-model="form.homepage_template" value="index-2" class="text-indigo-600 focus:ring-indigo-500" />
+                                    </div>
+                                    <p class="text-xs text-slate-500">Layout with full-width widget grid between counters and courses.</p>
+                                </label>
                             </div>
                             <p v-if="form.errors.homepage_template" class="text-xs text-red-500 mt-2">{{ form.errors.homepage_template }}</p>
                         </section>
@@ -609,6 +678,10 @@ const submit = () => {
                             </div>
                             <div v-show="form.sidebar_minister_show" class="flex flex-col gap-4 max-w-lg">
                                 <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Widget Title</label>
+                                    <InputText v-model="form.sidebar_minister_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Hon'ble Minister" />
+                                </div>
+                                <div>
                                     <label class="block text-xs font-medium text-slate-600 mb-1.5">Photo</label>
                                     <ImageDropzone
                                         :preview-url="sidebarMinisterPhotoPreview"
@@ -654,6 +727,10 @@ const submit = () => {
                             </div>
                             <div v-show="form.sidebar_secretary_show" class="flex flex-col gap-4 max-w-lg">
                                 <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Widget Title</label>
+                                    <InputText v-model="form.sidebar_secretary_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Secretary" />
+                                </div>
+                                <div>
                                     <label class="block text-xs font-medium text-slate-600 mb-1.5">Photo</label>
                                     <ImageDropzone
                                         :preview-url="sidebarSecretaryPhotoPreview"
@@ -697,9 +774,15 @@ const submit = () => {
                                     <ToggleSwitch v-model="form.sidebar_principal_show" />
                                 </div>
                             </div>
-                            <div v-show="form.sidebar_principal_show" class="max-w-xs">
-                                <label class="block text-xs font-medium text-slate-600 mb-1.5">Button Text</label>
-                                <InputText v-model="form.sidebar_principal_button_text[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Read More" />
+                            <div v-show="form.sidebar_principal_show" class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Widget Title</label>
+                                    <InputText v-model="form.sidebar_principal_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Our Principal" />
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Button Text</label>
+                                    <InputText v-model="form.sidebar_principal_button_text[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Read More" />
+                                </div>
                             </div>
                         </section>
 
@@ -716,6 +799,10 @@ const submit = () => {
                                 </div>
                             </div>
                             <div v-show="form.sidebar_vice_principal_show" class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Widget Title</label>
+                                    <InputText v-model="form.sidebar_vice_principal_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="Our Vice Principal" />
+                                </div>
                                 <div>
                                     <label class="block text-xs font-medium text-slate-600 mb-1.5">Photo</label>
                                     <ImageDropzone
@@ -1820,6 +1907,139 @@ const submit = () => {
                         </section>
                     </div>
 
+                    <!-- Student List Page -->
+                    <div v-show="activeSectionKey === 'student-list'" class="flex flex-col gap-5">
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Page — Breadcrumb &amp; SEO</h3>
+                            <p class="text-xs text-slate-400 mb-4">Shown on the dedicated <code>/students</code> page.</p>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb background image</label>
+                                    <ImageDropzone
+                                        :preview-url="studentListPageBreadcrumbPreview"
+                                        hint="Shown behind the page title"
+                                        width-class="w-full sm:w-80" height-class="h-32"
+                                        @select="(file) => onImageSelected('student_list_page_breadcrumb_image', studentListPageBreadcrumbPreview, file)"
+                                        @remove="() => onImageRemoved('student_list_page_breadcrumb_image', studentListPageBreadcrumbPreview)"
+                                    />
+                                    <p v-if="form.errors.student_list_page_breadcrumb_image" class="text-xs text-red-500 mt-1">{{ form.errors.student_list_page_breadcrumb_image }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb title</label>
+                                    <InputText v-model="form.student_list_page_breadcrumb_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Student List" />
+                                    <p v-if="form.errors[`student_list_page_breadcrumb_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`student_list_page_breadcrumb_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta title</label>
+                                    <InputText v-model="form.student_list_page_seo_title[activeLang]" :dir="currentLang?.direction" class="w-full" />
+                                    <p v-if="form.errors[`student_list_page_seo_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`student_list_page_seo_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta description</label>
+                                    <Textarea v-model="form.student_list_page_seo_description[activeLang]" :dir="currentLang?.direction" rows="3" class="w-full" />
+                                    <p v-if="form.errors[`student_list_page_seo_description.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`student_list_page_seo_description.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta keywords</label>
+                                    <InputText v-model="form.student_list_page_seo_keywords[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="comma, separated, keywords" />
+                                    <p v-if="form.errors[`student_list_page_seo_keywords.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`student_list_page_seo_keywords.${activeLang}`] }}</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Tuition Fees Page -->
+                    <div v-show="activeSectionKey === 'tuition-fees'" class="flex flex-col gap-5">
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Page — Breadcrumb &amp; SEO</h3>
+                            <p class="text-xs text-slate-400 mb-4">Shown on the dedicated <code>/tuition-fees</code> page.</p>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb background image</label>
+                                    <ImageDropzone
+                                        :preview-url="tuitionFeePageBreadcrumbPreview"
+                                        hint="Shown behind the page title"
+                                        width-class="w-full sm:w-80" height-class="h-32"
+                                        @select="(file) => onImageSelected('tuition_fee_page_breadcrumb_image', tuitionFeePageBreadcrumbPreview, file)"
+                                        @remove="() => onImageRemoved('tuition_fee_page_breadcrumb_image', tuitionFeePageBreadcrumbPreview)"
+                                    />
+                                    <p v-if="form.errors.tuition_fee_page_breadcrumb_image" class="text-xs text-red-500 mt-1">{{ form.errors.tuition_fee_page_breadcrumb_image }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb title</label>
+                                    <InputText v-model="form.tuition_fee_page_breadcrumb_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Tuition Fees" />
+                                    <p v-if="form.errors[`tuition_fee_page_breadcrumb_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`tuition_fee_page_breadcrumb_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta title</label>
+                                    <InputText v-model="form.tuition_fee_page_seo_title[activeLang]" :dir="currentLang?.direction" class="w-full" />
+                                    <p v-if="form.errors[`tuition_fee_page_seo_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`tuition_fee_page_seo_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta description</label>
+                                    <Textarea v-model="form.tuition_fee_page_seo_description[activeLang]" :dir="currentLang?.direction" rows="3" class="w-full" />
+                                    <p v-if="form.errors[`tuition_fee_page_seo_description.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`tuition_fee_page_seo_description.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta keywords</label>
+                                    <InputText v-model="form.tuition_fee_page_seo_keywords[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="comma, separated, keywords" />
+                                    <p v-if="form.errors[`tuition_fee_page_seo_keywords.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`tuition_fee_page_seo_keywords.${activeLang}`] }}</p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Tuition Fee Page Content</h3>
+                            <p class="text-xs text-slate-400 mb-4">Edit the text and tables that appear on the tuition fees page.</p>
+                            <Editor v-model="form.tuition_fee_page_content[activeLang]" :editor-style="`height: 350px; direction: ${currentLang?.direction ?? 'ltr'};`" />
+                            <p v-if="form.errors[`tuition_fee_page_content.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`tuition_fee_page_content.${activeLang}`] }}</p>
+                        </section>
+                    </div>
+
+                    <!-- Result Pages -->
+                    <div v-show="activeSectionKey === 'results'" class="flex flex-col gap-5">
+                        <section v-for="page in [
+                            { key: 'exam_result', label: 'Exam Result Page' },
+                            { key: 'academic_result', label: 'Academic Result Page' },
+                            { key: 'evaluation_result', label: 'Evaluation Result Page' },
+                            { key: 'board_exam_result', label: 'Board Exam Result Page' }
+                        ]" :key="page.key" class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">{{ page.label }} — Breadcrumb &amp; SEO</h3>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb background image</label>
+                                    <ImageDropzone
+                                        :preview-url="page.key === 'exam_result' ? examResultPageBreadcrumbPreview : page.key === 'academic_result' ? academicResultPageBreadcrumbPreview : page.key === 'evaluation_result' ? evaluationResultPageBreadcrumbPreview : boardExamResultPageBreadcrumbPreview"
+                                        hint="Shown behind the page title"
+                                        width-class="w-full sm:w-80" height-class="h-32"
+                                        @select="(file) => onImageSelected(`${page.key}_page_breadcrumb_image`, page.key === 'exam_result' ? examResultPageBreadcrumbPreview : page.key === 'academic_result' ? academicResultPageBreadcrumbPreview : page.key === 'evaluation_result' ? evaluationResultPageBreadcrumbPreview : boardExamResultPageBreadcrumbPreview, file)"
+                                        @remove="() => onImageRemoved(`${page.key}_page_breadcrumb_image`, page.key === 'exam_result' ? examResultPageBreadcrumbPreview : page.key === 'academic_result' ? academicResultPageBreadcrumbPreview : page.key === 'evaluation_result' ? evaluationResultPageBreadcrumbPreview : boardExamResultPageBreadcrumbPreview)"
+                                    />
+                                    <p v-if="form.errors[`${page.key}_page_breadcrumb_image`]" class="text-xs text-red-500 mt-1">{{ form.errors[`${page.key}_page_breadcrumb_image`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb title</label>
+                                    <InputText v-model="form[`${page.key}_page_breadcrumb_title`][activeLang]" :dir="currentLang?.direction" class="w-full" :placeholder="`e.g. ${page.label}`" />
+                                    <p v-if="form.errors[`${page.key}_page_breadcrumb_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`${page.key}_page_breadcrumb_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta title</label>
+                                    <InputText v-model="form[`${page.key}_page_seo_title`][activeLang]" :dir="currentLang?.direction" class="w-full" />
+                                    <p v-if="form.errors[`${page.key}_page_seo_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`${page.key}_page_seo_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta description</label>
+                                    <Textarea v-model="form[`${page.key}_page_seo_description`][activeLang]" :dir="currentLang?.direction" rows="3" class="w-full" />
+                                    <p v-if="form.errors[`${page.key}_page_seo_description.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`${page.key}_page_seo_description.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta keywords</label>
+                                    <InputText v-model="form[`${page.key}_page_seo_keywords`][activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="comma, separated, keywords" />
+                                    <p v-if="form.errors[`${page.key}_page_seo_keywords.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`${page.key}_page_seo_keywords.${activeLang}`] }}</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
                     <div class="mt-8 pt-5 border-t border-slate-200 flex justify-end">
                         <Button label="Save Changes" icon="pi pi-check" :loading="form.processing" @click="submit" />
                     </div>
@@ -1828,3 +2048,4 @@ const submit = () => {
         </div>
     </AdminLayout>
 </template>
+

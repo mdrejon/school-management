@@ -67,7 +67,12 @@ const profileRoute = computed(() => {
             <InputText placeholder="Search..." class="w-full" size="small" />
         </IconField>
 
-        <OverlayBadge value="3" severity="danger" class="cursor-pointer">
+        <a href="/" target="_blank" class="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">
+            <i class="pi pi-globe text-lg"></i>
+            <span>View Website</span>
+        </a>
+
+        <OverlayBadge :value="user.unreadNotificationsCount > 0 ? user.unreadNotificationsCount : null" severity="danger" class="cursor-pointer mx-2">
             <i class="pi pi-bell text-xl text-slate-500" />
         </OverlayBadge>
 

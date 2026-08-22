@@ -59,6 +59,31 @@ class SiteSetting extends Model
         'ex_principal_page_seo_title',
         'ex_principal_page_seo_description',
         'ex_principal_page_seo_keywords',
+        'student_list_page_breadcrumb_title',
+        'student_list_page_seo_title',
+        'student_list_page_seo_description',
+        'student_list_page_seo_keywords',
+        'tuition_fee_page_breadcrumb_title',
+        'tuition_fee_page_seo_title',
+        'tuition_fee_page_seo_description',
+        'tuition_fee_page_seo_keywords',
+        'tuition_fee_page_content',
+        'exam_result_page_breadcrumb_title',
+        'exam_result_page_seo_title',
+        'exam_result_page_seo_description',
+        'exam_result_page_seo_keywords',
+        'academic_result_page_breadcrumb_title',
+        'academic_result_page_seo_title',
+        'academic_result_page_seo_description',
+        'academic_result_page_seo_keywords',
+        'evaluation_result_page_breadcrumb_title',
+        'evaluation_result_page_seo_title',
+        'evaluation_result_page_seo_description',
+        'evaluation_result_page_seo_keywords',
+        'board_exam_result_page_breadcrumb_title',
+        'board_exam_result_page_seo_title',
+        'board_exam_result_page_seo_description',
+        'board_exam_result_page_seo_keywords',
         'contact_open_time',
         'contact_open_time_label',
         'contact_address_label',
@@ -81,13 +106,17 @@ class SiteSetting extends Model
         'sidebar_minister_name',
         'sidebar_minister_role',
         'sidebar_minister_button_text',
+        'sidebar_minister_title',
         'sidebar_secretary_name',
         'sidebar_secretary_role',
         'sidebar_secretary_button_text',
+        'sidebar_secretary_title',
         'sidebar_principal_button_text',
+        'sidebar_principal_title',
         'sidebar_vice_principal_name',
         'sidebar_vice_principal_role',
         'sidebar_vice_principal_button_text',
+        'sidebar_vice_principal_title',
         'sidebar_calendar_title',
     ];
 
@@ -166,6 +195,37 @@ class SiteSetting extends Model
         'ex_principal_page_seo_title',
         'ex_principal_page_seo_description',
         'ex_principal_page_seo_keywords',
+        'student_list_page_breadcrumb_image',
+        'student_list_page_breadcrumb_title',
+        'student_list_page_seo_title',
+        'student_list_page_seo_description',
+        'student_list_page_seo_keywords',
+        'tuition_fee_page_breadcrumb_image',
+        'tuition_fee_page_breadcrumb_title',
+        'tuition_fee_page_seo_title',
+        'tuition_fee_page_seo_description',
+        'tuition_fee_page_seo_keywords',
+        'tuition_fee_page_content',
+        'exam_result_page_breadcrumb_image',
+        'exam_result_page_breadcrumb_title',
+        'exam_result_page_seo_title',
+        'exam_result_page_seo_description',
+        'exam_result_page_seo_keywords',
+        'academic_result_page_breadcrumb_image',
+        'academic_result_page_breadcrumb_title',
+        'academic_result_page_seo_title',
+        'academic_result_page_seo_description',
+        'academic_result_page_seo_keywords',
+        'evaluation_result_page_breadcrumb_image',
+        'evaluation_result_page_breadcrumb_title',
+        'evaluation_result_page_seo_title',
+        'evaluation_result_page_seo_description',
+        'evaluation_result_page_seo_keywords',
+        'board_exam_result_page_breadcrumb_image',
+        'board_exam_result_page_breadcrumb_title',
+        'board_exam_result_page_seo_title',
+        'board_exam_result_page_seo_description',
+        'board_exam_result_page_seo_keywords',
         'contact_open_time',
         'contact_open_time_label',
         'contact_address_label',
@@ -197,20 +257,24 @@ class SiteSetting extends Model
         'sidebar_minister_name',
         'sidebar_minister_role',
         'sidebar_minister_button_text',
+        'sidebar_minister_title',
         'sidebar_minister_button_url',
         'sidebar_secretary_show',
         'sidebar_secretary_photo',
         'sidebar_secretary_name',
         'sidebar_secretary_role',
         'sidebar_secretary_button_text',
+        'sidebar_secretary_title',
         'sidebar_secretary_button_url',
         'sidebar_principal_show',
         'sidebar_principal_button_text',
+        'sidebar_principal_title',
         'sidebar_vice_principal_show',
         'sidebar_vice_principal_photo',
         'sidebar_vice_principal_name',
         'sidebar_vice_principal_role',
         'sidebar_vice_principal_button_text',
+        'sidebar_vice_principal_title',
         'sidebar_vice_principal_button_url',
         'sidebar_calendar_show',
         'sidebar_calendar_title',
@@ -240,6 +304,12 @@ class SiteSetting extends Model
         'about_image_1_url', 'about_image_2_url', 'about_image_3_url', 'about_page_breadcrumb_image_url',
         'principal_photo_url', 'principal_page_breadcrumb_image_url',
         'ex_principal_photo_url', 'ex_principal_page_breadcrumb_image_url',
+        'student_list_page_breadcrumb_image_url',
+        'tuition_fee_page_breadcrumb_image_url',
+        'exam_result_page_breadcrumb_image_url',
+        'academic_result_page_breadcrumb_image_url',
+        'evaluation_result_page_breadcrumb_image_url',
+        'board_exam_result_page_breadcrumb_image_url',
         'contact_image_url', 'contact_page_breadcrumb_image_url',
         'sidebar_minister_photo_url', 'sidebar_secretary_photo_url', 'sidebar_vice_principal_photo_url',
     ];
@@ -314,6 +384,36 @@ class SiteSetting extends Model
     public function getExPrincipalPageBreadcrumbImageUrlAttribute(): ?string
     {
         return $this->ex_principal_page_breadcrumb_image ? '/storage/'.ltrim($this->ex_principal_page_breadcrumb_image, '/') : null;
+    }
+
+    public function getStudentListPageBreadcrumbImageUrlAttribute()
+    {
+        return $this->student_list_page_breadcrumb_image ? Storage::disk('public')->url($this->student_list_page_breadcrumb_image) : null;
+    }
+
+    public function getTuitionFeePageBreadcrumbImageUrlAttribute()
+    {
+        return $this->tuition_fee_page_breadcrumb_image ? Storage::disk('public')->url($this->tuition_fee_page_breadcrumb_image) : null;
+    }
+
+    public function getExamResultPageBreadcrumbImageUrlAttribute()
+    {
+        return $this->exam_result_page_breadcrumb_image ? Storage::disk('public')->url($this->exam_result_page_breadcrumb_image) : null;
+    }
+
+    public function getAcademicResultPageBreadcrumbImageUrlAttribute()
+    {
+        return $this->academic_result_page_breadcrumb_image ? Storage::disk('public')->url($this->academic_result_page_breadcrumb_image) : null;
+    }
+
+    public function getEvaluationResultPageBreadcrumbImageUrlAttribute()
+    {
+        return $this->evaluation_result_page_breadcrumb_image ? Storage::disk('public')->url($this->evaluation_result_page_breadcrumb_image) : null;
+    }
+
+    public function getBoardExamResultPageBreadcrumbImageUrlAttribute()
+    {
+        return $this->board_exam_result_page_breadcrumb_image ? Storage::disk('public')->url($this->board_exam_result_page_breadcrumb_image) : null;
     }
 
     public function getContactImageUrlAttribute(): ?string

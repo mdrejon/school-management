@@ -27,7 +27,7 @@ class UpdateSiteSettingRequest extends FormRequest
         $default = Language::defaultLanguage()?->code ?? 'en';
 
         return [
-            'homepage_template' => ['nullable', 'string', 'in:default,index-1'],
+            'homepage_template' => ['nullable', 'string', 'in:default,index-1,index-2'],
             'logo' => ['nullable', 'image', 'max:2048'],
             'footer_logo' => ['nullable', 'image', 'max:2048'],
 
@@ -181,6 +181,19 @@ class UpdateSiteSettingRequest extends FormRequest
             'ex_principal_page_seo_description.*' => ['nullable', 'string', 'max:500'],
             'ex_principal_page_seo_keywords.*' => ['nullable', 'string', 'max:255'],
 
+            'student_list_page_breadcrumb_image' => ['nullable', 'image', 'max:2048'],
+            'student_list_page_breadcrumb_title.*' => ['nullable', 'string', 'max:150'],
+            'student_list_page_seo_title.*' => ['nullable', 'string', 'max:150'],
+            'student_list_page_seo_description.*' => ['nullable', 'string', 'max:500'],
+            'student_list_page_seo_keywords.*' => ['nullable', 'string', 'max:255'],
+
+            'tuition_fee_page_breadcrumb_image' => ['nullable', 'image', 'max:2048'],
+            'tuition_fee_page_breadcrumb_title.*' => ['nullable', 'string', 'max:150'],
+            'tuition_fee_page_seo_title.*' => ['nullable', 'string', 'max:150'],
+            'tuition_fee_page_seo_description.*' => ['nullable', 'string', 'max:500'],
+            'tuition_fee_page_seo_keywords.*' => ['nullable', 'string', 'max:255'],
+            'tuition_fee_page_content.*' => ['nullable', 'string'],
+
             'contact_address_label.*' => ['nullable', 'string', 'max:100'],
             'contact_address_value.*' => ['nullable', 'string', 'max:255'],
             'contact_phone_label.*' => ['nullable', 'string', 'max:100'],
@@ -204,6 +217,7 @@ class UpdateSiteSettingRequest extends FormRequest
             'sidebar_notice_limit' => ['nullable', 'integer', 'between:1,20'],
 
             'sidebar_minister_show' => ['nullable', 'boolean'],
+            'sidebar_minister_title.*' => ['nullable', 'string', 'max:150'],
             'sidebar_minister_photo' => ['nullable', 'image', 'max:2048'],
             'sidebar_minister_name.*' => ['nullable', 'string', 'max:150'],
             'sidebar_minister_role.*' => ['nullable', 'string', 'max:150'],
@@ -211,6 +225,7 @@ class UpdateSiteSettingRequest extends FormRequest
             'sidebar_minister_button_url' => ['nullable', 'string', 'max:255'],
 
             'sidebar_secretary_show' => ['nullable', 'boolean'],
+            'sidebar_secretary_title.*' => ['nullable', 'string', 'max:150'],
             'sidebar_secretary_photo' => ['nullable', 'image', 'max:2048'],
             'sidebar_secretary_name.*' => ['nullable', 'string', 'max:150'],
             'sidebar_secretary_role.*' => ['nullable', 'string', 'max:150'],
@@ -218,9 +233,11 @@ class UpdateSiteSettingRequest extends FormRequest
             'sidebar_secretary_button_url' => ['nullable', 'string', 'max:255'],
 
             'sidebar_principal_show' => ['nullable', 'boolean'],
+            'sidebar_principal_title.*' => ['nullable', 'string', 'max:150'],
             'sidebar_principal_button_text.*' => ['nullable', 'string', 'max:100'],
 
             'sidebar_vice_principal_show' => ['nullable', 'boolean'],
+            'sidebar_vice_principal_title.*' => ['nullable', 'string', 'max:150'],
             'sidebar_vice_principal_photo' => ['nullable', 'image', 'max:2048'],
             'sidebar_vice_principal_name.*' => ['nullable', 'string', 'max:150'],
             'sidebar_vice_principal_role.*' => ['nullable', 'string', 'max:150'],

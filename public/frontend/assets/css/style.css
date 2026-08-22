@@ -6922,3 +6922,460 @@ label {
 
 
 
+
+/* Index-1 and Index-2 specific sidebar styles */
+            .wexnix_hero-single {
+                padding-left: 100px;
+                padding-right: 100px;
+            }
+
+            .wexnix_home-content-area > .container > .row {
+                row-gap: 40px;
+            }
+
+            .wexnix_home-sidebar {
+                position: sticky;
+                top: 110px;
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .wexnix_sidebar-widget {
+                background: var(--color-white);
+                border-radius: 10px;
+                box-shadow: var(--box-shadow);
+                overflow: hidden;
+            }
+
+            .wexnix_sidebar-widget-title {
+                background: var(--theme-color);
+                color: var(--color-white);
+                padding: 16px 20px;
+                font-size: 18px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin: 0;
+            }
+
+            .wexnix_sidebar-widget-title.wexnix_sidebar-title-alt {
+                background: var(--theme-color2);
+            }
+
+            .wexnix_sidebar-notice-list {
+                list-style: none;
+                margin: 0;
+                padding: 20px;
+            }
+
+            .wexnix_sidebar-notice-list li {
+                display: flex;
+                gap: 12px;
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+                border-bottom: 1px dashed var(--border-info-color);
+            }
+
+            .wexnix_sidebar-notice-list li:last-child {
+                padding-bottom: 0;
+                margin-bottom: 0;
+                border-bottom: none;
+            }
+
+            .wexnix_sidebar-notice-icon {
+                flex: 0 0 36px;
+                width: 36px;
+                height: 36px;
+                border-radius: 6px;
+                background: var(--theme-color-light);
+                color: var(--theme-color);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+            }
+
+            .wexnix_sidebar-notice-content a {
+                display: block;
+                font-weight: 600;
+                font-size: 15px;
+                color: var(--color-dark);
+                transition: var(--transition2);
+            }
+
+            .wexnix_sidebar-notice-content a:hover {
+                color: var(--theme-color2);
+            }
+
+            .wexnix_sidebar-notice-content span {
+                display: block;
+                font-size: 12px;
+                font-style: italic;
+                color: var(--body-text-color);
+                margin-top: 3px;
+            }
+
+            .wexnix_sidebar-widget-footer {
+                padding: 0 20px 20px;
+                text-align: right;
+            }
+
+            .wexnix_sidebar-widget-footer a {
+                font-weight: 600;
+                font-style: italic;
+                font-size: 14px;
+                color: var(--theme-color2);
+            }
+
+            .wexnix_sidebar-person {
+                padding: 25px 20px;
+                text-align: center;
+            }
+
+            .wexnix_sidebar-person-img {
+                width: 120px;
+                height: 120px;
+                margin: 0 auto 15px;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 4px solid var(--theme-color-light);
+            }
+
+            .wexnix_sidebar-person-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .wexnix_sidebar-person-name {
+                margin-bottom: 2px;
+                font-size: 18px;
+            }
+
+            .wexnix_sidebar-person-role {
+                display: block;
+                color: var(--theme-color2);
+                font-weight: 500;
+                margin-bottom: 18px;
+            }
+
+            .wexnix_sidebar-more {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-weight: 600;
+                font-size: 14px;
+                color: var(--color-white);
+                background: var(--theme-color);
+                padding: 8px 20px;
+                border-radius: 30px;
+                transition: var(--transition2);
+            }
+
+            .wexnix_sidebar-more:hover {
+                background: var(--theme-color2);
+                color: var(--color-white);
+            }
+
+            .wexnix_sidebar-link-btn {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: var(--theme-color2);
+                color: var(--color-white);
+                padding: 16px 20px;
+                font-size: 16px;
+                font-weight: 600;
+                transition: var(--transition2);
+            }
+
+            .wexnix_sidebar-link-btn:hover {
+                background: var(--theme-color);
+                color: var(--color-white);
+            }
+
+            .wexnix_sidebar-links-list {
+                list-style: none;
+                margin: 0;
+                padding: 15px 20px;
+            }
+
+            .wexnix_sidebar-links-list li {
+                border-bottom: 1px dashed var(--border-info-color);
+            }
+
+            .wexnix_sidebar-links-list li:last-child {
+                border-bottom: none;
+            }
+
+            .wexnix_sidebar-links-list li a {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 10px 0;
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--color-dark);
+                transition: var(--transition2);
+            }
+
+            .wexnix_sidebar-links-list li a i {
+                font-size: 11px;
+                color: var(--theme-color2);
+            }
+
+            .wexnix_sidebar-links-list li a:hover {
+                color: var(--theme-color2);
+                padding-left: 4px;
+            }
+
+            @media (max-width: 991px) {
+                .wexnix_home-sidebar {
+                    position: static;
+                    margin-top: 60px;
+                }
+            }
+
+            .container-fluid {
+                padding: 0 40px;
+            }
+
+            /* nested container-fluid inside the home main column already sits
+           inside the outer container-fluid's 40px gutter, so drop the
+           duplicate side padding to avoid squeezing the column further */
+            .wexnix_home-main-col .container-fluid {
+                padding: 0;
+            }
+
+            /* the main column is only 9/12 wide once the sidebar is present
+           (>=992px), so scale headings/spacing down to fit instead of
+           wrapping awkwardly */
+            @media (min-width: 992px) {
+                .wexnix_home-main-col .wexnix_site-title {
+                    font-size: 34px;
+                }
+
+                .wexnix_home-main-col .wexnix_site-title-tagline {
+                    font-size: 15px;
+                    letter-spacing: 2px;
+                }
+
+                .wexnix_home-main-col .wexnix_site-heading {
+                    margin-bottom: 25px;
+                }
+
+                .wexnix_home-main-col .py-120 {
+                    padding: 70px 0;
+                }
+
+                .wexnix_home-main-col .wexnix_about-text {
+                    font-size: 15px;
+                }
+            }
+
+            @media (min-width: 992px) and (max-width: 1399px) {
+                .wexnix_home-main-col .wexnix_site-title {
+                    font-size: 28px;
+                }
+
+                .wexnix_home-main-col .py-120 {
+                    padding: 50px 0;
+                }
+            }
+
+            .wexnix_team-area {
+                position: relative;
+                z-index: 1;
+                background: var(--theme-bg-light);
+            }
+
+            .wexnix_team-area::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image: url(assets/img/shape/01.webp);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                opacity: 0.6;
+                z-index: -1;
+            }
+
+            .wexnix_home-content-area {
+                padding-bottom: 80px;
+            }
+
+            .wexnix_sidebar-calendar {
+                padding: 20px;
+            }
+
+            .wexnix_sidebar-calendar-head {
+                text-align: center;
+                font-weight: 700;
+                font-size: 15px;
+                color: var(--color-dark);
+                margin-bottom: 12px;
+            }
+
+            .wexnix_sidebar-calendar-grid {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 4px;
+                text-align: center;
+            }
+
+            .wexnix_cal-dow {
+                font-size: 11px;
+                font-weight: 700;
+                color: var(--theme-color2);
+                padding-bottom: 6px;
+            }
+
+            .wexnix_cal-day {
+                font-size: 13px;
+                padding: 6px 0;
+                border-radius: 50%;
+                color: var(--body-text-color);
+                position: relative;
+            }
+
+            .wexnix_cal-day.wexnix_cal-empty {
+                visibility: hidden;
+            }
+
+            .wexnix_cal-day.wexnix_cal-event {
+                color: var(--theme-color2);
+                font-weight: 700;
+            }
+
+            .wexnix_cal-day.wexnix_cal-event::after {
+                content: "";
+                position: absolute;
+                bottom: 2px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: var(--theme-color2);
+            }
+
+            .wexnix_cal-day.wexnix_cal-today {
+                background: var(--theme-color);
+                color: var(--color-white);
+                font-weight: 700;
+            }
+
+            .wexnix_sidebar-calendar-legend {
+                display: flex;
+                gap: 15px;
+                justify-content: center;
+                margin-top: 14px;
+                font-size: 12px;
+                color: var(--body-text-color);
+            }
+
+            .wexnix_dot {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                margin-right: 4px;
+            }
+
+            .wexnix_dot-event {
+                background: var(--theme-color2);
+            }
+
+            .wexnix_dot-today {
+                background: var(--theme-color);
+            }
+
+            .wexnix_sidebar-event-list {
+                list-style: none;
+                margin: 0;
+                padding: 20px;
+            }
+
+            .wexnix_sidebar-event-list li {
+                display: flex;
+                gap: 14px;
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+                border-bottom: 1px dashed var(--border-info-color);
+            }
+
+            .wexnix_sidebar-event-list li:last-child {
+                padding-bottom: 0;
+                margin-bottom: 0;
+                border-bottom: none;
+            }
+
+            .wexnix_sidebar-event-date {
+                flex: 0 0 50px;
+                width: 50px;
+                height: 50px;
+                border-radius: 8px;
+                background: var(--theme-color-light);
+                color: var(--theme-color2);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                line-height: 1.2;
+            }
+
+            .wexnix_sidebar-event-date span {
+                font-size: 18px;
+                color: var(--theme-color);
+            }
+
+            .wexnix_sidebar-event-content a {
+                display: block;
+                font-weight: 600;
+                font-size: 14px;
+                color: var(--color-dark);
+                transition: var(--transition2);
+            }
+
+            .wexnix_sidebar-event-content a:hover {
+                color: var(--theme-color2);
+            }
+
+            .wexnix_sidebar-event-content span {
+                display: block;
+                font-size: 12px;
+                color: var(--body-text-color);
+                margin-top: 3px;
+            }
+
+            .wexnix_sidebar-gallery {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                padding: 20px;
+            }
+
+            .wexnix_sidebar-gallery a {
+                display: block;
+                border-radius: 6px;
+                overflow: hidden;
+                aspect-ratio: 1 / 1;
+            }
+
+            .wexnix_sidebar-gallery img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: var(--transition2);
+            }
+
+            .wexnix_sidebar-gallery a:hover img {
+                transform: scale(1.1);
+            }
+        

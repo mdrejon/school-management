@@ -35,7 +35,7 @@
     <!-- Hon'ble Minister Widget -->
     @if (!empty($siteSettings->sidebar_minister_show))
         <div class="wexnix_sidebar-widget">
-            <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-user-tie"></i> Hon'ble Minister</h4>
+            <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-user-tie"></i> {{ $siteSettings->sidebar_minister_title ?: "Hon'ble Minister" }}</h4>
             <div class="wexnix_sidebar-person">
                 <div class="wexnix_sidebar-person-img">
                     <img src="{{ $siteSettings->sidebar_minister_photo_url ?: asset('assets/img/Minister.jpeg') }}" alt="Hon'ble Minister">
@@ -55,7 +55,7 @@
     <!-- Secretary Widget -->
     @if (!empty($siteSettings->sidebar_secretary_show))
         <div class="wexnix_sidebar-widget">
-            <h4 class="wexnix_sidebar-widget-title wexnix_sidebar-title-alt"><i class="fas fa-user-tie"></i> Secretary</h4>
+            <h4 class="wexnix_sidebar-widget-title wexnix_sidebar-title-alt"><i class="fas fa-user-tie"></i> {{ $siteSettings->sidebar_secretary_title ?: 'Secretary' }}</h4>
             <div class="wexnix_sidebar-person">
                 <div class="wexnix_sidebar-person-img">
                     <img src="{{ $siteSettings->sidebar_secretary_photo_url ?: asset('assets/img/Secretary.jpeg') }}" alt="Secretary">
@@ -75,7 +75,7 @@
     <!-- Our Principal Widget -->
     @if (!empty($siteSettings->sidebar_principal_show) && \App\Models\ModuleSetting::isEnabled('principal'))
         <div class="wexnix_sidebar-widget">
-            <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-user-tie"></i> Our Principal</h4>
+            <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-user-tie"></i> {{ $siteSettings->sidebar_principal_title ?: 'Our Principal' }}</h4>
             <div class="wexnix_sidebar-person">
                 <div class="wexnix_sidebar-person-img">
                     <img src="{{ $siteSettings->principal_photo_url ?: asset('assets/img/team/03.jpg') }}" alt="{{ $siteSettings->principal_name ?: 'Principal' }}">
@@ -95,7 +95,7 @@
     <!-- Our Vice Principal Widget -->
     @if (!empty($siteSettings->sidebar_vice_principal_show))
         <div class="wexnix_sidebar-widget">
-            <h4 class="wexnix_sidebar-widget-title wexnix_sidebar-title-alt"><i class="fas fa-user-tie"></i> Our Vice Principal</h4>
+            <h4 class="wexnix_sidebar-widget-title wexnix_sidebar-title-alt"><i class="fas fa-user-tie"></i> {{ $siteSettings->sidebar_vice_principal_title ?: 'Our Vice Principal' }}</h4>
             <div class="wexnix_sidebar-person">
                 <div class="wexnix_sidebar-person-img">
                     <img src="{{ $siteSettings->sidebar_vice_principal_photo_url ?: asset('assets/img/team/04.jpg') }}" alt="Our Vice Principal">
@@ -115,38 +115,7 @@
     <!-- Academic Calendar Widget -->
     @if (!empty($siteSettings->sidebar_calendar_show))
         <div class="wexnix_sidebar-widget">
-            <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-calendar-alt"></i> {{ $siteSettings->sidebar_calendar_title ?: 'Academic Calendar' }}</h4>
-            <div class="wexnix_sidebar-calendar">
-                <div class="wexnix_sidebar-calendar-head">{{ now()->format('F Y') }}</div>
-                <div class="wexnix_sidebar-calendar-grid">
-                    <span class="wexnix_cal-dow">Mo</span>
-                    <span class="wexnix_cal-dow">Tu</span>
-                    <span class="wexnix_cal-dow">We</span>
-                    <span class="wexnix_cal-dow">Th</span>
-                    <span class="wexnix_cal-dow">Fr</span>
-                    <span class="wexnix_cal-dow">Sa</span>
-                    <span class="wexnix_cal-dow">Su</span>
-
-                    @php
-                        $startOfMonth = now()->startOfMonth();
-                        $daysInMonth = now()->daysInMonth;
-                        $dayOfWeek = $startOfMonth->dayOfWeekIso; // 1 (Mon) to 7 (Sun)
-                        $today = now()->day;
-                    @endphp
-
-                    @for ($i = 1; $i < $dayOfWeek; $i++)
-                        <span class="wexnix_cal-day wexnix_cal-empty"></span>
-                    @endfor
-
-                    @for ($day = 1; $day <= $daysInMonth; $day++)
-                        <span class="wexnix_cal-day {{ $day == $today ? 'wexnix_cal-today' : '' }} {{ in_array($day, [4, 15, 22]) ? 'wexnix_cal-event' : '' }}">{{ $day }}</span>
-                    @endfor
-                </div>
-                <div class="wexnix_sidebar-calendar-legend">
-                    <span><span class="wexnix_dot wexnix_dot-today"></span> Today</span>
-                    <span><span class="wexnix_dot wexnix_dot-event"></span> Event</span>
-                </div>
-            </div>
+            @include('frontend.partials.academic-calendar-widget')
         </div>
     @endif
     <!-- Academic Calendar Widget End -->

@@ -34,6 +34,104 @@
         .wexnix_course-feature-list a img { width: 18px; height: 18px; vertical-align: -4px; margin-right: 4px; }
     </style>
 
+    {{-- Language-specific font overrides --}}
+    @if (app()->getLocale() === 'bn')
+        {{--
+            Bengali (Hind Siliguri) renders ~15-20% visually larger than Roboto/Yantramanav
+            at the same px size because Bengali glyphs have greater height/weight.
+            We load Hind Siliguri and scale every TEXT font-size to ~85% of its English
+            equivalent so the visual density matches across both languages.
+            Icon font-sizes (fa-icons) are intentionally left unchanged.
+        --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap">
+        <style>
+            /* ── Font family ─────────────────────────────────────────── */
+            :root {
+                --body-font:    'Hind Siliguri', sans-serif;
+                --heading-font: 'Hind Siliguri', sans-serif;
+            }
+            body, h1, h2, h3, h4, h5, h6, p, li, td, th, label, span, a, button, input, textarea, select {
+                font-family: 'Hind Siliguri', sans-serif !important;
+            }
+
+            /* ── Body (16px × 0.85 = 13.6 → 14px) ──────────────────── */
+            body {
+                font-size: 14px !important;
+                line-height: 1.75 !important;
+            }
+
+            /* ── Generic headings (×0.85) ────────────────────────────── */
+            /* h1: 40px → 34px */
+            h1 { font-size: 34px !important; }
+            /* h2: 35px → 30px */
+            h2 { font-size: 30px !important; }
+            /* h3: 28px → 24px */
+            h3 { font-size: 24px !important; }
+            /* h4: 22px → 19px */
+            h4 { font-size: 19px !important; }
+            /* h5: 18px → 15px */
+            h5 { font-size: 15px !important; }
+            /* h6: 16px → 14px */
+            h6 { font-size: 14px !important; }
+
+            /* ── Section title (.wexnix_site-title: 55px → 47px) ─────── */
+            .wexnix_site-title {
+                font-size: 47px !important;
+            }
+            /* tagline (18px → 15px) */
+            .wexnix_site-title-tagline {
+                font-size: 15px !important;
+                letter-spacing: 2px !important;
+            }
+
+            /* ── Hero title (.wexnix_hero-title: 72px → 61px) ───────── */
+            .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
+                font-size: 61px !important;
+            }
+            /* Responsive hero title (50px → 43px) */
+            @media all and (max-width: 991px) {
+                .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
+                    font-size: 43px !important;
+                }
+            }
+            @media all and (max-width: 767px) {
+                .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
+                    font-size: 34px !important;
+                }
+            }
+            /* Hero sub-title (25px → 21px) */
+            .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
+                font-size: 21px !important;
+                letter-spacing: 3px !important;
+            }
+            /* Hero paragraph (18px → 15px) */
+            .wexnix_hero-single .wexnix_hero-content p {
+                font-size: 15px !important;
+            }
+
+            /* ── Counter number (50px → 43px) ────────────────────────── */
+            .wexnix_counter-box .wexnix_counter {
+                font-size: 43px !important;
+            }
+            /* Counter label (20px → 17px) */
+            .wexnix_counter-box .wexnix_title {
+                font-size: 17px !important;
+            }
+
+            /* ── Choose / features item heading (21px → 18px) ────────── */
+            .wexnix_choose-item-info h4 {
+                font-size: 18px !important;
+            }
+
+            /* ── Navbar (14px → 13px) ────────────────────────────────── */
+            .wexnix_main-navigation .nav-link {
+                font-size: 13px !important;
+            }
+        </style>
+    @endif
+
     @stack('styles')
 </head>
 
@@ -307,5 +405,6 @@
     <script src="/frontend/assets/js/wow.min.js"></script>
     <script src="/frontend/assets/js/main.js"></script>
 
+    @stack('scripts')
 </body>
 

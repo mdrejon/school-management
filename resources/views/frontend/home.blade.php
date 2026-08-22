@@ -29,12 +29,43 @@
         @endif
         <!-- about area end -->
 
+        @if (($siteSettings->homepage_template ?? 'default') === 'index-2')
+            <!-- home content + sidebar layout grid 1 (index-2) -->
+            <div class="wexnix_home-content-area pt-60">
+                <div class="container-fluid">
+                    <div class="row g-4">
+                        <div class="col-lg-12">
+                            <div class="row g-4">
+                                @include('frontend.partials.home-sidebar-grid-1')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- home content + sidebar layout grid 1 end -->
+        @endif
 
         <!-- counter area -->
         @if (\App\Models\ModuleSetting::showOnHomepage('counter'))
             @include('frontend.sections.counter.' . config('frontend.sections.counter'), ['siteSettings' => $siteSettings])
         @endif
         <!-- counter area end -->
+
+        @if (($siteSettings->homepage_template ?? 'default') === 'index-2')
+            <!-- home content + sidebar layout grid (index-2) -->
+            <div class="wexnix_home-content-area pt-60">
+                <div class="container-fluid">
+                    <div class="row g-4">
+                        <div class="col-lg-12">
+                            <div class="row g-4">
+                                @include('frontend.partials.home-sidebar-grid-2')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- home content + sidebar layout grid end -->
+        @endif
 
 
         <!-- course-area -->

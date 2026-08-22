@@ -57,7 +57,7 @@ const submit = () => {
     const options = { forceFormData: true, preserveScroll: true };
 
     if (props.page) {
-        form.transform((data) => ({ ...data, _method: 'put' })).post(route('admin.cms.pages.update', props.page.id), options);
+        form.transform((data) => ({ ...data, _method: 'put' })).post(route('admin.cms.pages.update', props.page.slug), options);
     } else {
         form.post(route('admin.cms.pages.store'), options);
     }
@@ -84,7 +84,7 @@ const submit = () => {
                         <a :href="route('pages.show', page.slug)" target="_blank">
                             <Button label="View Frontend Page" icon="pi pi-eye" severity="secondary" outlined as="span" />
                         </a>
-                        <a :href="route('admin.cms.pages.builder.edit', page.id)" target="_blank">
+                        <a :href="route('admin.cms.pages.builder.edit', page.slug)" target="_blank">
                             <Button label="Open Visual Builder" icon="pi pi-external-link" iconPos="right" as="span" />
                         </a>
                     </div>

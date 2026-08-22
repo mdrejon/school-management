@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Card from 'primevue/card';
 import Chart from 'primevue/chart';
@@ -8,26 +8,21 @@ import Column from 'primevue/column';
 import Tag from 'primevue/tag';
 import Avatar from 'primevue/avatar';
 
-const stats = [
-    { label: 'Students', value: '1,284', icon: 'pi pi-users', color: 'bg-indigo-500' },
-    { label: 'Teachers', value: '86', icon: 'pi pi-user', color: 'bg-emerald-500' },
-    { label: 'Staff', value: '42', icon: 'pi pi-id-card', color: 'bg-amber-500' },
-    { label: 'Pending Admissions', value: '17', icon: 'pi pi-inbox', color: 'bg-rose-500' },
-];
-
-const chartData = ref({
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-    datasets: [
-        {
-            label: 'New Admissions',
-            data: [28, 34, 41, 36, 52, 47, 60],
-            fill: true,
-            borderColor: '#6366f1',
-            backgroundColor: 'rgba(99, 102, 241, 0.15)',
-            tension: 0.4,
-        },
-    ],
+const props = defineProps({
+    studentsCount: String,
+    teachersCount: String,
+    staffCount: String,
+    pendingCount: String,
+    recentAdmissions: Array,
+    chartData: Object,
 });
+
+const stats = computed(() => [
+    { label: 'Students', value: props.studentsCount, icon: 'pi pi-users', color: 'bg-indigo-500' },
+    { label: 'Teachers', value: props.teachersCount, icon: 'pi pi-user', color: 'bg-emerald-500' },
+    { label: 'Staff', value: props.staffCount, icon: 'pi pi-id-card', color: 'bg-amber-500' },
+    { label: 'Pending Admissions', value: props.pendingCount, icon: 'pi pi-inbox', color: 'bg-rose-500' },
+]);
 
 const chartOptions = ref({
     plugins: { legend: { display: false } },
@@ -37,18 +32,14 @@ const chartOptions = ref({
     },
 });
 
-const recentAdmissions = ref([
-    { name: 'Ayesha Rahman', class: 'Class 6', date: '2026-07-18', status: 'Pending' },
-    { name: 'Fahim Hasan', class: 'Class 9', date: '2026-07-17', status: 'Approved' },
-    { name: 'Nusrat Jahan', class: 'Class 3', date: '2026-07-17', status: 'Approved' },
-    { name: 'Tanvir Ahmed', class: 'Class 11', date: '2026-07-16', status: 'Rejected' },
-]);
-
-const statusSeverity = (status) => ({
-    Pending: 'warn',
-    Approved: 'success',
-    Rejected: 'danger',
-}[status] ?? 'secondary');
+const getStatusSeverity = (status) => {
+    switch (status?.toLowerCase()) {
+        case 'approved': return 'success';
+        case 'pending': return 'warning';
+        case 'rejected': return 'danger';
+        default: return 'info';
+    }
+};
 </script>
 
 <template>
@@ -93,7 +84,7 @@ const statusSeverity = (status) => ({
                         <Column field="class" header="Class" />
                         <Column field="status" header="Status">
                             <template #body="{ data }">
-                                <Tag :value="data.status" :severity="statusSeverity(data.status)" />
+                                <Tag :value="data.status" :severity="getStatusSeverity(data.status)" />
                             </template>
                         </Column>
                     </DataTable>

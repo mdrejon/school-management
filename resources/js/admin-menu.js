@@ -58,6 +58,7 @@ export default [
             { label: 'Courses', icon: 'pi pi-graduation-cap', route: 'admin.cms.courses.index', module: 'courses' },
             { label: 'Departments', icon: 'pi pi-sitemap', route: 'admin.cms.departments.index', module: 'departments' },
             { label: 'News & Events', icon: 'pi pi-calendar-plus', route: 'admin.cms.events.index', module: 'events' },
+            { label: 'Academic Calendar', icon: 'pi pi-calendar', route: 'admin.cms.academic-calendars.index' },
             { label: 'Notices', icon: 'pi pi-megaphone', route: 'admin.cms.notices.index', module: 'notices' },
             { label: 'Gallery', icon: 'pi pi-image', route: 'admin.cms.gallery.index', module: 'gallery' },
             { label: 'Facilities', icon: 'pi pi-building', route: 'admin.cms.facilities.index', module: 'facilities' },

@@ -36,6 +36,9 @@ use App\Models\Teacher;
 use App\Models\TeacherPageSetting;
 use App\Models\Testimonial;
 use App\Models\TestimonialPageSetting;
+use App\Http\Controllers\Frontend\StudentController;
+use App\Http\Controllers\Frontend\TuitionFeeController;
+use App\Http\Controllers\Frontend\ResultController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -158,7 +161,18 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/api/academic-calendar/events', [\App\Http\Controllers\Frontend\AcademicCalendarController::class, 'events'])->name('api.academic-calendar.events');
+
 require __DIR__.'/admin.php';
+
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+Route::get('/tuition-fees', [TuitionFeeController::class, 'index'])->name('tuition-fees');
+
+// Result Pages
+Route::get('/results', [ResultController::class, 'exam'])->name('results');
+Route::get('/academic-results', [ResultController::class, 'academic'])->name('academic-results');
+Route::get('/evaluation-results', [ResultController::class, 'evaluation'])->name('evaluation-results');
+Route::get('/board-exam-results', [ResultController::class, 'boardExam'])->name('board-exam-results');
 
 // Catch-all for admin-built Pages — must stay the LAST route registered in
 // the whole file so it never shadows a more specific route above (Laravel
