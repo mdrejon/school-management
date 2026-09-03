@@ -35,7 +35,7 @@ class Testimonial extends Model
 
     public function getAuthorPhotoUrlAttribute(): ?string
     {
-        return $this->author_photo ? '/storage/'.ltrim($this->author_photo, '/') : null;
+        return $this->author_photo ? asset('storage/'.ltrim($this->author_photo, '/')) : null;
     }
 
     public static function forHomepage(int $limit = 5)

@@ -81,7 +81,7 @@ class Teacher extends Model
 
     public function getPhotoUrlAttribute(): ?string
     {
-        return $this->photo ? '/storage/'.ltrim($this->photo, '/') : null;
+        return $this->photo ? asset('storage/'.ltrim($this->photo, '/')) : null;
     }
 
     /**

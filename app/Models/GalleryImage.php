@@ -29,7 +29,7 @@ class GalleryImage extends Model
 
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image ? '/storage/'.ltrim($this->image, '/') : null;
+        return $this->image ? asset('storage/'.ltrim($this->image, '/')) : null;
     }
 
     public static function forHomepage(int $limit = 6)

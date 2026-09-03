@@ -45,7 +45,7 @@ class Slider extends Model
         // config('app.url') at config-load time, which breaks whenever the
         // app is actually served from a different host/port than APP_URL
         // (e.g. `php artisan serve` on a port that doesn't match .env).
-        return $this->image ? '/storage/'.ltrim($this->image, '/') : null;
+        return $this->image ? asset('storage/'.ltrim($this->image, '/')) : null;
     }
 
     public static function forHomepage()

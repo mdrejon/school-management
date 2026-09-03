@@ -57,7 +57,7 @@ class Notice extends Model
 
     public function getPdfUrlAttribute(): ?string
     {
-        return $this->pdf ? '/storage/'.ltrim($this->pdf, '/') : null;
+        return $this->pdf ? asset('storage/'.ltrim($this->pdf, '/')) : null;
     }
 
     public static function forList(int $perPage = 10, ?string $search = null)

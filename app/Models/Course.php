@@ -87,22 +87,22 @@ class Course extends Model
 
     public function getThumbnailUrlAttribute(): ?string
     {
-        return $this->thumbnail ? '/storage/'.ltrim($this->thumbnail, '/') : null;
+        return $this->thumbnail ? asset('storage/'.ltrim($this->thumbnail, '/')) : null;
     }
 
     public function getInstructorImageUrlAttribute(): ?string
     {
-        return $this->instructor_image ? '/storage/'.ltrim($this->instructor_image, '/') : null;
+        return $this->instructor_image ? asset('storage/'.ltrim($this->instructor_image, '/')) : null;
     }
 
     public function getGalleryImage1UrlAttribute(): ?string
     {
-        return $this->gallery_image_1 ? '/storage/'.ltrim($this->gallery_image_1, '/') : null;
+        return $this->gallery_image_1 ? asset('storage/'.ltrim($this->gallery_image_1, '/')) : null;
     }
 
     public function getGalleryImage2UrlAttribute(): ?string
     {
-        return $this->gallery_image_2 ? '/storage/'.ltrim($this->gallery_image_2, '/') : null;
+        return $this->gallery_image_2 ? asset('storage/'.ltrim($this->gallery_image_2, '/')) : null;
     }
 
     /**

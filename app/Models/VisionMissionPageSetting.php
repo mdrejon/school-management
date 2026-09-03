@@ -84,52 +84,52 @@ class VisionMissionPageSetting extends Model
 
     public function getImage1UrlAttribute(): ?string
     {
-        return $this->image_1 ? '/storage/'.ltrim($this->image_1, '/') : null;
+        return $this->image_1 ? asset('storage/'.ltrim($this->image_1, '/')) : null;
     }
 
     public function getImage2UrlAttribute(): ?string
     {
-        return $this->image_2 ? '/storage/'.ltrim($this->image_2, '/') : null;
+        return $this->image_2 ? asset('storage/'.ltrim($this->image_2, '/')) : null;
     }
 
     public function getImage3UrlAttribute(): ?string
     {
-        return $this->image_3 ? '/storage/'.ltrim($this->image_3, '/') : null;
+        return $this->image_3 ? asset('storage/'.ltrim($this->image_3, '/')) : null;
     }
 
     public function getMissionImage1UrlAttribute(): ?string
     {
-        return $this->mission_image_1 ? '/storage/'.ltrim($this->mission_image_1, '/') : null;
+        return $this->mission_image_1 ? asset('storage/'.ltrim($this->mission_image_1, '/')) : null;
     }
 
     public function getMissionImage2UrlAttribute(): ?string
     {
-        return $this->mission_image_2 ? '/storage/'.ltrim($this->mission_image_2, '/') : null;
+        return $this->mission_image_2 ? asset('storage/'.ltrim($this->mission_image_2, '/')) : null;
     }
 
     public function getMissionImage3UrlAttribute(): ?string
     {
-        return $this->mission_image_3 ? '/storage/'.ltrim($this->mission_image_3, '/') : null;
+        return $this->mission_image_3 ? asset('storage/'.ltrim($this->mission_image_3, '/')) : null;
     }
 
     public function getValuesImage1UrlAttribute(): ?string
     {
-        return $this->values_image_1 ? '/storage/'.ltrim($this->values_image_1, '/') : null;
+        return $this->values_image_1 ? asset('storage/'.ltrim($this->values_image_1, '/')) : null;
     }
 
     public function getValuesImage2UrlAttribute(): ?string
     {
-        return $this->values_image_2 ? '/storage/'.ltrim($this->values_image_2, '/') : null;
+        return $this->values_image_2 ? asset('storage/'.ltrim($this->values_image_2, '/')) : null;
     }
 
     public function getValuesImage3UrlAttribute(): ?string
     {
-        return $this->values_image_3 ? '/storage/'.ltrim($this->values_image_3, '/') : null;
+        return $this->values_image_3 ? asset('storage/'.ltrim($this->values_image_3, '/')) : null;
     }
 
     public function getBreadcrumbImageUrlAttribute(): ?string
     {
-        return $this->breadcrumb_image ? '/storage/'.ltrim($this->breadcrumb_image, '/') : null;
+        return $this->breadcrumb_image ? asset('storage/'.ltrim($this->breadcrumb_image, '/')) : null;
     }
 
     public static function current(): self

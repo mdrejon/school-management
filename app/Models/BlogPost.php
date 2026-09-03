@@ -70,22 +70,22 @@ class BlogPost extends Model
 
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image ? '/storage/'.ltrim($this->image, '/') : null;
+        return $this->image ? asset('storage/'.ltrim($this->image, '/')) : null;
     }
 
     public function getGalleryImage1UrlAttribute(): ?string
     {
-        return $this->gallery_image_1 ? '/storage/'.ltrim($this->gallery_image_1, '/') : null;
+        return $this->gallery_image_1 ? asset('storage/'.ltrim($this->gallery_image_1, '/')) : null;
     }
 
     public function getGalleryImage2UrlAttribute(): ?string
     {
-        return $this->gallery_image_2 ? '/storage/'.ltrim($this->gallery_image_2, '/') : null;
+        return $this->gallery_image_2 ? asset('storage/'.ltrim($this->gallery_image_2, '/')) : null;
     }
 
     public function getAuthorPhotoUrlAttribute(): ?string
     {
-        return $this->author_photo ? '/storage/'.ltrim($this->author_photo, '/') : null;
+        return $this->author_photo ? asset('storage/'.ltrim($this->author_photo, '/')) : null;
     }
 
     /**

@@ -321,7 +321,7 @@ class SiteSetting extends Model
 
     public function getLogoUrlAttribute(): ?string
     {
-        return $this->logo ? '/storage/'.ltrim($this->logo, '/') : null;
+        return $this->logo ? asset('storage/'.ltrim($this->logo, '/')) : null;
     }
 
     public function getFooterLogoUrlAttribute(): ?string
@@ -333,57 +333,57 @@ class SiteSetting extends Model
 
     public function getVideoThumbnailUrlAttribute(): ?string
     {
-        return $this->video_thumbnail ? '/storage/'.ltrim($this->video_thumbnail, '/') : null;
+        return $this->video_thumbnail ? asset('storage/'.ltrim($this->video_thumbnail, '/')) : null;
     }
 
     public function getOfferBackgroundUrlAttribute(): ?string
     {
-        return $this->offer_background ? '/storage/'.ltrim($this->offer_background, '/') : null;
+        return $this->offer_background ? asset('storage/'.ltrim($this->offer_background, '/')) : null;
     }
 
     public function getChooseImageUrlAttribute(): ?string
     {
-        return $this->choose_image ? '/storage/'.ltrim($this->choose_image, '/') : null;
+        return $this->choose_image ? asset('storage/'.ltrim($this->choose_image, '/')) : null;
     }
 
     public function getAboutImage1UrlAttribute(): ?string
     {
-        return $this->about_image_1 ? '/storage/'.ltrim($this->about_image_1, '/') : null;
+        return $this->about_image_1 ? asset('storage/'.ltrim($this->about_image_1, '/')) : null;
     }
 
     public function getAboutImage2UrlAttribute(): ?string
     {
-        return $this->about_image_2 ? '/storage/'.ltrim($this->about_image_2, '/') : null;
+        return $this->about_image_2 ? asset('storage/'.ltrim($this->about_image_2, '/')) : null;
     }
 
     public function getAboutImage3UrlAttribute(): ?string
     {
-        return $this->about_image_3 ? '/storage/'.ltrim($this->about_image_3, '/') : null;
+        return $this->about_image_3 ? asset('storage/'.ltrim($this->about_image_3, '/')) : null;
     }
 
     public function getAboutPageBreadcrumbImageUrlAttribute(): ?string
     {
-        return $this->about_page_breadcrumb_image ? '/storage/'.ltrim($this->about_page_breadcrumb_image, '/') : null;
+        return $this->about_page_breadcrumb_image ? asset('storage/'.ltrim($this->about_page_breadcrumb_image, '/')) : null;
     }
 
     public function getPrincipalPhotoUrlAttribute(): ?string
     {
-        return $this->principal_photo ? '/storage/'.ltrim($this->principal_photo, '/') : null;
+        return $this->principal_photo ? asset('storage/'.ltrim($this->principal_photo, '/')) : null;
     }
 
     public function getPrincipalPageBreadcrumbImageUrlAttribute(): ?string
     {
-        return $this->principal_page_breadcrumb_image ? '/storage/'.ltrim($this->principal_page_breadcrumb_image, '/') : null;
+        return $this->principal_page_breadcrumb_image ? asset('storage/'.ltrim($this->principal_page_breadcrumb_image, '/')) : null;
     }
 
     public function getExPrincipalPhotoUrlAttribute(): ?string
     {
-        return $this->ex_principal_photo ? '/storage/'.ltrim($this->ex_principal_photo, '/') : null;
+        return $this->ex_principal_photo ? asset('storage/'.ltrim($this->ex_principal_photo, '/')) : null;
     }
 
     public function getExPrincipalPageBreadcrumbImageUrlAttribute(): ?string
     {
-        return $this->ex_principal_page_breadcrumb_image ? '/storage/'.ltrim($this->ex_principal_page_breadcrumb_image, '/') : null;
+        return $this->ex_principal_page_breadcrumb_image ? asset('storage/'.ltrim($this->ex_principal_page_breadcrumb_image, '/')) : null;
     }
 
     public function getStudentListPageBreadcrumbImageUrlAttribute()
@@ -418,27 +418,27 @@ class SiteSetting extends Model
 
     public function getContactImageUrlAttribute(): ?string
     {
-        return $this->contact_image ? '/storage/'.ltrim($this->contact_image, '/') : null;
+        return $this->contact_image ? asset('storage/'.ltrim($this->contact_image, '/')) : null;
     }
 
     public function getContactPageBreadcrumbImageUrlAttribute(): ?string
     {
-        return $this->contact_page_breadcrumb_image ? '/storage/'.ltrim($this->contact_page_breadcrumb_image, '/') : null;
+        return $this->contact_page_breadcrumb_image ? asset('storage/'.ltrim($this->contact_page_breadcrumb_image, '/')) : null;
     }
 
     public function getSidebarMinisterPhotoUrlAttribute(): ?string
     {
-        return $this->sidebar_minister_photo ? '/storage/'.ltrim($this->sidebar_minister_photo, '/') : null;
+        return $this->sidebar_minister_photo ? asset('storage/'.ltrim($this->sidebar_minister_photo, '/')) : null;
     }
 
     public function getSidebarSecretaryPhotoUrlAttribute(): ?string
     {
-        return $this->sidebar_secretary_photo ? '/storage/'.ltrim($this->sidebar_secretary_photo, '/') : null;
+        return $this->sidebar_secretary_photo ? asset('storage/'.ltrim($this->sidebar_secretary_photo, '/')) : null;
     }
 
     public function getSidebarVicePrincipalPhotoUrlAttribute(): ?string
     {
-        return $this->sidebar_vice_principal_photo ? '/storage/'.ltrim($this->sidebar_vice_principal_photo, '/') : null;
+        return $this->sidebar_vice_principal_photo ? asset('storage/'.ltrim($this->sidebar_vice_principal_photo, '/')) : null;
     }
 
     /**

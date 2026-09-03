@@ -42,7 +42,7 @@ class FacilityPageSetting extends Model
 
     public function getBreadcrumbImageUrlAttribute(): ?string
     {
-        return $this->breadcrumb_image ? '/storage/'.ltrim($this->breadcrumb_image, '/') : null;
+        return $this->breadcrumb_image ? asset('storage/'.ltrim($this->breadcrumb_image, '/')) : null;
     }
 
     /**
