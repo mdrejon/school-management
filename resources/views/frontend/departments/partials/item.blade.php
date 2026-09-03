@@ -6,12 +6,12 @@
         <x-dynamic-icon :icon="$department->icon" />
     </div>
     <div class="wexnix_department-info">
-        <h4 class="wexnix_department-title"><a href="{{ route('departments.show', $department) }}">{{ $department->title }}</a></h4>
-        @if ($department->short_description)
-            <p>{{ $department->short_description }}</p>
+        <h4 class="wexnix_department-title"><a href="{{ route('departments.show', $department) }}">{{ $department->{{ __('title }}') }}</a></h4>
+        @if ($department->{{ __('short_description)') }}
+            <p>{{ $department->{{ __('short_description }}') }}</p>
         @endif
         <div class="wexnix_department-btn">
-            <a href="{{ route('departments.show', $department) }}">Read More<i class="fas fa-arrow-right-long"></i></a>
+            <a href="{{ route('departments.show', $department) }}">{{ __('Read More') }}<i class="fas fa-arrow-right-long"></i></a>
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
 @php
     $titleHtml = e($siteSettings->skill_title);
     if (! empty($siteSettings->skill_highlight)) {
-        $titleHtml = str_ireplace(e($siteSettings->skill_highlight), '<span>' . e($siteSettings->skill_highlight) . '</span>', $titleHtml);
+        $titleHtml = str_ireplace(e($siteSettings->{{ __('skill_highlight), \'') }}<span>' . e($siteSettings->{{ __('skill_highlight) . \'') }}</span>', $titleHtml);
     }
     $skills = $siteSettings->skillItems();
 @endphp
@@ -16,33 +16,33 @@
                     <div class="wexnix_enroll-left wow fadeInLeft" data-wow-delay=".25s">
                         <div class="wexnix_enroll-form">
                             <div class="wexnix_enroll-form-header">
-                                <h3>{{ $siteSettings->skill_enroll_title ?: 'Start Your Enrollment' }}</h3>
-                                @if ($siteSettings->skill_enroll_subtitle)
-                                    <p>{{ $siteSettings->skill_enroll_subtitle }}</p>
+                                <h3>{{ $siteSettings->{{ __('skill_enroll_title ?: \'Start Your Enrollment\' }}') }}</h3>
+                                @if ($siteSettings->{{ __('skill_enroll_subtitle)') }}
+                                    <p>{{ $siteSettings->{{ __('skill_enroll_subtitle }}') }}</p>
                                 @endif
                             </div>
                             <form action="#">
                                 <div class="wexnix_form-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Your Name">
+                                    <input type="text" name="name" class="form-control" placeholder="{{ __('Your Name') }}">
                                 </div>
                                 <div class="wexnix_form-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Email Address">
+                                    <input type="email" name="email" class="form-control" placeholder="{{ __('Email Address') }}">
                                 </div>
                                 <div class="wexnix_form-group">
                                     <select class="form-select" name="service">
-                                        <option value="">Choose Course</option>
-                                        <option value="1">Art And Design</option>
-                                        <option value="2">Acting And Drama</option>
-                                        <option value="3">Accounting And Finance</option>
-                                        <option value="4">Biology And Conservation</option>
-                                        <option value="5">Science And Engineering</option>
-                                        <option value="6">Health Administration</option>
+                                        <option value="">{{ __('Choose Course') }}</option>
+                                        <option value="1">{{ __('Art And Design') }}</option>
+                                        <option value="2">{{ __('Acting And Drama') }}</option>
+                                        <option value="3">{{ __('Accounting And Finance') }}</option>
+                                        <option value="4">{{ __('Biology And Conservation') }}</option>
+                                        <option value="5">{{ __('Science And Engineering') }}</option>
+                                        <option value="6">{{ __('Health Administration') }}</option>
                                     </select>
                                 </div>
                                 <div class="wexnix_form-group">
-                                    <textarea name="message" class="form-control" placeholder="Type Message" rows="4"></textarea>
+                                    <textarea name="message" class="form-control" placeholder="{{ __('Type Message') }}" rows="4"></textarea>
                                 </div>
-                                <button class="wexnix_theme-btn">Enroll Now<i class="fas fa-arrow-right-long"></i></button>
+                                <button class="wexnix_theme-btn">{{ __('Enroll Now') }}<i class="fas fa-arrow-right-long"></i></button>
                             </form>
                         </div>
                     </div>
@@ -51,13 +51,13 @@
                     <div class="wexnix_enroll-right wow fadeInUp" data-wow-delay=".25s">
                         <div class="wexnix_skill-content">
                             <div class="wexnix_site-heading mb-3">
-                                @if ($siteSettings->skill_tagline)
-                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->skill_tagline }}</span>
+                                @if ($siteSettings->{{ __('skill_tagline)') }}
+                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->{{ __('skill_tagline }}') }}</span>
                                 @endif
                                 <h2 class="wexnix_site-title text-white">{!! $titleHtml !!}</h2>
                             </div>
-                            @if ($siteSettings->skill_description)
-                                <p class="text-white">{{ $siteSettings->skill_description }}</p>
+                            @if ($siteSettings->{{ __('skill_description)') }}
+                                <p class="text-white">{{ $siteSettings->{{ __('skill_description }}') }}</p>
                             @endif
                             @if (count($skills))
                                 <div class="wexnix_skills-section">
@@ -71,8 +71,8 @@
                                     @endforeach
                                 </div>
                             @endif
-                            @if ($siteSettings->skill_button_text)
-                                <a href="{{ $siteSettings->skill_button_url ?: '#' }}" class="wexnix_theme-btn mt-5">{{ $siteSettings->skill_button_text }}<i class="fas fa-arrow-right-long"></i></a>
+                            @if ($siteSettings->{{ __('skill_button_text)') }}
+                                <a href="{{ $siteSettings->skill_button_url ?: '#' }}" class="wexnix_theme-btn mt-5">{{ $siteSettings->{{ __('skill_button_text }}') }}<i class="fas fa-arrow-right-long"></i></a>
                             @endif
                         </div>
                     </div>

@@ -8,11 +8,11 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url({{ $pageSettings->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }})">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $notice->title }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $notice->{{ __('title }}') }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('notices.index') }}">{{ $pageSettings->breadcrumb_title ?: 'Notice' }}</a></li>
-                    <li class="active">{{ $notice->title }}</li>
+                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                    <li><a href="{{ route('notices.index') }}">{{ $pageSettings->{{ __('breadcrumb_title ?: \'Notice\' }}') }}</a></li>
+                    <li class="active">{{ $notice->{{ __('title }}') }}</li>
                 </ul>
             </div>
         </div>
@@ -29,21 +29,21 @@
                                     <div class="wexnix_blog-meta">
                                         <div class="wexnix_blog-meta-left">
                                             <ul>
-                                                @if ($notice->published_at)
-                                                    <li><i class="fas fa-calendar-alt"></i> {{ $notice->published_at->format('d M, Y') }}</li>
+                                                @if ($notice->{{ __('published_at)') }}
+                                                    <li><i class="fas fa-calendar-alt"></i> {{ $notice->published_at->{{ __('format(\'d M, Y\') }}') }}</li>
                                                 @endif
                                             </ul>
                                         </div>
-                                        @if ($notice->pdf_url)
+                                        @if ($notice->{{ __('pdf_url)') }}
                                             <div class="wexnix_blog-meta-right">
-                                                <a href="{{ $notice->pdf_url }}" target="_blank" class="wexnix_theme-btn"><i class="fas fa-download"></i> Download PDF</a>
+                                                <a href="{{ $notice->pdf_url }}" target="_blank" class="wexnix_theme-btn"><i class="fas fa-download"></i> {{ __('Download PDF') }}</a>
                                             </div>
                                         @endif
                                     </div>
                                     <div class="wexnix_blog-details">
-                                        <h3 class="wexnix_blog-details-title mb-20">{{ $notice->title }}</h3>
-                                        @if ($notice->description)
-                                            <div>{!! $notice->description !!}</div>
+                                        <h3 class="wexnix_blog-details-title mb-20">{{ $notice->{{ __('title }}') }}</h3>
+                                        @if ($notice->{{ __('description)') }}
+                                            <div>{!! $notice->{{ __('description !!}') }}</div>
                                         @endif
                                     </div>
                                 </div>

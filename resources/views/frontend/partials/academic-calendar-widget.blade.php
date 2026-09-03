@@ -25,24 +25,24 @@
         }
     </style>
     <div class="wexnix_sidebar-widget h-100">
-        <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-calendar-alt"></i> {{ $siteSettings->sidebar_calendar_title ?: 'Academic Calendar' }}</h4>
+        <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-calendar-alt"></i> {{ $siteSettings->{{ __('sidebar_calendar_title ?: \'Academic Calendar\' }}') }}</h4>
         <div class="wexnix_sidebar-calendar" id="academicCalendarWidget">
             <div class="wexnix_sidebar-calendar-head d-flex justify-content-between align-items-center">
                 <button type="button" id="acPrevMonth" class="btn btn-sm btn-link text-decoration-none p-1"><i class="fas fa-chevron-left"></i></button>
                 <div class="d-flex justify-content-center align-items-center">
                     <select id="acMonthSelect" class="form-select form-select-sm border-0 w-auto pe-4 me-1">
-                        <option value="1">January</option>
-                        <option value="2">February</option>
-                        <option value="3">March</option>
-                        <option value="4">April</option>
-                        <option value="5">May</option>
-                        <option value="6">June</option>
-                        <option value="7">July</option>
-                        <option value="8">August</option>
-                        <option value="9">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
+                        <option value="1">{{ __('January') }}</option>
+                        <option value="2">{{ __('February') }}</option>
+                        <option value="3">{{ __('March') }}</option>
+                        <option value="4">{{ __('April') }}</option>
+                        <option value="5">{{ __('May') }}</option>
+                        <option value="6">{{ __('June') }}</option>
+                        <option value="7">{{ __('July') }}</option>
+                        <option value="8">{{ __('August') }}</option>
+                        <option value="9">{{ __('September') }}</option>
+                        <option value="10">{{ __('October') }}</option>
+                        <option value="11">{{ __('November') }}</option>
+                        <option value="12">{{ __('December') }}</option>
                     </select>
                     <select id="acYearSelect" class="form-select form-select-sm border-0 w-auto pe-4">
                     </select>
@@ -53,8 +53,8 @@
                 <!-- Populated by JS -->
             </div>
             <div class="wexnix_sidebar-calendar-legend">
-                <span><span class="wexnix_dot wexnix_dot-today"></span> Today</span>
-                <span><span class="wexnix_dot wexnix_dot-event"></span> Event</span>
+                <span><span class="wexnix_dot wexnix_dot-today"></span> {{ __('Today') }}</span>
+                <span><span class="wexnix_dot wexnix_dot-event"></span> {{ __('Event') }}</span>
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="academicEventModalLabel">Event Details</h5>
+                    <h5 class="modal-title" id="academicEventModalLabel">{{ __('Event Details') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

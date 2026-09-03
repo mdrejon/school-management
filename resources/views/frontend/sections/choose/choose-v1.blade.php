@@ -3,11 +3,11 @@
 @php
     $titleHtml = e($siteSettings->choose_title);
     if (! empty($siteSettings->choose_highlight)) {
-        $titleHtml = str_ireplace(e($siteSettings->choose_highlight), '<span>' . e($siteSettings->choose_highlight) . '</span>', $titleHtml);
+        $titleHtml = str_ireplace(e($siteSettings->{{ __('choose_highlight), \'') }}<span>' . e($siteSettings->{{ __('choose_highlight) . \'') }}</span>', $titleHtml);
     }
     $features = $siteSettings->chooseFeatureItems();
 @endphp
-@if ($siteSettings->choose_title)
+@if ($siteSettings->{{ __('choose_title)') }}
     <div class="wexnix_choose-area pt-80 pb-80">
         <div class="container">
             <div class="row align-items-center">
@@ -15,12 +15,12 @@
                     <div class="wexnix_choose-content wow fadeInUp" data-wow-delay=".25s">
                         <div class="wexnix_choose-content-info">
                             <div class="wexnix_site-heading mb-0">
-                                @if ($siteSettings->choose_tagline)
-                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->choose_tagline }}</span>
+                                @if ($siteSettings->{{ __('choose_tagline)') }}
+                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->{{ __('choose_tagline }}') }}</span>
                                 @endif
                                 <h2 class="wexnix_site-title text-white mb-10">{!! $titleHtml !!}</h2>
-                                @if ($siteSettings->choose_description)
-                                    <p class="text-white">{{ $siteSettings->choose_description }}</p>
+                                @if ($siteSettings->{{ __('choose_description)') }}
+                                    <p class="text-white">{{ $siteSettings->{{ __('choose_description }}') }}</p>
                                 @endif
                             </div>
                             @if (count($features))

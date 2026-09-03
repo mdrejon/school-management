@@ -6610,6 +6610,20 @@ label {
   100%{ transform: translateX(-50%); }
 }
 
+[dir="rtl"] .wexnix_marquee-track {
+  animation: marquee-scroll-rtl 25s linear infinite;
+}
+
+@keyframes marquee-scroll-rtl {
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(50%); }
+}
+
+[dir="rtl"] .wexnix_marquee-track span::before {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
 @media (max-width: 767px) {
   .wexnix_header-search-form input{
     min-width: 140px;

@@ -7,16 +7,16 @@
         @endfor
     </div>
     <div class="wexnix_testimonial-quote">
-        <p>{{ $testimonial->quote }}</p>
+        <p>{{ $testimonial->{{ __('quote }}') }}</p>
     </div>
     <div class="wexnix_testimonial-content">
         <div class="wexnix_testimonial-author-img">
             <img src="{{ $testimonial->author_photo_url ?? '/frontend/assets/img/testimonial/01.jpg' }}" alt="">
         </div>
         <div class="wexnix_testimonial-author-info">
-            <h4>{{ $testimonial->author_name }}</h4>
-            @if ($testimonial->author_role)
-                <p>{{ $testimonial->author_role }}</p>
+            <h4>{{ $testimonial->{{ __('author_name }}') }}</h4>
+            @if ($testimonial->{{ __('author_role)') }}
+                <p>{{ $testimonial->{{ __('author_role }}') }}</p>
             @endif
         </div>
     </div>

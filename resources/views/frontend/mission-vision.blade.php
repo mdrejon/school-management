@@ -9,10 +9,10 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url('{{ $pageSettings->breadcrumb_image_url ?: asset('assets/img/breadcrumb/01.jpg') }}')">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $pageSettings->breadcrumb_title ?: 'Vision & Mission' }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $pageSettings->{{ __('breadcrumb_title ?: \'Vision & Mission\' }}') }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li class="active">{{ $pageSettings->breadcrumb_title ?: 'Vision & Mission' }}</li>
+                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                    <li class="active">{{ $pageSettings->{{ __('breadcrumb_title ?: \'Vision & Mission\' }}') }}</li>
                 </ul>
             </div>
         </div>
@@ -36,8 +36,8 @@
                     <div class="col-lg-6">
                         <div class="wexnix_about-right wow fadeInRight" data-wow-delay=".25s">
                             <div class="wexnix_site-heading mb-3">
-                                @if ($pageSettings->tagline)
-                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->tagline }}</span>
+                                @if ($pageSettings->{{ __('tagline)') }}
+                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->{{ __('tagline }}') }}</span>
                                 @endif
                                 <h2 class="wexnix_site-title">
                                     @php
@@ -53,7 +53,7 @@
                                 </h2>
                             </div>
                             <p class="wexnix_about-text">
-                                {{ $pageSettings->description ?: 'There are many variations of passages available but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable.' }}
+                                {{ $pageSettings->{{ __('description ?: \'There are many variations of passages available but the majority have suffered alteration in some form, by injected humour, or randomised words which don\\'t look even slightly believable.\' }}') }}
                             </p>
                         </div>
                     </div>
@@ -75,8 +75,8 @@
                     <div class="col-lg-6">
                         <div class="wexnix_about-right wow fadeInLeft" data-wow-delay=".25s">
                             <div class="wexnix_site-heading mb-3">
-                                @if ($pageSettings->mission_tagline)
-                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->mission_tagline }}</span>
+                                @if ($pageSettings->{{ __('mission_tagline)') }}
+                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->{{ __('mission_tagline }}') }}</span>
                                 @endif
                                 <h2 class="wexnix_site-title">
                                     @php
@@ -92,7 +92,7 @@
                                 </h2>
                             </div>
                             <p class="wexnix_about-text">
-                                {{ $pageSettings->mission_description ?: 'Our mission is to provide an inclusive, inspiring learning environment that fosters critical thinking, creativity, moral values, and life-long learning skills.' }}
+                                {{ $pageSettings->{{ __('mission_description ?: \'Our mission is to provide an inclusive, inspiring learning environment that fosters critical thinking, creativity, moral values, and life-long learning skills.\' }}') }}
                             </p>
                         </div>
                     </div>
@@ -114,8 +114,8 @@
                     <div class="col-lg-6">
                         <div class="wexnix_about-right wow fadeInRight" data-wow-delay=".25s">
                             <div class="wexnix_site-heading mb-3">
-                                @if ($pageSettings->values_tagline)
-                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->values_tagline }}</span>
+                                @if ($pageSettings->{{ __('values_tagline)') }}
+                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->{{ __('values_tagline }}') }}</span>
                                 @endif
                                 <h2 class="wexnix_site-title">
                                     @php
@@ -131,7 +131,7 @@
                                 </h2>
                             </div>
                             <p class="wexnix_about-text">
-                                {{ $pageSettings->values_description ?: "Integrity, Excellence, Innovation, Respect, and Community Engagement form the foundation of our institution's culture and daily endeavors." }}
+                                {{ $pageSettings->{{ __('values_description ?: "Integrity, Excellence, Innovation, Respect, and Community Engagement form the foundation of our institution\'s culture and daily endeavors." }}') }}
                             </p>
                         </div>
                     </div>

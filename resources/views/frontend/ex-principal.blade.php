@@ -9,10 +9,10 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url({{ $siteSettings->ex_principal_page_breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }})">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $siteSettings->ex_principal_page_breadcrumb_title ?: 'Our EX Principal' }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $siteSettings->{{ __('ex_principal_page_breadcrumb_title ?: \'Our EX Principal\' }}') }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li class="active">{{ $siteSettings->ex_principal_page_breadcrumb_title ?: 'Our EX Principal' }}</li>
+                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                    <li class="active">{{ $siteSettings->{{ __('ex_principal_page_breadcrumb_title ?: \'Our EX Principal\' }}') }}</li>
                 </ul>
             </div>
         </div>
@@ -26,22 +26,22 @@
                         <div class="wexnix_team-single-img">
                             <img src="{{ $siteSettings->ex_principal_photo_url ?? '/frontend/assets/img/team/03.jpg' }}" alt="{{ $siteSettings->ex_principal_name ?: 'Our EX Principal' }}">
                         </div>
-                        @if ($siteSettings->ex_principal_name || $siteSettings->ex_principal_designation)
+                        @if ($siteSettings->ex_principal_name || $siteSettings->{{ __('ex_principal_designation)') }}
                             <div class="text-center mt-3">
-                                @if ($siteSettings->ex_principal_name)
-                                    <h3 class="mb-1">{{ $siteSettings->ex_principal_name }}</h3>
+                                @if ($siteSettings->{{ __('ex_principal_name)') }}
+                                    <h3 class="mb-1">{{ $siteSettings->{{ __('ex_principal_name }}') }}</h3>
                                 @endif
-                                @if ($siteSettings->ex_principal_designation)
-                                    <strong>{{ $siteSettings->ex_principal_designation }}</strong>
+                                @if ($siteSettings->{{ __('ex_principal_designation)') }}
+                                    <strong>{{ $siteSettings->{{ __('ex_principal_designation }}') }}</strong>
                                 @endif
                             </div>
                         @endif
                     </div>
                     <div class="col-md-8">
                         <div class="wexnix_team-details">
-                            <h3>Message From Former Principal</h3>
-                            @if ($siteSettings->ex_principal_message)
-                                <p class="mt-3">{!! nl2br(e($siteSettings->ex_principal_message)) !!}</p>
+                            <h3>{{ __('Message From Former Principal') }}</h3>
+                            @if ($siteSettings->{{ __('ex_principal_message)') }}
+                                <p class="mt-3">{!! nl2br(e($siteSettings->{{ __('ex_principal_message)) !!}') }}</p>
                             @endif
                         </div>
                     </div>

@@ -3,11 +3,11 @@
 @php
     $titleHtml = e($siteSettings->about_title);
     if (! empty($siteSettings->about_highlight)) {
-        $titleHtml = str_ireplace(e($siteSettings->about_highlight), '<span>' . e($siteSettings->about_highlight) . '</span>', $titleHtml);
+        $titleHtml = str_ireplace(e($siteSettings->{{ __('about_highlight), \'') }}<span>' . e($siteSettings->{{ __('about_highlight) . \'') }}</span>', $titleHtml);
     }
     $items = $siteSettings->aboutItems();
 @endphp
-@if ($siteSettings->about_title)
+@if ($siteSettings->{{ __('about_title)') }}
     <div class="wexnix_about-area py-120">
         <div class="container">
             <div class="row g-4 align-items-center">
@@ -17,12 +17,12 @@
                             <div class="row g-4">
                                 <div class="col-md-6">
                                     <img class="wexnix_img-1" src="{{ $siteSettings->about_image_1_url ?? '/frontend/assets/img/about/01.jpg' }}" alt="">
-                                    @if ($siteSettings->about_badge_text)
+                                    @if ($siteSettings->{{ __('about_badge_text)') }}
                                         <div class="wexnix_about-experience mt-4">
                                             <div class="wexnix_about-experience-icon">
                                                 <x-dynamic-icon :icon="$siteSettings->about_badge_icon" />
                                             </div>
-                                            <b class="text-start">{{ $siteSettings->about_badge_text }}</b>
+                                            <b class="text-start">{{ $siteSettings->{{ __('about_badge_text }}') }}</b>
                                         </div>
                                     @endif
                                 </div>
@@ -37,19 +37,19 @@
                 <div class="col-lg-6">
                     <div class="wexnix_about-right wow fadeInRight" data-wow-delay=".25s">
                         <div class="wexnix_site-heading mb-3">
-                            @if ($siteSettings->about_tagline)
-                                <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->about_tagline }}</span>
+                            @if ($siteSettings->{{ __('about_tagline)') }}
+                                <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->{{ __('about_tagline }}') }}</span>
                             @endif
                             <h2 class="wexnix_site-title">
                                 {!! $titleHtml !!}
                             </h2>
                         </div>
-                        @if ($siteSettings->about_description)
+                        @if ($siteSettings->{{ __('about_description)') }}
                             <p class="wexnix_about-text">
-                                {{ $siteSettings->about_description }}
+                                {{ $siteSettings->{{ __('about_description }}') }}
                             </p>
                         @endif
-                        @if (count($items) || $siteSettings->about_quote)
+                        @if (count($items) || $siteSettings->{{ __('about_quote)') }}
                             <div class="wexnix_about-content">
                                 <div class="row">
                                     @if (count($items))
@@ -67,10 +67,10 @@
                                             @endforeach
                                         </div>
                                     @endif
-                                    @if ($siteSettings->about_quote)
+                                    @if ($siteSettings->{{ __('about_quote)') }}
                                         <div class="col-md-5">
                                             <div class="wexnix_about-quote">
-                                                <p>{{ $siteSettings->about_quote }}</p>
+                                                <p>{{ $siteSettings->{{ __('about_quote }}') }}</p>
                                                 <i class="fas fa-quote-right"></i>
                                             </div>
                                         </div>
@@ -78,18 +78,18 @@
                                 </div>
                             </div>
                         @endif
-                        @if ($siteSettings->about_button_text || $siteSettings->phone)
+                        @if ($siteSettings->about_button_text || $siteSettings->{{ __('phone)') }}
                             <div class="wexnix_about-bottom">
-                                @if ($siteSettings->about_button_text)
-                                    <a href="{{ $siteSettings->about_button_url ?: '#' }}" class="wexnix_theme-btn">{{ $siteSettings->about_button_text }}<i
+                                @if ($siteSettings->{{ __('about_button_text)') }}
+                                    <a href="{{ $siteSettings->about_button_url ?: '#' }}" class="wexnix_theme-btn">{{ $siteSettings->{{ __('about_button_text }}') }}<i
                                             class="fas fa-arrow-right-long"></i></a>
                                 @endif
-                                @if ($siteSettings->phone)
+                                @if ($siteSettings->{{ __('phone)') }}
                                     <div class="wexnix_about-phone">
                                         <div class="wexnix_icon"><i class="fas fa-headset"></i></div>
                                         <div class="wexnix_number">
-                                            <span>Call Now</span>
-                                            <h6><a href="tel:{{ $siteSettings->phone }}">{{ $siteSettings->phone }}</a></h6>
+                                            <span>{{ __('Call Now') }}</span>
+                                            <h6><a href="tel:{{ $siteSettings->phone }}">{{ $siteSettings->{{ __('phone }}') }}</a></h6>
                                         </div>
                                     </div>
                                 @endif

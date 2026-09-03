@@ -10,6 +10,8 @@ Version         : 1.0
     
     "use strict";
 
+    var isRtl = $('html').attr('dir') === 'rtl';
+
     // multi level dropdown menu
     $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
         if (!$(this).next().hasClass('show')) {
@@ -50,6 +52,7 @@ Version         : 1.0
 
     // hero slider
     $('.wexnix_hero-slider').owlCarousel({
+        rtl: isRtl,
         loop: true,
         nav: true,
         dots: false,
@@ -97,6 +100,7 @@ Version         : 1.0
 
     // testimonial-slider
     $('.wexnix_testimonial-slider').owlCarousel({
+        rtl: isRtl,
         loop: true,
         margin: 10,
         nav: false,
@@ -118,6 +122,7 @@ Version         : 1.0
 
     // event-slider
     $('.wexnix_event-slider').owlCarousel({
+        rtl: isRtl,
         loop: true,
         margin: 25,
         nav: true,
@@ -143,6 +148,7 @@ Version         : 1.0
 
     // department-slider
     $('.wexnix_department-slider').owlCarousel({
+        rtl: isRtl,
         loop: true,
         margin: 25,
         nav: true,
@@ -168,6 +174,7 @@ Version         : 1.0
 
     // partner-slider
     $('.wexnix_partner-slider').owlCarousel({
+        rtl: isRtl,
         loop: true,
         margin: 70,
         nav: false,

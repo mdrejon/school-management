@@ -9,10 +9,10 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url({{ $pageSettings->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }})">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $pageSettings->breadcrumb_title ?: 'Notice' }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $pageSettings->{{ __('breadcrumb_title ?: \'Notice\' }}') }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li class="active">{{ $pageSettings->breadcrumb_title ?: 'Notice' }}</li>
+                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                    <li class="active">{{ $pageSettings->{{ __('breadcrumb_title ?: \'Notice\' }}') }}</li>
                 </ul>
             </div>
         </div>
@@ -24,33 +24,33 @@
                 <div class="row justify-content-end mb-4">
                     <div class="col-md-5 col-lg-4">
                         <form action="{{ route('notices.index') }}" method="GET" class="d-flex">
-                            <input type="search" name="q" value="{{ $search }}" class="form-control" placeholder="Search Notice...">
-                            <button type="submit" class="wexnix_theme-btn ms-2"><span class="fas fa-search"></span>Search</button>
+                            <input type="search" name="q" value="{{ $search }}" class="form-control" placeholder="{{ __('Search Notice...') }}">
+                            <button type="submit" class="wexnix_theme-btn ms-2"><span class="fas fa-search"></span>{{ __('Search') }}</button>
                         </form>
                     </div>
                 </div>
 
-                @if ($notices->count())
+                @if ($notices->{{ __('count())') }}
                     <div class="table-responsive">
                         <table class="table table-bordered align-middle wexnix_notice-table">
                             <thead>
                                 <tr>
-                                    <th>SL</th>
-                                    <th>Notice Title</th>
-                                    <th>Publish Date</th>
-                                    <th class="text-center">Action</th>
+                                    <th>{{ __('SL') }}</th>
+                                    <th>{{ __('Notice Title') }}</th>
+                                    <th>{{ __('Publish Date') }}</th>
+                                    <th class="text-center">{{ __('Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($notices as $notice)
                                     <tr>
-                                        <td>{{ str_pad($notices->firstItem() + $loop->index, 2, '0', STR_PAD_LEFT) }}</td>
-                                        <td>{{ $notice->title }}</td>
-                                        <td>{{ $notice->published_at?->format('d M, Y') }}</td>
+                                        <td>{{ str_pad($notices->firstItem() + $loop->{{ __('index, 2, \'0\', STR_PAD_LEFT) }}') }}</td>
+                                        <td>{{ $notice->{{ __('title }}') }}</td>
+                                        <td>{{ $notice->published_at?->{{ __('format(\'d M, Y\') }}') }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('notices.show', $notice) }}" class="wexnix_theme-btn"><span class="fas fa-eye"></span>View</a>
-                                            @if ($notice->pdf_url)
-                                                <a href="{{ $notice->pdf_url }}" target="_blank" class="wexnix_theme-btn ms-1"><span class="fas fa-download"></span>PDF</a>
+                                            <a href="{{ route('notices.show', $notice) }}" class="wexnix_theme-btn"><span class="fas fa-eye"></span>{{ __('View') }}</a>
+                                            @if ($notice->{{ __('pdf_url)') }}
+                                                <a href="{{ $notice->pdf_url }}" target="_blank" class="wexnix_theme-btn ms-1"><span class="fas fa-download"></span>{{ __('PDF') }}</a>
                                             @endif
                                         </td>
                                     </tr>
@@ -60,10 +60,10 @@
                     </div>
 
                     <!-- pagination -->
-                    {{ $notices->links('frontend.pagination.wexnix') }}
+                    {{ $notices->{{ __('links(\'frontend.pagination.wexnix\') }}') }}
                     <!-- pagination end -->
                 @else
-                    <p class="text-center">No notices available right now — please check back soon.</p>
+                    <p class="text-center">{{ __('No notices available right now — please check back soon.') }}</p>
                 @endif
             </div>
         </div>

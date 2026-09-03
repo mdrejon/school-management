@@ -9,11 +9,11 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url({{ $pageSettings->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }})">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $teacher->name }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $teacher->{{ __('name }}') }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('teachers.index') }}">{{ $pageSettings->breadcrumb_title ?: 'Teachers' }}</a></li>
-                    <li class="active">{{ $teacher->name }}</li>
+                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                    <li><a href="{{ route('teachers.index') }}">{{ $pageSettings->{{ __('breadcrumb_title ?: \'Teachers\' }}') }}</a></li>
+                    <li class="active">{{ $teacher->{{ __('name }}') }}</li>
                 </ul>
             </div>
         </div>
@@ -30,43 +30,43 @@
                     </div>
                     <div class="col-md-8">
                         <div class="wexnix_team-details">
-                            <h3>{{ $teacher->name }}</h3>
-                            @if ($teacher->designation)
-                                <strong>{{ $teacher->designation }}</strong>
+                            <h3>{{ $teacher->{{ __('name }}') }}</h3>
+                            @if ($teacher->{{ __('designation)') }}
+                                <strong>{{ $teacher->{{ __('designation }}') }}</strong>
                             @endif
-                            @if ($teacher->short_intro)
-                                <p class="mt-3">{{ $teacher->short_intro }}</p>
+                            @if ($teacher->{{ __('short_intro)') }}
+                                <p class="mt-3">{{ $teacher->{{ __('short_intro }}') }}</p>
                             @endif
-                            @if ($teacher->address || $teacher->email || $teacher->phone)
+                            @if ($teacher->address || $teacher->email || $teacher->{{ __('phone)') }}
                                 <div class="wexnix_team-details-info">
                                     <ul>
-                                        @if ($teacher->address)
-                                            <li><a href="#"><i class="fas fa-location-dot"></i> {{ $teacher->address }}</a></li>
+                                        @if ($teacher->{{ __('address)') }}
+                                            <li><a href="#"><i class="fas fa-location-dot"></i> {{ $teacher->{{ __('address }}') }}</a></li>
                                         @endif
-                                        @if ($teacher->email)
-                                            <li><a href="mailto:{{ $teacher->email }}"><i class="fas fa-envelope"></i> {{ $teacher->email }}</a></li>
+                                        @if ($teacher->{{ __('email)') }}
+                                            <li><a href="mailto:{{ $teacher->email }}"><i class="fas fa-envelope"></i> {{ $teacher->{{ __('email }}') }}</a></li>
                                         @endif
-                                        @if ($teacher->phone)
-                                            <li><a href="tel:{{ $teacher->phone }}"><i class="fas fa-phone"></i> {{ $teacher->phone }}</a></li>
+                                        @if ($teacher->{{ __('phone)') }}
+                                            <li><a href="tel:{{ $teacher->phone }}"><i class="fas fa-phone"></i> {{ $teacher->{{ __('phone }}') }}</a></li>
                                         @endif
                                     </ul>
                                 </div>
                             @endif
-                            @if ($teacher->facebook_url || $teacher->whatsapp_url || $teacher->behance_url || $teacher->pinterest_url || $teacher->linkedin_url)
+                            @if ($teacher->facebook_url || $teacher->whatsapp_url || $teacher->behance_url || $teacher->pinterest_url || $teacher->{{ __('linkedin_url)') }}
                                 <div class="wexnix_team-details-social">
-                                    @if ($teacher->facebook_url)
+                                    @if ($teacher->{{ __('facebook_url)') }}
                                         <a href="{{ $teacher->facebook_url }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
                                     @endif
-                                    @if ($teacher->whatsapp_url)
+                                    @if ($teacher->{{ __('whatsapp_url)') }}
                                         <a href="{{ $teacher->whatsapp_url }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
                                     @endif
-                                    @if ($teacher->behance_url)
+                                    @if ($teacher->{{ __('behance_url)') }}
                                         <a href="{{ $teacher->behance_url }}" target="_blank" rel="noopener"><i class="fab fa-behance"></i></a>
                                     @endif
-                                    @if ($teacher->pinterest_url)
+                                    @if ($teacher->{{ __('pinterest_url)') }}
                                         <a href="{{ $teacher->pinterest_url }}" target="_blank" rel="noopener"><i class="fab fa-pinterest"></i></a>
                                     @endif
-                                    @if ($teacher->linkedin_url)
+                                    @if ($teacher->{{ __('linkedin_url)') }}
                                         <a href="{{ $teacher->linkedin_url }}" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
                                     @endif
                                 </div>
@@ -85,17 +85,17 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            @if ($teacher->biography)
+                            @if ($teacher->{{ __('biography)') }}
                                 <div class="wexnix_biography">
-                                    <h4 class="mb-3">Biography</h4>
-                                    <div class="mb-10">{!! $teacher->biography !!}</div>
+                                    <h4 class="mb-3">{{ __('Biography') }}</h4>
+                                    <div class="mb-10">{!! $teacher->{{ __('biography !!}') }}</div>
                                 </div>
                             @endif
                         </div>
                         <div class="col-md-6">
                             @if (count($skills))
                                 <div class="wexnix_team-skill">
-                                    <h4 class="mb-3">Professional Skills</h4>
+                                    <h4 class="mb-3">{{ __('Professional Skills') }}</h4>
                                     <div class="wexnix_skills-section">
                                         @foreach ($skills as $skill)
                                             <div class="wexnix_progress-box">

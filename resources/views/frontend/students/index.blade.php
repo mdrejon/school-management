@@ -9,10 +9,10 @@
     <!-- breadcrumb -->
     <div class="wexnix_site-breadcrumb" @if($settings->student_list_page_breadcrumb_image_url) style="background: url('{{ $settings->student_list_page_breadcrumb_image_url }}')" @endif>
         <div class="container">
-            <h2 class="wexnix_breadcrumb-title">{{ $settings->student_list_page_breadcrumb_title ?? 'Student List' }}</h2>
+            <h2 class="wexnix_breadcrumb-title">{{ $settings->{{ __('student_list_page_breadcrumb_title ?? \'Student List\' }}') }}</h2>
             <ul class="wexnix_breadcrumb-menu">
                 <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                <li class="active">{{ $settings->student_list_page_breadcrumb_title ?? 'Student List' }}</li>
+                <li class="active">{{ $settings->{{ __('student_list_page_breadcrumb_title ?? \'Student List\' }}') }}</li>
             </ul>
         </div>
     </div>
@@ -29,7 +29,7 @@
                             <select name="class_id" class="form-select">
                                 <option value="">{{ __('Select One') }}</option>
                                 @foreach($classes as $class)
-                                    <option value="{{ $class->id }}" @selected(request('class_id') == $class->id)>{{ $class->name }}</option>
+                                    <option value="{{ $class->id }}" @selected(request('class_id') == $class->id)>{{ $class->{{ __('name }}') }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -38,7 +38,7 @@
                             <select name="section_id" class="form-select">
                                 <option value="">{{ __('Select One') }}</option>
                                 @foreach($sections as $section)
-                                    <option value="{{ $section->id }}" @selected(request('section_id') == $section->id)>{{ $section->name }}</option>
+                                    <option value="{{ $section->id }}" @selected(request('section_id') == $section->id)>{{ $section->{{ __('name }}') }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -83,12 +83,12 @@
                                 <td>
                                     <img src="{{ $student->picture ? '/storage/' . ltrim($student->picture, '/') : asset('frontend/assets/img/default-user.jpg') }}" alt="{{ $student->first_name }}" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
                                 </td>
-                                <td>{{ $student->first_name }} {{ $student->last_name }}</td>
-                                <td>{{ $student->roll_no }}</td>
-                                <td>{{ $student->academicClass?->name ?? '-' }}</td>
-                                <td>{{ $student->section?->name ?? '-' }}</td>
-                                <td>{{ $student->group ?? '-' }}</td>
-                                <td>{{ $student->gender ?? '-' }}</td>
+                                <td>{{ $student->first_name }} {{ $student->{{ __('last_name }}') }}</td>
+                                <td>{{ $student->{{ __('roll_no }}') }}</td>
+                                <td>{{ $student->academicClass?->{{ __('name ?? \'-\' }}') }}</td>
+                                <td>{{ $student->section?->{{ __('name ?? \'-\' }}') }}</td>
+                                <td>{{ $student->{{ __('group ?? \'-\' }}') }}</td>
+                                <td>{{ $student->{{ __('gender ?? \'-\' }}') }}</td>
                             </tr>
                         @empty
                             <tr>
@@ -100,7 +100,7 @@
             </div>
 
             <div class="mt-4">
-                {{ $students->links('pagination::bootstrap-5') }}
+                {{ $students->{{ __('links(\'pagination::bootstrap-5\') }}') }}
             </div>
         </div>
     </div>

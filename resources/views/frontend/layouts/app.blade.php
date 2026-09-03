@@ -156,17 +156,17 @@
                 <div class="wexnix_header-top-wrap">
                     <div class="wexnix_header-top-left">
                         <div class="wexnix_header-top-social">
-                            <span>Follow Us: </span>
-                            @if ($siteSettings->facebook_url)
+                            <span>{{ __('Follow Us:') }} </span>
+                            @if ($siteSettings->{{ __('facebook_url)') }}
                                 <a href="{{ $siteSettings->facebook_url }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
                             @endif
-                            @if ($siteSettings->instagram_url)
+                            @if ($siteSettings->{{ __('instagram_url)') }}
                                 <a href="{{ $siteSettings->instagram_url }}" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
                             @endif
-                            @if ($siteSettings->youtube_url)
+                            @if ($siteSettings->{{ __('youtube_url)') }}
                                 <a href="{{ $siteSettings->youtube_url }}" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
                             @endif
-                            @if ($siteSettings->whatsapp_url)
+                            @if ($siteSettings->{{ __('whatsapp_url)') }}
                                 <a href="{{ $siteSettings->whatsapp_url }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
                             @endif
                         </div>
@@ -174,26 +174,26 @@
                     <div class="wexnix_header-top-right">
                         <div class="wexnix_header-top-contact">
                             <ul>
-                                @if ($siteSettings->address)
+                                @if ($siteSettings->{{ __('address)') }}
                                     <li>
-                                        <a href="#"><i class="fas fa-location-dot"></i> {{ $siteSettings->address }}</a>
+                                        <a href="#"><i class="fas fa-location-dot"></i> {{ $siteSettings->{{ __('address }}') }}</a>
                                     </li>
                                 @endif
-                                @if ($siteSettings->email)
+                                @if ($siteSettings->{{ __('email)') }}
                                     <li>
-                                        <a href="mailto:{{ $siteSettings->email }}"><i class="fas fa-envelope"></i> {{ $siteSettings->email }}</a>
+                                        <a href="mailto:{{ $siteSettings->email }}"><i class="fas fa-envelope"></i> {{ $siteSettings->{{ __('email }}') }}</a>
                                     </li>
                                 @endif
-                                @if ($siteSettings->phone)
+                                @if ($siteSettings->{{ __('phone)') }}
                                     <li>
-                                        <a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone-volume"></i> {{ $siteSettings->phone }}</a>
+                                        <a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone-volume"></i> {{ $siteSettings->{{ __('phone }}') }}</a>
                                     </li>
                                 @endif
                             </ul>
                         </div>
                         <div class="wexnix_header-lang">
                             @foreach ($languages as $lang)
-                                <a href="{{ route('language.switch', $lang->code) }}" class="{{ app()->getLocale() === $lang->code ? 'active' : '' }}">{{ strtoupper($lang->code) }}</a>
+                                <a href="{{ route('language.switch', $lang->code) }}" class="{{ app()->getLocale() === $lang->code ? 'active' : '' }}">{{ strtoupper($lang->{{ __('code) }}') }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -210,11 +210,11 @@
                     </a>
                     <div class="wexnix_header-middle-right">
                         <form class="wexnix_header-search-form" action="{{ route('search') }}" method="GET">
-                            <input type="search" name="q" placeholder="Search Here...">
+                            <input type="search" name="q" placeholder="{{ __('Search Here...') }}">
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </form>
                         <a href="application-form.html" class="wexnix_theme-btn"><span
-                                class="fas fa-pencil"></span>Apply Now</a>
+                                class="fas fa-pencil"></span>{{ __('Apply Now') }}</a>
                     </div>
                 </div>
             </div>
@@ -240,18 +240,18 @@
         </div>
 
         <!-- notice marquee -->
-        @if (\App\Models\ModuleSetting::isEnabled('notices') && $marqueeNotices->count())
+        @if (\App\Models\ModuleSetting::isEnabled('notices') && $marqueeNotices->{{ __('count())') }}
             <div class="wexnix_notice-marquee">
                 <div class="container">
                     <div class="wexnix_notice-marquee-wrap">
-                        <span class="wexnix_notice-label">{{ $noticePageSettings->marquee_label ?: 'Notice' }}</span>
+                        <span class="wexnix_notice-label">{{ $noticePageSettings->{{ __('marquee_label ?: \'Notice\' }}') }}</span>
                         <div class="wexnix_marquee-viewport">
                             <div class="wexnix_marquee-track">
                                 @foreach ($marqueeNotices as $notice)
-                                    <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->title }}</a></span>
+                                    <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->{{ __('title }}') }}</a></span>
                                 @endforeach
                                 @foreach ($marqueeNotices as $notice)
-                                    <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->title }}</a></span>
+                                    <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->{{ __('title }}') }}</a></span>
                                 @endforeach
                             </div>
                         </div>
@@ -269,7 +269,7 @@
         <button class="wexnix_close-search"><span class="fas fa-times"></span></button>
         <form action="{{ route('search') }}" method="GET">
             <div class="wexnix_form-group">
-                <input type="search" name="q" placeholder="Search Here..." required>
+                <input type="search" name="q" placeholder="{{ __('Search Here...') }}" required>
                 <button type="submit"><i class="fas fa-search"></i></button>
             </div>
         </form>
@@ -295,28 +295,28 @@
                             <a href="{{ route('home') }}" class="wexnix_footer-logo">
                                 <img src="{{ $siteSettings->footer_logo_url ?? '/frontend/assets/img/logo/logo-light.png' }}" alt="{{ $siteSettings->site_name }}">
                             </a>
-                            @if ($siteSettings->footer_about)
+                            @if ($siteSettings->{{ __('footer_about)') }}
                                 <p class="mb-3">
-                                    {{ $siteSettings->footer_about }}
+                                    {{ $siteSettings->{{ __('footer_about }}') }}
                                 </p>
                             @endif
                             <ul class="wexnix_footer-contact">
-                                @if ($siteSettings->phone)
-                                    <li><a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone"></i>{{ $siteSettings->phone }}</a></li>
+                                @if ($siteSettings->{{ __('phone)') }}
+                                    <li><a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone"></i>{{ $siteSettings->{{ __('phone }}') }}</a></li>
                                 @endif
-                                @if ($siteSettings->address)
-                                    <li><i class="fas fa-map-marker-alt"></i>{{ $siteSettings->address }}</li>
+                                @if ($siteSettings->{{ __('address)') }}
+                                    <li><i class="fas fa-map-marker-alt"></i>{{ $siteSettings->{{ __('address }}') }}</li>
                                 @endif
-                                @if ($siteSettings->email)
+                                @if ($siteSettings->{{ __('email)') }}
                                     <li><a href="mailto:{{ $siteSettings->email }}"><i
-                                                class="fas fa-envelope"></i>{{ $siteSettings->email }}</a></li>
+                                                class="fas fa-envelope"></i>{{ $siteSettings->{{ __('email }}') }}</a></li>
                                 @endif
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-2">
                         <div class="wexnix_footer-widget-box wexnix_list">
-                            <h4 class="wexnix_footer-widget-title">{{ $siteSettings->footer_quick_links_title ?: 'Quick Links' }}</h4>
+                            <h4 class="wexnix_footer-widget-title">{{ $siteSettings->{{ __('footer_quick_links_title ?: \'Quick Links\' }}') }}</h4>
                             <ul class="wexnix_footer-list">
                                 @foreach ($siteSettings->footerQuickLinkItems() as $link)
                                     <li><a href="{{ $link['url'] }}"><i class="fas fa-caret-right"></i> {{ $link['label'] }}</a></li>
@@ -326,7 +326,7 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="wexnix_footer-widget-box wexnix_list">
-                            <h4 class="wexnix_footer-widget-title">{{ $siteSettings->footer_campus_title ?: 'Our Campus' }}</h4>
+                            <h4 class="wexnix_footer-widget-title">{{ $siteSettings->{{ __('footer_campus_title ?: \'Our Campus\' }}') }}</h4>
                             <ul class="wexnix_footer-list">
                                 @foreach ($siteSettings->footerCampusLinkItems() as $link)
                                     <li><a href="{{ $link['url'] }}"><i class="fas fa-caret-right"></i> {{ $link['label'] }}</a></li>
@@ -336,14 +336,14 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="wexnix_footer-widget-box wexnix_list">
-                            <h4 class="wexnix_footer-widget-title">{{ $siteSettings->footer_newsletter_title ?: 'Newsletter' }}</h4>
+                            <h4 class="wexnix_footer-widget-title">{{ $siteSettings->{{ __('footer_newsletter_title ?: \'Newsletter\' }}') }}</h4>
                             <div class="wexnix_footer-newsletter">
-                                <p>{{ $siteSettings->footer_newsletter_text ?: 'Subscribe Our Newsletter To Get Latest Update And News' }}</p>
+                                <p>{{ $siteSettings->{{ __('footer_newsletter_text ?: \'Subscribe Our Newsletter To Get Latest Update And News\' }}') }}</p>
                                 <div class="wexnix_subscribe-form">
                                     <form action="#">
-                                        <input type="email" class="form-control" placeholder="Your Email">
+                                        <input type="email" class="form-control" placeholder="{{ __('Your Email') }}">
                                         <button class="wexnix_theme-btn" type="submit">
-                                            Subscribe Now <i class="fas fa-paper-plane"></i>
+                                            {{ __('Subscribe Now') }} <i class="fas fa-paper-plane"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -359,21 +359,21 @@
                     <div class="row">
                         <div class="col-md-6 align-self-center">
                             <p class="wexnix_copyright-text">
-                                &copy; Copyright <span id="date"></span> <a href="{{ route('home') }}"> {{ $siteSettings->site_name }} </a> {{ $siteSettings->copyright_text ?? 'All Rights Reserved.' }}
+                                &copy; Copyright <span id="date"></span> <a href="{{ route('home') }}"> {{ $siteSettings->{{ __('site_name }}') }} </a> {{ $siteSettings->{{ __('copyright_text ?? \'All Rights Reserved.\' }}') }}
                             </p>
                         </div>
                         <div class="col-md-6 align-self-center">
                             <ul class="wexnix_footer-social">
-                                @if ($siteSettings->facebook_url)
+                                @if ($siteSettings->{{ __('facebook_url)') }}
                                     <li><a href="{{ $siteSettings->facebook_url }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a></li>
                                 @endif
-                                @if ($siteSettings->linkedin_url)
+                                @if ($siteSettings->{{ __('linkedin_url)') }}
                                     <li><a href="{{ $siteSettings->linkedin_url }}" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a></li>
                                 @endif
-                                @if ($siteSettings->whatsapp_url)
+                                @if ($siteSettings->{{ __('whatsapp_url)') }}
                                     <li><a href="{{ $siteSettings->whatsapp_url }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a></li>
                                 @endif
-                                @if ($siteSettings->youtube_url)
+                                @if ($siteSettings->{{ __('youtube_url)') }}
                                     <li><a href="{{ $siteSettings->youtube_url }}" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a></li>
                                 @endif
                             </ul>

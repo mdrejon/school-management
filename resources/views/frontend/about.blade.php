@@ -9,10 +9,10 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url({{ $siteSettings->about_page_breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }})">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $siteSettings->about_page_breadcrumb_title ?: 'About Us' }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $siteSettings->{{ __('about_page_breadcrumb_title ?: \'About Us\' }}') }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li class="active">{{ $siteSettings->about_page_breadcrumb_title ?: 'About Us' }}</li>
+                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                    <li class="active">{{ $siteSettings->{{ __('about_page_breadcrumb_title ?: \'About Us\' }}') }}</li>
                 </ul>
             </div>
         </div>

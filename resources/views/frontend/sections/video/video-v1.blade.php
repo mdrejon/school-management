@@ -3,29 +3,29 @@
 @php
     $titleHtml = e($siteSettings->video_title);
     if (! empty($siteSettings->video_highlight)) {
-        $titleHtml = str_ireplace(e($siteSettings->video_highlight), '<span>' . e($siteSettings->video_highlight) . '</span>', $titleHtml);
+        $titleHtml = str_ireplace(e($siteSettings->{{ __('video_highlight), \'') }}<span>' . e($siteSettings->{{ __('video_highlight) . \'') }}</span>', $titleHtml);
     }
 @endphp
-@if ($siteSettings->video_title)
+@if ($siteSettings->{{ __('video_title)') }}
     <div class="wexnix_video-area">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4 wow fadeInLeft" data-wow-delay=".25s">
                     <div class="wexnix_site-heading mb-3">
-                        @if ($siteSettings->video_tagline)
-                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->video_tagline }}</span>
+                        @if ($siteSettings->{{ __('video_tagline)') }}
+                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->{{ __('video_tagline }}') }}</span>
                         @endif
                         <h2 class="wexnix_site-title">
                             {!! $titleHtml !!}
                         </h2>
                     </div>
-                    @if ($siteSettings->video_description)
+                    @if ($siteSettings->{{ __('video_description)') }}
                         <p class="wexnix_about-text">
-                            {{ $siteSettings->video_description }}
+                            {{ $siteSettings->{{ __('video_description }}') }}
                         </p>
                     @endif
-                    @if ($siteSettings->video_button_text)
-                        <a href="{{ $siteSettings->video_button_url ?: '#' }}" class="wexnix_theme-btn mt-30">{{ $siteSettings->video_button_text }}<i class="fas fa-arrow-right-long"></i></a>
+                    @if ($siteSettings->{{ __('video_button_text)') }}
+                        <a href="{{ $siteSettings->video_button_url ?: '#' }}" class="wexnix_theme-btn mt-30">{{ $siteSettings->{{ __('video_button_text }}') }}<i class="fas fa-arrow-right-long"></i></a>
                     @endif
                 </div>
                 <div class="col-lg-8 wow fadeInRight" data-wow-delay=".25s">

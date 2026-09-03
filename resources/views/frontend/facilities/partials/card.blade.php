@@ -7,13 +7,13 @@
         </div>
         <div class="wexnix_facility-content">
             <h3 class="wexnix_facility-title">
-                <a href="{{ route('facilities.show', $facility) }}">{{ $facility->title }}</a>
+                <a href="{{ route('facilities.show', $facility) }}">{{ $facility->{{ __('title }}') }}</a>
             </h3>
-            @if ($facility->short_description)
-                <p class="wexnix_facility-text">{{ $facility->short_description }}</p>
+            @if ($facility->{{ __('short_description)') }}
+                <p class="wexnix_facility-text">{{ $facility->{{ __('short_description }}') }}</p>
             @endif
             <div class="wexnix_facility-arrow">
-                <a href="{{ route('facilities.show', $facility) }}" class="wexnix_theme-btn">Read More<i class="fas fa-arrow-right-long"></i></a>
+                <a href="{{ route('facilities.show', $facility) }}" class="wexnix_theme-btn">{{ __('Read More') }}<i class="fas fa-arrow-right-long"></i></a>
             </div>
         </div>
     </div>

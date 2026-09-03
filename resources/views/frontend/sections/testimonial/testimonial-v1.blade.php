@@ -3,21 +3,21 @@
 @php
     $titleHtml = e($pageSettings->section_title);
     if (! empty($pageSettings->section_highlight)) {
-        $titleHtml = str_ireplace(e($pageSettings->section_highlight), '<span>' . e($pageSettings->section_highlight) . '</span>', $titleHtml);
+        $titleHtml = str_ireplace(e($pageSettings->{{ __('section_highlight), \'') }}<span>' . e($pageSettings->{{ __('section_highlight) . \'') }}</span>', $titleHtml);
     }
 @endphp
-@if ($pageSettings->section_title && $testimonials->count())
+@if ($pageSettings->section_title && $testimonials->{{ __('count())') }}
     <div class="wexnix_testimonial-area wexnix_ts-bg pt-80 pb-80">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mx-auto">
                     <div class="wexnix_site-heading text-center">
-                        @if ($pageSettings->section_tagline)
-                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->section_tagline }}</span>
+                        @if ($pageSettings->{{ __('section_tagline)') }}
+                            <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->{{ __('section_tagline }}') }}</span>
                         @endif
                         <h2 class="wexnix_site-title text-white">{!! $titleHtml !!}</h2>
-                        @if ($pageSettings->section_description)
-                            <p class="text-white">{{ $pageSettings->section_description }}</p>
+                        @if ($pageSettings->{{ __('section_description)') }}
+                            <p class="text-white">{{ $pageSettings->{{ __('section_description }}') }}</p>
                         @endif
                     </div>
                 </div>
