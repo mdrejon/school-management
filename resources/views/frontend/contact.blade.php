@@ -9,10 +9,10 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url({{ $siteSettings->contact_page_breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }})">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $siteSettings->{{ __('contact_page_breadcrumb_title ?: \'Contact Us\' }}') }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $siteSettings->contact_page_breadcrumb_title ?: 'Contact Us' }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
                     <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                    <li class="active">{{ $siteSettings->{{ __('contact_page_breadcrumb_title ?: \'Contact Us\' }}') }}</li>
+                    <li class="active">{{ $siteSettings->contact_page_breadcrumb_title ?: 'Contact Us' }}</li>
                 </ul>
             </div>
         </div>
@@ -23,54 +23,54 @@
             <div class="container">
                 <div class="wexnix_contact-content">
                     <div class="row">
-                        @if ($siteSettings->{{ __('contact_address_value)') }}
+                        @if ($siteSettings->contact_address_value)
                             <div class="col-md-3">
                                 <div class="wexnix_contact-info">
                                     <div class="wexnix_contact-info-icon">
                                         <i class="fas fa-map-location-dot"></i>
                                     </div>
                                     <div class="wexnix_contact-info-content">
-                                        <h5>{{ $siteSettings->{{ __('contact_address_label ?: \'Office Address\' }}') }}</h5>
-                                        <p>{{ $siteSettings->{{ __('contact_address_value }}') }}</p>
+                                        <h5>{{ $siteSettings->contact_address_label ?: 'Office Address' }}</h5>
+                                        <p>{{ $siteSettings->contact_address_value }}</p>
                                     </div>
                                 </div>
                             </div>
                         @endif
-                        @if ($siteSettings->{{ __('contact_phone_value)') }}
+                        @if ($siteSettings->contact_phone_value)
                             <div class="col-md-3">
                                 <div class="wexnix_contact-info">
                                     <div class="wexnix_contact-info-icon">
                                         <i class="fas fa-phone-volume"></i>
                                     </div>
                                     <div class="wexnix_contact-info-content">
-                                        <h5>{{ $siteSettings->{{ __('contact_phone_label ?: \'Call Us\' }}') }}</h5>
-                                        <p>{{ $siteSettings->{{ __('contact_phone_value }}') }}</p>
+                                        <h5>{{ $siteSettings->contact_phone_label ?: 'Call Us' }}</h5>
+                                        <p>{{ $siteSettings->contact_phone_value }}</p>
                                     </div>
                                 </div>
                             </div>
                         @endif
-                        @if ($siteSettings->{{ __('contact_email_value)') }}
+                        @if ($siteSettings->contact_email_value)
                             <div class="col-md-3">
                                 <div class="wexnix_contact-info">
                                     <div class="wexnix_contact-info-icon">
                                         <i class="fas fa-envelope"></i>
                                     </div>
                                     <div class="wexnix_contact-info-content">
-                                        <h5>{{ $siteSettings->{{ __('contact_email_label ?: \'Email Us\' }}') }}</h5>
-                                        <p>{{ $siteSettings->{{ __('contact_email_value }}') }}</p>
+                                        <h5>{{ $siteSettings->contact_email_label ?: 'Email Us' }}</h5>
+                                        <p>{{ $siteSettings->contact_email_value }}</p>
                                     </div>
                                 </div>
                             </div>
                         @endif
-                        @if ($siteSettings->{{ __('contact_open_time)') }}
+                        @if ($siteSettings->contact_open_time)
                             <div class="col-md-3">
                                 <div class="wexnix_contact-info">
                                     <div class="wexnix_contact-info-icon">
                                         <i class="fas fa-clock"></i>
                                     </div>
                                     <div class="wexnix_contact-info-content">
-                                        <h5>{{ $siteSettings->{{ __('contact_open_time_label ?: \'Open Time\' }}') }}</h5>
-                                        <p>{{ $siteSettings->{{ __('contact_open_time }}') }}</p>
+                                        <h5>{{ $siteSettings->contact_open_time_label ?: 'Open Time' }}</h5>
+                                        <p>{{ $siteSettings->contact_open_time }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -87,9 +87,9 @@
                         <div class="col-lg-7 align-self-center">
                             <div class="wexnix_contact-form">
                                 <div class="wexnix_contact-form-header">
-                                    <h2>{{ $siteSettings->{{ __('contact_form_title ?: \'Get In Touch\' }}') }}</h2>
-                                    @if ($siteSettings->{{ __('contact_form_description)') }}
-                                        <p>{{ $siteSettings->{{ __('contact_form_description }}') }}</p>
+                                    <h2>{{ $siteSettings->contact_form_title ?: 'Get In Touch' }}</h2>
+                                    @if ($siteSettings->contact_form_description)
+                                        <p>{{ $siteSettings->contact_form_description }}</p>
                                     @endif
                                 </div>
                                 <form method="post" action="{{ route('contact.store') }}" id="contact-form">
@@ -140,7 +140,7 @@
         <!-- end contact area -->
 
         <!-- map -->
-        @if ($siteSettings->{{ __('contact_map_embed_url)') }}
+        @if ($siteSettings->contact_map_embed_url)
             <div class="wexnix_contact-map">
                 <iframe src="{{ $siteSettings->contact_map_embed_url }}" style="border:0;" allowfullscreen loading="lazy"></iframe>
             </div>

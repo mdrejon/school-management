@@ -9,10 +9,10 @@
     <!-- breadcrumb -->
     <div class="wexnix_site-breadcrumb" @if($settings->exam_result_page_breadcrumb_image_url) style="background: url('{{ $settings->exam_result_page_breadcrumb_image_url }}')" @else style="background: url('{{ asset('frontend/assets/img/breadcrumb/01.jpg') }}')" @endif>
         <div class="container">
-            <h2 class="wexnix_breadcrumb-title">{{ $settings->{{ __('exam_result_page_breadcrumb_title ?? \'Exam Result\' }}') }}</h2>
+            <h2 class="wexnix_breadcrumb-title">{{ $settings->exam_result_page_breadcrumb_title ?? 'Exam Result' }}</h2>
             <ul class="wexnix_breadcrumb-menu">
                 <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                <li class="active">{{ $settings->{{ __('exam_result_page_breadcrumb_title ?? \'Exam Result\' }}') }}</li>
+                <li class="active">{{ $settings->exam_result_page_breadcrumb_title ?? 'Exam Result' }}</li>
             </ul>
         </div>
     </div>

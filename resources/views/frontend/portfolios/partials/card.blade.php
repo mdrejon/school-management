@@ -8,11 +8,11 @@
         <div class="wexnix_portfolio-content">
             <div class="wexnix_portfolio-info">
                 <div class="wexnix_portfolio-title-info">
-                    @if ($portfolio->{{ __('category)') }}
-                        <h5 class="wexnix_portfolio-subtitle"><span>//</span> {{ $portfolio->{{ __('category }}') }}</h5>
+                    @if ($portfolio->category)
+                        <h5 class="wexnix_portfolio-subtitle"><span>//</span> {{ $portfolio->category }}</h5>
                     @endif
                     <a href="{{ route('portfolios.show', $portfolio) }}">
-                        <h4 class="wexnix_portfolio-title">{{ $portfolio->{{ __('title }}') }}</h4>
+                        <h4 class="wexnix_portfolio-title">{{ $portfolio->title }}</h4>
                     </a>
                 </div>
                 <a href="{{ route('portfolios.show', $portfolio) }}" class="wexnix_portfolio-btn"><i class="fas fa-arrow-right"></i></a>

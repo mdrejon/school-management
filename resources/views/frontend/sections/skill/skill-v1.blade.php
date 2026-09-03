@@ -4,7 +4,7 @@
 @php
     $titleHtml = e($siteSettings->skill_title);
     if (! empty($siteSettings->skill_highlight)) {
-        $titleHtml = str_ireplace(e($siteSettings->{{ __('skill_highlight), \'') }}<span>' . e($siteSettings->{{ __('skill_highlight) . \'') }}</span>', $titleHtml);
+        $titleHtml = str_ireplace(e($siteSettings->skill_highlight), '<span>' . e($siteSettings->skill_highlight) . '</span>', $titleHtml);
     }
     $skills = $siteSettings->skillItems();
 @endphp
@@ -16,9 +16,9 @@
                     <div class="wexnix_enroll-left wow fadeInLeft" data-wow-delay=".25s">
                         <div class="wexnix_enroll-form">
                             <div class="wexnix_enroll-form-header">
-                                <h3>{{ $siteSettings->{{ __('skill_enroll_title ?: \'Start Your Enrollment\' }}') }}</h3>
-                                @if ($siteSettings->{{ __('skill_enroll_subtitle)') }}
-                                    <p>{{ $siteSettings->{{ __('skill_enroll_subtitle }}') }}</p>
+                                <h3>{{ $siteSettings->skill_enroll_title ?: 'Start Your Enrollment' }}</h3>
+                                @if ($siteSettings->skill_enroll_subtitle)
+                                    <p>{{ $siteSettings->skill_enroll_subtitle }}</p>
                                 @endif
                             </div>
                             <form action="#">
@@ -51,13 +51,13 @@
                     <div class="wexnix_enroll-right wow fadeInUp" data-wow-delay=".25s">
                         <div class="wexnix_skill-content">
                             <div class="wexnix_site-heading mb-3">
-                                @if ($siteSettings->{{ __('skill_tagline)') }}
-                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->{{ __('skill_tagline }}') }}</span>
+                                @if ($siteSettings->skill_tagline)
+                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $siteSettings->skill_tagline }}</span>
                                 @endif
                                 <h2 class="wexnix_site-title text-white">{!! $titleHtml !!}</h2>
                             </div>
-                            @if ($siteSettings->{{ __('skill_description)') }}
-                                <p class="text-white">{{ $siteSettings->{{ __('skill_description }}') }}</p>
+                            @if ($siteSettings->skill_description)
+                                <p class="text-white">{{ $siteSettings->skill_description }}</p>
                             @endif
                             @if (count($skills))
                                 <div class="wexnix_skills-section">
@@ -71,8 +71,8 @@
                                     @endforeach
                                 </div>
                             @endif
-                            @if ($siteSettings->{{ __('skill_button_text)') }}
-                                <a href="{{ $siteSettings->skill_button_url ?: '#' }}" class="wexnix_theme-btn mt-5">{{ $siteSettings->{{ __('skill_button_text }}') }}<i class="fas fa-arrow-right-long"></i></a>
+                            @if ($siteSettings->skill_button_text)
+                                <a href="{{ $siteSettings->skill_button_url ?: '#' }}" class="wexnix_theme-btn mt-5">{{ $siteSettings->skill_button_text }}<i class="fas fa-arrow-right-long"></i></a>
                             @endif
                         </div>
                     </div>

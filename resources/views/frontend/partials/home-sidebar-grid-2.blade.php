@@ -1,8 +1,8 @@
     <!-- Notice Board Widget -->
-    @if (!empty($siteSettings->{{ __('sidebar_notice_show) && \App\Models\ModuleSetting::isEnabled(\'notices\'))') }}
+    @if (!empty($siteSettings->sidebar_notice_show) && \App\Models\ModuleSetting::isEnabled('notices'))
         <div class="col-lg-4 col-md-6">
     <div class="wexnix_sidebar-widget h-100">
-            <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-rss"></i> {{ $siteSettings->{{ __('sidebar_notice_title ?: \'Notice Board\' }}') }}</h4>
+            <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-rss"></i> {{ $siteSettings->sidebar_notice_title ?: 'Notice Board' }}</h4>
             <ul class="wexnix_sidebar-notice-list">
                 @php
                     $limit = $siteSettings->sidebar_notice_limit ?: 4;
@@ -12,8 +12,8 @@
                     <li>
                         <span class="wexnix_sidebar-notice-icon"><i class="fas fa-file-alt"></i></span>
                         <div class="wexnix_sidebar-notice-content">
-                            <a href="{{ route('notices.show', $notice->slug) }}">{{ $notice->{{ __('title }}') }}</a>
-                            <span>{{ $notice->published_at ? $notice->published_at->{{ __('format(\'l, F j, Y\') : \'\' }}') }}</span>
+                            <a href="{{ route('notices.show', $notice->slug) }}">{{ $notice->title }}</a>
+                            <span>{{ $notice->published_at ? $notice->published_at->format('l, F j, Y') : '' }}</span>
                         </div>
                     </li>
                 @empty
@@ -33,7 +33,7 @@
     <!-- Notice Board Widget End -->
 
     <!-- Academic Calendar Widget -->
-    @if (!empty($siteSettings->{{ __('sidebar_calendar_show))') }}
+    @if (!empty($siteSettings->sidebar_calendar_show))
         <div class="col-lg-4 col-md-6">
             @include('frontend.partials.academic-calendar-widget')
         </div>
@@ -51,11 +51,11 @@
                     @foreach ($events->take(3) as $event)
                         <li>
                             <div class="wexnix_sidebar-event-date">
-                                <span>{{ $event->event_date ? $event->event_date->{{ __('format(\'d\') : \'\' }}') }}</span>{{ $event->event_date ? $event->event_date->{{ __('format(\'M\') : \'\' }}') }}
+                                <span>{{ $event->event_date ? $event->event_date->format('d') : '' }}</span>{{ $event->event_date ? $event->event_date->format('M') : '' }}
                             </div>
                             <div class="wexnix_sidebar-event-content">
-                                <a href="{{ route('events.show', $event) }}">{{ $event->{{ __('title }}') }}</a>
-                                <span><i class="fas fa-map-marker-alt"></i> {{ $event->{{ __('location }}') }}</span>
+                                <a href="{{ route('events.show', $event) }}">{{ $event->title }}</a>
+                                <span><i class="fas fa-map-marker-alt"></i> {{ $event->location }}</span>
                             </div>
                         </li>
                     @endforeach

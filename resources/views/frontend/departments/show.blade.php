@@ -9,11 +9,11 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url({{ $pageSettings->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }})">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $department->{{ __('title }}') }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $department->title }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
                     <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                    <li><a href="{{ route('departments.index') }}">{{ $pageSettings->{{ __('breadcrumb_title ?: \'Academics Department\' }}') }}</a></li>
-                    <li class="active">{{ $department->{{ __('title }}') }}</li>
+                    <li><a href="{{ route('departments.index') }}">{{ $pageSettings->breadcrumb_title ?: 'Academics Department' }}</a></li>
+                    <li class="active">{{ $department->title }}</li>
                 </ul>
             </div>
         </div>
@@ -26,12 +26,12 @@
                     <div class="row">
                         <div class="col-xl-4 col-lg-4">
                             <div class="wexnix_department-sidebar">
-                                @if ($otherDepartments->{{ __('count())') }}
+                                @if ($otherDepartments->count())
                                     <div class="wexnix_widget wexnix_category">
                                         <h4 class="wexnix_widget-title">{{ __('Our Departments') }}</h4>
                                         <div class="wexnix_category-list">
                                             @foreach ($otherDepartments as $other)
-                                                <a href="{{ route('departments.show', $other) }}"><i class="fas fa-long-arrow-right"></i>{{ $other->{{ __('title }}') }}</a>
+                                                <a href="{{ route('departments.show', $other) }}"><i class="fas fa-long-arrow-right"></i>{{ $other->title }}</a>
                                             @endforeach
                                         </div>
                                     </div>
@@ -50,25 +50,25 @@
                         </div>
                         <div class="col-xl-8 col-lg-8">
                             <div class="wexnix_department-details">
-                                @if ($department->{{ __('image_url)') }}
+                                @if ($department->image_url)
                                     <div class="wexnix_department-details-img mb-30">
                                         <img src="{{ $department->image_url }}" alt="thumb">
                                     </div>
                                 @endif
                                 <div class="wexnix_department-details">
-                                    <h3 class="mb-20">{{ $department->{{ __('title }}') }}</h3>
-                                    @if ($department->{{ __('description)') }}
-                                        <div class="mb-20">{!! $department->{{ __('description !!}') }}</div>
+                                    <h3 class="mb-20">{{ $department->title }}</h3>
+                                    @if ($department->description)
+                                        <div class="mb-20">{!! $department->description !!}</div>
                                     @endif
 
-                                    @if ($department->gallery_image_1_url || $department->{{ __('gallery_image_2_url)') }}
+                                    @if ($department->gallery_image_1_url || $department->gallery_image_2_url)
                                         <div class="row">
-                                            @if ($department->{{ __('gallery_image_1_url)') }}
+                                            @if ($department->gallery_image_1_url)
                                                 <div class="col-md-6 mb-20">
                                                     <img src="{{ $department->gallery_image_1_url }}" alt="">
                                                 </div>
                                             @endif
-                                            @if ($department->{{ __('gallery_image_2_url)') }}
+                                            @if ($department->gallery_image_2_url)
                                                 <div class="col-md-6 mb-20">
                                                     <img src="{{ $department->gallery_image_2_url }}" alt="">
                                                 </div>
@@ -79,9 +79,9 @@
                                     @php $requirementItems = $department->requirementItems(); @endphp
                                     @if ($department->requirement_title || count($requirementItems))
                                         <div class="my-4">
-                                            @if ($department->{{ __('requirement_title)') }}
+                                            @if ($department->requirement_title)
                                                 <div class="mb-3">
-                                                    <h3 class="mb-3">{{ $department->{{ __('requirement_title }}') }}</h3>
+                                                    <h3 class="mb-3">{{ $department->requirement_title }}</h3>
                                                 </div>
                                             @endif
                                             @if (count($requirementItems))

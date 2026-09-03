@@ -25,7 +25,7 @@
         }
     </style>
     <div class="wexnix_sidebar-widget h-100">
-        <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-calendar-alt"></i> {{ $siteSettings->{{ __('sidebar_calendar_title ?: \'Academic Calendar\' }}') }}</h4>
+        <h4 class="wexnix_sidebar-widget-title"><i class="fas fa-calendar-alt"></i> {{ $siteSettings->sidebar_calendar_title ?: 'Academic Calendar' }}</h4>
         <div class="wexnix_sidebar-calendar" id="academicCalendarWidget">
             <div class="wexnix_sidebar-calendar-head d-flex justify-content-between align-items-center">
                 <button type="button" id="acPrevMonth" class="btn btn-sm btn-link text-decoration-none p-1"><i class="fas fa-chevron-left"></i></button>

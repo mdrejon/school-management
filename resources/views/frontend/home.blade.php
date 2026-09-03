@@ -15,7 +15,7 @@
         @endif
         <!-- institute info strip end -->
 
-        @if (($siteSettings->{{ __('homepage_template ?? \'default\') === \'index-1\')') }}
+        @if (($siteSettings->homepage_template ?? 'default') === 'index-1')
             <!-- home content + sidebar layout (index-1) -->
             <div class="wexnix_home-content-area">
                 <div class="container-fluid">
@@ -29,7 +29,7 @@
         @endif
         <!-- about area end -->
 
-        @if (($siteSettings->{{ __('homepage_template ?? \'default\') === \'index-2\')') }}
+        @if (($siteSettings->homepage_template ?? 'default') === 'index-2')
             <!-- home content + sidebar layout grid 1 (index-2) -->
             <div class="wexnix_home-content-area pt-60">
                 <div class="container-fluid">
@@ -51,7 +51,7 @@
         @endif
         <!-- counter area end -->
 
-        @if (($siteSettings->{{ __('homepage_template ?? \'default\') === \'index-2\')') }}
+        @if (($siteSettings->homepage_template ?? 'default') === 'index-2')
             <!-- home content + sidebar layout grid (index-2) -->
             <div class="wexnix_home-content-area pt-60">
                 <div class="container-fluid">
@@ -81,7 +81,7 @@
         @endif
         <!-- video-area end -->
 
-        @if (($siteSettings->{{ __('homepage_template ?? \'default\') === \'index-1\')') }}
+        @if (($siteSettings->homepage_template ?? 'default') === 'index-1')
                         </div>
                         <!-- home main col end -->
 

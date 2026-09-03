@@ -9,10 +9,10 @@
     <!-- breadcrumb -->
     <div class="wexnix_site-breadcrumb" @if($settings->tuition_fee_page_breadcrumb_image_url) style="background: url('{{ $settings->tuition_fee_page_breadcrumb_image_url }}')" @endif>
         <div class="container">
-            <h2 class="wexnix_breadcrumb-title">{{ $settings->{{ __('tuition_fee_page_breadcrumb_title ?? \'Tuition Fees\' }}') }}</h2>
+            <h2 class="wexnix_breadcrumb-title">{{ $settings->tuition_fee_page_breadcrumb_title ?? 'Tuition Fees' }}</h2>
             <ul class="wexnix_breadcrumb-menu">
                 <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                <li class="active">{{ $settings->{{ __('tuition_fee_page_breadcrumb_title ?? \'Tuition Fees\' }}') }}</li>
+                <li class="active">{{ $settings->tuition_fee_page_breadcrumb_title ?? 'Tuition Fees' }}</li>
             </ul>
         </div>
     </div>
@@ -22,7 +22,7 @@
     <div class="wexnix_tuition-fee py-120">
         <div class="container">
             <div class="wexnix_tuition-wrap">
-                {!! $settings->{{ __('tuition_fee_page_content !!}') }}
+                {!! $settings->tuition_fee_page_content !!}
             </div>
         </div>
     </div>

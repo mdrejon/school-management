@@ -15,10 +15,10 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url({{ $page->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }})">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $page->{{ __('title }}') }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $page->title }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
                     <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                    <li class="active">{{ $page->{{ __('title }}') }}</li>
+                    <li class="active">{{ $page->title }}</li>
                 </ul>
             </div>
         </div>
@@ -27,7 +27,7 @@
         <!-- page content -->
         <div class="wexnix_page-builder py-120">
             <div class="container">
-                {!! $page->{{ __('content !!}') }}
+                {!! $page->content !!}
             </div>
         </div>
         <!-- page content end -->

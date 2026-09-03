@@ -36,56 +36,56 @@
                 @else
                     <p class="mb-4">{{ $totalCount }} result{{ $totalCount === 1 ? '' : 's' }} for &ldquo;{{ $query }}&rdquo;</p>
 
-                    @if ($results['notices']->{{ __('count())') }}
+                    @if ($results['notices']->count())
                         <div class="mb-5">
                             <h4 class="mb-3">{{ __('Notices') }}</h4>
                             <ul class="list-unstyled">
                                 @foreach ($results['notices'] as $notice)
-                                    <li class="mb-2"><a href="{{ route('notices.show', $notice) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $notice->{{ __('title }}') }}</a></li>
+                                    <li class="mb-2"><a href="{{ route('notices.show', $notice) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $notice->title }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif
 
-                    @if ($results['courses']->{{ __('count())') }}
+                    @if ($results['courses']->count())
                         <div class="mb-5">
                             <h4 class="mb-3">{{ __('Courses') }}</h4>
                             <ul class="list-unstyled">
                                 @foreach ($results['courses'] as $course)
-                                    <li class="mb-2"><a href="{{ route('courses.show', $course) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $course->{{ __('title }}') }}</a></li>
+                                    <li class="mb-2"><a href="{{ route('courses.show', $course) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $course->title }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif
 
-                    @if ($results['teachers']->{{ __('count())') }}
+                    @if ($results['teachers']->count())
                         <div class="mb-5">
                             <h4 class="mb-3">{{ __('Teachers') }}</h4>
                             <ul class="list-unstyled">
                                 @foreach ($results['teachers'] as $teacher)
-                                    <li class="mb-2"><a href="{{ route('teachers.show', $teacher) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $teacher->{{ __('name }}') }}</a></li>
+                                    <li class="mb-2"><a href="{{ route('teachers.show', $teacher) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $teacher->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif
 
-                    @if ($results['events']->{{ __('count())') }}
+                    @if ($results['events']->count())
                         <div class="mb-5">
                             <h4 class="mb-3">{{ __('Events') }}</h4>
                             <ul class="list-unstyled">
                                 @foreach ($results['events'] as $event)
-                                    <li class="mb-2"><a href="{{ route('events.show', $event) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $event->{{ __('title }}') }}</a></li>
+                                    <li class="mb-2"><a href="{{ route('events.show', $event) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $event->title }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
                     @endif
 
-                    @if ($results['departments']->{{ __('count())') }}
+                    @if ($results['departments']->count())
                         <div class="mb-5">
                             <h4 class="mb-3">{{ __('Departments') }}</h4>
                             <ul class="list-unstyled">
                                 @foreach ($results['departments'] as $department)
-                                    <li class="mb-2"><a href="{{ route('departments.show', $department) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $department->{{ __('title }}') }}</a></li>
+                                    <li class="mb-2"><a href="{{ route('departments.show', $department) }}"><i class="fas fa-arrow-right-long me-2"></i>{{ $department->title }}</a></li>
                                 @endforeach
                             </ul>
                         </div>

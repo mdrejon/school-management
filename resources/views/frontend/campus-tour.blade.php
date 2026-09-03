@@ -9,10 +9,10 @@
         <!-- breadcrumb -->
         <div class="wexnix_site-breadcrumb" style="background: url('{{ $pageSettings->breadcrumb_image_url ?: asset('assets/img/breadcrumb/01.jpg') }}')">
             <div class="container">
-                <h2 class="wexnix_breadcrumb-title">{{ $pageSettings->{{ __('breadcrumb_title ?: \'Campus Tour\' }}') }}</h2>
+                <h2 class="wexnix_breadcrumb-title">{{ $pageSettings->breadcrumb_title ?: 'Campus Tour' }}</h2>
                 <ul class="wexnix_breadcrumb-menu">
                     <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                    <li class="active">{{ $pageSettings->{{ __('breadcrumb_title ?: \'Campus Tour\' }}') }}</li>
+                    <li class="active">{{ $pageSettings->breadcrumb_title ?: 'Campus Tour' }}</li>
                 </ul>
             </div>
         </div>
@@ -25,25 +25,25 @@
                     @php
                         $titleHtml = e($pageSettings->title ?: 'Take A Look At Our Campus');
                         if (! empty($pageSettings->highlight)) {
-                            $titleHtml = str_ireplace(e($pageSettings->{{ __('highlight), \'') }}<span>' . e($pageSettings->{{ __('highlight) . \'') }}</span>', $titleHtml);
+                            $titleHtml = str_ireplace(e($pageSettings->highlight), '<span>' . e($pageSettings->highlight) . '</span>', $titleHtml);
                         }
                     @endphp
                     <div class="row">
                         <div class="col-lg-6 mx-auto">
                             <div class="wexnix_site-heading text-center">
-                                @if ($pageSettings->{{ __('tagline)') }}
-                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->{{ __('tagline }}') }}</span>
+                                @if ($pageSettings->tagline)
+                                    <span class="wexnix_site-title-tagline"><i class="fas fa-book-open-reader"></i> {{ $pageSettings->tagline }}</span>
                                 @endif
                                 <h2 class="wexnix_site-title">{!! $titleHtml !!}</h2>
-                                @if ($pageSettings->{{ __('description)') }}
-                                    <p>{{ $pageSettings->{{ __('description }}') }}</p>
+                                @if ($pageSettings->description)
+                                    <p>{{ $pageSettings->description }}</p>
                                 @endif
                             </div>
                         </div>
                     </div>
                 @endif
 
-                @if ($images->{{ __('count())') }}
+                @if ($images->count())
                     <div class="row wexnix_popup-gallery">
                         @foreach ($images->getCollection()->chunk(2) as $column)
                             <div class="col-md-4 wow fadeInUp" data-wow-delay=".25s">
@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- pagination -->
-                    {{ $images->{{ __('links(\'frontend.pagination.wexnix\') }}') }}
+                    {{ $images->links('frontend.pagination.wexnix') }}
                     <!-- pagination end -->
                 @else
                     <div class="col-12 text-center py-5 text-muted">
