@@ -54,6 +54,9 @@ class Event extends Model
 
     protected static function booted(): void
     {
+        static::saved(fn () => Cache::forget('events.homepage'));
+        static::deleted(fn () => Cache::forget('events.homepage'));
+
         static::creating(function (Event $event) {
             if (blank($event->slug)) {
                 $default = Language::defaultLanguage()?->code ?? config('app.fallback_locale');

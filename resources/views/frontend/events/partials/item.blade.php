@@ -8,7 +8,7 @@
         </div>
     @endif
     <div class="wexnix_event-img">
-        <img src="{{ $event->image_url ?? '/frontend/assets/img/event/01.jpg' }}" alt="">
+        <img loading="lazy" src="{{ $event->image_url ?? '/frontend/assets/img/event/01.jpg' }}" alt="">
     </div>
     <div class="wexnix_event-info">
         @if ($event->event_date || $event->event_time)

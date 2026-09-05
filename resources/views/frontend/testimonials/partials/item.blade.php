@@ -11,7 +11,7 @@
     </div>
     <div class="wexnix_testimonial-content">
         <div class="wexnix_testimonial-author-img">
-            <img src="{{ $testimonial->author_photo_url ?? '/frontend/assets/img/testimonial/01.jpg' }}" alt="">
+            <img loading="lazy" src="{{ $testimonial->author_photo_url ?? '/frontend/assets/img/testimonial/01.jpg' }}" alt="">
         </div>
         <div class="wexnix_testimonial-author-info">
             <h4>{{ $testimonial->author_name }}</h4>

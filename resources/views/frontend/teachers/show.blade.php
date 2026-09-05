@@ -25,7 +25,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-4">
                         <div class="wexnix_team-single-img">
-                            <img src="{{ $teacher->photo_url ?? '/frontend/assets/img/team/01.jpg' }}" alt="">
+                            <img loading="lazy" src="{{ $teacher->photo_url ?? '/frontend/assets/img/team/01.jpg' }}" alt="">
                         </div>
                     </div>
                     <div class="col-md-8">

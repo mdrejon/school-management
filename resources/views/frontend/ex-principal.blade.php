@@ -24,7 +24,7 @@
                 <div class="row align-items-center g-4">
                     <div class="col-md-4">
                         <div class="wexnix_team-single-img">
-                            <img src="{{ $siteSettings->ex_principal_photo_url ?? '/frontend/assets/img/team/03.jpg' }}" alt="{{ $siteSettings->ex_principal_name ?: 'Our EX Principal' }}">
+                            <img loading="lazy" src="{{ $siteSettings->ex_principal_photo_url ?? '/frontend/assets/img/team/03.jpg' }}" alt="{{ $siteSettings->ex_principal_name ?: 'Our EX Principal' }}">
                         </div>
                         @if ($siteSettings->ex_principal_name || $siteSettings->ex_principal_designation)
                             <div class="text-center mt-3">

@@ -16,7 +16,7 @@
                         <div class="wexnix_about-img">
                             <div class="row g-4">
                                 <div class="col-md-6">
-                                    <img class="wexnix_img-1" src="{{ $siteSettings->about_image_1_url ?? '/frontend/assets/img/about/01.jpg' }}" alt="">
+                                    <img loading="lazy" class="wexnix_img-1" src="{{ $siteSettings->about_image_1_url ?? '/frontend/assets/img/about/01.jpg' }}" alt="">
                                     @if ($siteSettings->about_badge_text)
                                         <div class="wexnix_about-experience mt-4">
                                             <div class="wexnix_about-experience-icon">
@@ -27,8 +27,8 @@
                                     @endif
                                 </div>
                                 <div class="col-md-6">
-                                    <img class="wexnix_img-2" src="{{ $siteSettings->about_image_2_url ?? '/frontend/assets/img/about/02.jpg' }}" alt="">
-                                    <img class="wexnix_img-3 mt-4" src="{{ $siteSettings->about_image_3_url ?? '/frontend/assets/img/about/03.jpg' }}" alt="">
+                                    <img loading="lazy" class="wexnix_img-2" src="{{ $siteSettings->about_image_2_url ?? '/frontend/assets/img/about/02.jpg' }}" alt="">
+                                    <img loading="lazy" class="wexnix_img-3 mt-4" src="{{ $siteSettings->about_image_3_url ?? '/frontend/assets/img/about/03.jpg' }}" alt="">
                                 </div>
                             </div>
                         </div>

@@ -46,6 +46,7 @@ class BlogPost extends Model
 
     protected static function booted(): void
     {
+
         static::creating(function (BlogPost $post) {
             if (blank($post->slug)) {
                 $default = Language::defaultLanguage()?->code ?? config('app.fallback_locale');

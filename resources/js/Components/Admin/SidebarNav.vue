@@ -29,7 +29,7 @@ const visibleMenu = computed(() => {
 });
 
 const isActive = (routeName) => {
-    if (!routeName) return false;
+    if (!routeName || !route().has(routeName)) return false;
     return route().current(routeName) || route().current(`${routeName}.*`);
 };
 
@@ -38,6 +38,21 @@ const isGroupActive = (group) => {
     if (group.items && group.items.some((item) => isActive(item.route))) return true;
     return false;
 };
+
+const hasRoute = (routeName) => {
+    if (!routeName) return false;
+    return typeof route().has === 'function' ? route().has(routeName) : true; // Fallback if has() is not available
+};
+
+const getRouteUrl = (routeName) => {
+    if (!routeName) return '#';
+    try {
+        return hasRoute(routeName) ? route(routeName) : '#';
+    } catch (e) {
+        return '#';
+    }
+};
+
 
 const openGroups = ref({});
 
@@ -70,7 +85,7 @@ const toggleGroup = (index) => {
             <div v-for="(group, index) in visibleMenu" :key="index">
                 <template v-if="!group.items">
                     <Link
-                        :href="route(group.route)"
+                        :href="getRouteUrl(group.route)"
                         @click="onNavigate"
                         class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors mb-1"
                         :class="isActive(group.route)
@@ -100,7 +115,7 @@ const toggleGroup = (index) => {
                         <Link
                             v-for="item in group.items"
                             :key="item.route"
-                            :href="route(item.route)"
+                            :href="getRouteUrl(item.route)"
                             @click="onNavigate"
                             class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors"
                             :class="isActive(item.route)
@@ -114,5 +129,9 @@ const toggleGroup = (index) => {
                 </template>
             </div>
         </nav>
+
+        <div v-if="page.props.appVersion" class="px-5 py-3 border-t border-slate-800 text-xs text-slate-500 text-center shrink-0">
+            School CMS v{{ page.props.appVersion }}
+        </div>
     </div>
 </template>

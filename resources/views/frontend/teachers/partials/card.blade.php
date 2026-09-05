@@ -3,7 +3,7 @@
 <div class="col-md-6 col-lg-3">
     <div class="wexnix_team-item wow fadeInUp" data-wow-delay=".25s">
         <div class="wexnix_team-img">
-            <img src="{{ $teacher->photo_url ?? '/frontend/assets/img/team/01.jpg' }}" alt="thumb">
+            <img loading="lazy" src="{{ $teacher->photo_url ?? '/frontend/assets/img/team/01.jpg' }}" alt="thumb">
         </div>
         <div class="wexnix_team-social">
             @if ($teacher->facebook_url)

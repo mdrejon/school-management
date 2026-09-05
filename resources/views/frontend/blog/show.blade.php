@@ -28,7 +28,7 @@
                             <div class="wexnix_blog-single-content">
                                 @if ($post->image_url)
                                     <div class="wexnix_blog-thumb-img">
-                                        <img src="{{ $post->image_url }}" alt="thumb">
+                                        <img loading="lazy" src="{{ $post->image_url }}" alt="thumb">
                                     </div>
                                 @endif
                                 <div class="wexnix_blog-info">
@@ -54,12 +54,12 @@
                                             <div class="row">
                                                 @if ($post->gallery_image_1_url)
                                                     <div class="col-md-6 mb-20">
-                                                        <img src="{{ $post->gallery_image_1_url }}" alt="">
+                                                        <img loading="lazy" src="{{ $post->gallery_image_1_url }}" alt="">
                                                     </div>
                                                 @endif
                                                 @if ($post->gallery_image_2_url)
                                                     <div class="col-md-6 mb-20">
-                                                        <img src="{{ $post->gallery_image_2_url }}" alt="">
+                                                        <img loading="lazy" src="{{ $post->gallery_image_2_url }}" alt="">
                                                     </div>
                                                 @endif
                                             </div>
@@ -83,7 +83,7 @@
                                         <div class="wexnix_blog-author">
                                             @if ($post->author_photo_url)
                                                 <div class="wexnix_blog-author-img">
-                                                    <img src="{{ $post->author_photo_url }}" alt="">
+                                                    <img loading="lazy" src="{{ $post->author_photo_url }}" alt="">
                                                 </div>
                                             @endif
                                             <div class="wexnix_author-info">
@@ -107,7 +107,7 @@
                                     @foreach ($recentPosts as $recentPost)
                                         <div class="wexnix_recent-post-single">
                                             <div class="wexnix_recent-post-img">
-                                                <img src="{{ $recentPost->image_url ?? '/frontend/assets/img/blog/01.jpg' }}" alt="thumb">
+                                                <img loading="lazy" src="{{ $recentPost->image_url ?? '/frontend/assets/img/blog/01.jpg' }}" alt="thumb">
                                             </div>
                                             <div class="wexnix_recent-post-bio">
                                                 <h6><a href="{{ route('blog.show', $recentPost) }}">{{ $recentPost->title }}</a></h6>

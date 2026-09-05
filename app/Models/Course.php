@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Translatable\HasTranslations;
 
 class Course extends Model
@@ -65,7 +66,7 @@ class Course extends Model
     {
         static::creating(function (Course $course) {
             if (blank($course->slug)) {
-                $default = Language::defaultLanguage()?->code ?? config('app.fallback_locale');
+                $default = config('app.fallback_locale', 'en');
                 $course->slug = static::uniqueSlugFrom($course->getTranslation('title', $default) ?: 'course');
             }
         });
@@ -142,6 +143,8 @@ class Course extends Model
             ->values()
             ->all();
     }
+
+
 
     public static function forHomepage(int $limit = 6)
     {

@@ -3,7 +3,7 @@
 <div class="col-md-6 col-lg-4">
     <div class="wexnix_facility-item wow fadeInUp" data-wow-delay=".25s">
         <div class="wexnix_facility-img">
-            <img src="{{ $facility->image_url ?? '/frontend/assets/img/facility/01.jpg' }}" alt="">
+            <img loading="lazy" src="{{ $facility->image_url ?? '/frontend/assets/img/facility/01.jpg' }}" alt="">
         </div>
         <div class="wexnix_facility-content">
             <h3 class="wexnix_facility-title">

@@ -6,7 +6,7 @@
             @if ($course->category)
                 <span class="wexnix_course-tag"><i class="fas fa-bookmark"></i> {{ $course->category }}</span>
             @endif
-            <img src="{{ $course->thumbnail_url ?? '/frontend/assets/img/course/01.jpg' }}" alt="">
+            <img loading="lazy" src="{{ $course->thumbnail_url ?? '/frontend/assets/img/course/01.jpg' }}" alt="">
             <a href="{{ route('courses.show', $course) }}" class="btn"><i class="fas fa-link"></i></a>
         </div>
         <div class="wexnix_course-content">

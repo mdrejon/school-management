@@ -132,6 +132,20 @@
         </style>
     @endif
 
+    @php
+        $primaryColor = $siteSettings->primary_color ?? '#0054A5';
+        $secondaryColor = $siteSettings->secondary_color ?? '#F26F21';
+        $parsed = sscanf($primaryColor, "#%02x%02x%02x");
+        $primaryRgb = $parsed && count($parsed) === 3 ? implode(', ', $parsed) : '0, 84, 165';
+    @endphp
+    <style>
+        :root {
+            --theme-color: {{ $primaryColor }} !important;
+            --theme-color2: {{ $secondaryColor }} !important;
+            --theme-color-light: rgba({{ $primaryRgb }}, 0.09) !important;
+        }
+    </style>
+
     @stack('styles')
 </head>
 
@@ -206,7 +220,7 @@
             <div class="container">
                 <div class="wexnix_header-middle-wrap">
                     <a class="navbar-brand" href="{{ route('home') }}">
-                        <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}">
+                        <img loading="lazy" src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}">
                     </a>
                     <div class="wexnix_header-middle-right">
                         <form class="wexnix_header-search-form" action="{{ route('search') }}" method="GET">
@@ -285,7 +299,7 @@
     <!-- footer area -->
     <footer class="wexnix_footer-area">
         <div class="wexnix_footer-shape">
-            <img src="/frontend/assets/img/shape/03.png" alt="">
+            <img loading="lazy" src="/frontend/assets/img/shape/03.png" alt="">
         </div>
         <div class="wexnix_footer-widget">
             <div class="container">
@@ -293,7 +307,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="wexnix_footer-widget-box wexnix_about-us">
                             <a href="{{ route('home') }}" class="wexnix_footer-logo">
-                                <img src="{{ $siteSettings->footer_logo_url ?? '/frontend/assets/img/logo/logo-light.png' }}" alt="{{ $siteSettings->site_name }}">
+                                <img loading="lazy" src="{{ $siteSettings->footer_logo_url ?? '/frontend/assets/img/logo/logo-light.png' }}" alt="{{ $siteSettings->site_name }}">
                             </a>
                             @if ($siteSettings->footer_about)
                                 <p class="mb-3">

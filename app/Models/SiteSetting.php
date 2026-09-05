@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Translatable\HasTranslations;
 
 class SiteSetting extends Model
@@ -123,6 +124,8 @@ class SiteSetting extends Model
     protected $fillable = [
         'site_name',
         'homepage_template',
+        'primary_color',
+        'secondary_color',
         'logo',
         'footer_logo',
         'address',

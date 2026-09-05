@@ -45,6 +45,9 @@ class Department extends Model
 
     protected static function booted(): void
     {
+        static::saved(fn () => Cache::forget('departments.homepage'));
+        static::deleted(fn () => Cache::forget('departments.homepage'));
+
         static::creating(function (Department $department) {
             if (blank($department->slug)) {
                 $default = Language::defaultLanguage()?->code ?? config('app.fallback_locale');

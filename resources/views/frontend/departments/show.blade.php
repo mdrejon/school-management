@@ -52,7 +52,7 @@
                             <div class="wexnix_department-details">
                                 @if ($department->image_url)
                                     <div class="wexnix_department-details-img mb-30">
-                                        <img src="{{ $department->image_url }}" alt="thumb">
+                                        <img loading="lazy" src="{{ $department->image_url }}" alt="thumb">
                                     </div>
                                 @endif
                                 <div class="wexnix_department-details">
@@ -65,12 +65,12 @@
                                         <div class="row">
                                             @if ($department->gallery_image_1_url)
                                                 <div class="col-md-6 mb-20">
-                                                    <img src="{{ $department->gallery_image_1_url }}" alt="">
+                                                    <img loading="lazy" src="{{ $department->gallery_image_1_url }}" alt="">
                                                 </div>
                                             @endif
                                             @if ($department->gallery_image_2_url)
                                                 <div class="col-md-6 mb-20">
-                                                    <img src="{{ $department->gallery_image_2_url }}" alt="">
+                                                    <img loading="lazy" src="{{ $department->gallery_image_2_url }}" alt="">
                                                 </div>
                                             @endif
                                         </div>

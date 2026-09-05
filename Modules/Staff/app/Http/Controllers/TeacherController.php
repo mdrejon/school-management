@@ -26,7 +26,7 @@ class TeacherController extends Controller
     {
         return Inertia::render('Admin/Staff/Teachers/Form', [
             'teacher' => null,
-            'departments' => Department::all(),
+            'departments' => Department::all()->map(fn($d) => ['id' => $d->id, 'title' => $d->title]),
         ]);
     }
 
@@ -90,7 +90,7 @@ class TeacherController extends Controller
         $teacher->load('user');
         return Inertia::render('Admin/Staff/Teachers/Form', [
             'teacher' => $teacher,
-            'departments' => Department::all(),
+            'departments' => Department::all()->map(fn($d) => ['id' => $d->id, 'title' => $d->title]),
         ]);
     }
 

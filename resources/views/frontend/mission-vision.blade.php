@@ -25,8 +25,7 @@
                 <div class="row g-4 align-items-center mb-5 pb-5 border-bottom">
                     <div class="col-lg-6">
                         <div class="vision-mission-img-wrap wow fadeInLeft" data-wow-delay=".25s">
-                            <img
-                                class="img-fluid w-100"
+                            <img loading="lazy" class="img-fluid w-100"
                                 src="{{ $pageSettings->image_1_url ?: asset('assets/img/about/01.jpg') }}"
                                 alt="{{ $pageSettings->title ?: 'Our Vision' }}"
                                 style="border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); object-fit: cover; max-height: 460px;"
@@ -64,8 +63,7 @@
                 <div class="row g-4 align-items-center mb-5 pb-5 border-bottom flex-lg-row-reverse">
                     <div class="col-lg-6">
                         <div class="vision-mission-img-wrap wow fadeInRight" data-wow-delay=".25s">
-                            <img
-                                class="img-fluid w-100"
+                            <img loading="lazy" class="img-fluid w-100"
                                 src="{{ $pageSettings->mission_image_1_url ?: asset('assets/img/about/02.jpg') }}"
                                 alt="{{ $pageSettings->mission_title ?: 'Our Mission' }}"
                                 style="border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); object-fit: cover; max-height: 460px;"
@@ -103,8 +101,7 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-lg-6">
                         <div class="vision-mission-img-wrap wow fadeInLeft" data-wow-delay=".25s">
-                            <img
-                                class="img-fluid w-100"
+                            <img loading="lazy" class="img-fluid w-100"
                                 src="{{ $pageSettings->values_image_1_url ?: asset('assets/img/about/03.jpg') }}"
                                 alt="{{ $pageSettings->values_title ?: 'Our Core Values' }}"
                                 style="border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); object-fit: cover; max-height: 460px;"

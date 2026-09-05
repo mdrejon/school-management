@@ -26,7 +26,7 @@
                     <div class="col-lg-8">
                         <div class="wexnix_event-details">
                             @if ($event->image_url)
-                                <img src="{{ $event->image_url }}" alt="">
+                                <img loading="lazy" src="{{ $event->image_url }}" alt="">
                             @endif
 
                             @foreach ($event->contentBlocks() as $block)
@@ -44,12 +44,12 @@
                                 <div class="row">
                                     @if ($event->gallery_image_1_url)
                                         <div class="col-md-6 mb-4">
-                                            <img src="{{ $event->gallery_image_1_url }}" alt="">
+                                            <img loading="lazy" src="{{ $event->gallery_image_1_url }}" alt="">
                                         </div>
                                     @endif
                                     @if ($event->gallery_image_2_url)
                                         <div class="col-md-6 mb-4">
-                                            <img src="{{ $event->gallery_image_2_url }}" alt="">
+                                            <img loading="lazy" src="{{ $event->gallery_image_2_url }}" alt="">
                                         </div>
                                     @endif
                                 </div>
@@ -104,7 +104,7 @@
                                 <h4 class="wexnix_widget-title">{{ __('Event Organizer') }}</h4>
                                 <div class="wexnix_event-author-info">
                                     @if ($event->organizer_photo_url)
-                                        <img src="{{ $event->organizer_photo_url }}" alt="">
+                                        <img loading="lazy" src="{{ $event->organizer_photo_url }}" alt="">
                                     @endif
                                     <h5>{{ $event->organizer_name }}</h5>
                                     @if ($event->organizer_bio)

@@ -81,7 +81,7 @@
                     <div class="row">
                         <div class="col-lg-5">
                             <div class="wexnix_contact-img">
-                                <img src="{{ $siteSettings->contact_image_url ?? '/frontend/assets/img/contact/01.jpg' }}" alt="{{ $siteSettings->contact_form_title ?: 'Contact Us' }}">
+                                <img loading="lazy" src="{{ $siteSettings->contact_image_url ?? '/frontend/assets/img/contact/01.jpg' }}" alt="{{ $siteSettings->contact_form_title ?: 'Contact Us' }}">
                             </div>
                         </div>
                         <div class="col-lg-7 align-self-center">

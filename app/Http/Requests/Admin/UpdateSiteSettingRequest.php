@@ -28,6 +28,8 @@ class UpdateSiteSettingRequest extends FormRequest
 
         return [
             'homepage_template' => ['nullable', 'string', 'in:default,index-1,index-2'],
+            'primary_color' => ['nullable', 'string', 'regex:/^#[a-fA-F0-9]{6}$/'],
+            'secondary_color' => ['nullable', 'string', 'regex:/^#[a-fA-F0-9]{6}$/'],
             'logo' => ['nullable', 'image', 'max:2048'],
             'footer_logo' => ['nullable', 'image', 'max:2048'],
 

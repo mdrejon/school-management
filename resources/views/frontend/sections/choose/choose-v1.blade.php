@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="wexnix_choose-img wow fadeInRight" data-wow-delay=".25s">
-                        <img src="{{ $siteSettings->choose_image_url ?? '/frontend/assets/img/choose/01.jpg' }}" alt="">
+                        <img loading="lazy" src="{{ $siteSettings->choose_image_url ?? '/frontend/assets/img/choose/01.jpg' }}" alt="">
                     </div>
                 </div>
             </div>

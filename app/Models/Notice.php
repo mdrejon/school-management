@@ -33,6 +33,7 @@ class Notice extends Model
 
     protected static function booted(): void
     {
+
         static::creating(function (Notice $notice) {
             if (blank($notice->slug)) {
                 $default = Language::defaultLanguage()?->code ?? config('app.fallback_locale');

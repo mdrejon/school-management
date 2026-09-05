@@ -6,7 +6,7 @@
             <div class="wexnix_blog-date"><i class="fas fa-calendar-alt"></i> {{ $post->published_at->format('F d, Y') }}</div>
         @endif
         <div class="wexnix_blog-item-img">
-            <img src="{{ $post->image_url ?? '/frontend/assets/img/blog/01.jpg' }}" alt="Thumb">
+            <img loading="lazy" src="{{ $post->image_url ?? '/frontend/assets/img/blog/01.jpg' }}" alt="Thumb">
         </div>
         <div class="wexnix_blog-item-info">
             @if ($post->author_name)

@@ -136,18 +136,39 @@ const sidebarMinisterPhotoPreview = ref(props.settings.sidebar_minister_photo_ur
 const sidebarSecretaryPhotoPreview = ref(props.settings.sidebar_secretary_photo_url);
 const sidebarVicePrincipalPhotoPreview = ref(props.settings.sidebar_vice_principal_photo_url);
 
-const onImageSelected = (field, previewRef, file) => {
-    form[field] = file;
-    previewRef.value = URL.createObjectURL(file);
+const previewRefsMap = {
+    about_image_1: aboutImage1Preview,
+    about_image_2: aboutImage2Preview,
+    about_image_3: aboutImage3Preview,
+    about_page_breadcrumb_image: aboutPageBreadcrumbPreview,
+    principal_photo: principalPhotoPreview,
+    principal_page_breadcrumb_image: principalPageBreadcrumbPreview,
+    ex_principal_photo: exPrincipalPhotoPreview,
+    ex_principal_page_breadcrumb_image: exPrincipalPageBreadcrumbPreview,
+    contact_image: contactImagePreview,
+    contact_page_breadcrumb_image: contactPageBreadcrumbPreview,
+    student_list_page_breadcrumb_image: studentListPageBreadcrumbPreview,
+    tuition_fee_page_breadcrumb_image: tuitionFeePageBreadcrumbPreview,
+    exam_result_page_breadcrumb_image: examResultPageBreadcrumbPreview,
+    academic_result_page_breadcrumb_image: academicResultPageBreadcrumbPreview,
+    evaluation_result_page_breadcrumb_image: evaluationResultPageBreadcrumbPreview,
+    board_exam_result_page_breadcrumb_image: boardExamResultPageBreadcrumbPreview,
 };
 
-const onImageRemoved = (field, previewRef) => {
+const onImageSelected = (field, _previewRef, file) => {
+    form[field] = file;
+    if (previewRefsMap[field]) previewRefsMap[field].value = URL.createObjectURL(file);
+};
+
+const onImageRemoved = (field, _previewRef) => {
     form[field] = ''; // Send empty string to signal deletion
-    previewRef.value = null;
+    if (previewRefsMap[field]) previewRefsMap[field].value = null;
 };
 
 const form = useForm({
     homepage_template: props.settings.homepage_template ?? 'default',
+    primary_color: props.settings.primary_color ?? '#0054A5',
+    secondary_color: props.settings.secondary_color ?? '#F26F21',
     logo: null,
     footer_logo: null,
     site_name: { ...emptyTranslatable(), ...props.settings.site_name },
@@ -442,14 +463,14 @@ const removeSkillItem = (index) => {
     form.skill_items.splice(index, 1);
 };
 
-const onAboutImageSelected = (field, previewRef, file) => {
+const onAboutImageSelected = (field, _previewRef, file) => {
     form[field] = file;
     form.clearErrors(field);
-    previewRef.value = URL.createObjectURL(file);
+    if (previewRefsMap[field]) previewRefsMap[field].value = URL.createObjectURL(file);
 };
-const onAboutImageRemoved = (field, previewRef) => {
+const onAboutImageRemoved = (field, _previewRef) => {
     form[field] = null;
-    previewRef.value = null;
+    if (previewRefsMap[field]) previewRefsMap[field].value = null;
 };
 
 const addAboutItem = () => {
@@ -589,6 +610,27 @@ const submit = () => {
                                 </label>
                             </div>
                             <p v-if="form.errors.homepage_template" class="text-xs text-red-500 mt-2">{{ form.errors.homepage_template }}</p>
+                        </section>
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Theme Colors</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
+                                <div class="flex items-center gap-3">
+                                    <input type="color" v-model="form.primary_color" class="w-10 h-10 p-0 border-0 rounded cursor-pointer" />
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-800">Primary Color</div>
+                                        <div class="text-xs text-slate-500">{{ form.primary_color }}</div>
+                                    </div>
+                                    <p v-if="form.errors.primary_color" class="text-xs text-red-500 mt-1">{{ form.errors.primary_color }}</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <input type="color" v-model="form.secondary_color" class="w-10 h-10 p-0 border-0 rounded cursor-pointer" />
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-800">Secondary Color</div>
+                                        <div class="text-xs text-slate-500">{{ form.secondary_color }}</div>
+                                    </div>
+                                    <p v-if="form.errors.secondary_color" class="text-xs text-red-500 mt-1">{{ form.errors.secondary_color }}</p>
+                                </div>
+                            </div>
                         </section>
 
                         <section class="rounded-xl border border-slate-200 p-5">

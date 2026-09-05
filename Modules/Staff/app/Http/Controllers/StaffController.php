@@ -27,7 +27,7 @@ class StaffController extends Controller
     {
         return Inertia::render('Admin/Staff/Staffs/Form', [
             'staff' => null,
-            'departments' => Department::all(),
+            'departments' => Department::all()->map(fn($d) => ['id' => $d->id, 'title' => $d->title]),
             'roles' => Role::all(),
         ]);
     }
@@ -79,7 +79,7 @@ class StaffController extends Controller
         $staff->load('user.roles');
         return Inertia::render('Admin/Staff/Staffs/Form', [
             'staff' => $staff,
-            'departments' => Department::all(),
+            'departments' => Department::all()->map(fn($d) => ['id' => $d->id, 'title' => $d->title]),
             'roles' => Role::all(),
         ]);
     }

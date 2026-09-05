@@ -6,7 +6,7 @@
         <div class="container">
             <div class="wexnix_partner-wrapper wexnix_partner-slider owl-carousel wexnix_owl-theme">
                 @foreach ($items as $item)
-                    <img src="{{ $item['image_url'] }}" alt="thumb">
+                    <img loading="lazy" src="{{ $item['image_url'] }}" alt="thumb">
                 @endforeach
             </div>
         </div>

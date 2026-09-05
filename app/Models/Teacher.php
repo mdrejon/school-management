@@ -57,6 +57,9 @@ class Teacher extends Model
 
     protected static function booted(): void
     {
+        static::saved(fn () => Cache::forget('teachers.homepage'));
+        static::deleted(fn () => Cache::forget('teachers.homepage'));
+
         static::creating(function (Teacher $teacher) {
             if (blank($teacher->slug)) {
                 $default = Language::defaultLanguage()?->code ?? config('app.fallback_locale');

@@ -42,6 +42,20 @@ use App\Http\Controllers\Frontend\ResultController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::get('/clear-cache', function () {
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    return "All caches cleared successfully!";
+});
+// Route::get('/assign-super-admin', function () {
+//     $user = \App\Models\User::where('email', 'admin@admin.com')->first();
+//     if ($user) {
+//         $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'system_admin', 'guard_name' => 'web']);
+//         $user->assignRole($role);
+//         return "system_admin role assigned successfully to admin@admin.com!";
+//     }
+//     return "User admin@admin.com not found";
+// });
+
 Route::get('/', function () {
     return view('frontend.home', [
         'sliders' => Slider::forHomepage(),
@@ -163,7 +177,7 @@ Route::middleware([
 
 Route::get('/api/academic-calendar/events', [\App\Http\Controllers\Frontend\AcademicCalendarController::class, 'events'])->name('api.academic-calendar.events');
 
-require __DIR__.'/admin.php';
+require __DIR__ . '/admin.php';
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::get('/tuition-fees', [TuitionFeeController::class, 'index'])->name('tuition-fees');

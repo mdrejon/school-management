@@ -28,7 +28,7 @@
                             <div class="wexnix_course-details">
                                 @if ($course->thumbnail_url)
                                     <div class="wexnix_course-details-img mb-30">
-                                        <img src="{{ $course->thumbnail_url }}" alt="thumb">
+                                        <img loading="lazy" src="{{ $course->thumbnail_url }}" alt="thumb">
                                     </div>
                                 @endif
                                 <div class="wexnix_course-details">
@@ -41,12 +41,12 @@
                                         <div class="row">
                                             @if ($course->gallery_image_1_url)
                                                 <div class="col-md-6 mb-20">
-                                                    <img src="{{ $course->gallery_image_1_url }}" alt="">
+                                                    <img loading="lazy" src="{{ $course->gallery_image_1_url }}" alt="">
                                                 </div>
                                             @endif
                                             @if ($course->gallery_image_2_url)
                                                 <div class="col-md-6 mb-20">
-                                                    <img src="{{ $course->gallery_image_2_url }}" alt="">
+                                                    <img loading="lazy" src="{{ $course->gallery_image_2_url }}" alt="">
                                                 </div>
                                             @endif
                                         </div>
@@ -92,7 +92,7 @@
                                             <div class="wexnix_single-info wexnix_author">
                                                 @if ($course->instructor_image_url)
                                                     <div class="wexnix_author-img">
-                                                        <img src="{{ $course->instructor_image_url }}" alt="#">
+                                                        <img loading="lazy" src="{{ $course->instructor_image_url }}" alt="#">
                                                     </div>
                                                 @endif
                                                 <div class="wexnix_single-info-content">

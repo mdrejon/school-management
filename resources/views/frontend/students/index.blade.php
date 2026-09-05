@@ -81,7 +81,7 @@
                         @forelse($students as $student)
                             <tr>
                                 <td>
-                                    <img src="{{ $student->picture ? '/storage/' . ltrim($student->picture, '/') : asset('frontend/assets/img/default-user.jpg') }}" alt="{{ $student->first_name }}" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                    <img loading="lazy" src="{{ $student->picture ? '/storage/' . ltrim($student->picture, '/') : asset('frontend/assets/img/default-user.jpg') }}" alt="{{ $student->first_name }}" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
                                 </td>
                                 <td>{{ $student->first_name }} {{ $student->last_name }}</td>
                                 <td>{{ $student->roll_no }}</td>

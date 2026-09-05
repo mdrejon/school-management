@@ -46,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'languages' => fn () => Language::active(),
             'enabledModules' => fn () => ModuleSetting::enabledKeys(),
+            'appVersion' => fn () => config('app.version'),
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
