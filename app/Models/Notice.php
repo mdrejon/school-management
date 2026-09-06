@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Spatie\Translatable\HasTranslations;
 
@@ -33,6 +34,10 @@ class Notice extends Model
 
     protected static function booted(): void
     {
+        static::saved(fn () => Cache::forget('notices_marquee_8'));
+        static::saved(fn () => Cache::forget('notices_marquee_5'));
+        static::deleted(fn () => Cache::forget('notices_marquee_8'));
+        static::deleted(fn () => Cache::forget('notices_marquee_5'));
 
         static::creating(function (Notice $notice) {
             if (blank($notice->slug)) {
@@ -79,10 +84,16 @@ class Notice extends Model
      */
     public static function forMarquee(int $limit = 8)
     {
-        return static::where('is_active', true)
-            ->orderByDesc('published_at')
-            ->orderByDesc('id')
-            ->limit($limit)
-            ->get();
+        $itemsRaw = Cache::rememberForever('notices_marquee_' . $limit, function () use ($limit) {
+            return static::where('is_active', true)
+                ->orderByDesc('published_at')
+                ->orderByDesc('id')
+                ->limit($limit)
+                ->get()
+                ->map(fn ($item) => $item->getAttributes())
+                ->all();
+        });
+
+        return static::hydrate($itemsRaw);
     }
 }

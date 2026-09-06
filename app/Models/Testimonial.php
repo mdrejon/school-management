@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Translatable\HasTranslations;
 
 class Testimonial extends Model
@@ -33,6 +34,12 @@ class Testimonial extends Model
 
     protected $appends = ['author_photo_url'];
 
+    protected static function booted(): void
+    {
+        static::saved(fn () => Cache::forget('testimonials_homepage_5'));
+        static::deleted(fn () => Cache::forget('testimonials_homepage_5'));
+    }
+
     public function getAuthorPhotoUrlAttribute(): ?string
     {
         return $this->author_photo ? asset('storage/'.ltrim($this->author_photo, '/')) : null;
@@ -40,6 +47,15 @@ class Testimonial extends Model
 
     public static function forHomepage(int $limit = 5)
     {
-        return static::where('is_active', true)->orderBy('sort_order')->limit($limit)->get();
+        $itemsRaw = Cache::rememberForever('testimonials_homepage_' . $limit, function () use ($limit) {
+            return static::where('is_active', true)
+                ->orderBy('sort_order')
+                ->limit($limit)
+                ->get()
+                ->map(fn ($item) => $item->getAttributes())
+                ->all();
+        });
+
+        return static::hydrate($itemsRaw);
     }
 }

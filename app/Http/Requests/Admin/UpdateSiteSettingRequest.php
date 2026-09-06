@@ -163,6 +163,16 @@ class UpdateSiteSettingRequest extends FormRequest
             'about_page_seo_description.*' => ['nullable', 'string', 'max:500'],
             'about_page_seo_keywords.*' => ['nullable', 'string', 'max:255'],
 
+            'chairman_photo' => ['nullable', 'image', 'max:2048'],
+            'chairman_name.*' => ['nullable', 'string', 'max:150'],
+            'chairman_designation.*' => ['nullable', 'string', 'max:100'],
+            'chairman_message.*' => ['nullable', 'string', 'max:2000'],
+            'chairman_page_breadcrumb_image' => ['nullable', 'image', 'max:2048'],
+            'chairman_page_breadcrumb_title.*' => ['nullable', 'string', 'max:150'],
+            'chairman_page_seo_title.*' => ['nullable', 'string', 'max:150'],
+            'chairman_page_seo_description.*' => ['nullable', 'string', 'max:500'],
+            'chairman_page_seo_keywords.*' => ['nullable', 'string', 'max:255'],
+
             'principal_photo' => ['nullable', 'image', 'max:2048'],
             'principal_name.*' => ['nullable', 'string', 'max:150'],
             'principal_designation.*' => ['nullable', 'string', 'max:100'],

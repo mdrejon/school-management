@@ -64,6 +64,9 @@ class Course extends Model
 
     protected static function booted(): void
     {
+        static::saved(fn () => Cache::forget('courses_homepage'));
+        static::deleted(fn () => Cache::forget('courses_homepage'));
+
         static::creating(function (Course $course) {
             if (blank($course->slug)) {
                 $default = config('app.fallback_locale', 'en');
@@ -148,6 +151,15 @@ class Course extends Model
 
     public static function forHomepage(int $limit = 6)
     {
-        return static::where('is_active', true)->orderBy('sort_order')->limit($limit)->get();
+        $itemsRaw = Cache::rememberForever('courses_homepage_' . $limit, function () use ($limit) {
+            return static::where('is_active', true)
+                ->orderBy('sort_order')
+                ->limit($limit)
+                ->get()
+                ->map(fn ($item) => $item->getAttributes())
+                ->all();
+        });
+
+        return static::hydrate($itemsRaw);
     }
 }

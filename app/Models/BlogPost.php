@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Spatie\Translatable\HasTranslations;
 
@@ -46,6 +47,8 @@ class BlogPost extends Model
 
     protected static function booted(): void
     {
+        static::saved(fn () => Cache::forget('blog_posts_homepage_3'));
+        static::deleted(fn () => Cache::forget('blog_posts_homepage_3'));
 
         static::creating(function (BlogPost $post) {
             if (blank($post->slug)) {
@@ -107,6 +110,15 @@ class BlogPost extends Model
 
     public static function forHomepage(int $limit = 3)
     {
-        return static::where('is_active', true)->orderBy('sort_order')->limit($limit)->get();
+        $itemsRaw = Cache::rememberForever('blog_posts_homepage_' . $limit, function () use ($limit) {
+            return static::where('is_active', true)
+                ->orderBy('sort_order')
+                ->limit($limit)
+                ->get()
+                ->map(fn ($item) => $item->getAttributes())
+                ->all();
+        });
+
+        return static::hydrate($itemsRaw);
     }
 }

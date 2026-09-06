@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 /**
- * Bridges the vendored Vvveb.js visual builder (public/vendor/vvvebjs — a
+ * Bridges the vendored Vvveb.js visual builder (public/assets/vvvebjs — a
  * standalone third-party editor that talks to a `save.php`/`upload.php`
  * style backend, not Inertia) to this app's Page model. Vvveb edits one
  * full HTML document at a time; each of this Page's active languages is

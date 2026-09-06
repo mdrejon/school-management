@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class Menu extends Model
 {
@@ -12,6 +13,18 @@ class Menu extends Model
         'name',
         'slug',
     ];
+
+    protected static function booted(): void
+    {
+        static::saved(function (Menu $menu) {
+            Cache::forget("menu_{$menu->id}_items_active_1");
+            Cache::forget("menu_{$menu->id}_items_active_0");
+        });
+        static::deleted(function (Menu $menu) {
+            Cache::forget("menu_{$menu->id}_items_active_1");
+            Cache::forget("menu_{$menu->id}_items_active_0");
+        });
+    }
 
     public function items(): HasMany
     {
@@ -27,13 +40,21 @@ class Menu extends Model
      */
     public function tree(bool $onlyActive = true): Collection
     {
-        $items = $this->items()
-            ->when($onlyActive, fn ($query) => $query->where('is_active', true))
-            ->orderBy('sort_order')
-            ->get();
+        $itemsRaw = Cache::rememberForever("menu_{$this->id}_items_active_" . (int)$onlyActive, function () use ($onlyActive) {
+            return $this->items()
+                ->when($onlyActive, fn ($query) => $query->where('is_active', true))
+                ->orderBy('sort_order')
+                ->get()
+                ->map(fn ($item) => $item->getAttributes())
+                ->all();
+        });
+
+        $items = MenuItem::hydrate($itemsRaw);
 
         return static::nest($items, null);
     }
+
+
 
     protected static function nest(Collection $items, ?int $parentId): Collection
     {

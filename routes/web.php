@@ -91,6 +91,10 @@ Route::middleware('module:contact')->group(function () {
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 });
 
+Route::get('/chairman-message', function () {
+    return view('frontend.chairman');
+})->name('chairman-message');
+
 Route::middleware('module:principal')->get('/principal', function () {
     return view('frontend.principal');
 })->name('principal');

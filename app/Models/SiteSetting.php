@@ -46,6 +46,13 @@ class SiteSetting extends Model
         'about_page_seo_title',
         'about_page_seo_description',
         'about_page_seo_keywords',
+        'chairman_name',
+        'chairman_designation',
+        'chairman_message',
+        'chairman_page_breadcrumb_title',
+        'chairman_page_seo_title',
+        'chairman_page_seo_description',
+        'chairman_page_seo_keywords',
         'principal_name',
         'principal_designation',
         'principal_message',
@@ -180,6 +187,15 @@ class SiteSetting extends Model
         'about_page_seo_title',
         'about_page_seo_description',
         'about_page_seo_keywords',
+        'chairman_photo',
+        'chairman_name',
+        'chairman_designation',
+        'chairman_message',
+        'chairman_page_breadcrumb_image',
+        'chairman_page_breadcrumb_title',
+        'chairman_page_seo_title',
+        'chairman_page_seo_description',
+        'chairman_page_seo_keywords',
         'principal_photo',
         'principal_name',
         'principal_designation',
@@ -305,6 +321,7 @@ class SiteSetting extends Model
     protected $appends = [
         'logo_url', 'footer_logo_url', 'video_thumbnail_url', 'offer_background_url', 'choose_image_url',
         'about_image_1_url', 'about_image_2_url', 'about_image_3_url', 'about_page_breadcrumb_image_url',
+        'chairman_photo_url', 'chairman_page_breadcrumb_image_url',
         'principal_photo_url', 'principal_page_breadcrumb_image_url',
         'ex_principal_photo_url', 'ex_principal_page_breadcrumb_image_url',
         'student_list_page_breadcrumb_image_url',
@@ -367,6 +384,16 @@ class SiteSetting extends Model
     public function getAboutPageBreadcrumbImageUrlAttribute(): ?string
     {
         return $this->about_page_breadcrumb_image ? asset('storage/'.ltrim($this->about_page_breadcrumb_image, '/')) : null;
+    }
+
+    public function getChairmanPhotoUrlAttribute(): ?string
+    {
+        return $this->chairman_photo ? asset('storage/'.ltrim($this->chairman_photo, '/')) : null;
+    }
+
+    public function getChairmanPageBreadcrumbImageUrlAttribute(): ?string
+    {
+        return $this->chairman_page_breadcrumb_image ? asset('storage/'.ltrim($this->chairman_page_breadcrumb_image, '/')) : null;
     }
 
     public function getPrincipalPhotoUrlAttribute(): ?string

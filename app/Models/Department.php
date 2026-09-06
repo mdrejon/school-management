@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Spatie\Translatable\HasTranslations;
 
@@ -45,8 +46,8 @@ class Department extends Model
 
     protected static function booted(): void
     {
-        static::saved(fn () => Cache::forget('departments.homepage'));
-        static::deleted(fn () => Cache::forget('departments.homepage'));
+        static::saved(fn () => Cache::forget('departments_homepage_8'));
+        static::deleted(fn () => Cache::forget('departments_homepage_8'));
 
         static::creating(function (Department $department) {
             if (blank($department->slug)) {
@@ -122,6 +123,15 @@ class Department extends Model
 
     public static function forHomepage(int $limit = 8)
     {
-        return static::where('is_active', true)->orderBy('sort_order')->limit($limit)->get();
+        $itemsRaw = Cache::rememberForever('departments_homepage_' . $limit, function () use ($limit) {
+            return static::where('is_active', true)
+                ->orderBy('sort_order')
+                ->limit($limit)
+                ->get()
+                ->map(fn ($item) => $item->getAttributes())
+                ->all();
+        });
+
+        return static::hydrate($itemsRaw);
     }
 }

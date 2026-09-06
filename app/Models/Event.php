@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Spatie\Translatable\HasTranslations;
 
@@ -54,8 +55,8 @@ class Event extends Model
 
     protected static function booted(): void
     {
-        static::saved(fn () => Cache::forget('events.homepage'));
-        static::deleted(fn () => Cache::forget('events.homepage'));
+        static::saved(fn () => Cache::forget('events_homepage_6'));
+        static::deleted(fn () => Cache::forget('events_homepage_6'));
 
         static::creating(function (Event $event) {
             if (blank($event->slug)) {
@@ -121,6 +122,15 @@ class Event extends Model
 
     public static function forHomepage(int $limit = 6)
     {
-        return static::where('is_active', true)->orderBy('sort_order')->limit($limit)->get();
+        $itemsRaw = Cache::rememberForever('events_homepage_' . $limit, function () use ($limit) {
+            return static::where('is_active', true)
+                ->orderBy('sort_order')
+                ->limit($limit)
+                ->get()
+                ->map(fn ($item) => $item->getAttributes())
+                ->all();
+        });
+
+        return static::hydrate($itemsRaw);
     }
 }

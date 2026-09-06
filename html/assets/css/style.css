@@ -853,7 +853,7 @@ label {
   left: 0;
   top: 0;
   bottom: -1px;
-  width: 30%;
+  width: 22%;
   background: var(--theme-color2);
   z-index: -1;
 }

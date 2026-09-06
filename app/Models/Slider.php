@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Translatable\HasTranslations;
 
 class Slider extends Model
@@ -39,6 +40,12 @@ class Slider extends Model
 
     protected $appends = ['image_url'];
 
+    protected static function booted(): void
+    {
+        static::saved(fn () => Cache::forget('sliders_homepage'));
+        static::deleted(fn () => Cache::forget('sliders_homepage'));
+    }
+
     public function getImageUrlAttribute(): ?string
     {
         // Root-relative on purpose, not Storage::url() — that bakes in
@@ -50,6 +57,14 @@ class Slider extends Model
 
     public static function forHomepage()
     {
-        return static::where('is_active', true)->orderBy('sort_order')->get();
+        $itemsRaw = Cache::rememberForever('sliders_homepage', function () {
+            return static::where('is_active', true)
+                ->orderBy('sort_order')
+                ->get()
+                ->map(fn ($item) => $item->getAttributes())
+                ->all();
+        });
+
+        return static::hydrate($itemsRaw);
     }
 }

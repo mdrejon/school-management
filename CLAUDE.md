@@ -185,7 +185,7 @@ deliberate choice after the custom canvas didn't meet the bar wanted here.
   locale's is empty, same fallback spirit as every other translatable
   field, just at whole-page granularity instead of per-field.
 - **Vvveb.js is vendored, not npm-bundled into the Vite build**:
-  `public/vendor/vvvebjs/` (~15MB — css/fonts/img/js/libs/media/resources
+  `public/assets/vvvebjs/` (~15MB — css/fonts/img/js/libs/media/resources
   copied from the `vvvebjs` npm package) is served as plain static assets,
   the same convention as `public/frontend/assets/`. It's vanilla JS with
   its own full UI (toolbar, components/blocks palette, style panel, code

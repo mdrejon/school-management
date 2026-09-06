@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Spatie\Translatable\HasTranslations;
 
@@ -31,6 +32,18 @@ class MenuItem extends Model
         'is_active' => 'boolean',
         'sort_order' => 'integer',
     ];
+
+    protected static function booted(): void
+    {
+        static::saved(function (MenuItem $item) {
+            Cache::forget("menu_{$item->menu_id}_items_active_1");
+            Cache::forget("menu_{$item->menu_id}_items_active_0");
+        });
+        static::deleted(function (MenuItem $item) {
+            Cache::forget("menu_{$item->menu_id}_items_active_1");
+            Cache::forget("menu_{$item->menu_id}_items_active_0");
+        });
+    }
 
     public function menu(): BelongsTo
     {

@@ -83,6 +83,7 @@ class SiteSettingController extends Controller
 
         foreach ([
             'about_image_1', 'about_image_2', 'about_image_3', 'about_page_breadcrumb_image',
+            'chairman_photo', 'chairman_page_breadcrumb_image',
             'principal_photo', 'principal_page_breadcrumb_image',
             'ex_principal_photo', 'ex_principal_page_breadcrumb_image',
             'contact_image', 'contact_page_breadcrumb_image',
