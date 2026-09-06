@@ -86,6 +86,7 @@ const sections = [
     { key: 'skill', label: 'Our Skills', icon: 'pi pi-chart-bar', description: 'The enrollment card and "Our Skills" progress bars.', module: 'skill' },
     { key: 'video', label: 'Video Section', icon: 'pi pi-video', description: 'The "Latest Video" block further down the homepage.', module: 'video' },
     { key: 'offer', label: 'Offer Banner', icon: 'pi pi-megaphone', description: 'The promotional banner ("Our 20% Offer...") further down the homepage.', module: 'offer' },
+    { key: 'chairman', label: 'Our Chairman', icon: 'pi pi-user', description: 'The current chairman\'s photo, message, and the /chairman-message page\'s breadcrumb & SEO.' },
     { key: 'principal', label: 'Our Principal', icon: 'pi pi-user', description: 'The current principal\'s photo, message, and the /principal page\'s breadcrumb & SEO.', module: 'principal' },
     { key: 'ex-principal', label: 'Ex-Principal', icon: 'pi pi-user-minus', description: 'The former principal\'s photo, message, and the /ex-principals page\'s breadcrumb & SEO.', module: 'ex_principal' },
     { key: 'contact', label: 'Contact Page', icon: 'pi pi-envelope', description: 'Office hours, the "Get In Touch" form intro/image/map, and the /contact page\'s breadcrumb & SEO.', module: 'contact' },
@@ -120,6 +121,8 @@ const aboutImage1Preview = ref(props.settings.about_image_1_url);
 const aboutImage2Preview = ref(props.settings.about_image_2_url);
 const aboutImage3Preview = ref(props.settings.about_image_3_url);
 const aboutPageBreadcrumbPreview = ref(props.settings.about_page_breadcrumb_image_url);
+const chairmanPhotoPreview = ref(props.settings.chairman_photo_url);
+const chairmanPageBreadcrumbPreview = ref(props.settings.chairman_page_breadcrumb_image_url);
 const principalPhotoPreview = ref(props.settings.principal_photo_url);
 const principalPageBreadcrumbPreview = ref(props.settings.principal_page_breadcrumb_image_url);
 const exPrincipalPhotoPreview = ref(props.settings.ex_principal_photo_url);
@@ -141,6 +144,8 @@ const previewRefsMap = {
     about_image_2: aboutImage2Preview,
     about_image_3: aboutImage3Preview,
     about_page_breadcrumb_image: aboutPageBreadcrumbPreview,
+    chairman_photo: chairmanPhotoPreview,
+    chairman_page_breadcrumb_image: chairmanPageBreadcrumbPreview,
     principal_photo: principalPhotoPreview,
     principal_page_breadcrumb_image: principalPageBreadcrumbPreview,
     ex_principal_photo: exPrincipalPhotoPreview,
@@ -237,6 +242,15 @@ const form = useForm({
     about_page_seo_title: { ...emptyTranslatable(), ...props.settings.about_page_seo_title },
     about_page_seo_description: { ...emptyTranslatable(), ...props.settings.about_page_seo_description },
     about_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.about_page_seo_keywords },
+    chairman_photo: null,
+    chairman_name: { ...emptyTranslatable(), ...props.settings.chairman_name },
+    chairman_designation: { ...emptyTranslatable(), ...props.settings.chairman_designation },
+    chairman_message: { ...emptyTranslatable(), ...props.settings.chairman_message },
+    chairman_page_breadcrumb_image: null,
+    chairman_page_breadcrumb_title: { ...emptyTranslatable(), ...props.settings.chairman_page_breadcrumb_title },
+    chairman_page_seo_title: { ...emptyTranslatable(), ...props.settings.chairman_page_seo_title },
+    chairman_page_seo_description: { ...emptyTranslatable(), ...props.settings.chairman_page_seo_description },
+    chairman_page_seo_keywords: { ...emptyTranslatable(), ...props.settings.chairman_page_seo_keywords },
     principal_photo: null,
     principal_name: { ...emptyTranslatable(), ...props.settings.principal_name },
     principal_designation: { ...emptyTranslatable(), ...props.settings.principal_designation },
@@ -1665,6 +1679,82 @@ const submit = () => {
                                     @remove="onOfferBackgroundRemoved"
                                 />
                                 <p v-if="form.errors.offer_background" class="text-xs text-red-500 mt-1">{{ form.errors.offer_background }}</p>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Our Chairman -->
+                    <div v-show="activeSectionKey === 'chairman'" class="flex flex-col gap-5">
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Profile</h3>
+                            <div class="flex flex-col sm:flex-row gap-6">
+                                <div class="w-full sm:w-48 shrink-0">
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Photo</label>
+                                    <ImageDropzone
+                                        :preview-url="chairmanPhotoPreview"
+                                        hint="Portrait photo"
+                                        width-class="w-full" height-class="h-40"
+                                        @select="(file) => onAboutImageSelected('chairman_photo', chairmanPhotoPreview, file)"
+                                        @remove="() => onAboutImageRemoved('chairman_photo', chairmanPhotoPreview)"
+                                    />
+                                    <p v-if="form.errors.chairman_photo" class="text-xs text-red-500 mt-1">{{ form.errors.chairman_photo }}</p>
+                                </div>
+                                <div class="flex-1 flex flex-col gap-4 max-w-lg">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Name</label>
+                                        <InputText v-model="form.chairman_name[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Mohammad Rafiqul Islam" />
+                                        <p v-if="form.errors[`chairman_name.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`chairman_name.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Designation</label>
+                                        <InputText v-model="form.chairman_designation[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Chairman" />
+                                        <p v-if="form.errors[`chairman_designation.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`chairman_designation.${activeLang}`] }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Message</label>
+                                        <Textarea v-model="form.chairman_message[activeLang]" :dir="currentLang?.direction" rows="6" class="w-full" placeholder="Chairman's message to visitors..." />
+                                        <p v-if="form.errors[`chairman_message.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`chairman_message.${activeLang}`] }}</p>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Contact details shown on the page reuse the address/phone/email set under General → Header.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="rounded-xl border border-slate-200 p-5">
+                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Page — Breadcrumb &amp; SEO</h3>
+                            <p class="text-xs text-slate-400 mb-4">Shown on the dedicated <code>/chairman-message</code> page.</p>
+                            <div class="flex flex-col gap-4 max-w-lg">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb background image</label>
+                                    <ImageDropzone
+                                        :preview-url="chairmanPageBreadcrumbPreview"
+                                        hint="Shown behind the page title"
+                                        width-class="w-full sm:w-80" height-class="h-32"
+                                        @select="(file) => onAboutImageSelected('chairman_page_breadcrumb_image', chairmanPageBreadcrumbPreview, file)"
+                                        @remove="() => onAboutImageRemoved('chairman_page_breadcrumb_image', chairmanPageBreadcrumbPreview)"
+                                    />
+                                    <p v-if="form.errors.chairman_page_breadcrumb_image" class="text-xs text-red-500 mt-1">{{ form.errors.chairman_page_breadcrumb_image }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Breadcrumb title</label>
+                                    <InputText v-model="form.chairman_page_breadcrumb_title[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="e.g. Our Chairman" />
+                                    <p v-if="form.errors[`chairman_page_breadcrumb_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`chairman_page_breadcrumb_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta title</label>
+                                    <InputText v-model="form.chairman_page_seo_title[activeLang]" :dir="currentLang?.direction" class="w-full" />
+                                    <p v-if="form.errors[`chairman_page_seo_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`chairman_page_seo_title.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta description</label>
+                                    <Textarea v-model="form.chairman_page_seo_description[activeLang]" :dir="currentLang?.direction" rows="3" class="w-full" />
+                                    <p v-if="form.errors[`chairman_page_seo_description.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`chairman_page_seo_description.${activeLang}`] }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600 mb-1.5">Meta keywords</label>
+                                    <InputText v-model="form.chairman_page_seo_keywords[activeLang]" :dir="currentLang?.direction" class="w-full" placeholder="comma, separated, keywords" />
+                                    <p v-if="form.errors[`chairman_page_seo_keywords.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`chairman_page_seo_keywords.${activeLang}`] }}</p>
+                                </div>
                             </div>
                         </section>
                     </div>

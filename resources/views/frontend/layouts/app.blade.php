@@ -24,125 +24,193 @@
     <link rel="stylesheet" href="/frontend/assets/css/style.css">
 
     {{-- Sizing/coloring for inline Lucide <svg> icons — the original theme's
-         icon boxes only ever styled <img>, so these dynamic icon slots
+         icon boxes only ever styled <img loading="lazy">, so these dynamic icon slots
          (counter strip, "Why Choose Us" feature boxes, course sidebar
          features) need their own rules. --}}
     <style>
-        .wexnix_counter-box .wexnix_icon svg { width: 60px; height: 60px; }
-        .wexnix_choose-item-icon svg { width: 45px; height: 45px; color: #fff; }
-        .wexnix_course-feature-list a svg { width: 18px; height: 18px; color: var(--theme-color2); vertical-align: -4px; margin-right: 4px; }
-        .wexnix_course-feature-list a img { width: 18px; height: 18px; vertical-align: -4px; margin-right: 4px; }
+        .wexnix_counter-box .wexnix_icon svg {
+            width: 60px;
+            height: 60px;
+        }
+
+        .wexnix_choose-item-icon svg {
+            width: 45px;
+            height: 45px;
+            color: #fff;
+        }
+
+        .wexnix_course-feature-list a svg {
+            width: 18px;
+            height: 18px;
+            color: var(--theme-color2);
+            vertical-align: -4px;
+            margin-right: 4px;
+        }
+
+        .wexnix_course-feature-list a img {
+            width: 18px;
+            height: 18px;
+            vertical-align: -4px;
+            margin-right: 4px;
+        }
     </style>
 
     {{-- Language-specific font overrides --}}
     @if (app()->getLocale() === 'bn')
-        {{--
+    {{--
             Bengali (Hind Siliguri) renders ~15-20% visually larger than Roboto/Yantramanav
             at the same px size because Bengali glyphs have greater height/weight.
             We load Hind Siliguri and scale every TEXT font-size to ~85% of its English
             equivalent so the visual density matches across both languages.
             Icon font-sizes (fa-icons) are intentionally left unchanged.
         --}}
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap">
-        <style>
-            /* ── Font family ─────────────────────────────────────────── */
-            :root {
-                --body-font:    'Hind Siliguri', sans-serif;
-                --heading-font: 'Hind Siliguri', sans-serif;
-            }
-            body, h1, h2, h3, h4, h5, h6, p, li, td, th, label, span, a, button, input, textarea, select {
-                font-family: 'Hind Siliguri', sans-serif !important;
-            }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap">
+    <style>
+        /* ── Font family ─────────────────────────────────────────── */
+        :root {
+            --body-font: 'Hind Siliguri', sans-serif;
+            --heading-font: 'Hind Siliguri', sans-serif;
+        }
 
-            /* ── Body (16px × 0.85 = 13.6 → 14px) ──────────────────── */
-            body {
-                font-size: 14px !important;
-                line-height: 1.75 !important;
-            }
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        li,
+        td,
+        th,
+        label,
+        span,
+        a,
+        button,
+        input,
+        textarea,
+        select {
+            font-family: 'Hind Siliguri', sans-serif !important;
+        }
 
-            /* ── Generic headings (×0.85) ────────────────────────────── */
-            /* h1: 40px → 34px */
-            h1 { font-size: 34px !important; }
-            /* h2: 35px → 30px */
-            h2 { font-size: 30px !important; }
-            /* h3: 28px → 24px */
-            h3 { font-size: 24px !important; }
-            /* h4: 22px → 19px */
-            h4 { font-size: 19px !important; }
-            /* h5: 18px → 15px */
-            h5 { font-size: 15px !important; }
-            /* h6: 16px → 14px */
-            h6 { font-size: 14px !important; }
+        /* ── Body (16px × 0.85 = 13.6 → 14px) ──────────────────── */
+        body {
+            font-size: 14px !important;
+            line-height: 1.75 !important;
+        }
 
-            /* ── Section title (.wexnix_site-title: 55px → 47px) ─────── */
-            .wexnix_site-title {
-                font-size: 47px !important;
-            }
-            /* tagline (18px → 15px) */
-            .wexnix_site-title-tagline {
-                font-size: 15px !important;
-                letter-spacing: 2px !important;
-            }
+        /* ── Generic headings (×0.85) ────────────────────────────── */
+        /* h1: 40px → 34px */
+        h1 {
+            font-size: 34px !important;
+        }
 
-            /* ── Hero title (.wexnix_hero-title: 72px → 61px) ───────── */
+        /* h2: 35px → 30px */
+        h2 {
+            font-size: 30px !important;
+        }
+
+        /* h3: 28px → 24px */
+        h3 {
+            font-size: 24px !important;
+        }
+
+        /* h4: 22px → 19px */
+        h4 {
+            font-size: 19px !important;
+        }
+
+        /* h5: 18px → 15px */
+        h5 {
+            font-size: 15px !important;
+        }
+
+        /* h6: 16px → 14px */
+        h6 {
+            font-size: 14px !important;
+        }
+
+        /* ── Section title (.wexnix_site-title: 55px → 47px) ─────── */
+        .wexnix_site-title {
+            font-size: 47px !important;
+        }
+
+        /* tagline (18px → 15px) */
+        .wexnix_site-title-tagline {
+            font-size: 15px !important;
+            letter-spacing: 2px !important;
+        }
+
+        /* ── Hero title (.wexnix_hero-title: 72px → 61px) ───────── */
+        .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
+            font-size: 61px !important;
+        }
+
+        /* Responsive hero title (50px → 43px) */
+        @media all and (max-width: 991px) {
             .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
-                font-size: 61px !important;
-            }
-            /* Responsive hero title (50px → 43px) */
-            @media all and (max-width: 991px) {
-                .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
-                    font-size: 43px !important;
-                }
-            }
-            @media all and (max-width: 767px) {
-                .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
-                    font-size: 34px !important;
-                }
-            }
-            /* Hero sub-title (25px → 21px) */
-            .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
-                font-size: 21px !important;
-                letter-spacing: 3px !important;
-            }
-            /* Hero paragraph (18px → 15px) */
-            .wexnix_hero-single .wexnix_hero-content p {
-                font-size: 15px !important;
-            }
-
-            /* ── Counter number (50px → 43px) ────────────────────────── */
-            .wexnix_counter-box .wexnix_counter {
                 font-size: 43px !important;
             }
-            /* Counter label (20px → 17px) */
-            .wexnix_counter-box .wexnix_title {
-                font-size: 17px !important;
-            }
+        }
 
-            /* ── Choose / features item heading (21px → 18px) ────────── */
-            .wexnix_choose-item-info h4 {
-                font-size: 18px !important;
+        @media all and (max-width: 767px) {
+            .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
+                font-size: 34px !important;
             }
+        }
 
-            /* ── Navbar (14px → 13px) ────────────────────────────────── */
-            .wexnix_main-navigation .nav-link {
-                font-size: 13px !important;
-            }
-        </style>
+        /* Hero sub-title (25px → 21px) */
+        .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
+            font-size: 21px !important;
+            letter-spacing: 3px !important;
+        }
+
+        /* Hero paragraph (18px → 15px) */
+        .wexnix_hero-single .wexnix_hero-content p {
+            font-size: 15px !important;
+        }
+
+        /* ── Counter number (50px → 43px) ────────────────────────── */
+        .wexnix_counter-box .wexnix_counter {
+            font-size: 43px !important;
+        }
+
+        /* Counter label (20px → 17px) */
+        .wexnix_counter-box .wexnix_title {
+            font-size: 17px !important;
+        }
+
+        /* ── Choose / features item heading (21px → 18px) ────────── */
+        .wexnix_choose-item-info h4 {
+            font-size: 18px !important;
+        }
+
+        /* ── Navbar (14px → 13px) ────────────────────────────────── */
+        .wexnix_main-navigation .nav-link {
+            font-size: 13px !important;
+        }
+    </style>
     @endif
 
     @php
-        $primaryColor = $siteSettings->primary_color ?? '#0054A5';
-        $secondaryColor = $siteSettings->secondary_color ?? '#F26F21';
-        $parsed = sscanf($primaryColor, "#%02x%02x%02x");
-        $primaryRgb = $parsed && count($parsed) === 3 ? implode(', ', $parsed) : '0, 84, 165';
+    $primaryColor = $siteSettings->primary_color ?? '#0054A5';
+    $secondaryColor = $siteSettings->secondary_color ?? '#F26F21';
+    $parsed = sscanf($primaryColor, "#%02x%02x%02x");
+    $primaryRgb = $parsed && count($parsed) === 3 ? implode(', ', $parsed) : '0, 84, 165';
     @endphp
     <style>
         :root {
             --theme-color: {{ $primaryColor }} !important;
             --theme-color2: {{ $secondaryColor }} !important;
             --theme-color-light: rgba({{ $primaryRgb }}, 0.09) !important;
+        }
+        /* ── Navbar flex-wrap to allow long menus to wrap gracefully ──────────────── */
+        @media (min-width: 992px) {
+            .wexnix_main-navigation .navbar-nav {
+                flex-wrap: wrap;
+            }
         }
     </style>
 
@@ -172,16 +240,16 @@
                         <div class="wexnix_header-top-social">
                             <span>{{ __('Follow Us:') }} </span>
                             @if ($siteSettings->facebook_url)
-                                <a href="{{ $siteSettings->facebook_url }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                            <a href="{{ $siteSettings->facebook_url }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
                             @endif
                             @if ($siteSettings->instagram_url)
-                                <a href="{{ $siteSettings->instagram_url }}" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                            <a href="{{ $siteSettings->instagram_url }}" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
                             @endif
                             @if ($siteSettings->youtube_url)
-                                <a href="{{ $siteSettings->youtube_url }}" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+                            <a href="{{ $siteSettings->youtube_url }}" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
                             @endif
                             @if ($siteSettings->whatsapp_url)
-                                <a href="{{ $siteSettings->whatsapp_url }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                            <a href="{{ $siteSettings->whatsapp_url }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
                             @endif
                         </div>
                     </div>
@@ -189,25 +257,25 @@
                         <div class="wexnix_header-top-contact">
                             <ul>
                                 @if ($siteSettings->address)
-                                    <li>
-                                        <a href="#"><i class="fas fa-location-dot"></i> {{ $siteSettings->address }}</a>
-                                    </li>
+                                <li>
+                                    <a href="#"><i class="fas fa-location-dot"></i> {{ $siteSettings->address }}</a>
+                                </li>
                                 @endif
                                 @if ($siteSettings->email)
-                                    <li>
-                                        <a href="mailto:{{ $siteSettings->email }}"><i class="fas fa-envelope"></i> {{ $siteSettings->email }}</a>
-                                    </li>
+                                <li>
+                                    <a href="mailto:{{ $siteSettings->email }}"><i class="fas fa-envelope"></i> {{ $siteSettings->email }}</a>
+                                </li>
                                 @endif
                                 @if ($siteSettings->phone)
-                                    <li>
-                                        <a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone-volume"></i> {{ $siteSettings->phone }}</a>
-                                    </li>
+                                <li>
+                                    <a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone-volume"></i> {{ $siteSettings->phone }}</a>
+                                </li>
                                 @endif
                             </ul>
                         </div>
                         <div class="wexnix_header-lang">
                             @foreach ($languages as $lang)
-                                <a href="{{ route('language.switch', $lang->code) }}" class="{{ app()->getLocale() === $lang->code ? 'active' : '' }}">{{ strtoupper($lang->code) }}</a>
+                            <a href="{{ route('language.switch', $lang->code) }}" class="{{ app()->getLocale() === $lang->code ? 'active' : '' }}">{{ strtoupper($lang->code) }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -245,7 +313,7 @@
                     <div class="collapse navbar-collapse" id="main_nav">
                         <ul class="navbar-nav">
                             @foreach ($headerMenuItems as $item)
-                                @include('frontend.partials.menu-item', ['item' => $item, 'depth' => 0])
+                            @include('frontend.partials.menu-item', ['item' => $item, 'depth' => 0])
                             @endforeach
                         </ul>
                     </div>
@@ -255,23 +323,23 @@
 
         <!-- notice marquee -->
         @if (\App\Models\ModuleSetting::isEnabled('notices') && $marqueeNotices->count())
-            <div class="wexnix_notice-marquee">
-                <div class="container">
-                    <div class="wexnix_notice-marquee-wrap">
-                        <span class="wexnix_notice-label">{{ $noticePageSettings->marquee_label ?: 'Notice' }}</span>
-                        <div class="wexnix_marquee-viewport">
-                            <div class="wexnix_marquee-track">
-                                @foreach ($marqueeNotices as $notice)
-                                    <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->title }}</a></span>
-                                @endforeach
-                                @foreach ($marqueeNotices as $notice)
-                                    <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->title }}</a></span>
-                                @endforeach
-                            </div>
+        <div class="wexnix_notice-marquee">
+            <div class="container">
+                <div class="wexnix_notice-marquee-wrap">
+                    <span class="wexnix_notice-label">{{ $noticePageSettings->marquee_label ?: 'Notice' }}</span>
+                    <div class="wexnix_marquee-viewport">
+                        <div class="wexnix_marquee-track">
+                            @foreach ($marqueeNotices as $notice)
+                            <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->title }}</a></span>
+                            @endforeach
+                            @foreach ($marqueeNotices as $notice)
+                            <span><a href="{{ route('notices.show', $notice) }}">{{ $notice->title }}</a></span>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         @endif
         <!-- notice marquee end -->
     </header>
@@ -310,20 +378,20 @@
                                 <img loading="lazy" src="{{ $siteSettings->footer_logo_url ?? '/frontend/assets/img/logo/logo-light.png' }}" alt="{{ $siteSettings->site_name }}">
                             </a>
                             @if ($siteSettings->footer_about)
-                                <p class="mb-3">
-                                    {{ $siteSettings->footer_about }}
-                                </p>
+                            <p class="mb-3">
+                                {{ $siteSettings->footer_about }}
+                            </p>
                             @endif
                             <ul class="wexnix_footer-contact">
                                 @if ($siteSettings->phone)
-                                    <li><a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone"></i>{{ $siteSettings->phone }}</a></li>
+                                <li><a href="tel:{{ $siteSettings->phone }}"><i class="fas fa-phone"></i>{{ $siteSettings->phone }}</a></li>
                                 @endif
                                 @if ($siteSettings->address)
-                                    <li><i class="fas fa-map-marker-alt"></i>{{ $siteSettings->address }}</li>
+                                <li><i class="fas fa-map-marker-alt"></i>{{ $siteSettings->address }}</li>
                                 @endif
                                 @if ($siteSettings->email)
-                                    <li><a href="mailto:{{ $siteSettings->email }}"><i
-                                                class="fas fa-envelope"></i>{{ $siteSettings->email }}</a></li>
+                                <li><a href="mailto:{{ $siteSettings->email }}"><i
+                                            class="fas fa-envelope"></i>{{ $siteSettings->email }}</a></li>
                                 @endif
                             </ul>
                         </div>
@@ -333,7 +401,7 @@
                             <h4 class="wexnix_footer-widget-title">{{ $siteSettings->footer_quick_links_title ?: 'Quick Links' }}</h4>
                             <ul class="wexnix_footer-list">
                                 @foreach ($siteSettings->footerQuickLinkItems() as $link)
-                                    <li><a href="{{ $link['url'] }}"><i class="fas fa-caret-right"></i> {{ $link['label'] }}</a></li>
+                                <li><a href="{{ $link['url'] }}"><i class="fas fa-caret-right"></i> {{ $link['label'] }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -343,7 +411,7 @@
                             <h4 class="wexnix_footer-widget-title">{{ $siteSettings->footer_campus_title ?: 'Our Campus' }}</h4>
                             <ul class="wexnix_footer-list">
                                 @foreach ($siteSettings->footerCampusLinkItems() as $link)
-                                    <li><a href="{{ $link['url'] }}"><i class="fas fa-caret-right"></i> {{ $link['label'] }}</a></li>
+                                <li><a href="{{ $link['url'] }}"><i class="fas fa-caret-right"></i> {{ $link['label'] }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -379,16 +447,16 @@
                         <div class="col-md-6 align-self-center">
                             <ul class="wexnix_footer-social">
                                 @if ($siteSettings->facebook_url)
-                                    <li><a href="{{ $siteSettings->facebook_url }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="{{ $siteSettings->facebook_url }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a></li>
                                 @endif
                                 @if ($siteSettings->linkedin_url)
-                                    <li><a href="{{ $siteSettings->linkedin_url }}" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="{{ $siteSettings->linkedin_url }}" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a></li>
                                 @endif
                                 @if ($siteSettings->whatsapp_url)
-                                    <li><a href="{{ $siteSettings->whatsapp_url }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a></li>
+                                <li><a href="{{ $siteSettings->whatsapp_url }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a></li>
                                 @endif
                                 @if ($siteSettings->youtube_url)
-                                    <li><a href="{{ $siteSettings->youtube_url }}" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a></li>
+                                <li><a href="{{ $siteSettings->youtube_url }}" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a></li>
                                 @endif
                             </ul>
                         </div>
@@ -421,4 +489,3 @@
 
     @stack('scripts')
 </body>
-

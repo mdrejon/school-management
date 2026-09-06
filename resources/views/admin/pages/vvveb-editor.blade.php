@@ -17,9 +17,9 @@
        individually, <base> makes all of them resolve against the vendored
        copy; root-relative URLs (our own route()/asset() calls, all starting
        with "/") are untouched by <base> and still resolve normally. --}}
-  <base href="{{ asset('vendor/vvvebjs') }}/">
+  <base href="{{ asset('assets/vvvebjs') }}/">
 
-  <link href="{{ asset('vendor/vvvebjs/css/editor.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/vvvebjs/css/editor.css') }}" rel="stylesheet">
   <script>
     // Vvveb.js is a vanilla-JS third-party editor unaware of Laravel's CSRF
     // protection — every save/upload it issues goes through fetch(), so a
@@ -103,8 +103,8 @@
       <div class="logo">
 
         <a href="{{ route('admin.cms.pages.index') }}" class="img" title="Back to Pages">
-          <img src="{{ asset('vendor/vvvebjs/img/logo.png') }}" data-v-site-logo>
-          <img src="{{ asset('vendor/vvvebjs/img/logo.png') }}" data-v-site-logo-dark>
+          <img src="{{ asset('assets/vvvebjs/img/logo.png') }}" data-v-site-logo>
+          <img src="{{ asset('assets/vvvebjs/img/logo.png') }}" data-v-site-logo-dark>
         </a>
       </div>
 
@@ -114,8 +114,8 @@
         <div class="logo">
           <!-- h1 class="display-5"><a href="#">M.</a></h1-->
           <a href="{{ route('admin.cms.pages.index') }}" class="img">
-            <img src="{{ asset('vendor/vvvebjs/img/logo.png') }}" data-v-site-logo>
-            <img src="{{ asset('vendor/vvvebjs/img/logo.png') }}" data-v-site-logo-dark>
+            <img src="{{ asset('assets/vvvebjs/img/logo.png') }}" data-v-site-logo>
+            <img src="{{ asset('assets/vvvebjs/img/logo.png') }}" data-v-site-logo-dark>
           </a>
         </div>
 
@@ -423,11 +423,11 @@
                         <ol>
                           <!--
 								<li data-component="Products" class="file">							
-									<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/products.svg)"><span>Products</span></label>							
+									<label for="idNaN" style="background-image:url(/assets/vvvebjs/icons/products.svg)"><span>Products</span></label>							
 									<input type="checkbox" id="idNaN">
 								</li>
 								<li data-component="Posts" class="file">							
-									<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>							
+									<label for="idNaN" style="background-image:url(/assets/vvvebjs/icons/posts.svg)"><span>Posts</span></label>							
 									<input type="checkbox" id="idNaN">
 								</li>
 								-->
@@ -1973,11 +1973,11 @@
 			<ol>
 				<!--
 				<li data-component="Products" class="file">							
-					<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/products.svg)"><span>Products</span></label>							
+					<label for="idNaN" style="background-image:url(/assets/vvvebjs/icons/products.svg)"><span>Products</span></label>							
 					<input type="checkbox" id="idNaN">
 				</li>
 				<li data-component="Posts" class="file">							
-					<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>							
+					<label for="idNaN" style="background-image:url(/assets/vvvebjs/icons/posts.svg)"><span>Posts</span></label>							
 					<input type="checkbox" id="idNaN">
 				</li>
 				-->

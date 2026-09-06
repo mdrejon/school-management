@@ -57,7 +57,7 @@
                                         <tbody>
                                             @foreach ($founders as $founder)
                                                 <tr>
-                                                    <td>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT') }}</td>
+                                                    <td>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
                                                     <td>{{ $founder->name }}</td>
                                                     <td>{{ $founder->designation }}</td>
                                                     <td>{{ $founder->year }}</td>
@@ -83,7 +83,7 @@
                                         <tbody>
                                             @foreach ($donors as $donor)
                                                 <tr>
-                                                    <td>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT') }}</td>
+                                                    <td>{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</td>
                                                     <td>{{ $donor->name }}</td>
                                                     <td>{{ $donor->contribution }}</td>
                                                     <td>{{ $donor->year }}</td>
