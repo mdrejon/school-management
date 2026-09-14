@@ -63,15 +63,22 @@ const form = useForm({
     seo_keywords: { ...emptyTranslatable(), ...props.pageSettings.seo_keywords },
 });
 
-const onImageSelected = (file, field, previewRef) => {
-    form[field] = file;
-    form.clearErrors(field);
-    previewRef.value = URL.createObjectURL(file);
+const previewRefsMap = {
+    image_1: image1Preview,
+    mission_image_1: missionImage1Preview,
+    values_image_1: valuesImage1Preview,
+    breadcrumb_image: breadcrumbImagePreview,
 };
 
-const onImageRemoved = (field, previewRef) => {
+const onImageSelected = (file, field, _previewRef) => {
+    form[field] = file;
+    form.clearErrors(field);
+    if (previewRefsMap[field]) previewRefsMap[field].value = URL.createObjectURL(file);
+};
+
+const onImageRemoved = (field, _previewRef) => {
     form[field] = null;
-    previewRef.value = null;
+    if (previewRefsMap[field]) previewRefsMap[field].value = null;
 };
 
 const submit = () => {

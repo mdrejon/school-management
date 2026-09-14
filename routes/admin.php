@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CoursePageSettingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DepartmentPageSettingController;
+use App\Http\Controllers\Admin\EducationLevelController;
 use App\Http\Controllers\Admin\DonorController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\EventPageSettingController;
@@ -330,14 +331,25 @@ Route::middleware([
         Route::patch('/{page}/toggle', [PageController::class, 'toggleActive'])->name('toggle')->middleware('permission:pages.edit');
         Route::delete('/{page}', [PageController::class, 'destroy'])->name('destroy')->middleware('permission:pages.delete');
 
-        // Vvveb.js visual content builder bridge (see PageVisualBuilderController)
-        // — a standalone full-screen editor, not an Inertia page. All of it
-        // is gated under pages.edit — it's editing a page's content either way.
         Route::get('/builder/scan', [PageVisualBuilderController::class, 'scan'])->name('builder.scan')->middleware('permission:pages.edit');
         Route::get('/{page}/builder', [PageVisualBuilderController::class, 'edit'])->name('builder.edit')->middleware('permission:pages.edit');
         Route::get('/{page}/builder/content', [PageVisualBuilderController::class, 'content'])->name('builder.content')->middleware('permission:pages.edit');
         Route::post('/{page}/builder/save', [PageVisualBuilderController::class, 'save'])->name('builder.save')->middleware('permission:pages.edit');
         Route::post('/{page}/builder/upload', [PageVisualBuilderController::class, 'upload'])->name('builder.upload')->middleware('permission:pages.edit');
+    });
+
+    Route::prefix('cms/education-levels')->name('cms.education-levels.')->group(function () {
+        Route::get('/', [EducationLevelController::class, 'index'])->name('index');
+        Route::put('/settings', [\App\Http\Controllers\Admin\EducationLevelPageSettingController::class, 'update'])->name('settings.update');
+        Route::post('/campus', [EducationLevelController::class, 'storeCampus'])->name('campus.store');
+        Route::put('/campus/{campus}', [EducationLevelController::class, 'updateCampus'])->name('campus.update');
+        Route::delete('/campus/{campus}', [EducationLevelController::class, 'destroyCampus'])->name('campus.destroy');
+        Route::post('/level', [EducationLevelController::class, 'storeLevel'])->name('level.store');
+        Route::put('/level/{level}', [EducationLevelController::class, 'updateLevel'])->name('level.update');
+        Route::delete('/level/{level}', [EducationLevelController::class, 'destroyLevel'])->name('level.destroy');
+        Route::post('/class', [EducationLevelController::class, 'storeClass'])->name('class.store');
+        Route::put('/class/{class}', [EducationLevelController::class, 'updateClass'])->name('class.update');
+        Route::delete('/class/{class}', [EducationLevelController::class, 'destroyClass'])->name('class.destroy');
     });
 
     Route::prefix('cms/menus')->name('cms.menus.')->group(function () {

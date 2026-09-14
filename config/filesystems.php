@@ -40,7 +40,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => public_path('storage'),
+            'root' => base_path('storage'),
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/') . '/storage',
             'visibility' => 'public',
             'throw' => false,
@@ -74,7 +74,7 @@ return [
     */
 
     'links' => [
-        public_path(env('STORAGE_SYMLINK_NAME', 'storage')) => storage_path('app/public'),
+        public_path(env('STORAGE_SYMLINK_NAME', 'storage')) => base_path('storage'),
     ],
 
 ];

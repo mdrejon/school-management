@@ -4,10 +4,18 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcademicCalendar;
+use App\Models\Page;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AcademicCalendarController extends Controller
 {
+    public function index(): View
+    {
+        $pageSettings = Page::where('slug', 'academic-calendar')->first();
+        return view('frontend.academic-calendar', compact('pageSettings'));
+    }
+
     public function events(Request $request)
     {
         $year = $request->query('year', date('Y'));

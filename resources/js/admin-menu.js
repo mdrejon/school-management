@@ -60,6 +60,7 @@ export default [
             { label: 'News & Events', icon: 'pi pi-calendar-plus', route: 'admin.cms.events.index', module: 'events' },
             { label: 'Academic Calendar', icon: 'pi pi-calendar', route: 'admin.cms.academic-calendars.index' },
             { label: 'Notices', icon: 'pi pi-megaphone', route: 'admin.cms.notices.index', module: 'notices' },
+            { label: 'Education Levels', icon: 'pi pi-sitemap', route: 'admin.cms.education-levels.index' },
             { label: 'Gallery', icon: 'pi pi-image', route: 'admin.cms.gallery.index', module: 'gallery' },
             { label: 'Facilities', icon: 'pi pi-building', route: 'admin.cms.facilities.index', module: 'facilities' },
             { label: 'Portfolio', icon: 'pi pi-briefcase', route: 'admin.cms.portfolios.index', module: 'portfolios' },

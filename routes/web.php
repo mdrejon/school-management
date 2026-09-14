@@ -16,6 +16,7 @@ use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\VisionMissionController;
@@ -179,6 +180,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/academic-calendar', [\App\Http\Controllers\Frontend\AcademicCalendarController::class, 'index'])->name('academic-calendar.index');
 Route::get('/api/academic-calendar/events', [\App\Http\Controllers\Frontend\AcademicCalendarController::class, 'events'])->name('api.academic-calendar.events');
 
 require __DIR__ . '/admin.php';
@@ -191,6 +193,16 @@ Route::get('/results', [ResultController::class, 'exam'])->name('results');
 Route::get('/academic-results', [ResultController::class, 'academic'])->name('academic-results');
 Route::get('/evaluation-results', [ResultController::class, 'evaluation'])->name('evaluation-results');
 Route::get('/board-exam-results', [ResultController::class, 'boardExam'])->name('board-exam-results');
+
+Route::get('/staff-information', [StaffController::class, 'index'])->name('staff.index');
+Route::get('/staff-information/{staff}', [StaffController::class, 'show'])->name('staff.show');
+
+Route::get('/education-levels', [\App\Http\Controllers\Frontend\EducationLevelController::class, 'index'])->name('education-levels.index');
+
+Route::get('/syllabus', [\App\Http\Controllers\Frontend\SyllabusController::class, 'index'])->name('syllabus.index');
+Route::get('/syllabus/{id}/download', [\App\Http\Controllers\Frontend\SyllabusController::class, 'download'])->name('syllabus.download');
+
+Route::get('/class-routine', [\App\Http\Controllers\Frontend\ClassRoutineController::class, 'index'])->name('class-routine.index');
 
 // Catch-all for admin-built Pages — must stay the LAST route registered in
 // the whole file so it never shadows a more specific route above (Laravel

@@ -105,6 +105,10 @@ class PageVisualBuilderController extends Controller
      */
     protected function extractSavableContent(string $html): string
     {
+        \Illuminate\Support\Facades\Log::info('Vvveb raw html payload length: ' . strlen($html));
+        \Illuminate\Support\Facades\Log::info('Vvveb raw html snippet: ' . substr($html, 0, 500));
+        file_put_contents(storage_path('logs/vvveb_payload.html'), $html);
+
         $html = trim($html);
 
         if ($html === '') {
@@ -130,22 +134,41 @@ class PageVisualBuilderController extends Controller
             }
         }
 
-        $xpath = new \DOMXPath($dom);
-        $root = $xpath->query('//*[@data-page-content-root]')->item(0)
-            ?? $dom->getElementsByTagName('body')->item(0);
+        $body = $dom->getElementsByTagName('body')->item(0);
 
-        $rootHtml = $html;
+        $rootHtml = '';
+        if ($body) {
+            $xpath = new \DOMXPath($dom);
+            // Unwrap the wexnix_page-builder so we don't save our own iframe injection wrapper
+            $wrappers = $xpath->query('//div[contains(@class, "wexnix_page-builder")]');
+            foreach ($wrappers as $wrapper) {
+                $containers = $xpath->query('.//div[@data-page-content-root]', $wrapper);
+                if ($containers->length > 0) {
+                    $container = $containers->item(0);
+                    // Move the container's children out to replace the wrapper
+                    while ($container->firstChild) {
+                        $wrapper->parentNode->insertBefore($container->firstChild, $wrapper);
+                    }
+                }
+                $wrapper->parentNode->removeChild($wrapper);
+            }
 
-        if ($root) {
-            $rootHtml = '';
-            foreach ($root->childNodes as $child) {
+            foreach ($body->childNodes as $child) {
+                // Ignore Chrome extensions like Simple Translate injecting UI into the builder
+                if ($child instanceof \DOMElement && strpos((string) $child->getAttribute('class'), 'simple-translate') !== false) {
+                    continue;
+                }
                 $rootHtml .= $dom->saveHTML($child);
             }
         }
 
         $styleTag = $customCss !== '' ? "<style id=\"vvvebjs-styles\">{$customCss}</style>\n" : '';
 
-        return trim($styleTag.trim($rootHtml));
+        $finalHtml = trim($styleTag.trim($rootHtml));
+        \Illuminate\Support\Facades\Log::info('Vvveb final extracted html length: ' . strlen($finalHtml));
+        \Illuminate\Support\Facades\Log::info('Vvveb final extracted html snippet: ' . substr($finalHtml, 0, 500));
+
+        return $finalHtml;
     }
 
     /**
