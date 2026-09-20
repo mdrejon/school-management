@@ -15,13 +15,35 @@
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="/frontend/assets/img/logo/favicon.png">
 
-    <!-- css -->
+    <!-- Resource hints: establish early connections to font CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    @if (app()->getLocale() !== 'bn')
+    {{-- English mode: preload Yantramanav + Roboto as a single optimised request.
+         font-display=swap prevents invisible text while fonts load. --}}
+    <link rel="preload" as="style"
+          href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+          onload="this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap">
+    </noscript>
+    @endif
+
+    <!-- critical css (render-blocking, kept synchronous) -->
     <link rel="stylesheet" href="/frontend/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/frontend/assets/css/all-fontawesome.min.css">
-    <link rel="stylesheet" href="/frontend/assets/css/animate.min.css">
-    <link rel="stylesheet" href="/frontend/assets/css/magnific-popup.min.css">
-    <link rel="stylesheet" href="/frontend/assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/frontend/assets/css/style.css">
+
+    <!-- non-critical css: load async so they never block first paint -->
+    <link rel="stylesheet" href="/frontend/assets/css/animate.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/frontend/assets/css/animate.min.css"></noscript>
+    <link rel="stylesheet" href="/frontend/assets/css/magnific-popup.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/frontend/assets/css/magnific-popup.min.css"></noscript>
+    <link rel="stylesheet" href="/frontend/assets/css/owl.carousel.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="/frontend/assets/css/owl.carousel.min.css"></noscript>
 
     {{-- Sizing/coloring for inline Lucide <svg> icons — the original theme's
          icon boxes only ever styled <img loading="lazy">, so these dynamic icon slots
@@ -64,9 +86,14 @@
             equivalent so the visual density matches across both languages.
             Icon font-sizes (fa-icons) are intentionally left unchanged.
         --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap">
+    {{-- Bengali: preconnect already declared globally above in <head>.
+         Load Hind Siliguri async to avoid render-blocking. --}}
+    <link rel="preload" as="style"
+          href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+          onload="this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap">
+    </noscript>
     <style>
         /* ── Font family ─────────────────────────────────────────── */
         :root {
@@ -288,7 +315,8 @@
             <div class="container">
                 <div class="wexnix_header-middle-wrap">
                     <a class="navbar-brand" href="{{ route('home') }}">
-                        <img loading="lazy" src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}">
+                        {{-- Logo is above-the-fold: eager + high fetch priority for fastest LCP --}}
+                <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}" fetchpriority="high" loading="eager">
                     </a>
                     <div class="wexnix_header-middle-right">
                         <form class="wexnix_header-search-form" action="{{ route('search') }}" method="GET">
@@ -473,19 +501,20 @@
     <!-- scroll-top end -->
 
 
-    <!-- js -->
-    <script src="/frontend/assets/js/jquery-3.7.1.min.js"></script>
-    <script src="/frontend/assets/js/modernizr.min.js"></script>
-    <script src="/frontend/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="/frontend/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="/frontend/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="/frontend/assets/js/isotope.pkgd.min.js"></script>
-    <script src="/frontend/assets/js/jquery.appear.min.js"></script>
-    <script src="/frontend/assets/js/jquery.easing.min.js"></script>
-    <script src="/frontend/assets/js/owl.carousel.min.js"></script>
-    <script src="/frontend/assets/js/counter-up.js"></script>
-    <script src="/frontend/assets/js/wow.min.js"></script>
-    <script src="/frontend/assets/js/main.js"></script>
+    <!-- js: defer lets the browser parse HTML first, then execute scripts
+         in source order after DOMContentLoaded — zero render-blocking. -->
+    <script defer src="/frontend/assets/js/jquery-3.7.1.min.js"></script>
+    <script defer src="/frontend/assets/js/modernizr.min.js"></script>
+    <script defer src="/frontend/assets/js/bootstrap.bundle.min.js"></script>
+    <script defer src="/frontend/assets/js/imagesloaded.pkgd.min.js"></script>
+    <script defer src="/frontend/assets/js/jquery.magnific-popup.min.js"></script>
+    <script defer src="/frontend/assets/js/isotope.pkgd.min.js"></script>
+    <script defer src="/frontend/assets/js/jquery.appear.min.js"></script>
+    <script defer src="/frontend/assets/js/jquery.easing.min.js"></script>
+    <script defer src="/frontend/assets/js/owl.carousel.min.js"></script>
+    <script defer src="/frontend/assets/js/counter-up.js"></script>
+    <script defer src="/frontend/assets/js/wow.min.js"></script>
+    <script defer src="/frontend/assets/js/main.js"></script>
 
     @stack('scripts')
 </body>

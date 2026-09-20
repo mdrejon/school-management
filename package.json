@@ -28,6 +28,7 @@
         "primevue": "^4.5.5",
         "quill": "^2.0.3",
         "sortablejs": "^1.15.7",
+        "vue3-colorpicker": "^2.3.0",
         "vuedraggable": "^4.1.0"
     }
 }

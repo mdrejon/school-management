@@ -47,6 +47,12 @@ Route::get('/clear-cache', function () {
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
     return "All caches cleared successfully!";
 });
+
+Route::get('admin/optimize', function () {
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    \Illuminate\Support\Facades\Artisan::call('optimize');
+    return "Server optimized successfully!";
+});
 // Route::get('/assign-super-admin', function () {
 //     $user = \App\Models\User::where('email', 'admin@admin.com')->first();
 //     if ($user) {

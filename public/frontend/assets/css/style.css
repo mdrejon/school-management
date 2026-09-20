@@ -847,7 +847,7 @@ label {
   z-index: 1;
 }
 
-.wexnix_header-top::before{
+/* .wexnix_header-top::before{
   content: "";
   position: absolute;
   left: 0;
@@ -856,7 +856,7 @@ label {
   width: 30%;
   background: var(--theme-color2);
   z-index: -1;
-}
+} */
 
 .wexnix_header-top-wrap {
   display: flex;

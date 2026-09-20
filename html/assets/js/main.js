@@ -187,10 +187,15 @@ Version         : 1.0
     });
 
 
-    // preloader
-    $(window).on('load', function () {
-        $(".wexnix_preloader").fadeOut("slow");
+    // preloader — hide as soon as DOM is ready, not after all images load.
+    // window.on('load') was waiting for every image/iframe to finish
+    // downloading before showing the page; DOMContentLoaded is much faster.
+    $(document).ready(function () {
+        $(".wexnix_preloader").fadeOut(500);
     });
+    // Fallback: force-hide after 3 s no matter what (catches edge-cases
+    // where DOMContentLoaded already fired before this script ran).
+    setTimeout(function () { $(".wexnix_preloader").fadeOut(500); }, 3000);
 
 
     // fun fact counter

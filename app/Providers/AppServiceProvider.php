@@ -38,13 +38,9 @@ class AppServiceProvider extends ServiceProvider
         // hasPermissionTo() check still decide the outcome.
         Gate::before(fn ($user, string $ability) => $user->hasRole('system_admin') ? true : null);
 
-        // Wildcard, not just the layout: @include'd section partials inside
-        // a page's own @section('content') render in that page's own view
-        // scope, which does NOT inherit data a composer attached only to
-        // the layout — Blade merges layout composer data only into the
-        // layout's own template body (confirmed empirically), not into
-        // child views or their includes. Every frontend.* view needs this
-        // directly for that reason.
+        // Attach shared data to all frontend views. The data lookup is heavily
+        // cached (SiteSetting::current(), Notice::forMarquee(), etc.), so 
+        // running this composer for every partial is fast and safe.
         View::composer('frontend.*', function ($view) {
             $view->with('siteSettings', SiteSetting::current());
             $view->with('marqueeNotices', Notice::forMarquee());

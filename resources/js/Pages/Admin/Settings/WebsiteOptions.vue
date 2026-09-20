@@ -13,6 +13,8 @@ import TabList from 'primevue/tablist';
 import Tab from 'primevue/tab';
 import Editor from 'primevue/editor';
 import ToggleSwitch from 'primevue/toggleswitch';
+import { ColorPicker } from 'vue3-colorpicker';
+import 'vue3-colorpicker/style.css';
 
 const props = defineProps({
     settings: {
@@ -629,20 +631,24 @@ const submit = () => {
                             <h3 class="text-sm font-semibold text-slate-800 mb-3">Theme Colors</h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
                                 <div class="flex items-center gap-3">
-                                    <input type="color" v-model="form.primary_color" class="w-10 h-10 p-0 border-0 rounded cursor-pointer" />
-                                    <div>
-                                        <div class="text-sm font-medium text-slate-800">Primary Color</div>
-                                        <div class="text-xs text-slate-500">{{ form.primary_color }}</div>
+                                    <div class="mt-1">
+                                        <color-picker v-model:pureColor="form.primary_color" format="hex" shape="square" />
                                     </div>
-                                    <p v-if="form.errors.primary_color" class="text-xs text-red-500 mt-1">{{ form.errors.primary_color }}</p>
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-800 mb-1">Primary Color</div>
+                                        <div class="text-xs text-slate-500 font-mono">{{ form.primary_color }}</div>
+                                        <p v-if="form.errors.primary_color" class="text-xs text-red-500 mt-1">{{ form.errors.primary_color }}</p>
+                                    </div>
                                 </div>
                                 <div class="flex items-center gap-3">
-                                    <input type="color" v-model="form.secondary_color" class="w-10 h-10 p-0 border-0 rounded cursor-pointer" />
-                                    <div>
-                                        <div class="text-sm font-medium text-slate-800">Secondary Color</div>
-                                        <div class="text-xs text-slate-500">{{ form.secondary_color }}</div>
+                                    <div class="mt-1">
+                                        <color-picker v-model:pureColor="form.secondary_color" format="hex" shape="square" />
                                     </div>
-                                    <p v-if="form.errors.secondary_color" class="text-xs text-red-500 mt-1">{{ form.errors.secondary_color }}</p>
+                                    <div>
+                                        <div class="text-sm font-medium text-slate-800 mb-1">Secondary Color</div>
+                                        <div class="text-xs text-slate-500 font-mono">{{ form.secondary_color }}</div>
+                                        <p v-if="form.errors.secondary_color" class="text-xs text-red-500 mt-1">{{ form.errors.secondary_color }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </section>

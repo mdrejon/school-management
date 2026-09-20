@@ -86,11 +86,9 @@ Table of contents
 =======================================================*/
 
 
-/*====================
-1. Google fonts
-======================*/
-
-@import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+/* Google Fonts are loaded via <link rel="preload"> in the HTML <head>
+   for optimal performance — @import here would add an extra blocking
+   round-trip before fonts could start downloading. */
 
 
 /*====================

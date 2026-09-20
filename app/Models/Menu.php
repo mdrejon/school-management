@@ -19,10 +19,16 @@ class Menu extends Model
         static::saved(function (Menu $menu) {
             Cache::forget("menu_{$menu->id}_items_active_1");
             Cache::forget("menu_{$menu->id}_items_active_0");
+            if ($menu->slug === 'header') {
+                Cache::forget('menu_header_id');
+            }
         });
         static::deleted(function (Menu $menu) {
             Cache::forget("menu_{$menu->id}_items_active_1");
             Cache::forget("menu_{$menu->id}_items_active_0");
+            if ($menu->slug === 'header') {
+                Cache::forget('menu_header_id');
+            }
         });
     }
 
@@ -67,6 +73,10 @@ class Menu extends Model
 
     public static function header(): ?self
     {
-        return static::where('slug', 'header')->first();
+        $id = Cache::rememberForever('menu_header_id', function () {
+            return static::where('slug', 'header')->value('id');
+        });
+
+        return $id ? static::find($id) : null;
     }
 }
