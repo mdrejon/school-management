@@ -49,9 +49,93 @@ Route::get('/clear-cache', function () {
 });
 
 Route::get('admin/optimize', function () {
-    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
-    \Illuminate\Support\Facades\Artisan::call('optimize');
-    return "Server optimized successfully!";
+    $results = [];
+
+    $commands = [
+        // ── Clear everything first ──────────────────────────
+        'cache:clear'       => 'Clear Application Cache',
+        'config:clear'      => 'Clear Config Cache',
+        'route:clear'       => 'Clear Route Cache',
+        'view:clear'        => 'Clear View Cache',
+        'event:clear'       => 'Clear Event Cache',
+        'optimize:clear'    => 'Clear All Optimizations',
+
+        // ── Rebuild optimized cache ─────────────────────────
+        'config:cache'      => 'Cache Config',
+        'route:cache'       => 'Cache Routes',
+        'view:cache'        => 'Cache Views',
+        'event:cache'       => 'Cache Events',
+        'optimize'          => 'Run Full Optimize',
+    ];
+
+    foreach ($commands as $command => $label) {
+        try {
+            \Illuminate\Support\Facades\Artisan::call($command);
+            $output = trim(\Illuminate\Support\Facades\Artisan::output());
+            $results[] = [
+                'command' => $command,
+                'label'   => $label,
+                'status'  => 'success',
+                'output'  => $output ?: 'Done',
+            ];
+        } catch (\Throwable $e) {
+            $results[] = [
+                'command' => $command,
+                'label'   => $label,
+                'status'  => 'error',
+                'output'  => $e->getMessage(),
+            ];
+        }
+    }
+
+    // ── Return a clean HTML report ──────────────────────────
+    $html = '<html><head><meta charset="utf-8">
+    <title>Server Optimize</title>
+    <style>
+        body { font-family: monospace; background: #0f172a; color: #e2e8f0; padding: 30px; }
+        h1   { color: #38bdf8; font-size: 22px; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th   { background: #1e293b; color: #94a3b8; text-align: left; padding: 10px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        td   { padding: 10px 14px; border-bottom: 1px solid #1e293b; font-size: 13px; }
+        tr:hover td { background: #1e293b; }
+        .badge-ok  { background: #14532d; color: #86efac; padding: 2px 10px; border-radius: 99px; font-size: 11px; }
+        .badge-err { background: #7f1d1d; color: #fca5a5; padding: 2px 10px; border-radius: 99px; font-size: 11px; }
+        .cmd  { color: #f59e0b; }
+        .out  { color: #94a3b8; font-size: 11px; }
+        .footer { margin-top: 20px; color: #475569; font-size: 12px; }
+    </style></head><body>';
+
+    $html .= '<h1>🚀 Server Optimization Report</h1>';
+    $html .= '<p style="color:#64748b;margin-bottom:20px;">Run at: ' . now()->format('Y-m-d H:i:s') . ' (Server Time)</p>';
+    $html .= '<table><tr><th>#</th><th>Label</th><th>Command</th><th>Status</th><th>Output</th></tr>';
+
+    foreach ($results as $i => $r) {
+        $badge = $r['status'] === 'success'
+            ? '<span class="badge-ok">✓ OK</span>'
+            : '<span class="badge-err">✗ Error</span>';
+
+        $html .= "<tr>
+            <td>" . ($i + 1) . "</td>
+            <td>{$r['label']}</td>
+            <td class='cmd'>php artisan {$r['command']}</td>
+            <td>{$badge}</td>
+            <td class='out'>" . htmlspecialchars($r['output']) . "</td>
+        </tr>";
+    }
+
+    $successCount = count(array_filter($results, fn($r) => $r['status'] === 'success'));
+    $errorCount   = count($results) - $successCount;
+
+    $html .= '</table>';
+    $html .= "<div class='footer'>✅ {$successCount} succeeded &nbsp;|&nbsp; ❌ {$errorCount} failed &nbsp;|&nbsp; Total: " . count($results) . " commands</div>";
+    $html .= '</body></html>';
+
+    return $html;
+});
+
+Route::get('/storage-link', function () {
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    return "Storage link created successfully!";
 });
 // Route::get('/assign-super-admin', function () {
 //     $user = \App\Models\User::where('email', 'admin@admin.com')->first();

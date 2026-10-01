@@ -2,6 +2,10 @@
 
 @section('title', $notice->title . ' - ' . config('app.name'))
 
+@section('breadcrumb_preload')
+<link rel="preload" as="image" href="{{ $pageSettings->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }}" fetchpriority="high">
+@endsection
+
 @section('content')
     <main class="wexnix_main">
 
@@ -43,7 +47,7 @@
                                     <div class="wexnix_blog-details">
                                         <h3 class="wexnix_blog-details-title mb-20">{{ $notice->title }}</h3>
                                         @if ($notice->description)
-                                            <div>{!! $notice->description !!}</div>
+                                            <div>{!! \App\Helpers\HtmlHelper::optimizeImages($notice->description) !!}</div>
                                         @endif
                                     </div>
                                 </div>

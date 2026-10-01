@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('site_settings', function (Blueprint $table) {
-            $table->string('primary_color')->default('#0054A5')->nullable();
-            $table->string('secondary_color')->default('#F26F21')->nullable();
+            if (!Schema::hasColumn('site_settings', 'primary_color')) {
+                $table->string('primary_color')->default('#0054A5')->nullable();
+            }
+            if (!Schema::hasColumn('site_settings', 'secondary_color')) {
+                $table->string('secondary_color')->default('#F26F21')->nullable();
+            }
         });
     }
 

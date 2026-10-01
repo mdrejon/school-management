@@ -3,6 +3,10 @@
 @section('title', $post->title . ' - ' . config('app.name'))
 @section('meta_description', $post->short_description ?: '')
 
+@section('breadcrumb_preload')
+<link rel="preload" as="image" href="{{ $pageSettings->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }}" fetchpriority="high">
+@endsection
+
 @section('content')
     <main class="wexnix_main">
 
@@ -47,7 +51,7 @@
                                     <div class="wexnix_blog-details">
                                         <h3 class="wexnix_blog-details-title mb-20">{{ $post->title }}</h3>
                                         @if ($post->description)
-                                            <div class="mb-10">{!! $post->description !!}</div>
+                                            <div class="mb-10">{!! \App\Helpers\HtmlHelper::optimizeImages($post->description) !!}</div>
                                         @endif
 
                                         @if ($post->gallery_image_1_url || $post->gallery_image_2_url)

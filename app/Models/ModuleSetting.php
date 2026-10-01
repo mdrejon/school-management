@@ -33,8 +33,14 @@ class ModuleSetting extends Model
 
     protected static function booted(): void
     {
-        static::saved(fn () => Cache::forget('module_settings.all'));
-        static::deleted(fn () => Cache::forget('module_settings.all'));
+        static::saved(function () {
+            Cache::forget('module_settings.all');
+            static::$memoizedAllKeyed = null;
+        });
+        static::deleted(function () {
+            Cache::forget('module_settings.all');
+            static::$memoizedAllKeyed = null;
+        });
     }
 
     /**
@@ -46,6 +52,8 @@ class ModuleSetting extends Model
     {
         return config('site_modules');
     }
+
+    protected static ?Collection $memoizedAllKeyed = null;
 
     /**
      * Every module's current DB state, keyed by module key — creates a
@@ -64,6 +72,10 @@ class ModuleSetting extends Model
      */
     public static function allKeyed(): Collection
     {
+        if (static::$memoizedAllKeyed !== null) {
+            return static::$memoizedAllKeyed;
+        }
+
         $rows = Cache::rememberForever('module_settings.all', function () {
             $existingKeys = static::query()->pluck('key')->all();
             $missingKeys = array_diff(array_keys(static::catalog()), $existingKeys);
@@ -75,9 +87,11 @@ class ModuleSetting extends Model
             return static::query()->get()->map(fn (self $model) => $model->getAttributes())->all();
         });
 
-        return collect($rows)
+        static::$memoizedAllKeyed = collect($rows)
             ->map(fn (array $attributes) => (new static())->forceFill($attributes)->syncOriginal())
             ->keyBy('key');
+
+        return static::$memoizedAllKeyed;
     }
 
     public static function isEnabled(string $key): bool

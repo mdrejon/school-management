@@ -93,6 +93,9 @@ class MenuItem extends Model
         ];
     }
 
+    protected ?string $memoizedResolvedUrl = null;
+    protected bool $hasMemoizedUrl = false;
+
     /**
      * The href this item should render with on the public site — resolved
      * per type, `null` if the underlying route/record no longer exists
@@ -101,12 +104,21 @@ class MenuItem extends Model
      */
     public function resolvedUrl(): ?string
     {
-        return match ($this->type) {
+        if ($this->hasMemoizedUrl) {
+            return $this->memoizedResolvedUrl;
+        }
+
+        $url = match ($this->type) {
             'custom' => $this->url,
             'route' => Route::has($this->route_name) ? route($this->route_name) : null,
             'model' => $this->resolveModelUrl(),
             default => null,
         };
+
+        $this->memoizedResolvedUrl = $url;
+        $this->hasMemoizedUrl = true;
+
+        return $url;
     }
 
     protected function resolveModelUrl(): ?string

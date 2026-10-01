@@ -21,6 +21,7 @@ class Menu extends Model
             Cache::forget("menu_{$menu->id}_items_active_0");
             if ($menu->slug === 'header') {
                 Cache::forget('menu_header_id');
+                Cache::forget('menu_header_model');
             }
         });
         static::deleted(function (Menu $menu) {
@@ -28,6 +29,7 @@ class Menu extends Model
             Cache::forget("menu_{$menu->id}_items_active_0");
             if ($menu->slug === 'header') {
                 Cache::forget('menu_header_id');
+                Cache::forget('menu_header_model');
             }
         });
     }
@@ -73,10 +75,10 @@ class Menu extends Model
 
     public static function header(): ?self
     {
-        $id = Cache::rememberForever('menu_header_id', function () {
-            return static::where('slug', 'header')->value('id');
+        $raw = Cache::rememberForever('menu_header_model', function () {
+            return static::where('slug', 'header')->first()?->getAttributes();
         });
 
-        return $id ? static::find($id) : null;
+        return $raw ? (new static())->forceFill($raw)->syncOriginal() : null;
     }
 }

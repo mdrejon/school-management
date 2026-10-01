@@ -3,6 +3,10 @@
 @section('title', $teacher->name . ' - ' . config('app.name'))
 @section('meta_description', $teacher->short_intro ?: '')
 
+@section('breadcrumb_preload')
+<link rel="preload" as="image" href="{{ $pageSettings->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }}" fetchpriority="high">
+@endsection
+
 @section('content')
     <main class="wexnix_main">
 
@@ -88,7 +92,7 @@
                             @if ($teacher->biography)
                                 <div class="wexnix_biography">
                                     <h4 class="mb-3">{{ __('Biography') }}</h4>
-                                    <div class="mb-10">{!! $teacher->biography !!}</div>
+                                    <div class="mb-10">{!! \App\Helpers\HtmlHelper::optimizeImages($teacher->biography) !!}</div>
                                 </div>
                             @endif
                         </div>

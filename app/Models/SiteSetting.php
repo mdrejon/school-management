@@ -631,6 +631,8 @@ class SiteSetting extends Model
             ->all();
     }
 
+    protected static ?self $memoizedCurrent = null;
+
     /**
      * The single settings row, created with sane defaults on first access.
      *
@@ -647,6 +649,10 @@ class SiteSetting extends Model
      */
     public static function current(): self
     {
+        if (static::$memoizedCurrent !== null) {
+            return static::$memoizedCurrent;
+        }
+
         $row = Cache::rememberForever('site_settings.current', function () {
             $settings = static::query()->first();
 
@@ -660,6 +666,7 @@ class SiteSetting extends Model
             return $settings->getAttributes();
         });
 
-        return static::hydrate([$row])->first();
+        static::$memoizedCurrent = static::hydrate([$row])->first();
+        return static::$memoizedCurrent;
     }
 }

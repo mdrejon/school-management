@@ -42,12 +42,21 @@ class AppServiceProvider extends ServiceProvider
         // cached (SiteSetting::current(), Notice::forMarquee(), etc.), so 
         // running this composer for every partial is fast and safe.
         View::composer('frontend.*', function ($view) {
-            $view->with('siteSettings', SiteSetting::current());
-            $view->with('marqueeNotices', Notice::forMarquee());
-            $view->with('noticePageSettings', NoticePageSetting::current());
-            $view->with('languages', Language::active());
-            $view->with('currentLanguage', Language::active()->firstWhere('code', app()->getLocale()));
-            $view->with('headerMenuItems', Menu::header()?->tree() ?? new Collection());
+            static $sharedData = null;
+            if ($sharedData === null) {
+                $sharedData = [
+                    'siteSettings' => SiteSetting::current(),
+                    'marqueeNotices' => Notice::forMarquee(),
+                    'noticePageSettings' => NoticePageSetting::current(),
+                    'languages' => Language::active(),
+                    'currentLanguage' => Language::active()->firstWhere('code', app()->getLocale()),
+                    'headerMenuItems' => Menu::header()?->tree() ?? new Collection(),
+                ];
+            }
+            
+            foreach ($sharedData as $key => $value) {
+                $view->with($key, $value);
+            }
         });
     }
 }

@@ -3,6 +3,10 @@
 @section('title', $event->title . ' - ' . config('app.name'))
 @section('meta_description', $event->short_description ?: '')
 
+@section('breadcrumb_preload')
+<link rel="preload" as="image" href="{{ $pageSettings->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }}" fetchpriority="high">
+@endsection
+
 @section('content')
     <main class="wexnix_main">
 

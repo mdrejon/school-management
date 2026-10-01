@@ -13,37 +13,36 @@
     <title>@yield('title', config('app.name', 'School') . ' - Home')</title>
 
     <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="/frontend/assets/img/logo/favicon.png">
+    <link rel="icon" type="image/x-icon" href="{{ asset('frontend/assets/img/logo/favicon.png') }}">
 
-    <!-- Resource hints: establish early connections to font CDN -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    @yield('breadcrumb_preload')
+
+    <!-- Local fonts -->
 
     @if (app()->getLocale() !== 'bn')
     {{-- English mode: preload Yantramanav + Roboto as a single optimised request.
          font-display=swap prevents invisible text while fonts load. --}}
     <link rel="preload" as="style"
-          href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+          href="{{ asset('frontend/assets/css/google-fonts.css') }}"
           onload="this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Yantramanav:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap">
+              href="{{ asset('frontend/assets/css/google-fonts.css') }}">
     </noscript>
     @endif
 
     <!-- critical css (render-blocking, kept synchronous) -->
-    <link rel="stylesheet" href="/frontend/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/frontend/assets/css/all-fontawesome.min.css">
-    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/all-fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
 
     <!-- non-critical css: load async so they never block first paint -->
-    <link rel="stylesheet" href="/frontend/assets/css/animate.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="/frontend/assets/css/animate.min.css"></noscript>
-    <link rel="stylesheet" href="/frontend/assets/css/magnific-popup.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="/frontend/assets/css/magnific-popup.min.css"></noscript>
-    <link rel="stylesheet" href="/frontend/assets/css/owl.carousel.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="/frontend/assets/css/owl.carousel.min.css"></noscript>
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}"></noscript>
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/magnific-popup.min.css') }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ asset('frontend/assets/css/magnific-popup.min.css') }}"></noscript>
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/owl.carousel.min.css') }}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{ asset('frontend/assets/css/owl.carousel.min.css') }}"></noscript>
 
     {{-- Sizing/coloring for inline Lucide <svg> icons — the original theme's
          icon boxes only ever styled <img loading="lazy">, so these dynamic icon slots
@@ -89,10 +88,10 @@
     {{-- Bengali: preconnect already declared globally above in <head>.
          Load Hind Siliguri async to avoid render-blocking. --}}
     <link rel="preload" as="style"
-          href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+          href="{{ asset('frontend/assets/css/google-fonts.css') }}"
           onload="this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap">
+        <link rel="stylesheet" href="{{ asset('frontend/assets/css/google-fonts.css') }}">
     </noscript>
     <style>
         /* ── Font family ─────────────────────────────────────────── */
@@ -395,7 +394,7 @@
     <!-- footer area -->
     <footer class="wexnix_footer-area">
         <div class="wexnix_footer-shape">
-            <img loading="lazy" src="/frontend/assets/img/shape/03.png" alt="">
+            <img loading="lazy" src="{{ asset('frontend/assets/img/shape/03.png') }}" alt="">
         </div>
         <div class="wexnix_footer-widget">
             <div class="container">
@@ -503,18 +502,18 @@
 
     <!-- js: defer lets the browser parse HTML first, then execute scripts
          in source order after DOMContentLoaded — zero render-blocking. -->
-    <script defer src="/frontend/assets/js/jquery-3.7.1.min.js"></script>
-    <script defer src="/frontend/assets/js/modernizr.min.js"></script>
-    <script defer src="/frontend/assets/js/bootstrap.bundle.min.js"></script>
-    <script defer src="/frontend/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script defer src="/frontend/assets/js/jquery.magnific-popup.min.js"></script>
-    <script defer src="/frontend/assets/js/isotope.pkgd.min.js"></script>
-    <script defer src="/frontend/assets/js/jquery.appear.min.js"></script>
-    <script defer src="/frontend/assets/js/jquery.easing.min.js"></script>
-    <script defer src="/frontend/assets/js/owl.carousel.min.js"></script>
-    <script defer src="/frontend/assets/js/counter-up.js"></script>
-    <script defer src="/frontend/assets/js/wow.min.js"></script>
-    <script defer src="/frontend/assets/js/main.js"></script>
+    <script defer src="{{ asset('frontend/assets/js/jquery-3.7.1.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/modernizr.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/imagesloaded.pkgd.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/isotope.pkgd.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/jquery.appear.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/jquery.easing.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/owl.carousel.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/counter-up.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
+    <script defer src="{{ asset('frontend/assets/js/main.js') }}"></script>
 
     @stack('scripts')
 </body>

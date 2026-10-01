@@ -29,6 +29,8 @@ class Language extends Model
         static::deleted(fn () => Cache::forget('languages.active'));
     }
 
+    protected static $memoizedActive = null;
+
     /**
      * Active languages, ordered for display. Cached until the next
      * create/update/delete so this can be read on every request cheaply.
@@ -40,12 +42,17 @@ class Language extends Model
      */
     public static function active()
     {
+        if (static::$memoizedActive !== null) {
+            return static::$memoizedActive;
+        }
+
         $rows = Cache::rememberForever(
             'languages.active',
             fn () => static::where('is_active', true)->orderBy('sort_order')->get()->toArray()
         );
 
-        return static::hydrate($rows);
+        static::$memoizedActive = static::hydrate($rows);
+        return static::$memoizedActive;
     }
 
     public static function defaultLanguage(): ?self

@@ -1,0 +1,1 @@
+import{B as e,F as t,Mt as n,O as r,mt as i,y as a}from"./vue.runtime.esm-bundler-DMNvs-nP.js";i(),r();var o={class:`block font-medium text-sm text-gray-700`},s={key:0},c={key:1},l={__name:`InputLabel`,props:{value:String},setup(r){return(i,l)=>(t(),a(`label`,o,[r.value?(t(),a(`span`,s,n(r.value),1)):(t(),a(`span`,c,[e(i.$slots,`default`)]))]))}};export{l as t};

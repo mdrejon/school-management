@@ -3,6 +3,10 @@
 @section('title', ($page->seo_title ?: $page->title) . ' - ' . config('app.name'))
 @section('meta_description', $page->seo_description ?: '')
 
+@section('breadcrumb_preload')
+<link rel="preload" as="image" href="{{ $page->breadcrumb_image_url ?? '/frontend/assets/img/breadcrumb/01.jpg' }}" fetchpriority="high">
+@endsection
+
 @if ($page->custom_css)
     @push('styles')
         <style>{!! $page->custom_css !!}</style>
@@ -27,7 +31,7 @@
         <!-- page content -->
         <div class="wexnix_page-builder py-120">
             <div class="container">
-                {!! $page->content !!}
+                {!! \App\Helpers\HtmlHelper::optimizeImages($page->content) !!}
             </div>
         </div>
         <!-- page content end -->
