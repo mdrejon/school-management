@@ -26,7 +26,7 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 d-none d-md-block">
                                     <img loading="lazy" class="wexnix_img-2" src="{{ $siteSettings->about_image_2_url ?? '/frontend/assets/img/about/02.jpg' }}" alt="">
                                     <img loading="lazy" class="wexnix_img-3 mt-4" src="{{ $siteSettings->about_image_3_url ?? '/frontend/assets/img/about/03.jpg' }}" alt="">
                                 </div>

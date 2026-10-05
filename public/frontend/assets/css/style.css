@@ -6467,7 +6467,7 @@ label {
 }
 
 .wexnix_header-middle .navbar-brand img{
-  height: 60px;
+  height: 110px;
   width: auto;
 }
 
@@ -6484,6 +6484,7 @@ label {
   border: 1px solid var(--border-info-color);
   border-radius: 50px;
   overflow: hidden;
+  width: 100%;
 }
 
 .wexnix_header-search-form input{
@@ -6492,6 +6493,7 @@ label {
   padding: 7px 18px;
   min-width: 200px;
   font-size: 14px;
+  width: 100%;
 }
 
 .wexnix_header-search-form button{
@@ -6633,6 +6635,8 @@ label {
 @media all and (max-width: 991px) {
   .wexnix_main-navigation .navbar{
     position: static;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 
   .wexnix_main-navigation .navbar-toggler{
@@ -7434,24 +7438,38 @@ label {
     font-size: 14px !important;
   }
   .wexnix_header-middle-wrap {
-    flex-direction: column;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "logo search"
+      "actions actions";
+    gap: 15px;
+    align-items: center;
+  }
+  .wexnix_header-middle .navbar-brand {
+    grid-area: logo;
   }
   .wexnix_header-middle-right {
-    flex-direction: column;
-    align-items: stretch;
+    display: contents;
   }
   .wexnix_header-search-form {
+    grid-area: search;
     width: 100%;
+    margin-bottom: 0 !important;
   }
   .wexnix_header-search-form input {
+    width: 100%;
+  }
+  .mobile-apply-lang-wrap {
+    grid-area: actions;
     width: 100%;
   }
   .wexnix_header-middle-right .wexnix_theme-btn {
     width: 100%;
   }
   .wexnix_header-middle .navbar-brand img {
-    margin: 0 auto;
+    height: 50px;
+    margin: 0;
     display: block;
   }
   .wexnix_site-title { 
@@ -7459,5 +7477,26 @@ label {
   }
   .wexnix_cta-content h1 { 
     font-size: 30px;
+  }
+  .py-120 {
+    padding: 60px 0;
+  }
+  .pt-120 {
+    padding-top: 60px;
+  }
+  .pb-120 {
+    padding-bottom: 60px;
+  }
+  .py-140 {
+    padding: 70px 0;
+  }
+  .pt-140 {
+    padding-top: 70px;
+  }
+  .pb-140 {
+    padding-bottom: 70px;
+  }
+  .wexnix_pd-50 {
+    padding: 30px 0;
   }
 }

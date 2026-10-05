@@ -34,7 +34,7 @@
     <!-- critical css (render-blocking, kept synchronous) -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/all-fontawesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}?v={{ filemtime(public_path('frontend/assets/css/style.css')) }}">
 
     <!-- non-critical css: load async so they never block first paint -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}" media="print" onload="this.media='all'">
@@ -201,6 +201,12 @@
         /* ── Section title (.wexnix_site-title: 55px → 47px) ─────── */
         .wexnix_site-title {
             font-size: 47px !important;
+        }
+
+        @media all and (max-width: 767px) {
+            .wexnix_site-title {
+                font-size: 27px !important;
+            }
         }
 
         /* tagline (18px → 15px) */
