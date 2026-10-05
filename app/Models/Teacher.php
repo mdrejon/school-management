@@ -20,6 +20,7 @@ class Teacher extends Model
     ];
 
     protected $fillable = [
+        'external_id',
         'slug',
         'name',
         'designation',

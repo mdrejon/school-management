@@ -23,11 +23,11 @@
     {{-- English mode: preload Yantramanav + Roboto as a single optimised request.
          font-display=swap prevents invisible text while fonts load. --}}
     <link rel="preload" as="style"
-          href="{{ asset('frontend/assets/css/google-fonts.css') }}"
-          onload="this.rel='stylesheet'">
+        href="{{ asset('frontend/assets/css/google-fonts.css') }}"
+        onload="this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet"
-              href="{{ asset('frontend/assets/css/google-fonts.css') }}">
+            href="{{ asset('frontend/assets/css/google-fonts.css') }}">
     </noscript>
     @endif
 
@@ -38,11 +38,17 @@
 
     <!-- non-critical css: load async so they never block first paint -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}"></noscript>
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}">
+    </noscript>
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/magnific-popup.min.css') }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ asset('frontend/assets/css/magnific-popup.min.css') }}"></noscript>
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('frontend/assets/css/magnific-popup.min.css') }}">
+    </noscript>
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/owl.carousel.min.css') }}" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="{{ asset('frontend/assets/css/owl.carousel.min.css') }}"></noscript>
+    <noscript>
+        <link rel="stylesheet" href="{{ asset('frontend/assets/css/owl.carousel.min.css') }}">
+    </noscript>
 
     {{-- Sizing/coloring for inline Lucide <svg> icons — the original theme's
          icon boxes only ever styled <img loading="lazy">, so these dynamic icon slots
@@ -58,6 +64,40 @@
             width: 45px;
             height: 45px;
             color: #fff;
+        }
+
+        .wexnix_about-experience-icon svg {
+            width: 49px;
+            height: 50px;
+            padding-top: 10px;
+        }
+
+        .wexnix_about-item-icon svg {
+            width: 30px;
+            height: 30px;
+            color: #fff;
+        }
+
+        .wexnix_feature-icon svg {
+            width: 48px;
+            height: 48px;
+            color: #fff;
+        }
+
+        .wexnix_department-icon svg {
+            width: 60px;
+            height: 60px;
+        }
+
+        .wexnix_pricing-icon svg {
+            width: 60px;
+            height: 60px;
+            color: #fff;
+        }
+
+        .wexnix_scholarship-icon svg {
+            width: 60px;
+            height: 60px;
         }
 
         .wexnix_course-feature-list a svg {
@@ -88,8 +128,8 @@
     {{-- Bengali: preconnect already declared globally above in <head>.
          Load Hind Siliguri async to avoid render-blocking. --}}
     <link rel="preload" as="style"
-          href="{{ asset('frontend/assets/css/google-fonts.css') }}"
-          onload="this.rel='stylesheet'">
+        href="{{ asset('frontend/assets/css/google-fonts.css') }}"
+        onload="this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet" href="{{ asset('frontend/assets/css/google-fonts.css') }}">
     </noscript>
@@ -171,7 +211,7 @@
 
         /* ── Hero title (.wexnix_hero-title: 72px → 61px) ───────── */
         .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
-            font-size: 61px !important;
+            font-size: 43px !important;
         }
 
         /* Responsive hero title (50px → 43px) */
@@ -226,12 +266,14 @@
     $parsed = sscanf($primaryColor, "#%02x%02x%02x");
     $primaryRgb = $parsed && count($parsed) === 3 ? implode(', ', $parsed) : '0, 84, 165';
     @endphp
-    <style>
+    {!! '<style>
         :root {
-            --theme-color: {{ $primaryColor }} !important;
-            --theme-color2: {{ $secondaryColor }} !important;
-            --theme-color-light: rgba({{ $primaryRgb }}, 0.09) !important;
+            --theme-color: ' . $primaryColor . ' !important;
+            --theme-color2: ' . $secondaryColor . ' !important;
+            --theme-color-light: rgba(' . $primaryRgb . ', 0.09) !important;
         }
+    </style>' !!}
+    <style>
         /* ── Navbar flex-wrap to allow long menus to wrap gracefully ──────────────── */
         @media (min-width: 992px) {
             .wexnix_main-navigation .navbar-nav {
@@ -315,15 +357,22 @@
                 <div class="wexnix_header-middle-wrap">
                     <a class="navbar-brand" href="{{ route('home') }}">
                         {{-- Logo is above-the-fold: eager + high fetch priority for fastest LCP --}}
-                <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}" fetchpriority="high" loading="eager">
+                        <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}" fetchpriority="high" loading="eager">
                     </a>
                     <div class="wexnix_header-middle-right">
                         <form class="wexnix_header-search-form" action="{{ route('search') }}" method="GET">
                             <input type="search" name="q" placeholder="{{ __('Search Here...') }}">
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </form>
-                        <a href="application-form.html" class="wexnix_theme-btn"><span
-                                class="fas fa-pencil"></span>{{ __('Apply Now') }}</a>
+                        <div class="d-flex align-items-center justify-content-between w-100 mobile-apply-lang-wrap" style="gap: 10px;">
+                            <a href="application-form.html" class="wexnix_theme-btn" style="flex: 1; text-align: center; width: auto;"><span
+                                    class="fas fa-pencil"></span>{{ __('Apply Now') }}</a>
+                            <div class="mobile-lang-switcher d-flex d-lg-none" style="gap: 5px;">
+                                @foreach ($languages as $lang)
+                                <a href="{{ route('language.switch', $lang->code) }}" class="{{ app()->getLocale() === $lang->code ? 'active-lang' : '' }}" style="padding: 8px 12px; border-radius: 4px; font-size: 13px; font-weight: 600; text-decoration: none; {{ app()->getLocale() === $lang->code ? 'background: var(--theme-color); color: #fff;' : 'background: #f1f1f1; color: #333;' }}">{{ strtoupper($lang->code) }}</a>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

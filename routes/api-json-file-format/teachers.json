@@ -1,0 +1,63 @@
+{
+    "external_id": "ASP-NET-TEACHER-1001",
+    
+    "email": "teacher1001@example.com",
+    "phone": "01700000000",
+    "is_active": true,
+    "sort_order": 1,
+    
+    "name": {
+        "en": "John Doe",
+        "bn": "জন ডো"
+    },
+    "designation": {
+        "en": "Head of Science",
+        "bn": "বিজ্ঞান বিভাগের প্রধান"
+    },
+    "short_intro": {
+        "en": "Passionate science educator with 10 years experience.",
+        "bn": "১০ বছরের অভিজ্ঞতা সম্পন্ন বিজ্ঞান শিক্ষক।"
+    },
+    "address": {
+        "en": "123 School Road, Dhaka",
+        "bn": "১২৩ স্কুল রোড, ঢাকা"
+    },
+    "biography": {
+        "en": "<p>Full biography HTML here...</p>",
+        "bn": "<p>সম্পূর্ণ জীবনী এখানে...</p>"
+    },
+
+    "photo_base64": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+    
+    "facebook_url": "https://facebook.com/johndoe",
+    "whatsapp_url": "https://wa.me/8801700000000",
+    "linkedin_url": "https://linkedin.com/in/johndoe",
+    "behance_url": "",
+    "pinterest_url": "",
+
+    "skills": [
+        {
+            "label": {
+                "en": "Physics",
+                "bn": "পদার্থবিদ্যা"
+            },
+            "percentage": "95"
+        },
+        {
+            "label": {
+                "en": "Chemistry",
+                "bn": "রসায়ন"
+            },
+            "percentage": "90"
+        }
+    ],
+
+    "gender": "Male",
+    "religion": "Islam",
+    "blood_group": "O+",
+    "serial_no": "EMP-001",
+    "joining_date": "2023-01-15",
+    
+    "user_id": 1, 
+    "department_id": 2
+}

@@ -1601,7 +1601,7 @@ label {
 
 .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
   color: var(--color-white);
-  font-size: 72px;
+  font-size: 43px !important;
   font-weight: 800;
   margin: 20px 0;
   text-transform: capitalize;
@@ -7392,4 +7392,72 @@ label {
             .wexnix_sidebar-gallery a:hover img {
                 transform: scale(1.1);
             }
-        
+
+/* Custom Responsive Fixes */
+.wexnix_hero-single .wexnix_hero-content .wexnix_hero-btn {
+  flex-wrap: wrap;
+}
+.wexnix_about-experience-icon{
+  flex-shrink: 0;
+}
+.wexnix_about-img .wexnix_img-2{
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.wexnix_hero-single {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+@media all and (max-width: 991px) {
+  .wexnix_header-middle-wrap {
+    justify-content: center;
+  }
+  .wexnix_header-middle-right {
+    justify-content: center;
+    width: 100%;
+  }
+}
+@media all and (max-width: 767px) {
+  .wexnix_hero-single {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
+    font-size: 32px !important;
+    word-break: break-word;
+    hyphens: auto;
+  }
+  .wexnix_institute-info-area h2 {
+    font-size: 24px !important;
+  }
+  .wexnix_institute-info-area h6 {
+    font-size: 14px !important;
+  }
+  .wexnix_header-middle-wrap {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .wexnix_header-middle-right {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .wexnix_header-search-form {
+    width: 100%;
+  }
+  .wexnix_header-search-form input {
+    width: 100%;
+  }
+  .wexnix_header-middle-right .wexnix_theme-btn {
+    width: 100%;
+  }
+  .wexnix_header-middle .navbar-brand img {
+    margin: 0 auto;
+    display: block;
+  }
+  .wexnix_site-title { 
+    font-size: 27px; 
+  }
+  .wexnix_cta-content h1 { 
+    font-size: 30px;
+  }
+}
