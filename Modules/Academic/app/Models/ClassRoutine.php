@@ -8,6 +8,7 @@ use App\Models\User;
 class ClassRoutine extends Model
 {
     protected $fillable = [
+        'external_id',
         'class_id',
         'section_id',
         'subject_id',
@@ -16,6 +17,7 @@ class ClassRoutine extends Model
         'start_time',
         'end_time',
         'room',
+        'routine_file',
     ];
 
     public function academicClass()

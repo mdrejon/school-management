@@ -1,0 +1,49 @@
+{
+    "external_id": "ASP-RES-1001",
+    "exam_name": "Annual Examination 2026",
+    "student_name": "Ahnaf Tahmid",
+    "roll_no": "101",
+    "registration_no": "REG-2026-101",
+    "class_name": "Class 6",
+    "section_name": "A",
+    "group_name": "General",
+    "academic_year": "2026",
+    "total_marks": 300,
+    "obtained_marks": 265,
+    "gpa": 4.85,
+    "grade": "A",
+    "merit_position": "2nd",
+    "status": "PASSED",
+    "remarks": "Excellent academic performance",
+    "subjects": [
+        {
+            "code": "101",
+            "name": "Bangla 1st Paper",
+            "written": 60,
+            "mcq": 28,
+            "total": 88,
+            "grade": "A+",
+            "point": 5.0
+        },
+        {
+            "code": "107",
+            "name": "English 1st Paper",
+            "written": 78,
+            "total": 78,
+            "grade": "A",
+            "point": 4.0
+        },
+        {
+            "code": "109",
+            "name": "General Math",
+            "written": 70,
+            "mcq": 29,
+            "total": 99,
+            "grade": "A+",
+            "point": 5.0
+        }
+    ],
+    "file_name": "transcript_101.pdf",
+    "marksheet_base64": "data:application/pdf;base64,JVBERi0xLjQKJcTl8uXrp/Og0MTGCjQgMCBvYmoKPDwKL1R5cGUgL1BhZ2VzCi9Db3VudCAxCj4+CmVuZG9iagoxIDAgb2JqCjw8Ci9UeXBlIC9DYXRhbG9nCi9QYWdlcyA0IDAgUgo+PgplbmRvYmoKMyAwIG9iago8PAovTGVuZ3RoIDQ0Cj4+CnN0cmVhbQpCVAovRjEgMTIgVGYKNzIgNzEyIFRECihoZWxsbykgVGoKRVQKZW5kc3RyZWFtCmVuZG9iago1IDAgb2JqCjw8Ci9UeXBlIC9QYWdlCi9QYXJlbnQgNCAwIFIKL01lZGlhQm94IFswIDAgNjEyIDc5Ml0KL0NvbnRlbnRzIDMgMCBSCj4+CmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNjggMDAwMDAgbiAKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMTE3IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMDIxMiAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDYKL1Jvb3QgMSAwIFIKPj4Kc3RhcnR4cmVmCjMwOQolJUVPRgo=",
+    "is_published": true
+}

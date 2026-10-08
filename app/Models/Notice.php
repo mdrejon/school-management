@@ -17,6 +17,7 @@ class Notice extends Model
     ];
 
     protected $fillable = [
+        'external_id',
         'slug',
         'title',
         'description',

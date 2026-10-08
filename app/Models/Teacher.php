@@ -65,7 +65,12 @@ class Teacher extends Model
         static::creating(function (Teacher $teacher) {
             if (blank($teacher->slug)) {
                 $default = Language::defaultLanguage()?->code ?? config('app.fallback_locale');
-                $teacher->slug = static::uniqueSlugFrom($teacher->getTranslation('name', $default) ?: 'teacher');
+                $name = $teacher->getTranslation('name', $default);
+                if (blank($name)) {
+                    $translations = $teacher->getTranslations('name');
+                    $name = collect($translations)->filter(fn ($v) => !blank($v))->first() ?: 'teacher';
+                }
+                $teacher->slug = static::uniqueSlugFrom($name);
             }
         });
     }

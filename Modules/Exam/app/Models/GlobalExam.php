@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class GlobalExam extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'external_id',
+        'name',
+        'code',
+        'academic_year',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 }
