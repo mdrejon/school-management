@@ -19,7 +19,7 @@
         <!-- breadcrumb end -->
 
         <!-- testimonial area -->
-        <div class="wexnix_testimonial-area wexnix_bg py-120">
+        <div class="wexnix_testimonial-area wexnix_bg py-80">
             <div class="container">
                 @if ($pageSettings->section_title)
                     @php

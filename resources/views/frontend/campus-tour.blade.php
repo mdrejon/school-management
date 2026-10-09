@@ -19,7 +19,7 @@
         <!-- breadcrumb end -->
 
         <!-- campus tour gallery-area -->
-        <div class="wexnix_gallery-area py-120">
+        <div class="wexnix_gallery-area py-80">
             <div class="container">
                 @if ($pageSettings->title || $pageSettings->tagline)
                     @php

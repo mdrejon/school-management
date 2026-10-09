@@ -19,7 +19,7 @@
         <!-- breadcrumb end -->
 
         <!-- facility area -->
-        <div class="wexnix_facility-area py-120">
+        <div class="wexnix_facility-area py-80">
             <div class="container">
                 @if ($pageSettings->section_title)
                     @php

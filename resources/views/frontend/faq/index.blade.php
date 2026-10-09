@@ -19,7 +19,7 @@
         <!-- breadcrumb end -->
 
         <!-- faq area -->
-        <div class="wexnix_faq-area py-120">
+        <div class="wexnix_faq-area py-80">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">

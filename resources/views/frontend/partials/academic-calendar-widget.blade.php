@@ -79,7 +79,7 @@
 
     @push('scripts')
     <script>
-        $(document).ready(function() {
+        document.addEventListener("DOMContentLoaded", function() {
             // Prevent multiple initializations if included multiple times
             if (window.academicCalendarInitialized) return;
             window.academicCalendarInitialized = true;

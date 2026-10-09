@@ -8,7 +8,7 @@
     }
 @endphp
 @if ($pageSettings->section_title && $events->count())
-    <div class="wexnix_event-area wexnix_bg py-120">
+    <div class="wexnix_event-area wexnix_bg py-80">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mx-auto">

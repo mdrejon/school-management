@@ -19,7 +19,7 @@
         <!-- breadcrumb end -->
 
         <!-- contact area -->
-        <div class="wexnix_contact-area py-120">
+        <div class="wexnix_contact-area py-80">
             <div class="container">
                 <div class="wexnix_contact-content">
                     <div class="row">

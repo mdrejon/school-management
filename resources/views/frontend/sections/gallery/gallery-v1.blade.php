@@ -7,7 +7,7 @@
     }
 @endphp
 @if ($pageSettings->section_title && $images->count())
-    <div class="wexnix_gallery-area py-120">
+    <div class="wexnix_gallery-area py-80">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mx-auto">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row wexnix_popup-gallery">
+            <div class="row g-4 wexnix_popup-gallery">
                 @foreach ($images->chunk(2) as $column)
                     <div class="col-md-4 wow fadeInUp" data-wow-delay=".25s">
                         @foreach ($column as $image)

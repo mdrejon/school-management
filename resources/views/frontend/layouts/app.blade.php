@@ -286,6 +286,280 @@
                 flex-wrap: wrap;
             }
         }
+
+        /* ── Copyright wrapper ────────────────────────────────────────────────────── */
+        .wexnix_copyright .wexnix_copyright-wrapper {
+            padding: 25px 0 !important;
+            border-top: 2px solid rgba(255, 255, 255, 0.23) !important;
+        }
+
+        /* ── Payment Methods (like image 5) ───────────────────────────────────────── */
+        .wexnix_footer-payment {
+            margin-top: 25px;
+        }
+
+        .payment-methods {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .payment-methods .payment-item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 5px 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 38px;
+            min-width: 58px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+            transition: all 0.25s ease-in-out;
+        }
+
+        .payment-methods .payment-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .payment-methods .payment-item img {
+            height: 24px;
+            width: auto;
+            max-width: 52px;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* ── Large Screen Responsive Rules (min-width: 1920px up to unlimited) ─────── */
+        @media (min-width: 1920px) {
+            /* Container max-width & horizontal padding */
+            .container,
+            .container-sm,
+            .container-md,
+            .container-lg,
+            .container-xl,
+            .container-xxl,
+            .container-fluid {
+                max-width: 92% !important;
+                padding-right: 50px !important;
+                padding-left: 50px !important;
+            }
+
+            /* 1. Header Menu */
+            .wexnix_main-navigation .navbar .nav-item .nav-link {
+                font-size: 24px !important;
+                padding: 0px 8px !important;
+                margin-right: 8px !important;
+                line-height: 2 !important;
+                display: inline-flex !important;
+                align-items: center !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item:last-child .nav-link {
+                margin-right: 0 !important;
+            }
+
+            .wexnix_main-navigation .navbar .dropdown-toggle::after {
+                font-size: 16px !important;
+                margin-left: 6px !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item .dropdown-menu {
+                min-width: 270px !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item .dropdown-menu .dropdown-item {
+                font-size: 20px !important;
+                padding: 10px 24px !important;
+                line-height: 1.5 !important;
+            }
+
+            /* 2. Notice Marquee */
+            .wexnix_notice-marquee {
+                padding: 8px 0 !important;
+            }
+
+            .wexnix_notice-label {
+                font-size: 16px !important;
+                padding: 6px 18px !important;
+                font-weight: 700 !important;
+                line-height: 1.4 !important;
+            }
+
+            .wexnix_marquee-track span {
+                font-size: 20px !important;
+                line-height: 1.5 !important;
+                padding: 0 45px !important;
+            }
+
+            .wexnix_marquee-track span a {
+                font-size: 20px !important;
+            }
+
+            .wexnix_marquee-track span::before {
+                font-size: 8px !important;
+                margin-right: 12px !important;
+            }
+
+            /* 3. Site Title & Tagline */
+            .wexnix_site-title-tagline {
+                font-size: 20px !important;
+                letter-spacing: 2px !important;
+            }
+
+            .wexnix_site-title-tagline i {
+                font-size: 20px !important;
+            }
+
+            .wexnix_site-title {
+                font-size: 44px !important;
+                line-height: 1.25 !important;
+            }
+
+            .header-brand-text h2,
+            .header-brand-text .wexnix_site-title {
+                font-size: 44px !important;
+                line-height: 1.15 !important;
+            }
+
+            .header-brand-text p,
+            .header-brand-text .wexnix_site-title-tagline {
+                font-size: 20px !important;
+                line-height: 1.35 !important;
+            }
+
+            .wexnix_header-middle .navbar-brand img {
+                height: 85px !important;
+                width: auto !important;
+            }
+
+            .wexnix_header-search-wrap {
+                max-width: 480px !important;
+            }
+
+            /* 4. Enroll Form Header */
+            .wexnix_enroll-form-header h3 {
+                font-size: 36px !important;
+                line-height: 1.25 !important;
+            }
+
+            .wexnix_enroll-form-header p {
+                font-size: 16px !important;
+                line-height: 1.5 !important;
+            }
+
+            .wexnix_enroll-form form {
+                padding: 35px 30px !important;
+            }
+
+            .wexnix_enroll-form .wexnix_form-group .form-control,
+            .wexnix_enroll-form .wexnix_form-group .form-select {
+                font-size: 16px !important;
+                padding: 16px 22px !important;
+            }
+
+            /* 5. All Heading Font Size: 44px */
+            h1,
+            h2,
+            .wexnix_site-heading h2,
+            .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title,
+            .wexnix_cta-content h1 {
+                font-size: 44px !important;
+                line-height: 1.25 !important;
+            }
+
+            /* 6. All Sub Title: 18px */
+            .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title,
+            .wexnix_site-sub-title,
+            .wexnix_sub-title,
+            .sub-title,
+            .wexnix_counter-box .wexnix_title,
+            .wexnix_institute-info-area h6 {
+                font-size: 18px !important;
+            }
+
+            /* 7. All Text Font Size: 16px */
+            body,
+            p,
+            .wexnix_about-text,
+            .wexnix_site-heading p,
+            .wexnix_choose-item-info p,
+            .wexnix_course-text,
+            .wexnix_hero-single .wexnix_hero-content p,
+            .wexnix_skill-content p,
+            .wexnix_cta-content p,
+            .wexnix_testimonial-text p,
+            .wexnix_footer-widget-box p,
+            .wexnix_copyright-text,
+            .wexnix_header-top-contact ul li a {
+                font-size: 16px !important;
+                line-height: 1.7 !important;
+            }
+
+            /* 8. Component & Card Titles (Proportional 20px-22px) */
+            .wexnix_course-title,
+            .wexnix_course-title a,
+            .wexnix_team-bio h5,
+            .wexnix_team-bio h5 a,
+            .wexnix_blog-title,
+            .wexnix_blog-title a,
+            .wexnix_choose-item-info h4,
+            .wexnix_department-title,
+            .wexnix_sidebar-widget-title,
+            .wexnix_footer-widget-title {
+                font-size: 22px !important;
+                line-height: 1.35 !important;
+            }
+
+            .wexnix_team-bio span,
+            .wexnix_course-meta,
+            .wexnix_course-bottom,
+            .wexnix_blog-item-meta {
+                font-size: 16px !important;
+            }
+
+            .wexnix_counter-box .wexnix_counter {
+                font-size: 44px !important;
+                line-height: 1.1 !important;
+            }
+
+            .wexnix_institute-info-area h2 {
+                font-size: 44px !important;
+                line-height: 1.1 !important;
+            }
+
+            .wexnix_theme-btn {
+                font-size: 16px !important;
+                padding: 14px 30px !important;
+            }
+
+            /* 9. Layout & Alignment Improvements */
+            .wexnix_site-heading {
+                max-width: 950px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 50px;
+            }
+
+            .wexnix_course-img img {
+                aspect-ratio: 16 / 10;
+                object-fit: cover;
+                width: 100%;
+            }
+
+            .wexnix_team-img img {
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+                width: 100%;
+            }
+
+            .wexnix_blog-item-img img {
+                aspect-ratio: 16 / 10;
+                object-fit: cover;
+                width: 100%;
+            }
+        }
     </style>
 
     @stack('styles')
@@ -361,17 +635,28 @@
         <div class="wexnix_header-middle">
             <div class="container">
                 <div class="wexnix_header-middle-wrap">
-                    <a class="navbar-brand" href="{{ route('home') }}">
+                    <a class="navbar-brand d-flex align-items-center gap-3" style="text-decoration: none;" href="{{ route('home') }}">
                         {{-- Logo is above-the-fold: eager + high fetch priority for fastest LCP --}}
                         <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}" fetchpriority="high" loading="eager">
+                        <div class="header-brand-text d-none d-lg-block text-start ms-2">
+                            <h2 class="mb-1 wexnix_site-title" style="font-weight: 800; line-height: 1.1; letter-spacing: -0.5px;">
+                                <span style="color: var(--theme-color);">Edu</span><span style="color: var(--theme-color2);">Ex</span> 
+                                <span style="color: var(--theme-color);">School &amp; College</span>
+                            </h2>
+                            <p class="mb-0 wexnix_site-title-tagline" style="font-weight: 600; color: #555; letter-spacing: 0.5px;">
+                                {{ __('Committed to Academic Excellence & Innovation') }}
+                            </p>
+                        </div>
                     </a>
-                    <div class="wexnix_header-middle-right">
-                        <form class="wexnix_header-search-form" action="{{ route('search') }}" method="GET">
-                            <input type="search" name="q" placeholder="{{ __('Search Here...') }}">
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                        <div class="d-flex align-items-center mobile-apply-lang-wrap" style="gap: 10px;">
-                            <a href="application-form.html" class="wexnix_theme-btn" style="text-align: center;"><span
+                    <div class="wexnix_header-middle-right flex-grow-1 d-flex flex-lg-row justify-content-end align-items-center gap-lg-4">
+                        <div class="wexnix_header-search-wrap" style="width: 100%; max-width: 450px;">
+                            <form class="wexnix_header-search-form w-100" action="{{ route('search') }}" method="GET">
+                                <input type="search" name="q" placeholder="{{ __('Search Here...') }}" class="w-100">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div class="d-flex align-items-center mobile-apply-lang-wrap justify-content-end" style="gap: 10px;">
+                            <a href="application-form.html" class="wexnix_theme-btn" style="text-align: center; white-space: nowrap;"><span
                                     class="fas fa-pencil"></span>{{ __('Apply Now') }}</a>
                             <div class="mobile-lang-switcher d-flex d-lg-none" style="gap: 5px;">
                                 @foreach ($languages as $lang)
@@ -496,6 +781,22 @@
                                 <li><a href="{{ $link['url'] }}"><i class="fas fa-caret-right"></i> {{ $link['label'] }}</a></li>
                                 @endforeach
                             </ul>
+                            <div class="wexnix_footer-payment mt-4">
+                                <div class="payment-methods">
+                                    <div class="payment-item">
+                                        <img src="{{ asset('frontend/assets/img/payment/visa.png') }}" alt="visa">
+                                    </div>
+                                    <div class="payment-item">
+                                        <img src="{{ asset('frontend/assets/img/payment/mastercard.png') }}" alt="mastercard">
+                                    </div>
+                                    <div class="payment-item">
+                                        <img src="{{ asset('frontend/assets/img/payment/nagad.png') }}" alt="nagad">
+                                    </div>
+                                    <div class="payment-item">
+                                        <img src="{{ asset('frontend/assets/img/payment/bkash.png') }}" alt="bkash">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">

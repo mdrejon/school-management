@@ -18,7 +18,7 @@
         </div>
         <!-- breadcrumb end -->
 
-        <div class="wexnix_about-area py-120">
+        <div class="wexnix_about-area py-80">
             <div class="container d-flex flex-column gap-5">
 
                 <!-- SECTION 1: VISION (Odd: Image Left, Text Right) -->

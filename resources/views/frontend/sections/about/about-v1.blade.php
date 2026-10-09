@@ -8,7 +8,7 @@
     $items = $siteSettings->aboutItems();
 @endphp
 @if ($siteSettings->about_title)
-    <div class="wexnix_about-area py-120">
+    <div class="wexnix_about-area py-80">
         <div class="container">
             <div class="row g-4 align-items-center">
                 <div class="col-lg-6">

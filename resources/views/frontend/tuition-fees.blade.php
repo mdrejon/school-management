@@ -19,7 +19,7 @@
     <!-- breadcrumb end -->
 
     <!-- tuition fee -->
-    <div class="wexnix_tuition-fee py-120">
+    <div class="wexnix_tuition-fee py-80">
         <div class="container">
             <div class="wexnix_tuition-wrap">
                 {!! $settings->tuition_fee_page_content !!}

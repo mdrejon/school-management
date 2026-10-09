@@ -7,7 +7,7 @@
     }
 @endphp
 @if ($pageSettings->section_title && $courses->count())
-    <div class="wexnix_course-area py-120">
+    <div class="wexnix_course-area py-80">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mx-auto">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row g-4">
                 @foreach ($courses as $course)
                     @include('frontend.courses.partials.card', ['course' => $course])
                 @endforeach

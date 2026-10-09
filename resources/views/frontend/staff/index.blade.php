@@ -19,7 +19,7 @@
         <!-- breadcrumb end -->
 
         <!-- team-area -->
-        <div class="wexnix_team-area py-120">
+        <div class="wexnix_team-area py-80">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 mx-auto">
@@ -31,7 +31,7 @@
                 </div>
 
                 @if ($staffs->count())
-                    <div class="row">
+                    <div class="row g-4">
                         @foreach ($staffs as $staff)
                             @include('frontend.staff.partials.card', ['staff' => $staff])
                         @endforeach

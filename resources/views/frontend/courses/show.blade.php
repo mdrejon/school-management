@@ -24,7 +24,7 @@
         <!-- breadcrumb end -->
 
         <!-- course-single -->
-        <div class="wexnix_course-single-area py-120">
+        <div class="wexnix_course-single-area py-80">
             <div class="container">
                 <div class="wexnix_course-single-wrapper">
                     <div class="row">

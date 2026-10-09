@@ -18,7 +18,7 @@
         <!-- breadcrumb end -->
 
         <!-- search results -->
-        <div class="py-120">
+        <div class="py-80">
             <div class="container">
                 <div class="row mb-4">
                     <div class="col-lg-6 mx-auto">

@@ -17,7 +17,7 @@
     </div>
     <!-- breadcrumb end -->
 
-    <div class="py-120">
+    <div class="py-80">
         <div class="container">
             <div class="row">
                 <div class="col-12">

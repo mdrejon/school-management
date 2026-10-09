@@ -19,7 +19,7 @@
         <!-- breadcrumb end -->
 
         <!-- portfolio-single -->
-        <div class="wexnix_portfolio-single-area py-120">
+        <div class="wexnix_portfolio-single-area py-80">
             <div class="container">
                 <div class="wexnix_portfolio-single-wrapper">
                     <div class="row">

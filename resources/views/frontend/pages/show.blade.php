@@ -29,7 +29,7 @@
         <!-- breadcrumb end -->
 
         <!-- page content -->
-        <div class="wexnix_page-builder py-120">
+        <div class="wexnix_page-builder py-80">
             <div class="container">
                 {!! \App\Helpers\HtmlHelper::optimizeImages($page->content) !!}
             </div>

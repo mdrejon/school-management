@@ -41,14 +41,14 @@
     <!-- Academic Calendar Widget End -->
 
     <!-- Upcoming Events Widget -->
-    @if (\App\Models\ModuleSetting::isEnabled('events') && isset($events) && $events->count() > 0)
+    @if (\App\Models\ModuleSetting::isEnabled('events') && isset($events))
         <div class="col-lg-4 col-md-6">
             <div class="wexnix_sidebar-widget h-100">
                 <h4 class="wexnix_sidebar-widget-title wexnix_sidebar-title-alt">
                     <i class="fas fa-calendar-check"></i> {{ __('Upcoming Events') }}
                 </h4>
                 <ul class="wexnix_sidebar-event-list">
-                    @foreach ($events->take(3) as $event)
+                    @forelse ($events->take(3) as $event)
                         <li>
                             <div class="wexnix_sidebar-event-date">
                                 <span>{{ $event->event_date ? $event->event_date->format('d') : '' }}</span>{{ $event->event_date ? $event->event_date->format('M') : '' }}
@@ -58,7 +58,13 @@
                                 <span><i class="fas fa-map-marker-alt"></i> {{ $event->location }}</span>
                             </div>
                         </li>
-                    @endforeach
+                    @empty
+                        <li>
+                            <div class="wexnix_sidebar-event-content" style="padding-left: 0;">
+                                <span>{{ __('No upcoming events.') }}</span>
+                            </div>
+                        </li>
+                    @endforelse
                 </ul>
                 <div class="wexnix_sidebar-widget-footer">
                     <a href="{{ route('events.index') }}">{{ __('Read more') }} <i class="fas fa-arrow-right-long"></i></a>
