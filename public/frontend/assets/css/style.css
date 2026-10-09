@@ -778,17 +778,135 @@ label {
 
 
 
-/*====================
-9. Container
-======================*/
+/*==========================================================
+9. Container - Full Width & Projector Responsive System
+============================================================*/
 
+.container,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl,
+.container-xxl,
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    max-width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    max-width: 100%;
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    max-width: 100%;
+    padding-right: 28px;
+    padding-left: 28px;
+  }
+}
+
+/* Widescreen Desktop & Small Projectors */
 @media (min-width: 1200px) {
   .container,
   .container-sm,
   .container-md,
   .container-lg,
-  .container-xl {
-    max-width: 1200px;
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    max-width: 95% !important;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+
+/* 1400px - 1599px Monitors */
+@media (min-width: 1400px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    max-width: 94% !important;
+    padding-right: 36px;
+    padding-left: 36px;
+  }
+}
+
+/* 1600px - 1919px High-Res Displays & Projectors */
+@media (min-width: 1600px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    max-width: 93% !important;
+    padding-right: 42px;
+    padding-left: 42px;
+  }
+}
+
+/* 1920px+ Full HD Projectors & Ultra-Wide Displays */
+@media (min-width: 1920px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    max-width: 92% !important;
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+}
+
+/* 2560px+ 2K/4K Projectors & Large Presentation Screens */
+@media (min-width: 2560px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    max-width: 90% !important;
+    padding-right: 60px;
+    padding-left: 60px;
   }
 }
 
@@ -7397,106 +7515,614 @@ label {
                 transform: scale(1.1);
             }
 
-/* Custom Responsive Fixes */
-.wexnix_hero-single .wexnix_hero-content .wexnix_hero-btn {
-  flex-wrap: wrap;
+/*==========================================================
+Full Width Projector & Mobile Responsive Complete System
+============================================================*/
+
+/* Global Horizontal Overflow Prevention */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
 }
-.wexnix_about-experience-icon{
-  flex-shrink: 0;
+
+/* Ensure smooth image scaling across all grids */
+.wexnix_course-item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.wexnix_about-img .wexnix_img-2{
+
+.wexnix_course-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.wexnix_course-bottom {
+  margin-top: auto;
+}
+
+.wexnix_course-img img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 35px 35px 35px 0;
+}
+
+.wexnix_team-item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.wexnix_team-img {
+  overflow: hidden;
+  border-radius: 40px 40px 40px 0;
+}
+
+.wexnix_team-img img {
+  width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+  border-radius: 40px 40px 40px 0;
 }
-.wexnix_hero-single {
-  padding-left: 100px;
-  padding-right: 100px;
+
+.wexnix_choose-img {
+  position: relative;
 }
-@media all and (max-width: 991px) {
-  .wexnix_header-middle-wrap {
-    justify-content: center;
-  }
-  .wexnix_header-middle-right {
-    justify-content: center;
-    width: 100%;
-  }
+
+.wexnix_choose-img img {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: 30% 0 30% 30%;
 }
-@media all and (max-width: 767px) {
+
+.wexnix_gallery-img img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.wexnix_about-experience-icon {
+  flex-shrink: 0;
+}
+
+.wexnix_about-img .wexnix_img-1 {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 80px 80px 0 80px;
+}
+
+.wexnix_about-img .wexnix_img-2 {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.wexnix_about-img .wexnix_img-3 {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 0 80px 80px 80px;
+}
+
+.wexnix_sidebar-widget {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.wexnix_sidebar-person {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.wexnix_sidebar-person-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 16px;
+  border: 4px solid var(--theme-color-light);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.wexnix_sidebar-person-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wexnix_sidebar-person-role {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.wexnix_sidebar-person > div:last-child {
+  margin-top: auto;
+}
+
+/* ── Projector & Large Screen Styles (>= 1200px) ───────────────────────── */
+@media (min-width: 1200px) {
   .wexnix_hero-single {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    min-height: 580px;
   }
-  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
-    font-size: 32px !important;
-    word-break: break-word;
-    hyphens: auto;
+
+  .wexnix_site-heading {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
   }
-  .wexnix_institute-info-area h2 {
-    font-size: 24px !important;
+
+  .wexnix_site-title {
+    font-size: 46px;
+    line-height: 1.25;
   }
-  .wexnix_institute-info-area h6 {
-    font-size: 14px !important;
+
+  .wexnix_choose-img {
+    margin-left: 30px;
   }
+}
+
+@media (min-width: 1600px) {
+  .wexnix_hero-single {
+    min-height: 650px;
+  }
+
+  .wexnix_site-heading {
+    max-width: 1100px;
+    margin-bottom: 60px;
+  }
+
+  .wexnix_site-title {
+    font-size: 52px;
+    line-height: 1.25;
+  }
+}
+
+/* ── Tablet & Mobile General (<= 991px) ────────────────────────────────── */
+@media all and (max-width: 991px) {
+  /* Header layout */
+  .wexnix_header-middle {
+    padding: 10px 0;
+  }
+
   .wexnix_header-middle-wrap {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-areas:
-      "logo search"
-      "actions actions";
-    gap: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
     align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
   }
+
   .wexnix_header-middle .navbar-brand {
-    grid-area: logo;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
+
+  .wexnix_header-middle .navbar-brand img {
+    height: 100px;
+    width: auto;
+    max-width: 170px;
+    object-fit: contain;
+  }
+
   .wexnix_header-middle-right {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    width: auto;
   }
+
   .wexnix_header-search-form {
-    grid-area: search;
     width: 100%;
     margin-bottom: 0 !important;
   }
+
   .wexnix_header-search-form input {
     width: 100%;
+    font-size: 14px;
+    padding: 8px 14px;
   }
+
   .mobile-apply-lang-wrap {
-    grid-area: actions;
     width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
+
   .wexnix_header-middle-right .wexnix_theme-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 13px;
+    width: auto;
+  }
+
+  .mobile-lang-switcher {
+    display: flex;
+    gap: 6px;
+  }
+
+  /* Navigation Bar on Mobile */
+  .wexnix_main-navigation {
+    background: var(--theme-color);
+  }
+
+  .wexnix_main-navigation .navbar {
+    padding: 8px 0;
+    position: relative;
+  }
+
+  .wexnix_main-navigation .navbar-toggler {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 7px 14px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.12);
+    margin-left: auto;
+    font-size: 14px;
+    color: var(--color-white);
+  }
+
+  .wexnix_main-navigation .navbar-toggler:focus {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+  }
+
+  .wexnix_main-navigation .navbar-collapse {
+    max-height: 75vh !important;
+    overflow-y: auto !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18) !important;
+    padding: 15px 18px !important;
+    margin-top: 10px;
     width: 100%;
   }
-  .wexnix_header-middle .navbar-brand img {
-    height: 50px;
-    margin: 0;
-    display: block;
+
+  .wexnix_main-navigation .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
-  .wexnix_site-title { 
-    font-size: 27px; 
+
+  .wexnix_main-navigation .navbar .nav-item {
+    border-bottom: 1px solid #f1f5f9;
   }
-  .wexnix_cta-content h1 { 
-    font-size: 30px;
+
+  .wexnix_main-navigation .navbar .nav-item:last-child {
+    border-bottom: none;
   }
+
+  .wexnix_main-navigation .navbar .nav-item .nav-link {
+    color: #1e293b !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    padding: 10px 8px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wexnix_main-navigation .navbar .nav-item .nav-link:hover,
+  .wexnix_main-navigation .navbar .nav-item .nav-link.active {
+    color: var(--theme-color2) !important;
+  }
+
+  /* Mobile Dropdown Submenus */
+  .navbar .nav-item .dropdown-menu,
+  .navbar .dropdown-menu {
+    display: none;
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #f8fafc !important;
+    border-radius: 8px !important;
+    padding: 6px 10px !important;
+    margin: 4px 0 10px !important;
+    width: 100% !important;
+    float: none !important;
+  }
+
+  .navbar .nav-item .dropdown-menu.show,
+  .navbar .dropdown-menu.show {
+    display: block !important;
+  }
+
+  .navbar .nav-item .dropdown-menu .dropdown-item {
+    color: #334155 !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    background: transparent !important;
+    border-radius: 4px;
+  }
+
+  .navbar .nav-item .dropdown-menu .dropdown-item:last-child {
+    border-bottom: none !important;
+  }
+
+  .navbar .nav-item .dropdown-menu .dropdown-item:hover {
+    color: var(--theme-color2) !important;
+    background: rgba(0, 84, 165, 0.06) !important;
+    padding-left: 16px !important;
+  }
+
+  .navbar .wexnix_dropdown-submenu .dropdown-menu.show {
+    margin-left: 10px !important;
+  }
+
+  /* Why choose us building image margin reset */
+  .wexnix_choose-img {
+    margin-left: 0 !important;
+    margin-top: 30px;
+  }
+
+  .wexnix_choose-img::before {
+    left: -8px;
+    bottom: -8px;
+  }
+}
+
+/* ── Mobile Phone Viewport (<= 767px) ──────────────────────────────────── */
+@media all and (max-width: 767px) {
+  /* Container padding for compact screen */
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* Compact section vertical paddings */
   .py-120 {
-    padding: 60px 0;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
   }
+
   .pt-120 {
-    padding-top: 60px;
+    padding-top: 48px !important;
   }
+
   .pb-120 {
-    padding-bottom: 60px;
+    padding-bottom: 48px !important;
   }
+
   .py-140 {
-    padding: 70px 0;
+    padding-top: 55px !important;
+    padding-bottom: 55px !important;
   }
+
   .pt-140 {
-    padding-top: 70px;
+    padding-top: 55px !important;
   }
+
   .pb-140 {
-    padding-bottom: 70px;
+    padding-bottom: 55px !important;
   }
+
+  .pt-80 {
+    padding-top: 40px !important;
+  }
+
+  .pb-80 {
+    padding-bottom: 40px !important;
+  }
+
+  .pt-60 {
+    padding-top: 35px !important;
+  }
+
+  .pb-60 {
+    padding-bottom: 35px !important;
+  }
+
   .wexnix_pd-50 {
-    padding: 30px 0;
+    padding: 25px 0 !important;
+  }
+
+  /* Headings on mobile */
+  .wexnix_site-heading {
+    margin-bottom: 25px !important;
+  }
+
+  .wexnix_site-title {
+    font-size: 25px !important;
+    line-height: 1.3 !important;
+  }
+
+  .wexnix_site-title-tagline {
+    font-size: 13px !important;
+    letter-spacing: 2px !important;
+  }
+
+  /* Hero Banner */
+  .wexnix_hero-single {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    min-height: 450px !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
+    font-size: 26px !important;
+    line-height: 1.3 !important;
+    word-break: break-word;
+  }
+
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
+    font-size: 14px !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .wexnix_hero-single .wexnix_hero-content p {
+    font-size: 14px !important;
+    line-height: 1.55 !important;
+  }
+
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-btn {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-btn .wexnix_theme-btn {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+
+  /* Institute Info Strip */
+  .wexnix_institute-info-area h2 {
+    font-size: 22px !important;
+  }
+
+  .wexnix_institute-info-area h6 {
+    font-size: 13px !important;
+  }
+
+  .wexnix_institute-info-area .py-4 {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+
+  /* Notice Marquee */
+  .wexnix_notice-marquee {
+    padding: 5px 0;
+  }
+
+  .wexnix_notice-label {
+    padding: 3px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* About section mobile */
+  .wexnix_about-img {
+    gap: 15px;
+  }
+
+  .wexnix_about-experience {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+
+  .wexnix_about-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  /* Counter area */
+  .wexnix_counter-box {
+    margin-bottom: 15px;
+    padding: 15px;
+  }
+
+  .wexnix_counter-box .wexnix_counter {
+    font-size: 32px !important;
+  }
+
+  /* Course cards */
+  .wexnix_course-img img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .wexnix_course-title {
+    font-size: 18px;
+  }
+
+  /* Choose items */
+  .wexnix_choose-item {
+    border-radius: 25px 25px 25px 0;
+    padding: 12px;
+  }
+
+  .wexnix_choose-item-icon {
+    width: 60px;
+    height: 60px;
+    line-height: 55px;
+  }
+
+  /* Gallery */
+  .wexnix_gallery-img img {
+    height: 200px;
+    margin-bottom: 12px;
+  }
+
+  /* CTA Banner */
+  .wexnix_cta-content h1 {
+    font-size: 26px !important;
+    line-height: 1.3 !important;
+  }
+
+  .wexnix_cta-area {
+    padding: 45px 0;
+  }
+
+  /* Footer */
+  .wexnix_footer-widget-wrapper {
+    padding-top: 60px !important;
+    padding-bottom: 30px !important;
+  }
+
+  .wexnix_footer-widget-box {
+    margin-bottom: 30px;
+  }
+
+  .wexnix_copyright-wrapper {
+    text-align: center;
+  }
+
+  .wexnix_footer-social {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  /* Scroll top button */
+  #scroll-top {
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    right: 15px;
+  }
+
+  #scroll-top.active {
+    bottom: 15px;
   }
 }

@@ -33,9 +33,9 @@ class AcademicCalendarController extends Controller
             return [
                 'id' => $event->id,
                 'date' => $event->date->format('Y-m-d'),
-                'title' => $event->title,
+                'title' => $event->getTranslations('title'),
                 'type' => $event->type,
-                'description' => $event->description,
+                'description' => $event->getTranslations('description'),
             ];
         });
 

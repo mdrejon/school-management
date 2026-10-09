@@ -70,6 +70,7 @@ class MenuItem extends Model
             'event' => ['label' => 'Event', 'model' => Event::class, 'titleField' => 'title', 'route' => 'events.show'],
             'department' => ['label' => 'Department', 'model' => Department::class, 'titleField' => 'title', 'route' => 'departments.show'],
             'notice' => ['label' => 'Notice', 'model' => Notice::class, 'titleField' => 'title', 'route' => 'notices.show'],
+            'facility' => ['label' => 'Facility', 'model' => Facility::class, 'titleField' => 'title', 'route' => 'facilities.show'],
             'page' => ['label' => 'CMS Page', 'model' => Page::class, 'titleField' => 'title', 'route' => 'pages.show'],
         ];
     }
@@ -88,7 +89,9 @@ class MenuItem extends Model
             'events.index' => 'Events (list)',
             'departments.index' => 'Departments (list)',
             'notices.index' => 'Notices (list)',
+            'facilities.index' => 'Facilities (list)',
             'gallery.index' => 'Gallery',
+            'video-gallery.index' => 'Video Gallery',
             'search' => 'Search page',
         ];
     }

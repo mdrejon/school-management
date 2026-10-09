@@ -9,7 +9,7 @@ API documentation for synchronizing and inserting teacher data from external sof
 | Property | Value |
 | :--- | :--- |
 | **HTTP Method** | `POST` |
-| **Live API URL** | `https://skmadrasah.edu.bd/api/rest-api/v1/teachers/insert` |
+| **Live API URL** | `https://eduex.hostdivine.com/api/rest-api/v1/teachers/insert` |
 | **Local API URL** | `http://school-management.test/api/rest-api/v1/teachers/insert` <br>*(or `http://localhost:8000/api/rest-api/v1/teachers/insert`)* |
 | **Controller** | `App\Http\Controllers\Api\SyncController@handleRequest` |
 
@@ -115,7 +115,7 @@ API documentation for synchronizing and inserting teacher data from external sof
 ## 6. cURL Example
 
 ```bash
-curl -X POST "https://skmadrasah.edu.bd/api/rest-api/v1/teachers/insert" \
+curl -X POST "https://eduex.hostdivine.com/api/rest-api/v1/teachers/insert" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json" \
   -d '{
@@ -142,7 +142,7 @@ curl -X POST "https://skmadrasah.edu.bd/api/rest-api/v1/teachers/insert" \
 
 1. Open Postman and click **New Request**.
 2. Set Method to **`POST`**.
-3. Set URL to **`https://skmadrasah.edu.bd/api/rest-api/v1/teachers/insert`**.
+3. Set URL to **`https://eduex.hostdivine.com/api/rest-api/v1/teachers/insert`**.
 4. In **Headers** tab, add:
    - `Content-Type`: `application/json`
    - `Accept`: `application/json`

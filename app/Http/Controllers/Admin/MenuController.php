@@ -12,6 +12,7 @@ use App\Models\Page;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -86,10 +87,16 @@ class MenuController extends Controller
      */
     public function reorder(ReorderMenuItemsRequest $request): RedirectResponse
     {
-        DB::transaction(function () use ($request) {
+        $menuId = null;
+
+        DB::transaction(function () use ($request, &$menuId) {
             $createdIdsMap = [];
 
             foreach ($request->validated('items') as $item) {
+                if (! empty($item['menu_id'])) {
+                    $menuId = $item['menu_id'];
+                }
+
                 $parentId = $item['parent_id'] ?? null;
                 if (is_string($parentId) && isset($createdIdsMap[$parentId])) {
                     $parentId = $createdIdsMap[$parentId];
@@ -98,11 +105,17 @@ class MenuController extends Controller
                 }
 
                 if (! empty($item['is_new']) || (is_string($item['id']) && str_starts_with($item['id'], 'new-'))) {
+                    $defaultLocale = \App\Models\Language::defaultLanguage()?->code ?? 'en';
+                    $label = $item['label'] ?? [$defaultLocale => 'New Item'];
+                    if (is_array($label) && empty($label[$defaultLocale])) {
+                        $label[$defaultLocale] = collect($label)->first(fn ($val) => ! empty($val)) ?? 'New Item';
+                    }
+
                     $newItem = MenuItem::create([
-                        'menu_id' => $item['menu_id'] ?? 1,
+                        'menu_id' => $item['menu_id'] ?? $menuId ?? 1,
                         'parent_id' => $parentId,
                         'type' => $item['type'] ?? 'custom',
-                        'label' => $item['label'] ?? ['en' => 'New Item'],
+                        'label' => $label,
                         'url' => $item['url'] ?? null,
                         'route_name' => $item['route_name'] ?? null,
                         'linkable_type' => $item['linkable_type'] ?? null,
@@ -113,13 +126,35 @@ class MenuController extends Controller
                     ]);
                     $createdIdsMap[$item['id']] = $newItem->id;
                 } else {
-                    MenuItem::whereKey($item['id'])->update([
-                        'parent_id' => $parentId,
-                        'sort_order' => (int) $item['sort_order'],
-                    ]);
+                    $existing = MenuItem::find($item['id']);
+                    if ($existing) {
+                        $existing->parent_id = $parentId;
+                        $existing->sort_order = (int) $item['sort_order'];
+                        if (isset($item['label']) && is_array($item['label'])) {
+                            $existing->label = $item['label'];
+                        }
+                        if (isset($item['target'])) {
+                            $existing->target = $item['target'];
+                        }
+                        if (array_key_exists('url', $item)) {
+                            $existing->url = $item['url'];
+                        }
+                        if (array_key_exists('route_name', $item)) {
+                            $existing->route_name = $item['route_name'];
+                        }
+                        if (isset($item['is_active'])) {
+                            $existing->is_active = (bool) $item['is_active'];
+                        }
+                        $existing->save();
+                    }
                 }
             }
         });
+
+        if ($menuId) {
+            Cache::forget("menu_{$menuId}_items_active_1");
+            Cache::forget("menu_{$menuId}_items_active_0");
+        }
 
         return back()->with('success', 'Menu structure saved.');
     }

@@ -6,14 +6,17 @@ use App\Models\Testimonial;
 use App\Models\TestimonialPageSetting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class TestimonialSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Testimonial::truncate();
+        TestimonialPageSetting::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         $this->seedPageSettings();
         $this->seedTestimonials();
     }
@@ -21,64 +24,74 @@ class TestimonialSeeder extends Seeder
     protected function seedPageSettings(): void
     {
         $breadcrumbImage = $this->copyIntoStorage('breadcrumb/01.jpg', 'site/testimonials-breadcrumb.jpg');
-        $settings = TestimonialPageSetting::query()->first() ?? new TestimonialPageSetting();
+        $settings = new TestimonialPageSetting();
 
         $settings->fill([
-            'section_tagline' => ['en' => 'Testimonials', 'bn' => 'প্রশংসাপত্র', 'ar' => 'الشهادات'],
-            'section_title' => ["en" => "What Our Students Say's", 'bn' => 'আমাদের শিক্ষার্থীরা যা বলে', 'ar' => 'ماذا يقول طلابنا'],
-            'section_highlight' => ["en" => "Say's", 'bn' => 'বলে', 'ar' => 'يقول'],
+            'section_tagline' => ['en' => 'Testimonials', 'bn' => 'প্রশংসাপত্র'],
+            'section_title' => ["en" => "What Our Students & Parents Say", 'bn' => 'আমাদের শিক্ষার্থী ও অভিভাবকরা যা বলেন'],
+            'section_highlight' => ["en" => "Say", 'bn' => 'বলেন'],
             'section_description' => [
-                'en' => 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-                'bn' => 'এটি দীর্ঘদিনের একটি প্রতিষ্ঠিত সত্য যে একজন পাঠক পৃষ্ঠার লেআউট দেখার সময় বিভ্রান্ত হবেন।',
-                'ar' => 'من الحقائق الراسخة منذ زمن طويل أن القارئ سيتشتت انتباهه بتخطيط الصفحة.',
+                'en' => 'Discover why students and parents love EduEx School and College.',
+                'bn' => 'শিক্ষার্থী ও অভিভাবকরা কেন এডুএক্স স্কুল এন্ড কলেজ পছন্দ করেন তা জানুন।',
             ],
-            'breadcrumb_title' => ['en' => 'Testimonials', 'bn' => 'প্রশংসাপত্র', 'ar' => 'الشهادات'],
-            'breadcrumb_image' => $breadcrumbImage ?? $settings->breadcrumb_image,
-            'seo_title' => ['en' => 'Testimonials', 'bn' => 'প্রশংসাপত্র', 'ar' => 'الشهادات'],
+            'breadcrumb_title' => ['en' => 'Testimonials', 'bn' => 'প্রশংসাপত্র'],
+            'breadcrumb_image' => $breadcrumbImage ?? null,
+            'seo_title' => ['en' => 'Testimonials | EduEx School and College', 'bn' => 'প্রশংসাপত্র | এডুএক্স স্কুল এন্ড কলেজ'],
             'seo_description' => [
-                'en' => 'See what our students and parents say about our school.',
-                'bn' => 'আমাদের শিক্ষার্থী ও অভিভাবকরা আমাদের স্কুল সম্পর্কে কী বলেন তা দেখুন।',
-                'ar' => 'اطلع على آراء طلابنا وأولياء الأمور حول مدرستنا.',
+                'en' => 'Read reviews and testimonials from our students and parents.',
+                'bn' => 'আমাদের শিক্ষার্থী ও অভিভাবকদের থেকে পর্যালোচনা এবং প্রশংসাপত্র পড়ুন।',
             ],
             'seo_keywords' => [
-                'en' => 'testimonials, reviews, student feedback',
-                'bn' => 'প্রশংসাপত্র, পর্যালোচনা, শিক্ষার্থীর মতামত',
-                'ar' => 'شهادات، تقييمات، آراء الطلاب',
+                'en' => 'testimonials, reviews, student feedback, eduex reviews',
+                'bn' => 'প্রশংসাপত্র, পর্যালোচনা, শিক্ষার্থীর মতামত, এডুএক্স রিভিউ',
             ],
         ])->save();
     }
 
     protected function seedTestimonials(): void
     {
-        $quote = [
-            'en' => 'There are many variations of tend to repeat chunks some all form necessary injected for the going are humour words.',
-            'bn' => 'আমার সন্তান এই স্কুলে ভর্তি হওয়ার পর থেকে অনেক উন্নতি করেছে। শিক্ষকরা অত্যন্ত যত্নশীল ও পেশাদার।',
-            'ar' => 'لقد تحسن طفلي كثيرًا منذ التحاقه بهذه المدرسة. المعلمون مهتمون ومحترفون للغاية.',
-        ];
-
         $testimonials = [
-            ['name' => ['en' => 'Anthony Nicoll', 'bn' => 'অ্যান্থনি নিকোল', 'ar' => 'أنتوني نيكول'], 'role' => ['en' => 'Student', 'bn' => 'শিক্ষার্থী', 'ar' => 'طالب'], 'image' => 'testimonial/01.jpg'],
-            ['name' => ['en' => 'Richard Lock', 'bn' => 'রিচার্ড লক', 'ar' => 'ريتشارد لوك'], 'role' => ['en' => 'Student', 'bn' => 'শিক্ষার্থী', 'ar' => 'طالب'], 'image' => 'testimonial/02.jpg'],
-            ['name' => ['en' => 'Randal Grand', 'bn' => 'র‍্যান্ডাল গ্র্যান্ড', 'ar' => 'راندال جراند'], 'role' => ['en' => 'Parent', 'bn' => 'অভিভাবক', 'ar' => 'ولي أمر'], 'image' => 'testimonial/03.jpg'],
-            ['name' => ['en' => 'Edward Miles', 'bn' => 'এডওয়ার্ড মাইলস', 'ar' => 'إدوارد مايلز'], 'role' => ['en' => 'Student', 'bn' => 'শিক্ষার্থী', 'ar' => 'طالب'], 'image' => 'testimonial/04.jpg'],
-            ['name' => ['en' => 'Ninal Gordon', 'bn' => 'নিনাল গর্ডন', 'ar' => 'نينال غوردون'], 'role' => ['en' => 'Parent', 'bn' => 'অভিভাবক', 'ar' => 'ولي أمر'], 'image' => 'testimonial/05.jpg'],
+            [
+                'name' => ['en' => 'Sarah Rahman', 'bn' => 'সারা রহমান'], 
+                'role' => ['en' => 'Former Student (HSC Batch 2024)', 'bn' => 'প্রাক্তন শিক্ষার্থী (এইচএসসি ব্যাচ ২০২৪)'], 
+                'image' => 'testimonial/01.jpg',
+                'rating' => 5,
+                'quote' => [
+                    'en' => 'EduEx School and College gave me the foundation I needed to excel in university. The teachers were incredibly supportive!',
+                    'bn' => 'বিশ্ববিদ্যালয়ে ভালো করার জন্য যে ভিত্তি প্রয়োজন ছিল তা এডুএক্স স্কুল এন্ড কলেজ আমাকে দিয়েছে। শিক্ষকরা অবিশ্বাস্যভাবে সহায়ক ছিলেন!'
+                ]
+            ],
+            [
+                'name' => ['en' => 'Ahsan Habib', 'bn' => 'আহসান হাবিব'], 
+                'role' => ['en' => 'Parent of Class 8 Student', 'bn' => 'অষ্টম শ্রেণির শিক্ষার্থীর অভিভাবক'], 
+                'image' => 'testimonial/02.jpg',
+                'rating' => 5,
+                'quote' => [
+                    'en' => 'Since enrolling my son at EduEx, I have seen a remarkable improvement in his confidence and academic performance.',
+                    'bn' => 'আমার ছেলেকে এডুএক্সে ভর্তি করার পর থেকে তার আত্মবিশ্বাস এবং একাডেমিক পারফরম্যান্সে আমি উল্লেখযোগ্য উন্নতি দেখেছি।'
+                ]
+            ],
+            [
+                'name' => ['en' => 'Rafiqul Islam', 'bn' => 'রফিকুল ইসলাম'], 
+                'role' => ['en' => 'Alumni & Entrepreneur', 'bn' => 'প্রাক্তন ছাত্র ও উদ্যোক্তা'], 
+                'image' => 'testimonial/03.jpg',
+                'rating' => 5,
+                'quote' => [
+                    'en' => 'The focus on both academics and extracurriculars at EduEx helped shape my career. I am proud to be an alumni.',
+                    'bn' => 'এডুএক্সে পড়াশোনার পাশাপাশি পাঠ্যক্রম বহির্ভূত কার্যক্রমের প্রতি মনোযোগ আমার ক্যারিয়ার গড়তে সাহায্য করেছে। আমি একজন প্রাক্তন ছাত্র হিসেবে গর্বিত।'
+                ]
+            ],
         ];
 
         foreach ($testimonials as $index => $testimonial) {
-            $photo = $this->copyIntoStorage($testimonial['image'], "site/testimonials/".($index + 1).".jpg");
-
-            $existing = Testimonial::whereJsonContains('author_name->en', $testimonial['name']['en'])->first();
-
-            if ($existing) {
-                continue;
-            }
+            $image = $this->copyIntoStorage($testimonial['image'], "site/testimonial-" . ($index + 1) . ".jpg");
 
             Testimonial::create([
-                'quote' => $quote,
-                'rating' => 5,
                 'author_name' => $testimonial['name'],
                 'author_role' => $testimonial['role'],
-                'author_photo' => $photo,
+                'quote' => $testimonial['quote'],
+                'rating' => $testimonial['rating'],
+                'author_photo' => $image,
                 'is_active' => true,
                 'sort_order' => $index + 1,
             ]);

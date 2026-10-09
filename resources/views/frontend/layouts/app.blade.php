@@ -370,8 +370,8 @@
                             <input type="search" name="q" placeholder="{{ __('Search Here...') }}">
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </form>
-                        <div class="d-flex align-items-center justify-content-between w-100 mobile-apply-lang-wrap" style="gap: 10px;">
-                            <a href="application-form.html" class="wexnix_theme-btn" style="flex: 1; text-align: center; width: auto;"><span
+                        <div class="d-flex align-items-center mobile-apply-lang-wrap" style="gap: 10px;">
+                            <a href="application-form.html" class="wexnix_theme-btn" style="text-align: center;"><span
                                     class="fas fa-pencil"></span>{{ __('Apply Now') }}</a>
                             <div class="mobile-lang-switcher d-flex d-lg-none" style="gap: 5px;">
                                 @foreach ($languages as $lang)
@@ -390,7 +390,7 @@
                 <div class="container position-relative">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="wexnix_navbar-toggler-mobile-icon"><i class="fas fa-bars"></i></span>
+                        <span class="wexnix_navbar-toggler-mobile-icon"><i class="fas fa-bars me-1"></i> {{ __('Menu') }}</span>
                     </button>
                     <div class="collapse navbar-collapse" id="main_nav">
                         <ul class="navbar-nav">

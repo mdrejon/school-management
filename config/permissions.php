@@ -19,6 +19,7 @@ return [
     'events' => ['label' => 'News & Events', 'actions' => ['view', 'create', 'edit', 'delete']],
     'notices' => ['label' => 'Notices', 'actions' => ['view', 'create', 'edit', 'delete']],
     'gallery' => ['label' => 'Gallery', 'actions' => ['view', 'create', 'edit', 'delete']],
+    'video_gallery' => ['label' => 'Video Gallery', 'actions' => ['view', 'create', 'edit', 'delete']],
     'facilities' => ['label' => 'Facilities', 'actions' => ['view', 'create', 'edit', 'delete']],
     'portfolios' => ['label' => 'Portfolio', 'actions' => ['view', 'create', 'edit', 'delete']],
     'blog' => ['label' => 'Blog', 'actions' => ['view', 'create', 'edit', 'delete']],

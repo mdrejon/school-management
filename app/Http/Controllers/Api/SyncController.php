@@ -1402,9 +1402,9 @@ class SyncController extends Controller
 
         $validator = Validator::make($request->all(), [
             'external_id' => 'required|string',
-            'first_name' => 'nullable|string',
-            'name' => 'nullable|string',
-            'roll_no' => 'nullable|string',
+            'first_name' => 'nullable',
+            'name' => 'nullable',
+            'roll_no' => 'nullable',
             'email' => 'nullable|email',
         ]);
 
@@ -1615,29 +1615,93 @@ class SyncController extends Controller
             $student->external_id = (string)$request->input('external_id');
         }
 
-        // Names
-        $firstName = $request->input('first_name');
-        $lastName = $request->input('last_name');
-        if (blank($firstName) && $request->filled('name')) {
-            $parts = explode(' ', trim($request->input('name')), 2);
-            $firstName = $parts[0];
-            $lastName = $lastName ?: ($parts[1] ?? '');
-        }
-        $student->first_name = $firstName ?: ($student->first_name ?: 'Student');
-        if (!is_null($lastName)) {
-            $student->last_name = $lastName;
+        // Helper to extract or normalize translation fields
+        $normalizeTrans = function ($input) {
+            if (is_array($input)) {
+                $en = isset($input['en']) ? trim((string)$input['en']) : null;
+                $bn = isset($input['bn']) ? trim((string)$input['bn']) : null;
+                $res = [];
+                if (!blank($en)) $res['en'] = $en;
+                if (!blank($bn)) $res['bn'] = $bn;
+                return !empty($res) ? $res : null;
+            }
+            if (is_string($input) && trim($input) !== '') {
+                return trim($input);
+            }
+            return null;
+        };
+
+        // 1. Names - Handle both "name" object, "first_name" / "last_name" objects, or plain strings
+        $nameInput = $request->input('name');
+        $firstNameInput = $request->input('first_name');
+        $lastNameInput = $request->input('last_name');
+
+        if (is_array($nameInput)) {
+            $enName = isset($nameInput['en']) ? trim((string)$nameInput['en']) : '';
+            $bnName = isset($nameInput['bn']) ? trim((string)$nameInput['bn']) : '';
+
+            $firstNames = [];
+            $lastNames = [];
+
+            if ($enName !== '') {
+                $parts = explode(' ', $enName, 2);
+                $firstNames['en'] = $parts[0];
+                if (!empty($parts[1])) $lastNames['en'] = $parts[1];
+            }
+            if ($bnName !== '') {
+                $parts = explode(' ', $bnName, 2);
+                $firstNames['bn'] = $parts[0];
+                if (!empty($parts[1])) $lastNames['bn'] = $parts[1];
+            }
+
+            if (!empty($firstNames)) {
+                $student->first_name = $firstNames;
+            }
+            if (!empty($lastNames)) {
+                $student->last_name = $lastNames;
+            }
+        } elseif (is_string($nameInput) && trim($nameInput) !== '') {
+            $parts = explode(' ', trim($nameInput), 2);
+            $student->first_name = $parts[0];
+            if (!empty($parts[1])) {
+                $student->last_name = $parts[1];
+            }
         }
 
-        // Family & Guardians
-        if ($request->has('father_name')) $student->father_name = $request->input('father_name');
-        if ($request->has('mother_name')) $student->mother_name = $request->input('mother_name');
-        if ($request->has('guardian_name')) $student->guardian_name = $request->input('guardian_name');
+        // Direct first_name / last_name inputs (can be {"en": "...", "bn": "..."} or "...")
+        if ($request->has('first_name')) {
+            $fn = $normalizeTrans($firstNameInput);
+            if (!is_null($fn)) $student->first_name = $fn;
+        }
+        if ($request->has('last_name')) {
+            $ln = $normalizeTrans($lastNameInput);
+            if (!is_null($ln)) $student->last_name = $ln;
+        }
+
+        if (empty($student->first_name)) {
+            $student->first_name = 'Student';
+        }
+
+        // 2. Translatable Family, Guardian & Address fields
+        $transFields = [
+            'father_name',
+            'mother_name',
+            'guardian_name',
+            'address',
+            'guardian_address',
+        ];
+
+        foreach ($transFields as $field) {
+            if ($request->has($field)) {
+                $val = $normalizeTrans($request->input($field));
+                $student->$field = $val;
+            }
+        }
+
+        // Non-translatable fields
         if ($request->has('guardian_email')) $student->guardian_email = $request->input('guardian_email');
         if ($request->has('guardian_phone')) $student->guardian_phone = $request->input('guardian_phone');
         if ($request->has('guardian_relationship')) $student->guardian_relationship = $request->input('guardian_relationship');
-        if ($request->has('guardian_address')) $student->guardian_address = $request->input('guardian_address');
-
-        // Academics & Identifiers
         if ($request->has('roll_no')) $student->roll_no = (string)$request->input('roll_no');
         if ($request->has('registration_no')) $student->registration_no = (string)$request->input('registration_no');
         if ($request->has('group')) $student->group = $request->input('group');
@@ -1645,7 +1709,6 @@ class SyncController extends Controller
         if ($request->has('blood_group')) $student->blood_group = $request->input('blood_group');
         if ($request->has('religion')) $student->religion = $request->input('religion');
         if ($request->has('admission_number')) $student->admission_number = $request->input('admission_number');
-        if ($request->has('address')) $student->address = $request->input('address');
         if ($request->has('status')) $student->status = $request->input('status') ?: 'approved';
 
         // Class & Section resolution

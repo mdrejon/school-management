@@ -147,6 +147,23 @@ Route::middleware([
         Route::put('/', [GalleryPageSettingController::class, 'update'])->name('update');
     });
 
+    Route::prefix('cms/video-gallery')->name('cms.video-gallery.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\VideoGalleryController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Admin\VideoGalleryController::class, 'create'])->name('create');
+        Route::get('/{videoGallery}/edit', [\App\Http\Controllers\Admin\VideoGalleryController::class, 'edit'])->name('edit');
+        Route::post('/', [\App\Http\Controllers\Admin\VideoGalleryController::class, 'store'])->name('store');
+        Route::put('/{videoGallery}', [\App\Http\Controllers\Admin\VideoGalleryController::class, 'update'])->name('update');
+        Route::patch('/{videoGallery}/toggle', [\App\Http\Controllers\Admin\VideoGalleryController::class, 'toggleActive'])->name('toggle');
+        Route::patch('/{videoGallery}/move-up', [\App\Http\Controllers\Admin\VideoGalleryController::class, 'moveUp'])->name('moveUp');
+        Route::patch('/{videoGallery}/move-down', [\App\Http\Controllers\Admin\VideoGalleryController::class, 'moveDown'])->name('moveDown');
+        Route::delete('/{videoGallery}', [\App\Http\Controllers\Admin\VideoGalleryController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('cms/video-gallery-settings')->name('cms.video-gallery.settings.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\VideoGalleryPageSettingController::class, 'edit'])->name('edit');
+        Route::put('/', [\App\Http\Controllers\Admin\VideoGalleryPageSettingController::class, 'update'])->name('update');
+    });
+
     Route::prefix('cms/events')->name('cms.events.')->middleware('module:events')->group(function () {
         Route::get('/', [EventController::class, 'index'])->name('index')->middleware('permission:events.view');
         Route::get('/create', [EventController::class, 'create'])->name('create')->middleware('permission:events.create');

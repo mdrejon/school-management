@@ -30,7 +30,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/Student/StudentCreate');
+        $classes = \Modules\Academic\Models\AcademicClass::with('sections')->get();
+        return Inertia::render('Admin/Student/StudentCreate', [
+            'classes' => $classes,
+        ]);
     }
 
     /**
@@ -39,8 +42,11 @@ class StudentController extends Controller
     public function store(StoreStudentRequest $request)
     {
         DB::transaction(function () use ($request) {
+            $firstNameStr = is_array($request->first_name) ? ($request->first_name['en'] ?? reset($request->first_name)) : $request->first_name;
+            $lastNameStr = is_array($request->last_name) ? ($request->last_name['en'] ?? reset($request->last_name)) : $request->last_name;
+
             $user = User::create([
-                'name' => $request->first_name . ' ' . $request->last_name,
+                'name' => trim($firstNameStr . ' ' . $lastNameStr),
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
@@ -69,7 +75,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $student = Student::with('user')->findOrFail($id);
+        $student = Student::with(['user', 'academicClass', 'section'])->findOrFail($id);
         return Inertia::render('Admin/Student/StudentShow', [
             'student' => $student
         ]);
@@ -80,9 +86,17 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::with('user')->findOrFail($id);
+        $student = Student::with(['user', 'academicClass', 'section'])->findOrFail($id);
+        $classes = \Modules\Academic\Models\AcademicClass::with('sections')->get();
+
+        $studentData = $student->toArray();
+        foreach ($student->translatable as $field) {
+            $studentData[$field] = $student->getTranslations($field);
+        }
+
         return Inertia::render('Admin/Student/StudentEdit', [
-            'student' => $student
+            'student' => $studentData,
+            'classes' => $classes,
         ]);
     }
 
@@ -96,17 +110,22 @@ class StudentController extends Controller
         DB::transaction(function () use ($request, $student) {
             $user = $student->user;
             
-            $userData = [
-                'name' => $request->first_name . ' ' . $request->last_name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-            ];
-            
-            if ($request->filled('password')) {
-                $userData['password'] = Hash::make($request->password);
+            $firstNameStr = is_array($request->first_name) ? ($request->first_name['en'] ?? reset($request->first_name)) : $request->first_name;
+            $lastNameStr = is_array($request->last_name) ? ($request->last_name['en'] ?? reset($request->last_name)) : $request->last_name;
+
+            if ($user) {
+                $userData = [
+                    'name' => trim($firstNameStr . ' ' . $lastNameStr),
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                ];
+                
+                if ($request->filled('password')) {
+                    $userData['password'] = Hash::make($request->password);
+                }
+                
+                $user->update($userData);
             }
-            
-            $user->update($userData);
 
             $data = $request->except(['email', 'password', 'password_confirmation', 'phone', 'picture']);
 

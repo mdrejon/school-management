@@ -6,14 +6,17 @@ use App\Models\Faq;
 use App\Models\FaqPageSetting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class FaqSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Faq::truncate();
+        FaqPageSetting::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         $this->seedPageSettings();
         $this->seedFaqs();
     }
@@ -21,35 +24,31 @@ class FaqSeeder extends Seeder
     protected function seedPageSettings(): void
     {
         $breadcrumbImage = $this->copyIntoStorage('breadcrumb/01.jpg', 'site/faq-breadcrumb.jpg');
-        $settings = FaqPageSetting::query()->first() ?? new FaqPageSetting();
+        $settings = new FaqPageSetting();
 
         $settings->fill([
-            'section_tagline' => ["en" => "Faq's", 'bn' => 'সাধারণ জিজ্ঞাসা', 'ar' => 'الأسئلة الشائعة'],
+            'section_tagline' => ["en" => "FAQ", 'bn' => 'সাধারণ জিজ্ঞাসা'],
             'section_title' => [
-                'en' => 'General frequently asked questions',
+                'en' => 'Frequently Asked Questions',
                 'bn' => 'সাধারণ জিজ্ঞাসিত প্রশ্নসমূহ',
-                'ar' => 'الأسئلة الشائعة العامة',
             ],
-            'section_highlight' => ['en' => 'frequently', 'bn' => 'জিজ্ঞাসিত', 'ar' => 'الشائعة'],
+            'section_highlight' => ['en' => 'Questions', 'bn' => 'প্রশ্নসমূহ'],
             'section_description' => [
-                'en' => 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even.',
-                'bn' => 'আমাদের স্কুল সম্পর্কিত সাধারণ প্রশ্নের উত্তর এখানে পাওয়া যাবে। আরও তথ্যের জন্য অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন।',
-                'ar' => 'يمكنكم العثور هنا على إجابات للأسئلة الشائعة المتعلقة بمدرستنا. لمزيد من المعلومات، يرجى الاتصال بنا.',
+                'en' => 'Find quick answers to common questions about admissions, facilities, and academic programs at EduEx.',
+                'bn' => 'এডুএক্সের ভর্তি, সুযোগ-সুবিধা এবং একাডেমিক প্রোগ্রাম সম্পর্কে সাধারণ প্রশ্নগুলোর উত্তর খুঁজুন।',
             ],
-            'cta_button_text' => ['en' => 'Have Any Question ?', 'bn' => 'কোনো প্রশ্ন আছে ?', 'ar' => 'هل لديك سؤال؟'],
-            'cta_button_url' => '/search',
-            'breadcrumb_title' => ["en" => "Faq's", 'bn' => 'সাধারণ জিজ্ঞাসা', 'ar' => 'الأسئلة الشائعة'],
-            'breadcrumb_image' => $breadcrumbImage ?? $settings->breadcrumb_image,
-            'seo_title' => ["en" => "Faq's", 'bn' => 'সাধারণ জিজ্ঞাসা', 'ar' => 'الأسئلة الشائعة'],
+            'cta_button_text' => ['en' => 'Have More Questions?', 'bn' => 'আরও কোনো প্রশ্ন আছে?'],
+            'cta_button_url' => '/contact',
+            'breadcrumb_title' => ["en" => "FAQ", 'bn' => 'সাধারণ জিজ্ঞাসা'],
+            'breadcrumb_image' => $breadcrumbImage ?? null,
+            'seo_title' => ["en" => "FAQ | EduEx School and College", 'bn' => 'সাধারণ জিজ্ঞাসা | এডুএক্স স্কুল এন্ড কলেজ'],
             'seo_description' => [
-                'en' => 'Find answers to frequently asked questions about our school.',
-                'bn' => 'আমাদের স্কুল সম্পর্কে সাধারণ জিজ্ঞাসিত প্রশ্নের উত্তর খুঁজুন।',
-                'ar' => 'اعثر على إجابات للأسئلة الشائعة حول مدرستنا.',
+                'en' => 'Find answers to frequently asked questions about our school and college.',
+                'bn' => 'আমাদের স্কুল এবং কলেজ সম্পর্কে সাধারণ জিজ্ঞাসিত প্রশ্নের উত্তর খুঁজুন।',
             ],
             'seo_keywords' => [
-                'en' => 'faq, questions, help',
-                'bn' => 'সাধারণ জিজ্ঞাসা, প্রশ্ন, সাহায্য',
-                'ar' => 'الأسئلة الشائعة، أسئلة، مساعدة',
+                'en' => 'faq, school faq, admission queries, eduex help',
+                'bn' => 'সাধারণ জিজ্ঞাসা, স্কুলের প্রশ্ন, ভর্তির প্রশ্ন, এডুএক্স সাহায্য',
             ],
         ])->save();
     }
@@ -58,46 +57,48 @@ class FaqSeeder extends Seeder
     {
         $faqs = [
             [
-                'question' => ['en' => 'How Can do I apply ?', 'bn' => 'আমি কীভাবে আবেদন করতে পারি?', 'ar' => 'كيف يمكنني التقديم؟'],
-                'answer' => [
-                    'en' => 'We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment so blinded by desire ante odio dignissim quam vitae pulvinar turpis.',
-                    'bn' => 'আপনি আমাদের ওয়েবসাইটের ভর্তি পৃষ্ঠা থেকে অনলাইন আবেদন ফর্ম পূরণ করে আবেদন করতে পারেন, অথবা সরাসরি অফিসে যোগাযোগ করতে পারেন।',
-                    'ar' => 'يمكنك التقديم من خلال ملء استمارة الطلب عبر الإنترنت من صفحة القبول في موقعنا الإلكتروني، أو زيارة المكتب مباشرة.',
+                'question' => [
+                    'en' => 'When does the admission process start?',
+                    'bn' => 'ভর্তি প্রক্রিয়া কখন শুরু হয়?'
                 ],
+                'answer' => [
+                    'en' => 'Admission usually starts in November for the upcoming academic year. Please check our website announcements for exact dates.',
+                    'bn' => 'আগামী শিক্ষাবর্ষের জন্য ভর্তি সাধারণত নভেম্বরে শুরু হয়। সঠিক তারিখের জন্য আমাদের ওয়েবসাইটের বিজ্ঞপ্তি দেখুন।'
+                ]
             ],
             [
-                'question' => ['en' => 'How Can I Become A Member ?', 'bn' => 'আমি কীভাবে সদস্য হতে পারি?', 'ar' => 'كيف يمكنني أن أصبح عضوًا؟'],
-                'answer' => [
-                    'en' => 'We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment so blinded by desire ante odio dignissim quam vitae pulvinar turpis.',
-                    'bn' => 'ভর্তি পরীক্ষায় উত্তীর্ণ হওয়ার পর প্রয়োজনীয় কাগজপত্র জমা দিয়ে সদস্যপদ নিশ্চিত করা যায়।',
-                    'ar' => 'يمكن تأكيد العضوية بعد اجتياز اختبار القبول وتقديم المستندات المطلوبة.',
+                'question' => [
+                    'en' => 'What curriculums do you offer?',
+                    'bn' => 'আপনারা কোন শিক্ষাক্রম অফার করেন?'
                 ],
+                'answer' => [
+                    'en' => 'We offer the national curriculum (NCTB) for primary, secondary (SSC), and higher secondary (HSC) levels.',
+                    'bn' => 'আমরা প্রাথমিক, মাধ্যমিক (এসএসসি) এবং উচ্চ মাধ্যমিক (এইচএসসি) স্তরের জন্য জাতীয় শিক্ষাক্রম (এনসিটিবি) প্রদান করি।'
+                ]
             ],
             [
-                'question' => ['en' => 'What Payment Gateway You Support ?', 'bn' => 'আপনারা কোন পেমেন্ট গেটওয়ে সমর্থন করেন?', 'ar' => 'ما هي بوابات الدفع التي تدعمونها؟'],
-                'answer' => [
-                    'en' => 'We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment so blinded by desire ante odio dignissim quam vitae pulvinar turpis.',
-                    'bn' => 'আমরা মোবাইল ব্যাংকিং, ব্যাংক ট্রান্সফার এবং সরাসরি অফিস পেমেন্ট সমর্থন করি।',
-                    'ar' => 'ندعم الخدمات المصرفية عبر الهاتف المحمول والتحويل البنكي والدفع المباشر في المكتب.',
+                'question' => [
+                    'en' => 'Do you have hostel facilities for students?',
+                    'bn' => 'শিক্ষার্থীদের জন্য কি হোস্টেল সুবিধা আছে?'
                 ],
+                'answer' => [
+                    'en' => 'Yes, we provide secure and well-maintained hostel facilities for students coming from outside the city.',
+                    'bn' => 'হ্যাঁ, শহরের বাইরে থেকে আসা শিক্ষার্থীদের জন্য আমাদের নিরাপদ ও সুপরিচালিত হোস্টেল সুবিধা রয়েছে।'
+                ]
             ],
             [
-                'question' => ['en' => 'How Can I Cancel My Request ?', 'bn' => 'আমি কীভাবে আমার অনুরোধ বাতিল করতে পারি?', 'ar' => 'كيف يمكنني إلغاء طلبي؟'],
-                'answer' => [
-                    'en' => 'We denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment so blinded by desire ante odio dignissim quam vitae pulvinar turpis.',
-                    'bn' => 'আপনি অফিসে সরাসরি যোগাযোগ করে অথবা ইমেইলের মাধ্যমে আপনার অনুরোধ বাতিল করতে পারেন।',
-                    'ar' => 'يمكنك إلغاء طلبك عن طريق الاتصال بالمكتب مباشرة أو عبر البريد الإلكتروني.',
+                'question' => [
+                    'en' => 'Are there extracurricular activities?',
+                    'bn' => 'এখানে কি পাঠ্যক্রম বহির্ভূত কার্যক্রম রয়েছে?'
                 ],
-            ],
+                'answer' => [
+                    'en' => 'Absolutely. We have various clubs, sports events, and cultural programs to ensure students\' holistic development.',
+                    'bn' => 'অবশ্যই। শিক্ষার্থীদের সামগ্রিক বিকাশ নিশ্চিত করতে আমাদের বিভিন্ন ক্লাব, ক্রীড়া ইভেন্ট এবং সাংস্কৃতিক কর্মসূচি রয়েছে।'
+                ]
+            ]
         ];
 
         foreach ($faqs as $index => $faq) {
-            $existing = Faq::whereJsonContains('question->en', $faq['question']['en'])->first();
-
-            if ($existing) {
-                continue;
-            }
-
             Faq::create([
                 'question' => $faq['question'],
                 'answer' => $faq['answer'],

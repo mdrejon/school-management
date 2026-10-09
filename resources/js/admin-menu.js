@@ -62,6 +62,7 @@ export default [
             { label: 'Notices', icon: 'pi pi-megaphone', route: 'admin.cms.notices.index', module: 'notices' },
             { label: 'Education Levels', icon: 'pi pi-sitemap', route: 'admin.cms.education-levels.index' },
             { label: 'Gallery', icon: 'pi pi-image', route: 'admin.cms.gallery.index', module: 'gallery' },
+            { label: 'Video Gallery', icon: 'pi pi-video', route: 'admin.cms.video-gallery.index', module: 'video_gallery' },
             { label: 'Facilities', icon: 'pi pi-building', route: 'admin.cms.facilities.index', module: 'facilities' },
             { label: 'Portfolio', icon: 'pi pi-briefcase', route: 'admin.cms.portfolios.index', module: 'portfolios' },
             { label: 'Blog', icon: 'pi pi-file-edit', route: 'admin.cms.blog.index', module: 'blog' },

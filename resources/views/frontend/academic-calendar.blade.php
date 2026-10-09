@@ -201,8 +201,9 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        let currentYear = {{ now()->year }};
+    document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function() {
+            let currentYear = {{ now()->year }};
         let currentMonth = {{ now()->month }};
         const lang = '{{ app()->getLocale() }}';
         let eventsData = [];
@@ -335,6 +336,7 @@
         });
 
         fetchEvents(currentYear, currentMonth);
+        });
     });
 </script>
 @endpush

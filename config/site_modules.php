@@ -28,6 +28,7 @@ return [
     'courses' => ['label' => 'Courses', 'section' => true, 'route' => true],
     'teachers' => ['label' => 'Teachers', 'section' => true, 'route' => true],
     'gallery' => ['label' => 'Gallery', 'section' => true, 'route' => true],
+    'video_gallery' => ['label' => 'Video Gallery', 'section' => true, 'route' => true],
     'events' => ['label' => 'News & Events', 'section' => true, 'route' => true],
     'departments' => ['label' => 'Departments', 'section' => true, 'route' => true],
     'blog' => ['label' => 'Blog', 'section' => true, 'route' => true],

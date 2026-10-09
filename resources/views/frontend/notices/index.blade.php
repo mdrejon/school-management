@@ -44,7 +44,7 @@
                             <tbody>
                                 @foreach ($notices as $notice)
                                     <tr>
-                                        <td>{{ str_pad($notices->firstItem() + $loop->index, 2, '0', STR_PAD_LEFT') }}</td>
+                                        <td>{{ str_pad($notices->firstItem() + $loop->index, 2, '0', STR_PAD_LEFT) }}</td>
                                         <td>{{ $notice->title }}</td>
                                         <td>{{ $notice->published_at?->format('d M, Y') }}</td>
                                         <td class="text-center">

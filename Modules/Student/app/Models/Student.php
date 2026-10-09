@@ -5,10 +5,21 @@ namespace Modules\Student\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
+use Spatie\Translatable\HasTranslations;
 
 class Student extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
+
+    public array $translatable = [
+        'first_name',
+        'last_name',
+        'father_name',
+        'mother_name',
+        'guardian_name',
+        'address',
+        'guardian_address',
+    ];
 
     protected $fillable = [
         'external_id',

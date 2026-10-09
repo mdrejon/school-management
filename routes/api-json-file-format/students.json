@@ -1,0 +1,56 @@
+{
+    "external_id": "STU-2026-1001",
+    
+    "name": {
+        "en": "Tanvir Ahmed",
+        "bn": "তানভীর আহমেদ"
+    },
+    "first_name": {
+        "en": "Tanvir",
+        "bn": "তানভীর"
+    },
+    "last_name": {
+        "en": "Ahmed",
+        "bn": "আহমেদ"
+    },
+    
+    "father_name": {
+        "en": "Abdur Rahman",
+        "bn": "আব্দুর রহমান"
+    },
+    "mother_name": {
+        "en": "Fatema Begum",
+        "bn": "ফাতেমা বেগম"
+    },
+    "guardian_name": {
+        "en": "Abdur Rahman",
+        "bn": "আব্দুর রহমান"
+    },
+    "guardian_relationship": "Father",
+    "guardian_phone": "01712345678",
+    "guardian_email": "rahman@example.com",
+    
+    "address": {
+        "en": "House 12, Road 4, Sector 7, Uttara, Dhaka",
+        "bn": "বাড়ি ১২, রোড ৪, সেক্টর ৭, উত্তরা, ঢাকা"
+    },
+    "guardian_address": {
+        "en": "House 12, Road 4, Sector 7, Uttara, Dhaka",
+        "bn": "বাড়ি ১২, রোড ৪, সেক্টর ৭, উত্তরা, ঢাকা"
+    },
+    
+    "roll_no": "101",
+    "registration_no": "REG-2026-8801",
+    "admission_number": "ADM-2026-015",
+    "class_name": "Class 8",
+    "section_name": "A",
+    "group": "Science",
+    "gender": "Male",
+    "blood_group": "A+",
+    "religion": "Islam",
+    
+    "status": "approved",
+    "email": "tanvir.student@example.com",
+    "password": "Password123",
+    "picture": ""
+}

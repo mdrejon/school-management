@@ -137,6 +137,101 @@ Route::get('/storage-link', function () {
     \Illuminate\Support\Facades\Artisan::call('storage:link');
     return "Storage link created successfully!";
 });
+
+Route::get('/migration', function () {
+    $results = [];
+
+    $commands = [
+        [
+            'cmd' => 'migrate',
+            'params' => ['--force' => true],
+            'label' => 'Database Migration',
+        ],
+    ];
+
+    if (request()->has('seed')) {
+        $commands[] = [
+            'cmd' => 'db:seed',
+            'params' => ['--force' => true],
+            'label' => 'Database Seeders',
+        ];
+    }
+
+    $commands[] = [
+        'cmd' => 'optimize:clear',
+        'params' => [],
+        'label' => 'Clear Optimized Cache',
+    ];
+
+    foreach ($commands as $item) {
+        try {
+            \Illuminate\Support\Facades\Artisan::call($item['cmd'], $item['params']);
+            $output = trim(\Illuminate\Support\Facades\Artisan::output());
+            $results[] = [
+                'command' => $item['cmd'],
+                'label'   => $item['label'],
+                'status'  => 'success',
+                'output'  => $output ?: 'Executed successfully with no output.',
+            ];
+        } catch (\Throwable $e) {
+            $results[] = [
+                'command' => $item['cmd'],
+                'label'   => $item['label'],
+                'status'  => 'error',
+                'output'  => $e->getMessage(),
+            ];
+        }
+    }
+
+    $allSuccess = ! collect($results)->contains('status', 'error');
+
+    $html = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+    <title>Database Migration Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; background: #0f172a; color: #e2e8f0; padding: 30px; margin: 0; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #38bdf8; font-size: 22px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .subtitle { color: #64748b; font-size: 13px; margin-bottom: 24px; }
+        .card { background: #1e293b; border-radius: 8px; border: 1px solid #334155; margin-bottom: 20px; overflow: hidden; }
+        .card-header { padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; background: #1e293b; border-bottom: 1px solid #334155; }
+        .card-title { font-weight: bold; font-size: 14px; color: #f1f5f9; }
+        .badge-ok  { background: #14532d; color: #86efac; padding: 3px 12px; border-radius: 99px; font-size: 11px; font-weight: 600; }
+        .badge-err { background: #7f1d1d; color: #fca5a5; padding: 3px 12px; border-radius: 99px; font-size: 11px; font-weight: 600; }
+        pre { margin: 0; padding: 16px; background: #090d16; color: #94a3b8; font-size: 12px; line-height: 1.6; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+        .actions { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn { display: inline-block; padding: 8px 16px; background: #0284c7; color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 12px; font-weight: 500; transition: background 0.2s; }
+        .btn:hover { background: #0369a1; }
+        .btn-secondary { background: #334155; }
+        .btn-secondary:hover { background: #475569; }
+    </style></head><body><div class="container">';
+
+    $statusHeader = $allSuccess ? '⚡ Database Migration Completed' : '⚠️ Migration Encountered Errors';
+    $html .= "<h1>{$statusHeader}</h1>";
+    $html .= '<div class="subtitle">Run at: ' . now()->format('Y-m-d H:i:s') . ' (Server Time)</div>';
+
+    foreach ($results as $r) {
+        $badge = $r['status'] === 'success'
+            ? '<span class="badge-ok">✓ SUCCESS</span>'
+            : '<span class="badge-err">✗ ERROR</span>';
+
+        $html .= '<div class="card">';
+        $html .= "<div class='card-header'><span class='card-title'>{$r['label']} <code style='color:#f59e0b;'>[php artisan {$r['command']}]</code></span>{$badge}</div>";
+        $html .= '<pre>' . htmlspecialchars($r['output']) . '</pre>';
+        $html .= '</div>';
+    }
+
+    $html .= '<div class="actions">
+        <a href="' . url('admin/auth/migration') . '" class="btn">🔄 Re-run Migration</a>
+        <a href="' . url('admin/auth/migration?seed=1') . '" class="btn btn-secondary">🌱 Migrate & Seed (?seed=1)</a>
+        <a href="' . url('admin/optimize') . '" class="btn btn-secondary">🚀 Server Optimize</a>
+        <a href="' . url('/') . '" class="btn btn-secondary">🏠 Back to Homepage</a>
+    </div>';
+
+    $html .= '</div></body></html>';
+
+    return response($html);
+});
 // Route::get('/assign-super-admin', function () {
 //     $user = \App\Models\User::where('email', 'admin@admin.com')->first();
 //     if ($user) {
@@ -209,7 +304,7 @@ Route::middleware('module:teachers')->group(function () {
 });
 
 Route::middleware('module:gallery')->get('/gallery', [GalleryImageController::class, 'index'])->name('gallery.index');
-
+Route::middleware('module:video_gallery')->get('/video-gallery', [\App\Http\Controllers\Frontend\VideoGalleryController::class, 'index'])->name('video-gallery.index');
 Route::middleware('module:events')->group(function () {
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/{event:slug}', [EventController::class, 'show'])->name('events.show');

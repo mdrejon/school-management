@@ -46,30 +46,99 @@ const emptyTranslatable = () => Object.fromEntries(languages.value.map((lang) =>
 /* Live drag-and-drop working tree                                      */
 /* ------------------------------------------------------------------ */
 
-const cloneTree = (nodes) => nodes.map((node) => ({ ...node, children: cloneTree(node.children ?? []) }));
+const cloneTree = (nodes) => (nodes ?? []).map((node) => ({
+    ...node,
+    label: { ...emptyTranslatable(), ...(node.label ?? {}) },
+    children: cloneTree(node.children ?? []),
+}));
 
 const tree = ref(cloneTree(props.items));
 watch(() => props.items, (value) => { tree.value = cloneTree(value); });
 
 const saving = ref(false);
+
 const flatten = (nodes, parentId = null) => {
     const rows = [];
     nodes.forEach((node, index) => {
-        rows.push({ id: node.id, parent_id: parentId, sort_order: index });
+        rows.push({
+            id: node.id,
+            parent_id: parentId,
+            sort_order: index,
+            menu_id: node.menu_id ?? props.menu.id,
+            type: node.type,
+            label: node.label,
+            url: node.url ?? null,
+            route_name: node.route_name ?? null,
+            linkable_type: node.linkable_type ?? null,
+            linkable_id: node.linkable_id ?? null,
+            target: node.target ?? '_self',
+            is_active: node.is_active ?? true,
+            is_new: !!(node.is_new || (typeof node.id === 'string' && node.id.startsWith('new-'))),
+        });
         rows.push(...flatten(node.children ?? [], node.id));
     });
     return rows;
 };
 
-const saveOrder = () => {
+const hasNewItemsInTree = () => {
+    const check = (list) => list.some((item) => (item.is_new || (typeof item.id === 'string' && item.id.startsWith('new-'))) || (item.children && check(item.children)));
+    return check(tree.value);
+};
+
+const removeNodeFromTree = (list, targetId) => {
+    const idx = list.findIndex((item) => item.id === targetId);
+    if (idx !== -1) {
+        list.splice(idx, 1);
+        return true;
+    }
+    for (const item of list) {
+        if (item.children && item.children.length) {
+            if (removeNodeFromTree(item.children, targetId)) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
+const saveOrder = (onSuccess, onError) => {
     saving.value = true;
     router.patch(route('admin.cms.menus.reorder'), { items: flatten(tree.value) }, {
         preserveScroll: true,
+        onSuccess: () => {
+            onSuccess?.();
+        },
+        onError: (errors) => {
+            const message = Object.values(errors)[0] ?? 'Could not save menu items.';
+            toast.add({ severity: 'error', summary: 'Not saved', detail: message, life: 6000 });
+            onError?.();
+        },
         onFinish: () => (saving.value = false),
     });
 };
 
 const saveItem = (node, onSuccess, onError) => {
+    const isNew = node.is_new || (typeof node.id === 'string' && node.id.startsWith('new-'));
+
+    if (isNew || hasNewItemsInTree()) {
+        saving.value = true;
+        router.patch(route('admin.cms.menus.reorder'), { items: flatten(tree.value) }, {
+            preserveScroll: true,
+            onSuccess: () => {
+                onSuccess?.();
+            },
+            onError: (errors) => {
+                const message = Object.values(errors)[0] ?? 'Could not save menu items.';
+                toast.add({ severity: 'error', summary: 'Not saved', detail: message, life: 6000 });
+                onError?.();
+            },
+            onFinish: () => {
+                saving.value = false;
+            },
+        });
+        return;
+    }
+
     router.put(route('admin.cms.menus.items.update', node.id), {
         type: node.type,
         label: node.label,
@@ -81,7 +150,9 @@ const saveItem = (node, onSuccess, onError) => {
         is_active: node.is_active,
     }, {
         preserveScroll: true,
-        onSuccess: () => onSuccess?.(),
+        onSuccess: () => {
+            onSuccess?.();
+        },
         onError: (errors) => {
             const message = Object.values(errors)[0] ?? 'Could not save this menu item — please check the fields and try again.';
             toast.add({ severity: 'error', summary: 'Not saved', detail: message, life: 6000 });
@@ -94,10 +165,26 @@ const deleteItem = (node) => {
     if (! confirm('Remove this menu item? Any children under it will be removed too.')) {
         return;
     }
-    router.delete(route('admin.cms.menus.items.destroy', node.id), { preserveScroll: true });
+    const isNew = node.is_new || (typeof node.id === 'string' && node.id.startsWith('new-'));
+    if (isNew) {
+        removeNodeFromTree(tree.value, node.id);
+        toast.add({ severity: 'info', summary: 'Removed', detail: 'Menu item removed.', life: 3000 });
+        return;
+    }
+    router.delete(route('admin.cms.menus.items.destroy', node.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            // Toast is handled by AdminLayout flash listener
+        },
+    });
 };
 
 const toggleItem = (node) => {
+    const isNew = node.is_new || (typeof node.id === 'string' && node.id.startsWith('new-'));
+    if (isNew) {
+        node.is_active = !node.is_active;
+        return;
+    }
     router.patch(route('admin.cms.menus.items.toggle', node.id), {}, { preserveScroll: true });
 };
 
