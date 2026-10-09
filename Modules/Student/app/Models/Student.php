@@ -21,6 +21,16 @@ class Student extends Model
         'guardian_address',
     ];
 
+    protected $casts = [
+        'first_name' => 'array',
+        'last_name' => 'array',
+        'father_name' => 'array',
+        'mother_name' => 'array',
+        'guardian_name' => 'array',
+        'address' => 'array',
+        'guardian_address' => 'array',
+    ];
+
     protected $fillable = [
         'external_id',
         'user_id',

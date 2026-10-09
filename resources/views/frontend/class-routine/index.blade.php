@@ -68,7 +68,6 @@
                                                 <tr>
                                                     <th>{{ __('Time') }}</th>
                                                     <th>{{ __('Subject') }}</th>
-                                                    <th>{{ __('Teacher') }}</th>
                                                     <th>{{ __('Room') }}</th>
                                                 </tr>
                                             </thead>
@@ -82,7 +81,6 @@
                                                         <td>
                                                             <span class="badge bg-info text-dark">{{ $routine->subject?->name ?? 'N/A' }}</span>
                                                         </td>
-                                                        <td>{{ $routine->teacher?->name ?? 'N/A' }}</td>
                                                         <td class="text-muted">{{ $routine->room ?: '--' }}</td>
                                                     </tr>
                                                 @endforeach

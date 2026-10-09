@@ -18,17 +18,14 @@ class DashboardController extends Controller
         
         $pendingAdmissionsCount = DB::table('students')->where('status', 'pending')->count();
         
-        $recentAdmissions = DB::table('students')
-            ->select('id', 'first_name', 'last_name', 'class_id', 'status', 'created_at')
+        $recentAdmissions = \Modules\Student\Models\Student::with('academicClass')
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get()
             ->map(function ($student) {
-                // Fetch the class name
-                $className = DB::table('academic_classes')->where('id', $student->class_id)->value('name');
                 return [
                     'name' => $student->first_name . ' ' . $student->last_name,
-                    'class' => $className ?? 'N/A',
+                    'class' => $student->academicClass ? $student->academicClass->name : 'N/A',
                     'status' => $student->status ?? 'approved',
                 ];
             });

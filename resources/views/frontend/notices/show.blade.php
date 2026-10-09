@@ -40,7 +40,7 @@
                                         </div>
                                         @if ($notice->pdf_url)
                                             <div class="wexnix_blog-meta-right">
-                                                <a href="{{ $notice->pdf_url }}" target="_blank" class="wexnix_theme-btn"><i class="fas fa-download"></i> {{ __('Download PDF') }}</a>
+                                                <a href="{{ $notice->pdf_url }}" target="_blank" class="wexnix_theme-btn" style="padding: 12px 25px;"><span class="fas fa-download"></span> {{ __('Download PDF') }}</a>
                                             </div>
                                         @endif
                                     </div>

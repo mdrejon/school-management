@@ -70,8 +70,8 @@ const confirmDelete = (id) => {
                     <Column field="roll_no" header="Roll No" sortable style="width: 15%"></Column>
                     <Column header="Name" sortable style="width: 25%">
                         <template #body="{ data }">
-                            {{ typeof data.first_name === 'object' && data.first_name !== null ? (data.first_name?.bn || data.first_name?.en || '') : data.first_name }}
-                            {{ typeof data.last_name === 'object' && data.last_name !== null ? (data.last_name?.bn || data.last_name?.en || '') : data.last_name }}
+                            {{ typeof data.first_name === 'object' && data.first_name !== null ? (data.first_name?.en || data.first_name?.bn || '') : data.first_name }}
+                            {{ typeof data.last_name === 'object' && data.last_name !== null ? (data.last_name?.en || data.last_name?.bn || '') : data.last_name }}
                         </template>
                     </Column>
                     <Column field="class_id" header="Class" sortable style="width: 15%"></Column>

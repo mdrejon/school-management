@@ -23,9 +23,9 @@
             <div class="container">
                 <div class="row justify-content-end mb-4">
                     <div class="col-md-5 col-lg-4">
-                        <form action="{{ route('notices.index') }}" method="GET" class="d-flex">
+                        <form action="{{ route('notices.index') }}" method="GET" class="d-flex align-items-center">
                             <input type="search" name="q" value="{{ $search }}" class="form-control" placeholder="{{ __('Search Notice...') }}">
-                            <button type="submit" class="wexnix_theme-btn ms-2"><span class="fas fa-search"></span>{{ __('Search') }}</button>
+                            <button type="submit" class="wexnix_theme-btn ms-2" style="white-space: nowrap; padding: 12px 25px;"><span class="fas fa-search"></span> {{ __('Search') }}</button>
                         </form>
                     </div>
                 </div>

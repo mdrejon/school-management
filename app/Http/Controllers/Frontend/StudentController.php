@@ -24,7 +24,19 @@ class StudentController extends Controller
         }
 
         if ($request->filled('section_id')) {
-            $query->where('section_id', $request->section_id);
+            $query->whereHas('section', function($q) use ($request) {
+                // If the frontend sends an ID, we could filter by ID, but wait, 
+                // we want to filter by name because the frontend dropdown was sending the wrong ID.
+                // Actually, let's just change it so the frontend dropdown sends the section name in the 'section_id' parameter
+                // OR we can change the parameter to 'section_name'. Let's use the ID passed to get the name and then filter by name!
+                $section = \Modules\Academic\Models\Section::find($request->section_id);
+                if ($section) {
+                    $q->where('name', $section->name);
+                } else {
+                    // Fallback if somehow it's passed as a string
+                    $q->where('name', $request->section_id);
+                }
+            });
         }
 
         if ($request->filled('group')) {
@@ -37,7 +49,7 @@ class StudentController extends Controller
 
         // Fetch options for the filter dropdowns
         $classes = AcademicClass::orderBy('name')->get();
-        $sections = Section::orderBy('name')->get();
+        $sections = Section::select('name')->distinct()->orderBy('name')->get();
         // Since 'group' is a string field on students, we can either hardcode the common groups or get distinct groups
         $groups = Student::select('group')->whereNotNull('group')->distinct()->pluck('group');
 

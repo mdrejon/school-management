@@ -38,7 +38,7 @@
                             <select name="section_id" class="form-select">
                                 <option value="">{{ __('Select One') }}</option>
                                 @foreach($sections as $section)
-                                    <option value="{{ $section->id }}" @selected(request('section_id') == $section->id)>{{ $section->name }}</option>
+                                    <option value="{{ $section->name }}" @selected(request('section_id') == $section->name)>{{ $section->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -82,7 +82,18 @@
                             <tr>
                                 <td>
                                     @php
-                                        $picUrl = 'https://ui-avatars.com/api/?name=' . urlencode($student->first_name . ' ' . $student->last_name) . '&background=random';
+                                        // Robust fallback to handle JSON strings if Eloquent/Spatie hasn't parsed them
+                                        $fName = is_string($student->first_name) && str_starts_with($student->first_name, '{') 
+                                            ? (json_decode($student->first_name, true)[app()->getLocale()] ?? json_decode($student->first_name, true)['en'] ?? '') 
+                                            : $student->first_name;
+                                            
+                                        $lName = is_string($student->last_name) && str_starts_with($student->last_name, '{') 
+                                            ? (json_decode($student->last_name, true)[app()->getLocale()] ?? json_decode($student->last_name, true)['en'] ?? '') 
+                                            : $student->last_name;
+                                            
+                                        $fullName = trim($fName . ' ' . $lName);
+                                            
+                                        $picUrl = 'https://ui-avatars.com/api/?name=' . urlencode($fullName) . '&background=random';
                                         if (!empty($student->picture)) {
                                             if (str_starts_with($student->picture, 'http') || str_starts_with($student->picture, '/')) {
                                                 $picUrl = $student->picture;
@@ -91,9 +102,9 @@
                                             }
                                         }
                                     @endphp
-                                    <img loading="lazy" src="{{ $picUrl }}" alt="{{ $student->first_name }}" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                    <img loading="lazy" src="{{ $picUrl }}" alt="{{ $fullName }}" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
                                 </td>
-                                <td>{{ $student->first_name }} {{ $student->last_name }}</td>
+                                <td>{{ $fullName }}</td>
                                 <td>{{ $student->roll_no }}</td>
                                 <td>{{ $student->academicClass?->name ?? '-' }}</td>
                                 <td>{{ $student->section?->name ?? '-' }}</td>
