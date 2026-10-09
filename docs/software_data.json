@@ -1,0 +1,1143 @@
+{
+  "metadata": {
+    "source_file": "docs/software_data.md",
+    "export_date": "2026-10-09",
+    "school_id": 67,
+    "school_name": "EduEx School & College",
+    "academic_year": 2026,
+    "total_students": 10,
+    "total_notices": 1,
+    "total_results": 10,
+    "system_mappings": {
+      "source_class_id_57": "Class 10 (System Class ID 5)",
+      "source_section_id_48": "Section A (System Section ID 9)",
+      "source_group_id_35_39": "Science (System Group ID 1)",
+      "source_shift_id_47": "Evening (System Shift ID 3)",
+      "source_exam_id_24": "3rd Term 2026 (System GlobalExam ID 5)"
+    }
+  },
+  "notice": {
+    "system_id": 39,
+    "title_en": "Notice of Durga Puja Holiday",
+    "title_bn": "শারদীয় দুর্গাপূজা উপলক্ষে ছুটির নোটিশ",
+    "title_ar": "إشعار عطلة دورجا بوجا",
+    "slug": "notice-of-durga-puja-holiday",
+    "notice_path": "Notice/Notice of Durga Puja Holiday_20261009112952.pdf",
+    "school_id": 67,
+    "makeby": "admin",
+    "makedate": "2026-10-09 11:29:52.000",
+    "published_at": "2026-10-09",
+    "is_active": true,
+    "description_en": "Notice of Durga Puja Holiday 2026. All academic classes and administrative offices will remain closed during the holiday period.",
+    "description_bn": "শারদীয় দুর্গাপূজা ২০২৬ উপলক্ষে বিদ্যালয়ের যাবতীয় শ্রেণি কার্যক্রম ও প্রশাসনিক কার্যক্রম বন্ধ থাকবে।",
+    "description_ar": "إشعار عطلة دورجا بوجا 2026. ستتوقف جميع الفصول الدراسية والمكاتب الإدارية خلال فترة العطلة."
+  },
+  "students": [
+    {
+      "system_id": 7410,
+      "roll_no": 1,
+      "name_en": "Rafsan Hossain",
+      "name_bn": "রাফসান হোসেন",
+      "father_name_en": "Md. Rafiqul Hossain",
+      "father_name_bn": "মোঃ রফিকুল হোসেন",
+      "mother_name_en": "Shahida Parvin",
+      "mother_name_bn": "শাহিদা পারভীন",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 35,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 10, Road 1, Mirpur-10, Dhaka-1216",
+      "contact_no": "01717391237",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Male",
+      "picture": "/STD_Image/Ten-A-1.jpg"
+    },
+    {
+      "system_id": 7428,
+      "roll_no": 3,
+      "name_en": "Tanvir Rahman",
+      "name_bn": "তানভীর রহমান",
+      "father_name_en": "Md. Selim Rahman",
+      "father_name_bn": "মোঃ সেলিম রহমান",
+      "mother_name_en": "Nasima Akter",
+      "mother_name_bn": "নাসিমা আক্তার",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 35,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 16, Road 3, Mohammadpur, Dhaka-1207",
+      "contact_no": "01932173711",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Male",
+      "picture": "/STD_Image/Ten-A-3.jpg"
+    },
+    {
+      "system_id": 7429,
+      "roll_no": 4,
+      "name_en": "Sumaiya Rahman",
+      "name_bn": "সুমাইয়া রহমান",
+      "father_name_en": "Md. Sirajul Rahman",
+      "father_name_bn": "মোঃ সিরাজুল রহমান",
+      "mother_name_en": "Shirin Sultana",
+      "mother_name_bn": "শিরিন সুলতানা",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 39,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 19, Road 4, Chawkbazar, Chattogram-4203",
+      "contact_no": "01639564948",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Female",
+      "picture": "/STD_Image/Ten-A-4.jpg"
+    },
+    {
+      "system_id": 7411,
+      "roll_no": 10,
+      "name_en": "Jannat Khan",
+      "name_bn": "জান্নাত খান",
+      "father_name_en": "Md. Kamal Khan",
+      "father_name_bn": "মোঃ কামাল খান",
+      "mother_name_en": "Kamrun Nahar",
+      "mother_name_bn": "কামরুন নাহার",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 39,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 37, Road 10, Mymensingh Sadar, Mymensingh-2200",
+      "contact_no": "01583912370",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Female",
+      "picture": "/STD_Image/Ten-A-10.jpg"
+    },
+    {
+      "system_id": 7412,
+      "roll_no": 11,
+      "name_en": "Fahim Chowdhury",
+      "name_bn": "ফাহিম চৌধুরী",
+      "father_name_en": "Md. Delwar Chowdhury",
+      "father_name_bn": "মোঃ দেলোয়ার চৌধুরী",
+      "mother_name_en": "Fatema Khatun",
+      "mother_name_bn": "ফাতেমা খাতুন",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 35,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 40, Road 11, Savar, Dhaka-1340",
+      "contact_no": "01791303607",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Male",
+      "picture": "/STD_Image/Ten-A-11.jpg"
+    },
+    {
+      "system_id": 7413,
+      "roll_no": 12,
+      "name_en": "Farzana Chowdhury",
+      "name_bn": "ফারজানা চৌধুরী",
+      "father_name_en": "Abdul Karim Chowdhury",
+      "father_name_bn": "আব্দুল করিম চৌধুরী",
+      "mother_name_en": "Rina Akter",
+      "mother_name_bn": "রিনা আক্তার",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 39,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 43, Road 12, Narayanganj Sadar, Narayanganj-1400",
+      "contact_no": "01898694844",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Female",
+      "picture": "/STD_Image/Ten-A-12.jpg"
+    },
+    {
+      "system_id": 7414,
+      "roll_no": 13,
+      "name_en": "Nayeem Sarker",
+      "name_bn": "নাঈম সরকার",
+      "father_name_en": "Abdur Rahim Sarker",
+      "father_name_bn": "আব্দুর রহিম সরকার",
+      "mother_name_en": "Monowara Begum",
+      "mother_name_bn": "মনোয়ারা বেগম",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 35,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 46, Road 13, Mirpur-10, Dhaka-1216",
+      "contact_no": "01916086082",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Male",
+      "picture": "/STD_Image/Ten-A-13.jpg"
+    },
+    {
+      "system_id": 7415,
+      "roll_no": 14,
+      "name_en": "Maliha Sarker",
+      "name_bn": "মালিহা সরকার",
+      "father_name_en": "Md. Habib Sarker",
+      "father_name_bn": "মোঃ হাবিব সরকার",
+      "mother_name_en": "Morzina Begum",
+      "mother_name_bn": "মর্জিনা বেগম",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 39,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 49, Road 14, Uttara Sector-7, Dhaka-1230",
+      "contact_no": "01623477319",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Female",
+      "picture": "/STD_Image/Ten-A-14.jpg"
+    },
+    {
+      "system_id": 7416,
+      "roll_no": 15,
+      "name_en": "Rakib Mia",
+      "name_bn": "রাকিব মিয়া",
+      "father_name_en": "Md. Monir Mia",
+      "father_name_bn": "মোঃ মনির মিয়া",
+      "mother_name_en": "Taslima Akter",
+      "mother_name_bn": "তাসলিমা আক্তার",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 35,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 52, Road 15, Mohammadpur, Dhaka-1207",
+      "contact_no": "01530868556",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Male",
+      "picture": "/STD_Image/Ten-A-15.jpg"
+    },
+    {
+      "system_id": 7417,
+      "roll_no": 16,
+      "name_en": "Ritu Mia",
+      "name_bn": "ঋতু মিয়া",
+      "father_name_en": "Md. Rafiqul Mia",
+      "father_name_bn": "মোঃ রফিকুল মিয়া",
+      "mother_name_en": "Shahida Parvin",
+      "mother_name_bn": "শাহিদা পারভীন",
+      "class_id_source": 57,
+      "class_name": "Class 10",
+      "group_id_source": 39,
+      "group_name": "Science",
+      "section_id_source": 48,
+      "section": "A",
+      "year": 2026,
+      "address": "House 55, Road 16, Chawkbazar, Chattogram-4203",
+      "contact_no": "01738259793",
+      "shift_id_source": 47,
+      "shift_name": "Evening",
+      "gender": "Female",
+      "picture": "/STD_Image/Ten-A-16.jpg"
+    }
+  ],
+  "subject_mapping": {
+    "579": {
+      "code": "101",
+      "name": "Bangla",
+      "full_marks": 100,
+      "has_lab": false
+    },
+    "580": {
+      "code": "107",
+      "name": "English",
+      "full_marks": 100,
+      "has_lab": false
+    },
+    "581": {
+      "code": "109",
+      "name": "General Math",
+      "full_marks": 100,
+      "has_lab": false
+    },
+    "582": {
+      "code": "136",
+      "name": "Physics",
+      "full_marks": 100,
+      "has_lab": true
+    },
+    "583": {
+      "code": "154",
+      "name": "Information and Communication Technology",
+      "full_marks": 100,
+      "has_lab": false
+    }
+  },
+  "exam_results": [
+    {
+      "student_system_id": 7410,
+      "student_name": "Rafsan Hossain",
+      "roll_no": 1,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 420,
+      "gpa": 5.0,
+      "grade": "A+",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 55,
+          "mcq": 27,
+          "lab": 0,
+          "total": 82,
+          "grade": "A+",
+          "point": 5.0
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 58,
+          "mcq": 25,
+          "lab": 0,
+          "total": 83,
+          "grade": "A+",
+          "point": 5.0
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 59,
+          "mcq": 28,
+          "lab": 0,
+          "total": 87,
+          "grade": "A+",
+          "point": 5.0
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 42,
+          "mcq": 22,
+          "lab": 22,
+          "total": 86,
+          "grade": "A+",
+          "point": 5.0
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 54,
+          "mcq": 28,
+          "lab": 0,
+          "total": 82,
+          "grade": "A+",
+          "point": 5.0
+        }
+      ]
+    },
+    {
+      "student_system_id": 7428,
+      "student_name": "Tanvir Rahman",
+      "roll_no": 3,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 380,
+      "gpa": 4.2,
+      "grade": "A",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 52,
+          "mcq": 24,
+          "lab": 0,
+          "total": 76,
+          "grade": "A",
+          "point": 4.0
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 50,
+          "mcq": 22,
+          "lab": 0,
+          "total": 72,
+          "grade": "A",
+          "point": 4.0
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 56,
+          "mcq": 26,
+          "lab": 0,
+          "total": 82,
+          "grade": "A+",
+          "point": 5.0
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 38,
+          "mcq": 20,
+          "lab": 20,
+          "total": 78,
+          "grade": "A",
+          "point": 4.0
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 48,
+          "mcq": 24,
+          "lab": 0,
+          "total": 72,
+          "grade": "A",
+          "point": 4.0
+        }
+      ]
+    },
+    {
+      "student_system_id": 7429,
+      "student_name": "Sumaiya Rahman",
+      "roll_no": 4,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 369,
+      "gpa": 4.0,
+      "grade": "A",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 50,
+          "mcq": 23,
+          "lab": 0,
+          "total": 73,
+          "grade": "A",
+          "point": 4.0
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 51,
+          "mcq": 23,
+          "lab": 0,
+          "total": 74,
+          "grade": "A",
+          "point": 4.0
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 52,
+          "mcq": 24,
+          "lab": 0,
+          "total": 76,
+          "grade": "A",
+          "point": 4.0
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 36,
+          "mcq": 19,
+          "lab": 19,
+          "total": 74,
+          "grade": "A",
+          "point": 4.0
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 50,
+          "mcq": 22,
+          "lab": 0,
+          "total": 72,
+          "grade": "A",
+          "point": 4.0
+        }
+      ]
+    },
+    {
+      "student_system_id": 7411,
+      "student_name": "Jannat Khan",
+      "roll_no": 10,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 299,
+      "gpa": 3.2,
+      "grade": "B",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 44,
+          "mcq": 21,
+          "lab": 0,
+          "total": 65,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 38,
+          "mcq": 17,
+          "lab": 0,
+          "total": 55,
+          "grade": "B",
+          "point": 3.0
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 38,
+          "mcq": 16,
+          "lab": 0,
+          "total": 54,
+          "grade": "B",
+          "point": 3.0
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 35,
+          "mcq": 18,
+          "lab": 16,
+          "total": 69,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 39,
+          "mcq": 17,
+          "lab": 0,
+          "total": 56,
+          "grade": "B",
+          "point": 3.0
+        }
+      ]
+    },
+    {
+      "student_system_id": 7412,
+      "student_name": "Fahim Chowdhury",
+      "roll_no": 11,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 322,
+      "gpa": 3.4,
+      "grade": "B",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 45,
+          "mcq": 20,
+          "lab": 0,
+          "total": 65,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 44,
+          "mcq": 18,
+          "lab": 0,
+          "total": 62,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 47,
+          "mcq": 21,
+          "lab": 0,
+          "total": 68,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 34,
+          "mcq": 17,
+          "lab": 17,
+          "total": 68,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 41,
+          "mcq": 18,
+          "lab": 0,
+          "total": 59,
+          "grade": "B",
+          "point": 3.0
+        }
+      ]
+    },
+    {
+      "student_system_id": 7413,
+      "student_name": "Farzana Chowdhury",
+      "roll_no": 12,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 333,
+      "gpa": 3.7,
+      "grade": "A-",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 46,
+          "mcq": 21,
+          "lab": 0,
+          "total": 67,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 45,
+          "mcq": 19,
+          "lab": 0,
+          "total": 64,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 48,
+          "mcq": 22,
+          "lab": 0,
+          "total": 70,
+          "grade": "A",
+          "point": 4.0
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 35,
+          "mcq": 18,
+          "lab": 18,
+          "total": 71,
+          "grade": "A",
+          "point": 4.0
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 42,
+          "mcq": 19,
+          "lab": 0,
+          "total": 61,
+          "grade": "A-",
+          "point": 3.5
+        }
+      ]
+    },
+    {
+      "student_system_id": 7414,
+      "student_name": "Nayeem Sarker",
+      "roll_no": 13,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 300,
+      "gpa": 3.3,
+      "grade": "B",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 42,
+          "mcq": 19,
+          "lab": 0,
+          "total": 61,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 40,
+          "mcq": 18,
+          "lab": 0,
+          "total": 58,
+          "grade": "B",
+          "point": 3.0
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 43,
+          "mcq": 19,
+          "lab": 0,
+          "total": 62,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 32,
+          "mcq": 16,
+          "lab": 16,
+          "total": 64,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 38,
+          "mcq": 17,
+          "lab": 0,
+          "total": 55,
+          "grade": "B",
+          "point": 3.0
+        }
+      ]
+    },
+    {
+      "student_system_id": 7415,
+      "student_name": "Maliha Sarker",
+      "roll_no": 14,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 317,
+      "gpa": 3.4,
+      "grade": "B",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 45,
+          "mcq": 20,
+          "lab": 0,
+          "total": 65,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 42,
+          "mcq": 18,
+          "lab": 0,
+          "total": 60,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 45,
+          "mcq": 21,
+          "lab": 0,
+          "total": 66,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 34,
+          "mcq": 17,
+          "lab": 17,
+          "total": 68,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 40,
+          "mcq": 18,
+          "lab": 0,
+          "total": 58,
+          "grade": "B",
+          "point": 3.0
+        }
+      ]
+    },
+    {
+      "student_system_id": 7416,
+      "student_name": "Rakib Mia",
+      "roll_no": 15,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 288,
+      "gpa": 3.2,
+      "grade": "B",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 40,
+          "mcq": 18,
+          "lab": 0,
+          "total": 58,
+          "grade": "B",
+          "point": 3.0
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 38,
+          "mcq": 16,
+          "lab": 0,
+          "total": 54,
+          "grade": "B",
+          "point": 3.0
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 42,
+          "mcq": 18,
+          "lab": 0,
+          "total": 60,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 31,
+          "mcq": 16,
+          "lab": 16,
+          "total": 63,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 37,
+          "mcq": 16,
+          "lab": 0,
+          "total": 53,
+          "grade": "B",
+          "point": 3.0
+        }
+      ]
+    },
+    {
+      "student_system_id": 7417,
+      "student_name": "Ritu Mia",
+      "roll_no": 16,
+      "exam_name": "3rd Term",
+      "academic_year": "2026",
+      "total_marks": 500,
+      "obtained_marks": 296,
+      "gpa": 3.2,
+      "grade": "B",
+      "status": "PASSED",
+      "subjects": [
+        {
+          "subject_id_source": 579,
+          "code": "101",
+          "name": "Bangla",
+          "written": 41,
+          "mcq": 18,
+          "lab": 0,
+          "total": 59,
+          "grade": "B",
+          "point": 3.0
+        },
+        {
+          "subject_id_source": 580,
+          "code": "107",
+          "name": "English",
+          "written": 39,
+          "mcq": 17,
+          "lab": 0,
+          "total": 56,
+          "grade": "B",
+          "point": 3.0
+        },
+        {
+          "subject_id_source": 581,
+          "code": "109",
+          "name": "General Math",
+          "written": 43,
+          "mcq": 19,
+          "lab": 0,
+          "total": 62,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 582,
+          "code": "136",
+          "name": "Physics",
+          "written": 32,
+          "mcq": 16,
+          "lab": 16,
+          "total": 64,
+          "grade": "A-",
+          "point": 3.5
+        },
+        {
+          "subject_id_source": 583,
+          "code": "154",
+          "name": "Information and Communication Technology",
+          "written": 38,
+          "mcq": 17,
+          "lab": 0,
+          "total": 55,
+          "grade": "B",
+          "point": 3.0
+        }
+      ]
+    }
+  ],
+  "class_routine": [
+    {
+      "day": "Sunday",
+      "time": "09:00 AM - 09:45 AM",
+      "subject": "Bangla",
+      "room": "Room 201"
+    },
+    {
+      "day": "Sunday",
+      "time": "10:00 AM - 10:45 AM",
+      "subject": "English",
+      "room": "Room 201"
+    },
+    {
+      "day": "Sunday",
+      "time": "11:00 AM - 11:45 AM",
+      "subject": "General Math",
+      "room": "Room 201"
+    },
+    {
+      "day": "Sunday",
+      "time": "12:00 PM - 12:45 PM",
+      "subject": "Physics",
+      "room": "Science Lab 1"
+    },
+    {
+      "day": "Sunday",
+      "time": "01:30 PM - 02:15 PM",
+      "subject": "Information and Communication Technology",
+      "room": "Computer Lab"
+    },
+    {
+      "day": "Monday",
+      "time": "09:00 AM - 09:45 AM",
+      "subject": "English",
+      "room": "Room 201"
+    },
+    {
+      "day": "Monday",
+      "time": "10:00 AM - 10:45 AM",
+      "subject": "General Math",
+      "room": "Room 201"
+    },
+    {
+      "day": "Monday",
+      "time": "11:00 AM - 11:45 AM",
+      "subject": "Bangla",
+      "room": "Room 201"
+    },
+    {
+      "day": "Monday",
+      "time": "12:00 PM - 12:45 PM",
+      "subject": "Physics",
+      "room": "Science Lab 1"
+    },
+    {
+      "day": "Monday",
+      "time": "01:30 PM - 02:15 PM",
+      "subject": "Information and Communication Technology",
+      "room": "Computer Lab"
+    },
+    {
+      "day": "Tuesday",
+      "time": "09:00 AM - 09:45 AM",
+      "subject": "Bangla",
+      "room": "Room 201"
+    },
+    {
+      "day": "Tuesday",
+      "time": "10:00 AM - 10:45 AM",
+      "subject": "Physics",
+      "room": "Science Lab 1"
+    },
+    {
+      "day": "Tuesday",
+      "time": "11:00 AM - 11:45 AM",
+      "subject": "English",
+      "room": "Room 201"
+    },
+    {
+      "day": "Tuesday",
+      "time": "12:00 PM - 12:45 PM",
+      "subject": "General Math",
+      "room": "Room 201"
+    },
+    {
+      "day": "Tuesday",
+      "time": "01:30 PM - 02:15 PM",
+      "subject": "Information and Communication Technology",
+      "room": "Computer Lab"
+    },
+    {
+      "day": "Wednesday",
+      "time": "09:00 AM - 09:45 AM",
+      "subject": "General Math",
+      "room": "Room 201"
+    },
+    {
+      "day": "Wednesday",
+      "time": "10:00 AM - 10:45 AM",
+      "subject": "Bangla",
+      "room": "Room 201"
+    },
+    {
+      "day": "Wednesday",
+      "time": "11:00 AM - 11:45 AM",
+      "subject": "Physics",
+      "room": "Science Lab 1"
+    },
+    {
+      "day": "Wednesday",
+      "time": "12:00 PM - 12:45 PM",
+      "subject": "English",
+      "room": "Room 201"
+    },
+    {
+      "day": "Wednesday",
+      "time": "01:30 PM - 02:15 PM",
+      "subject": "Information and Communication Technology",
+      "room": "Computer Lab"
+    },
+    {
+      "day": "Thursday",
+      "time": "09:00 AM - 09:45 AM",
+      "subject": "Physics",
+      "room": "Science Lab 1"
+    },
+    {
+      "day": "Thursday",
+      "time": "10:00 AM - 10:45 AM",
+      "subject": "Information and Communication Technology",
+      "room": "Computer Lab"
+    },
+    {
+      "day": "Thursday",
+      "time": "11:00 AM - 11:45 AM",
+      "subject": "English",
+      "room": "Room 201"
+    },
+    {
+      "day": "Thursday",
+      "time": "12:00 PM - 12:45 PM",
+      "subject": "Bangla",
+      "room": "Room 201"
+    },
+    {
+      "day": "Thursday",
+      "time": "01:30 PM - 02:15 PM",
+      "subject": "General Math",
+      "room": "Room 201"
+    }
+  ]
+}

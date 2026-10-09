@@ -8914,7 +8914,7 @@ html, body {
   .wexnix_marquee-track span,
   .wexnix_marquee-track span a {
     font-size: 17px !important;
-    padding: 0 36px !important;
+    /* padding: 0 36px !important; */
   }
 
   .wexnix_hero-single {
@@ -9063,7 +9063,7 @@ html, body {
   .wexnix_marquee-track span,
   .wexnix_marquee-track span a {
     font-size: 18px !important;
-    padding: 0 40px !important;
+    /* padding: 0 40px !important; */
   }
 
   .wexnix_hero-single {

@@ -5,7 +5,7 @@
 @section('meta_keywords', $settings->academic_result_page_seo_keywords)
 
 @section('content')
-
+    <main class="wexnix_main">
     <!-- breadcrumb -->
     <div class="wexnix_site-breadcrumb" @if($settings->academic_result_page_breadcrumb_image_url) style="background: url('{{ $settings->academic_result_page_breadcrumb_image_url }}')" @else style="background: url('{{ asset('frontend/assets/img/breadcrumb/01.jpg') }}')" @endif>
         <div class="container">
@@ -64,5 +64,5 @@
         </div>
     </div>
     <!-- academic result search end -->
-
+    </main>
 @endsection

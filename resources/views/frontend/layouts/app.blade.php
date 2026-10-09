@@ -630,8 +630,8 @@
                         <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}" fetchpriority="high" loading="eager">
                         <div class="header-brand-text d-flex flex-column text-start ms-2">
                             <h2 class="mb-1 wexnix_site-title" style="font-weight: 800; line-height: 1.1; letter-spacing: -0.5px;">
-                                <span style="color: var(--theme-color);">Edu</span><span style="color: var(--theme-color2);">Ex</span>
-                                <span style="color: var(--theme-color);">School &amp; College</span>
+                                <!-- <span style="color: var(--theme-color);">Edu</span><span style="color: var(--theme-color2);">Ex</span> -->
+                                <span style="color: var(--theme-color);">Maruwf Model Primary & High School</span>
                             </h2>
                             <p class="mb-0 wexnix_site-title-tagline " style="font-weight: 600; color: #555; letter-spacing: 0.5px;">
                                 {{ __('Committed to Academic Excellence & Innovation') }}
@@ -647,7 +647,7 @@
                         </div>
                         <div class="d-flex align-items-center mobile-apply-lang-wrap justify-content-end" style="gap: 10px;">
                             <a href="application-form.html" class="wexnix_theme-btn" style="text-align: center; white-space: nowrap;"><span
-                                    class="fas fa-pencil"></span>{{ __('Apply Now') }}</a>
+                                    class="fas fa-edit"></span> {{ __('Apply Now') }}</a>
                             <div class="mobile-lang-switcher d-flex d-lg-none" style="gap: 5px;">
                                 @foreach ($languages as $lang)
                                 <a href="{{ route('language.switch', $lang->code) }}" class="{{ app()->getLocale() === $lang->code ? 'active-lang' : '' }}" style="padding: 8px 12px; border-radius: 4px; font-size: 13px; font-weight: 600; text-decoration: none; {{ app()->getLocale() === $lang->code ? 'background: var(--theme-color); color: #fff;' : 'background: #f1f1f1; color: #333;' }}">{{ strtoupper($lang->code) }}</a>

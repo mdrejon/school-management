@@ -5,20 +5,20 @@
 @section('meta_keywords', $settings->student_list_page_seo_keywords)
 
 @section('content')
-
-    <!-- breadcrumb -->
-    <div class="wexnix_site-breadcrumb" @if($settings->student_list_page_breadcrumb_image_url) style="background: url('{{ $settings->student_list_page_breadcrumb_image_url }}')" @endif>
-        <div class="container">
-            <h2 class="wexnix_breadcrumb-title">{{ $settings->student_list_page_breadcrumb_title ?? 'Student List' }}</h2>
-            <ul class="wexnix_breadcrumb-menu">
-                <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
-                <li class="active">{{ $settings->student_list_page_breadcrumb_title ?? 'Student List' }}</li>
-            </ul>
+    <main class="wexnix_main">
+        <!-- breadcrumb -->
+        <div class="wexnix_site-breadcrumb" style="background: url('{{ $settings->student_list_page_breadcrumb_image_url ?? asset('frontend/assets/img/breadcrumb/01.jpg') }}')">
+            <div class="container">
+                <h2 class="wexnix_breadcrumb-title">{{ $settings->student_list_page_breadcrumb_title ?? 'Student List' }}</h2>
+                <ul class="wexnix_breadcrumb-menu">
+                    <li><a href="{{ route('home') }}">{{ __('Home') }}</a></li>
+                    <li class="active">{{ $settings->student_list_page_breadcrumb_title ?? 'Student List' }}</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <!-- breadcrumb end -->
+        <!-- breadcrumb end -->
 
-    <!-- student list search -->
+        <!-- student list search -->
     <div class="pt-80 pb-80">
         <div class="container">
             <div class="wexnix_search-filter-box bg-light p-4 mb-5">
@@ -81,7 +81,17 @@
                         @forelse($students as $student)
                             <tr>
                                 <td>
-                                    <img loading="lazy" src="{{ $student->picture ? '/storage/' . ltrim($student->picture, '/') : asset('frontend/assets/img/default-user.jpg') }}" alt="{{ $student->first_name }}" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                                    @php
+                                        $picUrl = 'https://ui-avatars.com/api/?name=' . urlencode($student->first_name . ' ' . $student->last_name) . '&background=random';
+                                        if (!empty($student->picture)) {
+                                            if (str_starts_with($student->picture, 'http') || str_starts_with($student->picture, '/')) {
+                                                $picUrl = $student->picture;
+                                            } else {
+                                                $picUrl = '/storage/' . ltrim($student->picture, '/');
+                                            }
+                                        }
+                                    @endphp
+                                    <img loading="lazy" src="{{ $picUrl }}" alt="{{ $student->first_name }}" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
                                 </td>
                                 <td>{{ $student->first_name }} {{ $student->last_name }}</td>
                                 <td>{{ $student->roll_no }}</td>
@@ -105,5 +115,5 @@
         </div>
     </div>
     <!-- student list search end -->
-
+    </main>
 @endsection

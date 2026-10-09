@@ -183,6 +183,15 @@ const submit = () => {
                                 <InputText id="religion" v-model="form.religion" placeholder="e.g. Islam, Hinduism" />
                             </div>
 
+                            <div class="flex flex-col gap-2">
+                                <label for="picture">Profile Picture</label>
+                                <input id="picture" type="file" @input="e => form.picture = e.target.files[0]" class="p-inputtext p-component p-2" accept="image/*" />
+                                <small class="text-red-500" v-if="form.errors.picture">{{ form.errors.picture }}</small>
+                                <div v-if="props.student.picture" class="mt-2">
+                                    <img :src="props.student.picture.startsWith('http') || props.student.picture.startsWith('/') ? props.student.picture : '/storage/' + props.student.picture" alt="Current Picture" class="w-16 h-16 object-cover rounded-full" />
+                                </div>
+                            </div>
+
                             <div class="flex flex-col gap-2 sm:col-span-2">
                                 <label for="address">Address ({{ currentLang?.native_name }})</label>
                                 <Textarea 

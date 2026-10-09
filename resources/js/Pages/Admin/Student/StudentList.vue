@@ -61,6 +61,12 @@ const confirmDelete = (id) => {
                         </div>
                     </template>
                     
+                    <Column header="Photo" style="width: 10%">
+                        <template #body="{ data }">
+                            <img v-if="data.picture" :src="data.picture.startsWith('http') || data.picture.startsWith('/') ? data.picture : '/storage/' + data.picture" class="w-10 h-10 object-cover rounded-full" />
+                            <img v-else :src="'https://ui-avatars.com/api/?name=' + encodeURIComponent((typeof data.first_name === 'object' ? data.first_name?.en || data.first_name?.bn : data.first_name) + ' ' + (typeof data.last_name === 'object' ? data.last_name?.en || data.last_name?.bn : data.last_name)) + '&background=random'" class="w-10 h-10 rounded-full" />
+                        </template>
+                    </Column>
                     <Column field="roll_no" header="Roll No" sortable style="width: 15%"></Column>
                     <Column header="Name" sortable style="width: 25%">
                         <template #body="{ data }">
