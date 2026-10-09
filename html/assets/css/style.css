@@ -974,8 +974,8 @@ label {
 
 .navbar {
   background: var(--color-white);
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   z-index: 999;
 }
 
@@ -6244,436 +6244,1175 @@ label {
 
 }
 
-@media all and (max-width: 767px) {
-  .wexnix_footer-widget-wrapper {
-    padding-bottom: 0px;
-  }
-
-  .wexnix_footer-social {
-    justify-content: flex-start;
-    margin-top: 20px;
-  }
-
-  .wexnix_copyright::before{
-    width: 40%;
-  }
-}
-
-
-
-/*====================
-71. Home 2
-======================*/
-
-.wexnix_home-2 .wexnix_header{
-  background: var(--theme-color);
-}
-
-.wexnix_home-2 .wexnix_header-top{
-  padding: 12px 0 13px 0;
-}
-
-.wexnix_home-2 .wexnix_header-top::before{
-  display: none;
-}
-
-.wexnix_home-2 .wexnix_header-top::after{
-  display: none;
-}
-
-.wexnix_home-2 .wexnix_header-top-contact ul li{
-  border-color: rgba(255, 255, 255, 0.5);
-}
-
-.wexnix_home-2 .wexnix_header-top-social a{
-  background: var(--color-white);
-  color: var(--theme-color2);
-}
-
-.wexnix_home-2 .wexnix_header-top-social a:hover{
-  background: var(--theme-color);
-  color: var(--color-white);
-}
-
-.wexnix_home-2 .wexnix_hero-single{
-  padding-top: 200px;
-  padding-bottom: 180px;
-}
-
-.wexnix_home-2 .wexnix_hero-single::before{
-  background: rgba(0, 0, 0, .65);
-}
-
-.wexnix_home-2 .wexnix_hero-single .wexnix_hero-title span{
-  -webkit-text-stroke: 2px var(--theme-color2);
-  -webkit-text-fill-color: transparent;
-}
-
-
-@media all and (min-width: 1199px) {
-  .wexnix_home-2 .navbar{
-    background: transparent;
-    padding-right: 25px;
-  }
-  
-  .wexnix_home-2 .navbar.fixed-top{
-    padding-right: 0;
-  }
-  
-  .wexnix_home-2 .navbar::before{
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 11%;
-    background: var(--color-white);
-    height: 100%;
-    border-radius: 0 10px 10px 0;
-  }
-  
-  .wexnix_home-2 .wexnix_main{
-    margin-top: -3rem;
-  }
-  
-}
-
-@media all and (min-width: 992px) {
-  .wexnix_home-2 .navbar .dropdown-menu{
-    border-top: none;
-    border-radius: 20px;
-    background: var(--color-white);
-  }
-  
-  .wexnix_home-2 .navbar .dropdown-menu .dropdown-item{
-    color: var(--color-dark);
-    border-bottom: 1px dashed var(--border-info-color);
-  }
-  
-  .wexnix_home-2 .navbar .dropdown-menu li:last-child .dropdown-item{
-    border-bottom: none;
-  }
-  
-  .wexnix_home-2 .wexnix_menu-about p{
-    color: var(--color-dark);
-  }
-}
-
-@media (max-width: 991px) {
-  .navbar .dropdown-menu {
-      border-radius: 20px;
-  }
-}
-
-
-
-
-/*====================
-72. Home 3
-======================*/
-
-.wexnix_home-3 .wexnix_theme-btn{
-  border-radius: 50px;
-}
-
-.wexnix_home-3 .wexnix_header-top{
-  padding: 12px 0 14px 0;
-  background: var(--theme-color);
-}
-
-.wexnix_home-3 .wexnix_header-top::before,
-.wexnix_home-3 .wexnix_header-top::after{
-  display: none;
-}
-
-.wexnix_home-3 .wexnix_header-top-news{
-  color: var(--color-white);
-  text-transform: capitalize;
-}
-
-.wexnix_home-3 .wexnix_header-top-menu a{
-  color: var(--color-white);
-  margin-right: 6px;
-  padding-right: 8px;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.wexnix_home-3 .wexnix_header-top-menu a:last-child{
-  border-right: none;
-  margin-right: 0;
-  padding-right: 0;
-}
-
-.wexnix_home-3 .wexnix_header-top-menu a:hover{
-  color: var(--theme-color);
-}
-
-.wexnix_home-3 .wexnix_hero-single{
-  padding-bottom: 150px;
-}
-
-.wexnix_home-3 .wexnix_hero-single::before{
-  background: rgba(0, 0, 0, .6);
-  opacity: unset;
-}
-
-.wexnix_home-3 .wexnix_hero-single .wexnix_hero-title span{
-  -webkit-text-stroke: 2px var(--theme-color2);
-  -webkit-text-fill-color: transparent;
-}
-
-.wexnix_home-3 .wexnix_counter-box .wexnix_icon{
-  border-radius: 30px 30px 30px 0;
-}
-
-.wexnix_home-3 .wexnix_counter-box .wexnix_icon::before{
-  border-radius: 30px 30px 30px 0;
-}
-
-.wexnix_home-3 .wexnix_footer-area{
-  position: relative;
-  background-image: url(../img/footer/01.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  z-index: 1;
-}
-
-.wexnix_home-3 .wexnix_footer-area::before{
-  content: "";
-  position: absolute;
-  background: var(--footer-bg);
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  opacity: .95;
-}
-
-
-/*====================
-73. Header Middle & Notice Marquee
-======================*/
-
-.wexnix_header-middle{
-  background: var(--color-white);
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border-info-color);
-}
-
-.wexnix_header-middle-wrap{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.wexnix_header-middle .navbar-brand img{
-  height: 60px;
-  width: auto;
-}
-
-.wexnix_header-middle-right{
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.wexnix_header-search-form{
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--border-info-color);
-  border-radius: 50px;
-  overflow: hidden;
-}
-
-.wexnix_header-search-form input{
-  border: none;
-  outline: none;
-  padding: 7px 18px;
-  min-width: 200px;
-  font-size: 14px;
-}
-
-.wexnix_header-search-form button{
-  border: none;
-  background: var(--theme-color);
-  color: var(--color-white);
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  cursor: pointer;
-  flex: 0 0 auto;
-}
-
-.wexnix_header-middle-right .wexnix_theme-btn{
-  padding: 9px 18px;
-  font-size: 13px;
-}
-
-.wexnix_main-navigation{
-  background: var(--theme-color);
-}
-
-.wexnix_main-navigation .navbar{
-  background: transparent;
-}
-
-.wexnix_main-navigation .navbar.fixed-top{
-  background: var(--theme-color) !important;
-}
-
-.wexnix_main-navigation .navbar .nav-item .nav-link{
-  color: var(--color-white);
-}
-
-.wexnix_main-navigation .navbar .nav-item .nav-link.active,
-.wexnix_main-navigation .navbar .nav-item:hover .nav-link{
-  color: var(--theme-color2);
-}
-
-.wexnix_main-navigation .navbar .navbar-toggler .wexnix_navbar-toggler-mobile-icon{
-  color: var(--color-white);
-}
-
-.wexnix_main-navigation .navbar #main_nav{
-  justify-content: flex-start;
-}
-
-@media all and (min-width: 992px) {
-  .wexnix_main-navigation .navbar .nav-item .nav-link{
-    padding-top: 11px;
-    padding-bottom: 11px;
-  }
-}
-
-.wexnix_notice-marquee{
-  background: var(--color-white);
-  border-bottom: 1px solid var(--border-info-color);
-  padding: 6px 0;
-}
-
-.wexnix_notice-marquee-wrap{
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.wexnix_notice-label{
-  flex: 0 0 auto;
-  background: var(--theme-color2);
-  color: var(--color-white);
-  font-weight: 600;
-  padding: 4px 14px;
-  border-radius: 50px;
-  font-size: 12px;
-  text-transform: uppercase;
-}
-
-.wexnix_marquee-viewport{
-  flex: 1 1 auto;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.wexnix_marquee-track{
-  display: inline-flex;
-  animation: marquee-scroll 25s linear infinite;
-}
-
-.wexnix_marquee-track span{
-  padding: 0 40px;
-  position: relative;
-  color: var(--color-dark);
-  font-size: 15px;
-  white-space: nowrap;
-}
-
-.wexnix_marquee-track span::before{
-  content: "\f111";
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  font-size: 6px;
-  color: var(--theme-color2);
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
-@keyframes marquee-scroll{
-  0%{ transform: translateX(0); }
-  100%{ transform: translateX(-50%); }
-}
-
-@media (max-width: 767px) {
-  .wexnix_header-search-form input{
-    min-width: 140px;
-  }
-}
-
-@media all and (max-width: 991px) {
-  .wexnix_main-navigation .navbar{
-    position: static;
-  }
-
-  .wexnix_main-navigation .navbar-toggler{
-    display: block;
-    margin-left: auto;
-  }
-
-  .wexnix_main-navigation .wexnix_navbar-toggler-mobile-icon{
-    color: var(--color-white);
-  }
-
-  .wexnix_main-navigation .navbar .nav-item .nav-link{
-    color: var(--color-dark);
-  }
-}
-
-/* search / result filter box */
-.wexnix_search-filter-box{
-  border-radius: 6px;
-}
-
-.wexnix_filter-label{
-  display: block;
-  font-size: 13px;
-  text-transform: uppercase;
-  color: #6b7280;
-  margin-bottom: 8px;
-  letter-spacing: .5px;
-}
-
-.wexnix_theme-btn.w-100{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.wexnix_notice-table thead th{
-  background: var(--theme-color);
-  color: var(--color-white);
-  text-transform: uppercase;
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-.wexnix_notice-table tbody tr:hover{
-  background: var(--theme-color-light);
-}
-
-
-
-.header-brand-text h2 {
-    font-size: 35px !important;
-}
-
+/* ==========================================================================
+   Comprehensive 7-Tier Responsive System
+   ========================================================================== */
 
 /* ==========================================================================
-   74. Large Screen Responsive Rules (min-width: 1920px up to unlimited)
+   Tier 1: Mobile Devices (320px – 575px)
+   ========================================================================== */
+@media (max-width: 575.98px) {
+  /* Containers & Global Gutters */
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* Vertical Section Padding Cadence */
+  .py-80,
+  .pt-80.pb-80 {
+    padding-top: 38px !important;
+    padding-bottom: 38px !important;
+  }
+  .pt-80 { padding-top: 38px !important; }
+  .pb-80 { padding-bottom: 38px !important; }
+
+  .py-120,
+  .pt-120.pb-120 {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  .pt-120 { padding-top: 48px !important; }
+  .pb-120 { padding-bottom: 48px !important; }
+
+  .py-140,
+  .pt-140.pb-140 {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+  }
+  .pt-140 { padding-top: 50px !important; }
+  .pb-140 { padding-bottom: 50px !important; }
+
+  .pt-60.pb-60 {
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
+  }
+  .pt-60 { padding-top: 32px !important; }
+  .pb-60 { padding-bottom: 32px !important; }
+
+  .pt-100.pb-70,
+  .wexnix_footer-widget-wrapper {
+    padding-top: 45px !important;
+    padding-bottom: 25px !important;
+  }
+
+  .wexnix_pd-50,
+  .pt-50.pb-50 {
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+  }
+
+  /* Section Headings & Margin */
+  .wexnix_site-heading {
+    margin-bottom: 24px !important;
+  }
+
+  h1,
+  h2,
+  .wexnix_site-title,
+  .wexnix_site-heading h2,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title,
+  .wexnix_cta-content h1 {
+    font-size: 25px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* Section Subtitles */
+  .wexnix_site-title-tagline,
+  .wexnix_site-sub-title,
+  .wexnix_sub-title,
+  .sub-title,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
+    font-size: 13px !important;
+    letter-spacing: 1px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Card / Item Titles */
+  .wexnix_course-title,
+  .wexnix_course-title a,
+  .wexnix_team-bio h5,
+  .wexnix_team-bio h5 a,
+  .wexnix_blog-title,
+  .wexnix_blog-title a,
+  .wexnix_choose-item-info h4,
+  .wexnix_department-title,
+  .wexnix_sidebar-widget-title,
+  .wexnix_footer-widget-title,
+  .wexnix_event-info h4,
+  .wexnix_about-item-content h5 {
+    font-size: 17px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Body Text */
+  body,
+  p,
+  .wexnix_about-text,
+  .wexnix_site-heading p,
+  .wexnix_choose-item-info p,
+  .wexnix_course-text,
+  .wexnix_hero-single .wexnix_hero-content p,
+  .wexnix_skill-content p,
+  .wexnix_cta-content p,
+  .wexnix_testimonial-text p,
+  .wexnix_footer-widget-box p,
+  .wexnix_copyright-text,
+  .wexnix_header-top-contact ul li a {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Meta details */
+  .wexnix_team-bio span,
+  .wexnix_course-meta,
+  .wexnix_course-bottom,
+  .wexnix_blog-item-meta,
+  .wexnix_event-meta {
+    font-size: 12.5px !important;
+  }
+
+  /* Buttons */
+  .wexnix_theme-btn {
+    font-size: 12.5px !important;
+    padding: 8px 16px !important;
+  }
+
+  /* Header Middle & Logo & Brand */
+  .wexnix_header-middle .navbar-brand img {
+    height: 56px !important;
+    width: auto !important;
+  }
+
+  .header-brand-text h2,
+  .header-brand-text .wexnix_site-title {
+    font-size: 19px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.3px !important;
+  }
+
+  .wexnix_header-middle-wrap {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+
+  .wexnix_header-middle-right {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .wexnix_header-search-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .wexnix_header-search-form input {
+    height: 40px !important;
+    font-size: 13.5px !important;
+    padding: 6px 12px !important;
+  }
+
+  .mobile-apply-lang-wrap {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .mobile-apply-lang-wrap .wexnix_theme-btn {
+    flex: 1 !important;
+    text-align: center !important;
+    padding: 8px 14px !important;
+  }
+
+  /* Notice Marquee */
+  .wexnix_notice-marquee {
+    padding: 5px 0 !important;
+  }
+
+  .wexnix_notice-label {
+    font-size: 12px !important;
+    padding: 3px 10px !important;
+    white-space: nowrap !important;
+  }
+
+  .wexnix_marquee-track span,
+  .wexnix_marquee-track span a {
+    font-size: 13px !important;
+    padding: 0 16px !important;
+  }
+
+  /* Hero Banner */
+  .wexnix_hero-single {
+    min-height: 450px !important;
+    padding: 20px 10px !important;
+  }
+
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-btn {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-top: 14px !important;
+  }
+
+  /* Institute Info Strip (2x2 Grid) */
+  .wexnix_institute-info-area h2 {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+  }
+  .wexnix_institute-info-area h6 {
+    font-size: 11px !important;
+    letter-spacing: 0.5px !important;
+  }
+  .wexnix_institute-info-area .py-3 {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+
+  /* Counter Area (2x2 Grid) */
+  .wexnix_counter-box {
+    margin-bottom: 12px !important;
+    padding: 14px 10px !important;
+    border-radius: 10px !important;
+  }
+  .wexnix_counter-box .wexnix_counter {
+    font-size: 28px !important;
+  }
+  .wexnix_counter-box .wexnix_title {
+    font-size: 12px !important;
+  }
+  .wexnix_counter-box .wexnix_icon svg {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* About Area */
+  .wexnix_about-img {
+    margin-bottom: 25px !important;
+  }
+  .wexnix_about-experience {
+    position: relative !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    margin-top: 12px !important;
+    width: 100% !important;
+    border-radius: 16px !important;
+    justify-content: center !important;
+    padding: 12px 18px !important;
+  }
+  .wexnix_about-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+  }
+
+  /* Sidebar Profile Widgets (Hon'ble Minister, Principal, etc.) */
+  .wexnix_sidebar-person {
+    padding: 16px 12px !important;
+  }
+  .wexnix_sidebar-person-img {
+    width: 95px !important;
+    height: 95px !important;
+  }
+
+  /* Courses & Teachers Grids */
+  .wexnix_course-item,
+  .wexnix_team-item {
+    margin-bottom: 16px !important;
+  }
+  .wexnix_course-content {
+    padding: 18px 14px !important;
+  }
+
+  /* Choose Us */
+  .wexnix_choose-item {
+    padding: 14px !important;
+    margin-bottom: 12px !important;
+  }
+  .wexnix_choose-img {
+    margin-top: 24px !important;
+    margin-left: 0 !important;
+  }
+
+  /* Gallery */
+  .wexnix_gallery-img img {
+    height: 160px !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* CTA Area */
+  .wexnix_cta-area {
+    padding: 38px 0 !important;
+  }
+
+  /* Enroll Form */
+  .wexnix_enroll-form-header h3 {
+    font-size: 22px !important;
+  }
+  .wexnix_enroll-form form {
+    padding: 20px 14px !important;
+  }
+  .wexnix_enroll-form .wexnix_form-group .form-control,
+  .wexnix_enroll-form .wexnix_form-group .form-select {
+    font-size: 13.5px !important;
+    padding: 10px 14px !important;
+  }
+
+  /* Departments */
+  .wexnix_department-item {
+    padding: 16px 12px !important;
+    margin-bottom: 12px !important;
+  }
+  .wexnix_department-icon svg {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  /* Footer & Copyright */
+  .wexnix_footer-widget-box {
+    margin-bottom: 24px !important;
+  }
+  .wexnix_copyright-wrapper {
+    text-align: center !important;
+    padding: 18px 0 !important;
+  }
+  .wexnix_footer-social {
+    justify-content: center !important;
+    margin-top: 12px !important;
+  }
+  .payment-methods {
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+  .payment-methods .payment-item {
+    height: 32px !important;
+    min-width: 48px !important;
+    padding: 3px 6px !important;
+  }
+  .payment-methods .payment-item img {
+    height: 20px !important;
+    max-width: 44px !important;
+  }
+}
+
+/* ==========================================================================
+   Tier 2: Small Tablet Devices (576px – 767px)
+   ========================================================================== */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  /* Vertical Padding Cadence */
+  .py-80,
+  .pt-80.pb-80 {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+  .pt-80 { padding-top: 48px !important; }
+  .pb-80 { padding-bottom: 48px !important; }
+
+  .py-120,
+  .pt-120.pb-120 {
+    padding-top: 58px !important;
+    padding-bottom: 58px !important;
+  }
+  .pt-120 { padding-top: 58px !important; }
+  .pb-120 { padding-bottom: 58px !important; }
+
+  .pt-60.pb-60 {
+    padding-top: 38px !important;
+    padding-bottom: 38px !important;
+  }
+  .pt-60 { padding-top: 38px !important; }
+  .pb-60 { padding-bottom: 38px !important; }
+
+  .pt-100.pb-70,
+  .wexnix_footer-widget-wrapper {
+    padding-top: 55px !important;
+    padding-bottom: 30px !important;
+  }
+
+  .wexnix_site-heading {
+    margin-bottom: 28px !important;
+  }
+
+  /* Typography */
+  h1,
+  h2,
+  .wexnix_site-title,
+  .wexnix_site-heading h2,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title,
+  .wexnix_cta-content h1 {
+    font-size: 29px !important;
+    line-height: 1.25 !important;
+  }
+
+  .wexnix_site-title-tagline,
+  .wexnix_site-sub-title,
+  .wexnix_sub-title,
+  .sub-title,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
+    font-size: 13.5px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .wexnix_course-title,
+  .wexnix_course-title a,
+  .wexnix_team-bio h5,
+  .wexnix_team-bio h5 a,
+  .wexnix_blog-title,
+  .wexnix_blog-title a,
+  .wexnix_choose-item-info h4,
+  .wexnix_department-title,
+  .wexnix_sidebar-widget-title,
+  .wexnix_footer-widget-title,
+  .wexnix_event-info h4 {
+    font-size: 18px !important;
+  }
+
+  body,
+  p,
+  .wexnix_about-text,
+  .wexnix_site-heading p,
+  .wexnix_choose-item-info p,
+  .wexnix_course-text,
+  .wexnix_hero-single .wexnix_hero-content p,
+  .wexnix_skill-content p,
+  .wexnix_cta-content p,
+  .wexnix_testimonial-text p,
+  .wexnix_footer-widget-box p,
+  .wexnix_copyright-text {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  .wexnix_theme-btn {
+    font-size: 13px !important;
+    padding: 9px 18px !important;
+  }
+
+  /* Header & Brand */
+  .wexnix_header-middle .navbar-brand img {
+    height: 68px !important;
+  }
+  .header-brand-text h2,
+  .header-brand-text .wexnix_site-title {
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+  }
+  .header-brand-text p,
+  .header-brand-text .wexnix_site-title-tagline {
+    font-size: 12px !important;
+  }
+
+  /* Notice Marquee */
+  .wexnix_notice-label {
+    font-size: 13px !important;
+    padding: 4px 12px !important;
+  }
+  .wexnix_marquee-track span,
+  .wexnix_marquee-track span a {
+    font-size: 14px !important;
+    padding: 0 22px !important;
+  }
+
+  /* Hero */
+  .wexnix_hero-single {
+    min-height: 500px !important;
+  }
+
+  /* Institute Info */
+  .wexnix_institute-info-area h2 {
+    font-size: 26px !important;
+  }
+  .wexnix_institute-info-area h6 {
+    font-size: 12px !important;
+  }
+
+  /* Counter */
+  .wexnix_counter-box .wexnix_counter {
+    font-size: 32px !important;
+  }
+  .wexnix_counter-box .wexnix_title {
+    font-size: 13.5px !important;
+  }
+
+  /* Gallery */
+  .wexnix_gallery-img img {
+    height: 190px !important;
+  }
+
+  /* Enroll Form */
+  .wexnix_enroll-form-header h3 {
+    font-size: 26px !important;
+  }
+
+  .payment-methods {
+    gap: 10px !important;
+  }
+  .payment-methods .payment-item {
+    height: 35px !important;
+    min-width: 52px !important;
+  }
+}
+
+/* ==========================================================================
+   Mobile & Small Tablet Global Rules (<= 767.98px)
+   ========================================================================== */
+@media (max-width: 767.98px) {
+  .wexnix_site-heading { 
+    margin-bottom: 28px !important;
+    text-align: center;
+  }
+  .wexnix_site-title-tagline {
+    font-size: 10px !important;
+  }
+  .wexnix_course-title,
+  .wexnix_course-title a,
+  .wexnix_team-bio h5,
+  .wexnix_team-bio h5 a,
+  .wexnix_blog-title,
+  .wexnix_blog-title a,
+  .wexnix_choose-item-info h4,
+  .wexnix_department-title,
+  .wexnix_sidebar-widget-title,
+  .wexnix_footer-widget-title,
+  .wexnix_event-info h4 { 
+    justify-content: center;
+  }
+  .wexnix_team-item.wow.fadeInUp {
+    text-align: center;
+  }
+}
+/* ==========================================================================
+   Tier 3: Tablet Devices (768px – 991px)
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+
+  .py-80,
+  .pt-80.pb-80 {
+    padding-top: 58px !important;
+    padding-bottom: 58px !important;
+  }
+  .pt-80 { padding-top: 58px !important; }
+  .pb-80 { padding-bottom: 58px !important; }
+
+  .py-120,
+  .pt-120.pb-120 {
+    padding-top: 72px !important;
+    padding-bottom: 72px !important;
+  }
+  .pt-120 { padding-top: 72px !important; }
+  .pb-120 { padding-bottom: 72px !important; }
+
+  .pt-60.pb-60 {
+    padding-top: 46px !important;
+    padding-bottom: 46px !important;
+  }
+  .pt-60 { padding-top: 46px !important; }
+  .pb-60 { padding-bottom: 46px !important; }
+
+  .pt-100.pb-70,
+  .wexnix_footer-widget-wrapper {
+    padding-top: 65px !important;
+    padding-bottom: 35px !important;
+  }
+
+  .wexnix_site-heading {
+    margin-bottom: 34px !important;
+  }
+
+  /* Typography */
+  h1,
+  h2,
+  .wexnix_site-title,
+  .wexnix_site-heading h2,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title,
+  .wexnix_cta-content h1 {
+    font-size: 33px !important;
+    line-height: 1.25 !important;
+  }
+
+  .wexnix_site-title-tagline,
+  .wexnix_site-sub-title,
+  .wexnix_sub-title,
+  .sub-title,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
+    font-size: 14.5px !important;
+  }
+
+  .wexnix_course-title,
+  .wexnix_course-title a,
+  .wexnix_team-bio h5,
+  .wexnix_team-bio h5 a,
+  .wexnix_blog-title,
+  .wexnix_blog-title a,
+  .wexnix_choose-item-info h4,
+  .wexnix_department-title,
+  .wexnix_sidebar-widget-title,
+  .wexnix_footer-widget-title,
+  .wexnix_event-info h4 {
+    font-size: 19px !important;
+  }
+
+  body,
+  p,
+  .wexnix_about-text,
+  .wexnix_site-heading p,
+  .wexnix_choose-item-info p,
+  .wexnix_course-text,
+  .wexnix_hero-single .wexnix_hero-content p,
+  .wexnix_skill-content p,
+  .wexnix_cta-content p,
+  .wexnix_testimonial-text p,
+  .wexnix_footer-widget-box p,
+  .wexnix_copyright-text {
+    font-size: 14.5px !important;
+    line-height: 1.65 !important;
+  }
+
+  .wexnix_theme-btn {
+    font-size: 14px !important;
+    padding: 10px 20px !important;
+  }
+
+  /* Header & Brand */
+  .wexnix_header-middle .navbar-brand img {
+    height: 75px !important;
+  }
+  .header-brand-text h2,
+  .header-brand-text .wexnix_site-title {
+    font-size: 26px !important;
+  }
+  .header-brand-text p,
+  .header-brand-text .wexnix_site-title-tagline {
+    font-size: 13.5px !important;
+  }
+
+  .wexnix_header-search-wrap {
+    max-width: 340px !important;
+  }
+
+  /* Marquee */
+  .wexnix_notice-label {
+    font-size: 14px !important;
+    padding: 5px 14px !important;
+  }
+  .wexnix_marquee-track span,
+  .wexnix_marquee-track span a {
+    font-size: 15px !important;
+    padding: 0 28px !important;
+  }
+
+  /* Hero */
+  .wexnix_hero-single {
+    min-height: 550px !important;
+  }
+
+  /* Institute Info */
+  .wexnix_institute-info-area h2 {
+    font-size: 30px !important;
+  }
+  .wexnix_institute-info-area h6 {
+    font-size: 13.5px !important;
+  }
+
+  /* Counter */
+  .wexnix_counter-box .wexnix_counter {
+    font-size: 36px !important;
+  }
+  .wexnix_counter-box .wexnix_title {
+    font-size: 15px !important;
+  }
+
+  /* Gallery */
+  .wexnix_gallery-img img {
+    height: 210px !important;
+  }
+
+  /* Enroll Form */
+  .wexnix_enroll-form-header h3 {
+    font-size: 28px !important;
+  }
+}
+
+/* ==========================================================================
+   Tier 4: Laptop Devices (992px – 1199px)
+   ========================================================================== */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    padding-left: 26px !important;
+    padding-right: 26px !important;
+  }
+
+  .py-80,
+  .pt-80.pb-80 {
+    padding-top: 68px !important;
+    padding-bottom: 68px !important;
+  }
+  .pt-80 { padding-top: 68px !important; }
+  .pb-80 { padding-bottom: 68px !important; }
+
+  .py-120,
+  .pt-120.pb-120 {
+    padding-top: 88px !important;
+    padding-bottom: 88px !important;
+  }
+  .pt-120 { padding-top: 88px !important; }
+  .pb-120 { padding-bottom: 88px !important; }
+
+  .pt-60.pb-60 {
+    padding-top: 52px !important;
+    padding-bottom: 52px !important;
+  }
+  .pt-60 { padding-top: 52px !important; }
+  .pb-60 { padding-bottom: 52px !important; }
+
+  .pt-100.pb-70,
+  .wexnix_footer-widget-wrapper {
+    padding-top: 75px !important;
+    padding-bottom: 45px !important;
+  }
+
+  .wexnix_site-heading {
+    margin-bottom: 40px !important;
+  }
+
+  /* Typography */
+  h1,
+  h2,
+  .wexnix_site-title,
+  .wexnix_site-heading h2,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title,
+  .wexnix_cta-content h1 {
+    font-size: 37px !important;
+    line-height: 1.25 !important;
+  }
+
+  .wexnix_site-title-tagline,
+  .wexnix_site-sub-title,
+  .wexnix_sub-title,
+  .sub-title,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
+    font-size: 15.5px !important;
+  }
+
+  .wexnix_course-title,
+  .wexnix_course-title a,
+  .wexnix_team-bio h5,
+  .wexnix_team-bio h5 a,
+  .wexnix_blog-title,
+  .wexnix_blog-title a,
+  .wexnix_choose-item-info h4,
+  .wexnix_department-title,
+  .wexnix_sidebar-widget-title,
+  .wexnix_footer-widget-title,
+  .wexnix_event-info h4 {
+    font-size: 20px !important;
+  }
+
+  body,
+  p,
+  .wexnix_about-text,
+  .wexnix_site-heading p,
+  .wexnix_choose-item-info p,
+  .wexnix_course-text,
+  .wexnix_hero-single .wexnix_hero-content p,
+  .wexnix_skill-content p,
+  .wexnix_cta-content p,
+  .wexnix_testimonial-text p,
+  .wexnix_footer-widget-box p,
+  .wexnix_copyright-text {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+  }
+
+  .wexnix_theme-btn {
+    font-size: 14.5px !important;
+    padding: 11px 22px !important;
+  }
+
+  /* Header & Nav */
+  .wexnix_main-navigation .navbar .nav-item .nav-link {
+    font-size: 15px !important;
+    padding: 0 10px !important;
+  }
+  .wexnix_header-middle .navbar-brand img {
+    height: 80px !important;
+  }
+  .header-brand-text h2,
+  .header-brand-text .wexnix_site-title {
+    font-size: 32px !important;
+  }
+  .header-brand-text p,
+  .header-brand-text .wexnix_site-title-tagline {
+    font-size: 15px !important;
+  }
+
+  .wexnix_notice-label {
+    font-size: 14px !important;
+    padding: 5px 15px !important;
+  }
+  .wexnix_marquee-track span,
+  .wexnix_marquee-track span a {
+    font-size: 16px !important;
+    padding: 0 32px !important;
+  }
+
+  .wexnix_hero-single {
+    min-height: 600px !important;
+  }
+
+  .wexnix_institute-info-area h2 {
+    font-size: 34px !important;
+  }
+  .wexnix_counter-box .wexnix_counter {
+    font-size: 38px !important;
+  }
+
+  .wexnix_gallery-img img {
+    height: 230px !important;
+  }
+
+  .wexnix_enroll-form-header h3 {
+    font-size: 30px !important;
+  }
+}
+
+/* ==========================================================================
+   Tier 5: Desktop Devices (1200px – 1399px)
+   ========================================================================== */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }
+
+  .py-80,
+  .pt-80.pb-80 {
+    padding-top: 78px !important;
+    padding-bottom: 78px !important;
+  }
+  .pt-80 { padding-top: 78px !important; }
+  .pb-80 { padding-bottom: 78px !important; }
+
+  .py-120,
+  .pt-120.pb-120 {
+    padding-top: 105px !important;
+    padding-bottom: 105px !important;
+  }
+  .pt-120 { padding-top: 105px !important; }
+  .pb-120 { padding-bottom: 105px !important; }
+
+  .pt-60.pb-60 {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+  .pt-60 { padding-top: 60px !important; }
+  .pb-60 { padding-bottom: 60px !important; }
+
+  .pt-100.pb-70,
+  .wexnix_footer-widget-wrapper {
+    padding-top: 85px !important;
+    padding-bottom: 55px !important;
+  }
+
+  .wexnix_site-heading {
+    margin-bottom: 45px !important;
+  }
+
+  /* Typography */
+  h1,
+  h2,
+  .wexnix_site-title,
+  .wexnix_site-heading h2,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title,
+  .wexnix_cta-content h1 {
+    font-size: 39px !important;
+    line-height: 1.25 !important;
+  }
+
+  .wexnix_site-title-tagline,
+  .wexnix_site-sub-title,
+  .wexnix_sub-title,
+  .sub-title,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
+    font-size: 16.5px !important;
+  }
+
+  .wexnix_course-title,
+  .wexnix_course-title a,
+  .wexnix_team-bio h5,
+  .wexnix_team-bio h5 a,
+  .wexnix_blog-title,
+  .wexnix_blog-title a,
+  .wexnix_choose-item-info h4,
+  .wexnix_department-title,
+  .wexnix_sidebar-widget-title,
+  .wexnix_footer-widget-title,
+  .wexnix_event-info h4 {
+    font-size: 21px !important;
+  }
+
+  body,
+  p,
+  .wexnix_about-text,
+  .wexnix_site-heading p,
+  .wexnix_choose-item-info p,
+  .wexnix_course-text,
+  .wexnix_hero-single .wexnix_hero-content p,
+  .wexnix_skill-content p,
+  .wexnix_cta-content p,
+  .wexnix_testimonial-text p,
+  .wexnix_footer-widget-box p,
+  .wexnix_copyright-text {
+    font-size: 15.5px !important;
+    line-height: 1.7 !important;
+  }
+
+  .wexnix_theme-btn {
+    font-size: 15px !important;
+    padding: 12px 24px !important;
+  }
+
+  /* Header & Brand */
+  .wexnix_header-middle .navbar-brand img {
+    height: 85px !important;
+  }
+  .header-brand-text h2,
+  .header-brand-text .wexnix_site-title {
+    font-size: 36px !important;
+  }
+  .header-brand-text p,
+  .header-brand-text .wexnix_site-title-tagline {
+    font-size: 16.5px !important;
+  }
+
+  .wexnix_main-navigation .navbar .nav-item .nav-link {
+    font-size: 15.5px !important;
+    padding: 0 11px !important;
+  }
+
+  .wexnix_notice-label {
+    font-size: 15px !important;
+  }
+  .wexnix_marquee-track span,
+  .wexnix_marquee-track span a {
+    font-size: 17px !important;
+    padding: 0 36px !important;
+  }
+
+  .wexnix_hero-single {
+    min-height: 620px !important;
+  }
+
+  .wexnix_institute-info-area h2 {
+    font-size: 38px !important;
+  }
+  .wexnix_counter-box .wexnix_counter {
+    font-size: 40px !important;
+  }
+
+  .wexnix_gallery-img img {
+    height: 250px !important;
+  }
+
+  .wexnix_enroll-form-header h3 {
+    font-size: 32px !important;
+  }
+}
+
+/* ==========================================================================
+   Tier 6: Large Desktop Devices (1400px – 1919px)
+   ========================================================================== */
+@media (min-width: 1400px) and (max-width: 1919.98px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl,
+  .container-fluid {
+    padding-left: 38px !important;
+    padding-right: 38px !important;
+  }
+
+  .py-80,
+  .pt-80.pb-80 {
+    padding-top: 82px !important;
+    padding-bottom: 82px !important;
+  }
+  .pt-80 { padding-top: 82px !important; }
+  .pb-80 { padding-bottom: 82px !important; }
+
+  .py-120,
+  .pt-120.pb-120 {
+    padding-top: 115px !important;
+    padding-bottom: 115px !important;
+  }
+  .pt-120 { padding-top: 115px !important; }
+  .pb-120 { padding-bottom: 115px !important; }
+
+  .pt-60.pb-60 {
+    padding-top: 65px !important;
+    padding-bottom: 65px !important;
+  }
+  .pt-60 { padding-top: 65px !important; }
+  .pb-60 { padding-bottom: 65px !important; }
+
+  .pt-100.pb-70,
+  .wexnix_footer-widget-wrapper {
+    padding-top: 90px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .wexnix_site-heading {
+    margin-bottom: 48px !important;
+  }
+
+  /* Typography */
+  h1,
+  h2,
+  .wexnix_site-title,
+  .wexnix_site-heading h2,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title,
+  .wexnix_cta-content h1 {
+    font-size: 41px !important;
+    line-height: 1.25 !important;
+  }
+
+  .wexnix_site-title-tagline,
+  .wexnix_site-sub-title,
+  .wexnix_sub-title,
+  .sub-title,
+  .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
+    font-size: 17.5px !important;
+  }
+
+  .wexnix_course-title,
+  .wexnix_course-title a,
+  .wexnix_team-bio h5,
+  .wexnix_team-bio h5 a,
+  .wexnix_blog-title,
+  .wexnix_blog-title a,
+  .wexnix_choose-item-info h4,
+  .wexnix_department-title,
+  .wexnix_sidebar-widget-title,
+  .wexnix_footer-widget-title,
+  .wexnix_event-info h4 {
+    font-size: 22px !important;
+  }
+
+  body,
+  p,
+  .wexnix_about-text,
+  .wexnix_site-heading p,
+  .wexnix_choose-item-info p,
+  .wexnix_course-text,
+  .wexnix_hero-single .wexnix_hero-content p,
+  .wexnix_skill-content p,
+  .wexnix_cta-content p,
+  .wexnix_testimonial-text p,
+  .wexnix_footer-widget-box p,
+  .wexnix_copyright-text {
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+  }
+
+  .wexnix_theme-btn {
+    font-size: 15.5px !important;
+    padding: 13px 26px !important;
+  }
+
+  /* Header & Brand */
+  .wexnix_header-middle .navbar-brand img {
+    height: 85px !important;
+  }
+  .header-brand-text h2,
+  .header-brand-text .wexnix_site-title {
+    font-size: 40px !important;
+  }
+  .header-brand-text p,
+  .header-brand-text .wexnix_site-title-tagline {
+    font-size: 18px !important;
+  }
+
+  .wexnix_main-navigation .navbar .nav-item .nav-link {
+    font-size: 17px !important;
+    padding: 0 12px !important;
+  }
+
+  .wexnix_notice-label {
+    font-size: 15.5px !important;
+  }
+  .wexnix_marquee-track span,
+  .wexnix_marquee-track span a {
+    font-size: 18px !important;
+    padding: 0 40px !important;
+  }
+
+  .wexnix_hero-single {
+    min-height: 650px !important;
+  }
+
+  .wexnix_institute-info-area h2 {
+    font-size: 42px !important;
+  }
+  .wexnix_counter-box .wexnix_counter {
+    font-size: 42px !important;
+  }
+
+  .wexnix_gallery-img img {
+    height: 270px !important;
+  }
+
+  .wexnix_enroll-form-header h3 {
+    font-size: 34px !important;
+  }
+}
+
+/* ==========================================================================
+   Tier 7: Big Screen / 2K+ (1920px up to unlimited)
    ========================================================================== */
 @media (min-width: 1920px) {
   /* Container layout */
@@ -6689,7 +7428,54 @@ label {
     padding-left: 50px !important;
   }
 
-  /* 1. Header Menu */
+  .py-80,
+  .pt-80.pb-80 {
+    padding-top: 95px !important;
+    padding-bottom: 95px !important;
+  }
+  .pt-80 { padding-top: 95px !important; }
+  .pb-80 { padding-bottom: 95px !important; }
+
+  .py-120,
+  .pt-120.pb-120 {
+    padding-top: 125px !important;
+    padding-bottom: 125px !important;
+  }
+  .pt-120 { padding-top: 125px !important; }
+  .pb-120 { padding-bottom: 125px !important; }
+
+  .pt-60.pb-60 {
+    padding-top: 75px !important;
+    padding-bottom: 75px !important;
+  }
+  .pt-60 { padding-top: 75px !important; }
+  .pb-60 { padding-bottom: 75px !important; }
+
+  .pt-100.pb-70,
+  .wexnix_footer-widget-wrapper {
+    padding-top: 100px !important;
+    padding-bottom: 70px !important;
+  }
+
+  .wexnix_site-heading {
+    max-width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 52px !important;
+  }
+
+  /* 1. Header Menu (Approved Specification) */
+  .wexnix_main-navigation .navbar-nav {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+  }
+
+  .wexnix_main-navigation .navbar .nav-item {
+    display: flex !important;
+    align-items: center !important;
+  }
+
   .wexnix_main-navigation .navbar .nav-item .nav-link {
     font-size: 24px !important;
     padding: 0px 8px !important;
@@ -6697,6 +7483,33 @@ label {
     line-height: 2 !important;
     display: inline-flex !important;
     align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+  }
+
+  .wexnix_main-navigation .navbar .nav-item:first-child,
+  .wexnix_main-navigation .navbar .nav-item:has(> .nav-link > i.fa-house, > .nav-link > i.fa-home) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .wexnix_main-navigation .navbar .nav-item:first-child .nav-link,
+  .wexnix_main-navigation .navbar .nav-link:has(> i.fa-house, > i.fa-home) {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+  }
+
+  .wexnix_main-navigation .navbar .nav-item .nav-link i,
+  .wexnix_main-navigation .navbar .nav-item .nav-link svg {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    line-height: 1 !important;
+    margin: 0 !important;
   }
 
   .wexnix_main-navigation .navbar .nav-item:last-child .nav-link {
@@ -6718,7 +7531,7 @@ label {
     line-height: 1.5 !important;
   }
 
-  /* 2. Notice Marquee */
+  /* 2. Notice Marquee (Approved Specification) */
   .wexnix_notice-marquee {
     padding: 8px 0 !important;
   }
@@ -6745,7 +7558,7 @@ label {
     margin-right: 12px !important;
   }
 
-  /* 3. Site Title & Tagline */
+  /* 3. Site Title & Tagline (Approved Specification) */
   .wexnix_site-title-tagline {
     font-size: 20px !important;
     letter-spacing: 2px !important;
@@ -6781,7 +7594,7 @@ label {
     max-width: 480px !important;
   }
 
-  /* 4. Enroll Form Header */
+  /* 4. Enroll Form Header (Approved Specification) */
   .wexnix_enroll-form-header h3 {
     font-size: 36px !important;
     line-height: 1.25 !important;
@@ -6802,7 +7615,7 @@ label {
     padding: 16px 22px !important;
   }
 
-  /* 5. All Heading Font Size: 44px */
+  /* 5. All Heading Font Size: 44px (Approved Specification) */
   h1,
   h2,
   .wexnix_site-heading h2,
@@ -6812,7 +7625,7 @@ label {
     line-height: 1.25 !important;
   }
 
-  /* 6. All Sub Title: 18px */
+  /* 6. All Sub Title: 18px (Approved Specification) */
   .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title,
   .wexnix_site-sub-title,
   .wexnix_sub-title,
@@ -6822,7 +7635,7 @@ label {
     font-size: 18px !important;
   }
 
-  /* 7. All Text Font Size: 16px */
+  /* 7. All Text Font Size: 16px (Approved Specification) */
   body,
   p,
   .wexnix_about-text,
@@ -6840,7 +7653,7 @@ label {
     line-height: 1.7 !important;
   }
 
-  /* 8. Component & Card Titles (Proportional 20px-22px) */
+  /* 8. Component & Card Titles: 22px (Approved Specification) */
   .wexnix_course-title,
   .wexnix_course-title a,
   .wexnix_team-bio h5,
@@ -6877,14 +7690,6 @@ label {
     padding: 14px 30px !important;
   }
 
-  /* 9. Layout & Alignment Improvements */
-  .wexnix_site-heading {
-    max-width: 950px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 50px;
-  }
-
   .wexnix_course-img img {
     aspect-ratio: 16 / 10;
     object-fit: cover;
@@ -6892,9 +7697,10 @@ label {
   }
 
   .wexnix_team-img img {
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
     width: 100%;
+    aspect-ratio: 1 / 1.3;
+    object-fit: cover;
+    border-radius: 40px 40px 40px 0;
   }
 
   .wexnix_blog-item-img img {
@@ -6904,56 +7710,42 @@ label {
   }
 }
 
-/* Footer Payment Image */
+/* ==========================================================================
+   Footer Payment Methods System
+   ========================================================================== */
 .wexnix_footer-payment {
   margin-top: 25px;
 }
-.wexnix_footer-payment img {
-  height: 48px;
-  width: auto;
-  object-fit: contain;
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-.wexnix_footer-payment img:hover {
-  transform: scale(1.05);
-}
-
-
-/* ── Payment Methods (like image 5) ───────────────────────────────────────── */
-.wexnix_footer-payment {
-    margin-top: 25px;
-}
 
 .payment-methods {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .payment-methods .payment-item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 5px 10px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 38px;
-    min-width: 58px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
-    transition: all 0.25s ease-in-out;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  min-width: 58px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transition: all 0.25s ease-in-out;
 }
 
 .payment-methods .payment-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .payment-methods .payment-item img {
-    height: 24px;
-    width: auto;
-    max-width: 52px;
-    object-fit: contain;
-    display: block;
+  height: 24px;
+  width: auto;
+  max-width: 52px;
+  object-fit: contain;
+  display: block;
 }

@@ -161,107 +161,18 @@
             font-family: 'Hind Siliguri', sans-serif !important;
         }
 
-        /* ── Body (16px × 0.85 = 13.6 → 14px) ──────────────────── */
+        /* ── Body font settings ──────────────────────────────────── */
         body {
-            font-size: 14px !important;
-            line-height: 1.75 !important;
+            line-height: 1.75;
         }
 
-        /* ── Generic headings (×0.85) ────────────────────────────── */
-        /* h1: 40px → 34px */
-        h1 {
-            font-size: 34px !important;
-        }
-
-        /* h2: 35px → 30px */
-        h2 {
-            font-size: 30px !important;
-        }
-
-        /* h3: 28px → 24px */
-        h3 {
-            font-size: 24px !important;
-        }
-
-        /* h4: 22px → 19px */
-        h4 {
-            font-size: 19px !important;
-        }
-
-        /* h5: 18px → 15px */
-        h5 {
-            font-size: 15px !important;
-        }
-
-        /* h6: 16px → 14px */
-        h6 {
-            font-size: 14px !important;
-        }
-
-        /* ── Section title (.wexnix_site-title: 55px → 47px) ─────── */
-        .wexnix_site-title {
-            font-size: 47px !important;
-        }
-
-        @media all and (max-width: 767px) {
-            .wexnix_site-title {
-                font-size: 27px !important;
-            }
-        }
-
-        /* tagline (18px → 15px) */
+        /* ── Bengali glyph optical balance ────────────────────────── */
         .wexnix_site-title-tagline {
-            font-size: 15px !important;
-            letter-spacing: 2px !important;
+            letter-spacing: 1px;
         }
 
-        /* ── Hero title (.wexnix_hero-title: 72px → 61px) ───────── */
-        .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
-            font-size: 43px !important;
-        }
-
-        /* Responsive hero title (50px → 43px) */
-        @media all and (max-width: 991px) {
-            .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
-                font-size: 43px !important;
-            }
-        }
-
-        @media all and (max-width: 767px) {
-            .wexnix_hero-single .wexnix_hero-content .wexnix_hero-title {
-                font-size: 34px !important;
-            }
-        }
-
-        /* Hero sub-title (25px → 21px) */
         .wexnix_hero-single .wexnix_hero-content .wexnix_hero-sub-title {
-            font-size: 21px !important;
-            letter-spacing: 3px !important;
-        }
-
-        /* Hero paragraph (18px → 15px) */
-        .wexnix_hero-single .wexnix_hero-content p {
-            font-size: 15px !important;
-        }
-
-        /* ── Counter number (50px → 43px) ────────────────────────── */
-        .wexnix_counter-box .wexnix_counter {
-            font-size: 43px !important;
-        }
-
-        /* Counter label (20px → 17px) */
-        .wexnix_counter-box .wexnix_title {
-            font-size: 17px !important;
-        }
-
-        /* ── Choose / features item heading (21px → 18px) ────────── */
-        .wexnix_choose-item-info h4 {
-            font-size: 18px !important;
-        }
-
-        /* ── Navbar (14px → 13px) ────────────────────────────────── */
-        .wexnix_main-navigation .nav-link {
-            font-size: 13px !important;
+            letter-spacing: 1.5px;
         }
     </style>
     @endif
@@ -284,6 +195,45 @@
         @media (min-width: 992px) {
             .wexnix_main-navigation .navbar-nav {
                 flex-wrap: wrap;
+                display: flex;
+                align-items: center;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item {
+                display: flex;
+                align-items: center;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item .nav-link {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item:first-child,
+            .wexnix_main-navigation .navbar .nav-item:has(> .nav-link > i.fa-house, > .nav-link > i.fa-home) {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item:first-child .nav-link,
+            .wexnix_main-navigation .navbar .nav-link:has(> i.fa-house, > i.fa-home) {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item .nav-link i,
+            .wexnix_main-navigation .navbar .nav-item .nav-link svg {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                vertical-align: middle !important;
+                line-height: 1 !important;
+                margin: 0 !important;
             }
         }
 
@@ -333,6 +283,7 @@
 
         /* ── Large Screen Responsive Rules (min-width: 1920px up to unlimited) ─────── */
         @media (min-width: 1920px) {
+
             /* Container max-width & horizontal padding */
             .container,
             .container-sm,
@@ -347,6 +298,17 @@
             }
 
             /* 1. Header Menu */
+            .wexnix_main-navigation .navbar-nav {
+                display: flex !important;
+                align-items: center !important;
+                flex-wrap: wrap !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item {
+                display: flex !important;
+                align-items: center !important;
+            }
+
             .wexnix_main-navigation .navbar .nav-item .nav-link {
                 font-size: 24px !important;
                 padding: 0px 8px !important;
@@ -354,6 +316,33 @@
                 line-height: 2 !important;
                 display: inline-flex !important;
                 align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item:first-child,
+            .wexnix_main-navigation .navbar .nav-item:has(> .nav-link > i.fa-house, > .nav-link > i.fa-home) {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item:first-child .nav-link,
+            .wexnix_main-navigation .navbar .nav-link:has(> i.fa-house, > i.fa-home) {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item .nav-link i,
+            .wexnix_main-navigation .navbar .nav-item .nav-link svg {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                vertical-align: middle !important;
+                line-height: 1 !important;
+                margin: 0 !important;
             }
 
             .wexnix_main-navigation .navbar .nav-item:last-child .nav-link {
@@ -549,9 +538,10 @@
             }
 
             .wexnix_team-img img {
-                aspect-ratio: 1 / 1;
-                object-fit: cover;
                 width: 100%;
+                aspect-ratio: 1 / 1.3;
+                object-fit: cover;
+                border-radius: 40px 40px 40px 0;
             }
 
             .wexnix_blog-item-img img {
@@ -638,18 +628,18 @@
                     <a class="navbar-brand d-flex align-items-center gap-3" style="text-decoration: none;" href="{{ route('home') }}">
                         {{-- Logo is above-the-fold: eager + high fetch priority for fastest LCP --}}
                         <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}" fetchpriority="high" loading="eager">
-                        <div class="header-brand-text d-none d-lg-block text-start ms-2">
+                        <div class="header-brand-text d-flex flex-column text-start ms-2">
                             <h2 class="mb-1 wexnix_site-title" style="font-weight: 800; line-height: 1.1; letter-spacing: -0.5px;">
-                                <span style="color: var(--theme-color);">Edu</span><span style="color: var(--theme-color2);">Ex</span> 
+                                <span style="color: var(--theme-color);">Edu</span><span style="color: var(--theme-color2);">Ex</span>
                                 <span style="color: var(--theme-color);">School &amp; College</span>
                             </h2>
-                            <p class="mb-0 wexnix_site-title-tagline" style="font-weight: 600; color: #555; letter-spacing: 0.5px;">
+                            <p class="mb-0 wexnix_site-title-tagline " style="font-weight: 600; color: #555; letter-spacing: 0.5px;">
                                 {{ __('Committed to Academic Excellence & Innovation') }}
                             </p>
                         </div>
                     </a>
                     <div class="wexnix_header-middle-right flex-grow-1 d-flex flex-lg-row justify-content-end align-items-center gap-lg-4">
-                        <div class="wexnix_header-search-wrap" style="width: 100%; max-width: 450px;">
+                        <div class="wexnix_header-search-wrap" style="  max-width: 450px;">
                             <form class="wexnix_header-search-form w-100" action="{{ route('search') }}" method="GET">
                                 <input type="search" name="q" placeholder="{{ __('Search Here...') }}" class="w-100">
                                 <button type="submit"><i class="fas fa-search"></i></button>
