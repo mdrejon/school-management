@@ -1,10 +1,23 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+
+const page = usePage();
+const siteSettings = computed(() => page.props.siteSettings || {});
+const logoUrl = computed(() => siteSettings.value.logo_url);
+const siteTitle = computed(() => siteSettings.value.site_name || 'School');
 </script>
 
 <template>
-    <Link :href="'/'">
+    <Link :href="'/'" class="flex flex-col items-center justify-center gap-2 group">
+        <img
+            v-if="logoUrl"
+            :src="logoUrl"
+            :alt="siteTitle"
+            class="h-20 w-auto max-w-[240px] object-contain transition-transform group-hover:scale-105 duration-200"
+        />
         <svg
+            v-else
             class="size-16"
             viewBox="0 0 48 48"
             fill="none"

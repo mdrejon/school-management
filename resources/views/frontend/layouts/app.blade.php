@@ -6,14 +6,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@yield('meta_description', config('app.name') . ' - School Management')">
+    <meta name="description" content="@yield('meta_description', ($siteSettings->site_tagline ?: ($siteSettings->site_name ?: config('app.name')) . ' - School Management'))">
     <meta name="keywords" content="">
 
     <!-- title -->
-    <title>@yield('title', config('app.name', 'School') . ' - Home')</title>
+    <title>@yield('title', $siteSettings->meta_title ?: (($siteSettings->site_name ?: config('app.name', 'School')) . ' - Home'))</title>
 
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('frontend/assets/img/logo/favicon.png') }}">
+
+    @php
+        $rawHeight = $siteSettings->header_logo_height ?? '110px';
+        $headerLogoHeight = is_numeric($rawHeight) ? $rawHeight . 'px' : ($rawHeight ?: '110px');
+        $rawWidth = $siteSettings->header_logo_width ?? 'auto';
+        $headerLogoWidth = is_numeric($rawWidth) ? $rawWidth . 'px' : ($rawWidth ?: 'auto');
+    @endphp
 
     @yield('breadcrumb_preload')
 
@@ -152,13 +159,73 @@
         td,
         th,
         label,
-        span,
+        span:not([class*="fa"]):not([class*="icon"]):not(.fa):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-brands),
         a,
         button,
         input,
         textarea,
         select {
             font-family: 'Hind Siliguri', sans-serif !important;
+        }
+
+        /* ── Protect Font Awesome Solid & Regular icons in Bengali mode ── */
+        .fa,
+        .fas,
+        .far,
+        .fal,
+        .fad,
+        .fa-solid,
+        .fa-regular,
+        i.fa,
+        i.fas,
+        i.far,
+        i.fa-solid,
+        i.fa-regular,
+        span.fa,
+        span.fas,
+        span.far,
+        span.fa-solid,
+        span.fa-regular {
+            font-family: 'Font Awesome 6 Free' !important;
+            font-style: normal !important;
+            font-variant: normal !important;
+            text-rendering: auto !important;
+            line-height: 1 !important;
+        }
+
+        .fa-solid,
+        .fas,
+        i.fas,
+        i.fa-solid,
+        span.fas,
+        span.fa-solid {
+            font-weight: 900 !important;
+        }
+
+        .fa-regular,
+        .far,
+        i.far,
+        i.fa-regular,
+        span.far,
+        span.fa-regular {
+            font-weight: 400 !important;
+        }
+
+        /* ── Protect Font Awesome Brand icons (Facebook, YouTube, WhatsApp, Instagram, etc.) ── */
+        .fab,
+        .fa-brands,
+        i.fab,
+        i.fa-brands,
+        span.fab,
+        span.fa-brands,
+        a i.fab,
+        li i.fab {
+            font-family: 'Font Awesome 6 Brands', 'Font Awesome 5 Brands', 'FontAwesome' !important;
+            font-weight: 400 !important;
+            font-style: normal !important;
+            font-variant: normal !important;
+            text-rendering: auto !important;
+            line-height: 1 !important;
         }
 
         /* ── Body font settings ──────────────────────────────────── */
@@ -191,6 +258,83 @@
         }
     </style>' !!}
     <style>
+        /* ── Global Font Awesome Protection (Applies to all locales) ── */
+        .fa,
+        .fas,
+        .far,
+        .fal,
+        .fad,
+        .fa-solid,
+        .fa-regular,
+        i.fa,
+        i.fas,
+        i.far,
+        i.fa-solid,
+        i.fa-regular,
+        span.fa,
+        span.fas,
+        span.far,
+        span.fa-solid,
+        span.fa-regular,
+        i[class*="fa-"]:not(.fab):not(.fa-brands):not([class*="fab"]),
+        span[class*="fa-"]:not(.fab):not(.fa-brands):not([class*="fab"]) {
+            font-family: 'Font Awesome 6 Free' !important;
+            font-style: normal !important;
+            font-variant: normal !important;
+            text-rendering: auto !important;
+            line-height: 1 !important;
+        }
+
+        .fa-solid,
+        .fas,
+        i.fas,
+        i.fa-solid,
+        span.fas,
+        span.fa-solid {
+            font-weight: 900 !important;
+        }
+
+        .fa-regular,
+        .far,
+        i.fa-regular,
+        i.far,
+        span.fa-regular,
+        span.far {
+            font-weight: 400 !important;
+        }
+
+        /* ── Protect Brand icons (Facebook, YouTube, WhatsApp, Instagram, LinkedIn, etc.) ── */
+        .fab,
+        .fa-brands,
+        i.fab,
+        i.fa-brands,
+        span.fab,
+        span.fa-brands,
+        a i.fab,
+        a i.fa-brands,
+        li a i.fab,
+        li a i.fa-brands,
+        .wexnix_header-top-social a i,
+        .wexnix_footer-social li a i,
+        i[class*="fa-facebook"],
+        i[class*="fa-youtube"],
+        i[class*="fa-whatsapp"],
+        i[class*="fa-instagram"],
+        i[class*="fa-linkedin"],
+        i[class*="fa-twitter"],
+        i[class*="fa-x-twitter"],
+        i[class*="fa-tiktok"],
+        i[class*="fa-pinterest"],
+        i[class*="fa-behance"] {
+            font-family: 'Font Awesome 6 Brands', 'Font Awesome 5 Brands', 'FontAwesome' !important;
+            font-weight: 400 !important;
+            font-style: normal !important;
+            font-variant: normal !important;
+            text-rendering: auto !important;
+            line-height: 1 !important;
+            display: inline-block !important;
+        }
+
         /* ── Navbar flex-wrap to allow long menus to wrap gracefully ──────────────── */
         @media (min-width: 992px) {
             .wexnix_main-navigation .navbar-nav {
@@ -408,23 +552,25 @@
 
             .header-brand-text h2,
             .header-brand-text .wexnix_site-title {
-                font-size: 44px !important;
+                font-size: 34px !important;
                 line-height: 1.15 !important;
             }
 
             .header-brand-text p,
             .header-brand-text .wexnix_site-title-tagline {
-                font-size: 20px !important;
+                font-size: 15px !important;
                 line-height: 1.35 !important;
             }
 
             .wexnix_header-middle .navbar-brand img {
-                height: 85px !important;
-                width: auto !important;
+                height: {{ $headerLogoHeight }} !important;
+                width: {{ $headerLogoWidth }} !important;
+                max-height: none;
+                object-fit: contain;
             }
 
             .wexnix_header-search-wrap {
-                max-width: 480px !important;
+                max-width: 380px !important;
             }
 
             /* 4. Enroll Form Header */
@@ -550,6 +696,135 @@
                 width: 100%;
             }
         }
+
+        /* ── Header Brand Responsive Typography Calibration ── */
+        .header-brand-text {
+            min-width: 0;
+            flex-shrink: 1;
+        }
+
+        .header-brand-text h2,
+        .header-brand-text .wexnix_site-title {
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        @media (min-width: 992px) {
+            .wexnix_header-middle-wrap {
+                flex-wrap: nowrap !important;
+            }
+            .wexnix_header-middle-right {
+                flex-wrap: nowrap !important;
+                flex-shrink: 0 !important;
+            }
+            .wexnix_header-middle .navbar-brand {
+                flex-shrink: 1 !important;
+                min-width: 0 !important;
+            }
+        }
+
+        @media (min-width: 1400px) and (max-width: 1919.98px) {
+            .header-brand-text h2,
+            .header-brand-text .wexnix_site-title {
+                font-size: 29px !important;
+                line-height: 1.2 !important;
+            }
+            .header-brand-text p,
+            .header-brand-text .wexnix_site-title-tagline {
+                font-size: 13.5px !important;
+                line-height: 1.3 !important;
+            }
+            .wexnix_header-search-wrap {
+                max-width: 340px !important;
+            }
+        }
+
+        @media (min-width: 1200px) and (max-width: 1399.98px) {
+            .header-brand-text h2,
+            .header-brand-text .wexnix_site-title {
+                font-size: 25px !important;
+                line-height: 1.2 !important;
+            }
+            .header-brand-text p,
+            .header-brand-text .wexnix_site-title-tagline {
+                font-size: 12.5px !important;
+                line-height: 1.3 !important;
+            }
+            .wexnix_header-search-wrap {
+                max-width: 300px !important;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            .header-brand-text h2,
+            .header-brand-text .wexnix_site-title {
+                font-size: 22px !important;
+                line-height: 1.2 !important;
+            }
+            .header-brand-text p,
+            .header-brand-text .wexnix_site-title-tagline {
+                font-size: 11.5px !important;
+                line-height: 1.3 !important;
+            }
+            .wexnix_header-search-wrap {
+                max-width: 260px !important;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .header-brand-text h2,
+            .header-brand-text .wexnix_site-title {
+                font-size: 20px !important;
+                line-height: 1.2 !important;
+            }
+            .header-brand-text p,
+            .header-brand-text .wexnix_site-title-tagline {
+                font-size: 11px !important;
+                line-height: 1.3 !important;
+            }
+            .wexnix_header-middle .navbar-brand img {
+                height: auto !important;
+                max-height: 65px !important;
+                width: auto !important;
+            }
+            .wexnix_header-search-wrap {
+                max-width: 240px !important;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            .header-brand-text h2,
+            .header-brand-text .wexnix_site-title {
+                font-size: 17px !important;
+                line-height: 1.2 !important;
+            }
+            .header-brand-text p,
+            .header-brand-text .wexnix_site-title-tagline {
+                font-size: 10px !important;
+            }
+            .wexnix_header-middle .navbar-brand img {
+                height: auto !important;
+                max-height: 52px !important;
+                width: auto !important;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .header-brand-text h2,
+            .header-brand-text .wexnix_site-title {
+                font-size: 15px !important;
+                line-height: 1.2 !important;
+            }
+            .header-brand-text p,
+            .header-brand-text .wexnix_site-title-tagline {
+                font-size: 9px !important;
+            }
+            .wexnix_header-middle .navbar-brand img {
+                height: auto !important;
+                max-height: 46px !important;
+                width: auto !important;
+            }
+        }
     </style>
 
     @stack('styles')
@@ -628,26 +903,31 @@
                     <a class="navbar-brand d-flex align-items-center gap-3" style="text-decoration: none;" href="{{ route('home') }}">
                         {{-- Logo is above-the-fold: eager + high fetch priority for fastest LCP --}}
                         <img src="{{ $siteSettings->logo_url ?? '/frontend/assets/img/logo/logo.png' }}" alt="{{ $siteSettings->site_name }}" fetchpriority="high" loading="eager">
+                        @if (!empty(trim($siteSettings->site_title ?? '')) || !empty(trim($siteSettings->site_tagline ?? '')))
                         <div class="header-brand-text d-flex flex-column text-start ms-2">
+                            @if (!empty(trim($siteSettings->site_title ?? '')))
                             <h2 class="mb-1 wexnix_site-title" style="font-weight: 800; line-height: 1.1; letter-spacing: -0.5px;">
-                                <!-- <span style="color: var(--theme-color);">Edu</span><span style="color: var(--theme-color2);">Ex</span> -->
-                                <span style="color: var(--theme-color);">Maruwf Model Primary & High School</span>
+                                <span style="color: var(--theme-color);">{{ $siteSettings->site_title }}</span>
                             </h2>
-                            <p class="mb-0 wexnix_site-title-tagline " style="font-weight: 600; color: #555; letter-spacing: 0.5px;">
-                                {{ __('Committed to Academic Excellence & Innovation') }}
+                            @endif
+                            @if (!empty(trim($siteSettings->site_tagline ?? '')))
+                            <p class="mb-0 wexnix_site-title-tagline" style="font-weight: 600; color: #555; letter-spacing: 0.5px;">
+                                {{ $siteSettings->site_tagline }}
                             </p>
+                            @endif
                         </div>
+                        @endif
                     </a>
                     <div class="wexnix_header-middle-right flex-grow-1 d-flex flex-lg-row justify-content-end align-items-center gap-lg-4">
-                        <div class="wexnix_header-search-wrap" style="  max-width: 450px;">
+                        <div class="wexnix_header-search-wrap" style="max-width: 380px;">
                             <form class="wexnix_header-search-form w-100" action="{{ route('search') }}" method="GET">
                                 <input type="search" name="q" placeholder="{{ __('Search Here...') }}" class="w-100">
                                 <button type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
                         <div class="d-flex align-items-center mobile-apply-lang-wrap justify-content-end" style="gap: 10px;">
-                            <a href="application-form.html" class="wexnix_theme-btn" style="text-align: center; white-space: nowrap;"><span
-                                    class="fas fa-edit"></span> {{ __('Apply Now') }}</a>
+                            <a href="{{ url('/admission-form') }}" class="wexnix_theme-btn" style="text-align: center; white-space: nowrap;"><i
+                                    class="fas fa-edit me-1"></i> {{ __('Apply Now') }}</a>
                             <div class="mobile-lang-switcher d-flex d-lg-none" style="gap: 5px;">
                                 @foreach ($languages as $lang)
                                 <a href="{{ route('language.switch', $lang->code) }}" class="{{ app()->getLocale() === $lang->code ? 'active-lang' : '' }}" style="padding: 8px 12px; border-radius: 4px; font-size: 13px; font-weight: 600; text-decoration: none; {{ app()->getLocale() === $lang->code ? 'background: var(--theme-color); color: #fff;' : 'background: #f1f1f1; color: #333;' }}">{{ strtoupper($lang->code) }}</a>
@@ -705,7 +985,7 @@
 
     <!-- popup search -->
     <div class="wexnix_search-popup">
-        <button class="wexnix_close-search"><span class="fas fa-times"></span></button>
+        <button class="wexnix_close-search"><i class="fas fa-times"></i></button>
         <form action="{{ route('search') }}" method="GET">
             <div class="wexnix_form-group">
                 <input type="search" name="q" placeholder="{{ __('Search Here...') }}" required>

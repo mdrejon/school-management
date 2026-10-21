@@ -31,10 +31,15 @@ class UpdateSiteSettingRequest extends FormRequest
             'primary_color' => ['nullable', 'string', 'regex:/^#[a-fA-F0-9]{6}$/'],
             'secondary_color' => ['nullable', 'string', 'regex:/^#[a-fA-F0-9]{6}$/'],
             'logo' => ['nullable', 'image', 'max:2048'],
+            'header_logo_height' => ['nullable', 'string', 'max:50'],
+            'header_logo_width' => ['nullable', 'string', 'max:50'],
             'footer_logo' => ['nullable', 'image', 'max:2048'],
 
             "site_name.$default" => ['required', 'string', 'max:150'],
             'site_name.*' => ['nullable', 'string', 'max:150'],
+            'site_title.*' => ['nullable', 'string', 'max:150'],
+            'site_tagline.*' => ['nullable', 'string', 'max:255'],
+            'meta_title.*' => ['nullable', 'string', 'max:255'],
 
             'address.*' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:50'],

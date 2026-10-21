@@ -67,16 +67,25 @@ onMounted(() => {
 const toggleGroup = (index) => {
     openGroups.value[index] = !openGroups.value[index];
 };
+const siteSettings = computed(() => page.props.siteSettings || {});
 </script>
 
 <template>
     <div class="flex flex-col h-full">
-        <div class="h-16 flex items-center gap-2 px-5 shrink-0 border-b border-slate-800">
-            <div class="flex items-center justify-center size-9 rounded-lg bg-indigo-500 text-white font-bold">
-                S
+        <div class="h-16 flex items-center gap-3 px-5 shrink-0 border-b border-slate-800">
+            <img
+                v-if="siteSettings?.logo_url"
+                :src="siteSettings.logo_url"
+                :alt="siteSettings?.site_title || siteSettings?.site_name || 'School'"
+                class="size-9 rounded-lg object-contain bg-white/10 p-1"
+            />
+            <div v-else class="flex items-center justify-center size-9 rounded-lg bg-indigo-500 text-white font-bold">
+                {{ (siteSettings?.site_name || 'S').charAt(0) }}
             </div>
-            <div class="leading-tight">
-                <div class="text-white font-semibold text-sm">School CMS</div>
+            <div class="leading-tight truncate">
+                <div class="text-white font-semibold text-sm truncate">
+                    {{ siteSettings?.site_name || 'School CMS' }}
+                </div>
                 <div class="text-slate-400 text-xs">Admin Panel</div>
             </div>
         </div>

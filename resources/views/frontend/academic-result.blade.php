@@ -56,7 +56,7 @@
                             <input type="text" class="form-control">
                         </div>
                         <div class="col-lg-2">
-                            <button type="submit" class="wexnix_theme-btn w-100 justify-content-center"><span class="fas fa-search"></span>{{ __('Search') }}</button>
+                            <button type="submit" class="wexnix_theme-btn w-100 justify-content-center"><i class="fas fa-search me-1"></i>{{ __('Search') }}</button>
                         </div>
                     </div>
                 </form>

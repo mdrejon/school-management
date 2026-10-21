@@ -58,7 +58,7 @@
                         
                         <div class="col-12 d-flex justify-content-end gap-3 mt-4">
                             <a href="{{ route('students.index') }}" class="btn btn-light border"><i class="fas fa-rotate"></i> {{ __('Reset') }}</a>
-                            <button type="submit" class="wexnix_theme-btn justify-content-center"><span class="fas fa-search"></span> {{ __('Search') }}</button>
+                            <button type="submit" class="wexnix_theme-btn justify-content-center"><i class="fas fa-search me-1"></i> {{ __('Search') }}</button>
                         </div>
                     </div>
                 </form>

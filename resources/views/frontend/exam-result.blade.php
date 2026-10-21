@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-lg-2">
                             <button type="submit" class="wexnix_theme-btn w-100 justify-content-center py-2">
-                                <span class="fas fa-search me-1"></span> {{ __('Search') }}
+                                <i class="fas fa-search me-1"></i> {{ __('Search') }}
                             </button>
                         </div>
                     </div>

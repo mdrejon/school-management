@@ -25,7 +25,7 @@
                     <div class="col-md-5 col-lg-4">
                         <form action="{{ route('notices.index') }}" method="GET" class="d-flex align-items-center">
                             <input type="search" name="q" value="{{ $search }}" class="form-control" placeholder="{{ __('Search Notice...') }}">
-                            <button type="submit" class="wexnix_theme-btn ms-2" style="white-space: nowrap; padding: 12px 25px;"><span class="fas fa-search"></span> {{ __('Search') }}</button>
+                            <button type="submit" class="wexnix_theme-btn ms-2" style="white-space: nowrap; padding: 12px 25px;"><i class="fas fa-search me-1"></i> {{ __('Search') }}</button>
                         </form>
                     </div>
                 </div>
@@ -48,9 +48,9 @@
                                         <td>{{ $notice->title }}</td>
                                         <td>{{ $notice->published_at?->format('d M, Y') }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('notices.show', $notice) }}" class="wexnix_theme-btn"><span class="fas fa-eye"></span>{{ __('View') }}</a>
+                                            <a href="{{ route('notices.show', $notice) }}" class="wexnix_theme-btn"><i class="fas fa-eye me-1"></i> {{ __('View') }}</a>
                                             @if ($notice->pdf_url)
-                                                <a href="{{ $notice->pdf_url }}" target="_blank" class="wexnix_theme-btn ms-1"><span class="fas fa-download"></span>{{ __('PDF') }}</a>
+                                                <a href="{{ $notice->pdf_url }}" target="_blank" class="wexnix_theme-btn ms-1"><i class="fas fa-download me-1"></i> {{ __('PDF') }}</a>
                                             @endif
                                         </td>
                                     </tr>

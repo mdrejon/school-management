@@ -24,6 +24,7 @@ class SiteSettingController extends Controller
         $settings = SiteSetting::current();
         $data = $request->validated();
 
+
         if ($request->hasFile('logo')) {
             if ($settings->logo) {
                 Storage::disk('public')->delete($settings->logo);

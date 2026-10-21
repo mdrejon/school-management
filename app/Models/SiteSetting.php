@@ -13,6 +13,9 @@ class SiteSetting extends Model
 
     public array $translatable = [
         'site_name',
+        'site_title',
+        'site_tagline',
+        'meta_title',
         'address',
         'footer_about',
         'copyright_text',
@@ -130,10 +133,15 @@ class SiteSetting extends Model
 
     protected $fillable = [
         'site_name',
+        'site_title',
+        'site_tagline',
+        'meta_title',
         'homepage_template',
         'primary_color',
         'secondary_color',
         'logo',
+        'header_logo_height',
+        'header_logo_width',
         'footer_logo',
         'address',
         'phone',
@@ -343,12 +351,15 @@ class SiteSetting extends Model
 
     protected static function booted(): void
     {
-        static::saved(fn () => Cache::forget('site_settings.current'));
+        static::saved(function () {
+            Cache::forget('site_settings.current');
+            static::$memoizedCurrent = null;
+        });
     }
 
     public function getLogoUrlAttribute(): ?string
     {
-        return $this->logo ? asset('storage/'.ltrim($this->logo, '/')) : null;
+        return $this->logo ? '/storage/'.ltrim($this->logo, '/') : null;
     }
 
     public function getFooterLogoUrlAttribute(): ?string

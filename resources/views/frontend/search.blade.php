@@ -24,7 +24,7 @@
                     <div class="col-lg-6 mx-auto">
                         <form action="{{ route('search') }}" method="GET" class="d-flex">
                             <input type="search" name="q" value="{{ $query }}" class="form-control" placeholder="{{ __('Search...') }}">
-                            <button type="submit" class="wexnix_theme-btn ms-2"><span class="fas fa-search"></span>{{ __('Search') }}</button>
+                            <button type="submit" class="wexnix_theme-btn ms-2"><i class="fas fa-search me-1"></i>{{ __('Search') }}</button>
                         </form>
                     </div>
                 </div>

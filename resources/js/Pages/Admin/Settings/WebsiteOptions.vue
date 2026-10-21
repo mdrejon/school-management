@@ -78,7 +78,7 @@ const normalizeAboutItems = (items) =>
     }));
 
 const sections = [
-    { key: 'general', label: 'General', icon: 'pi pi-building', description: 'Site name, homepage layout template, and logos.' },
+    { key: 'general', label: 'General', icon: 'pi pi-building', description: 'Site title, tagline, meta title, homepage layout template, and logos.' },
     { key: 'header', label: 'Header', icon: 'pi pi-align-left', description: "Address, phone, email, and social links shown in the site header — the footer reuses these too." },
     { key: 'footer', label: 'Footer', icon: 'pi pi-align-justify', description: "The footer's about text, copyright line, Quick Links / Our Campus columns, and Newsletter heading." },
     { key: 'sidebar', label: 'Homepage Sidebar', icon: 'pi pi-bars', description: 'Widgets, titles, photos, links, and show/hide options for the Home v2 sidebar.' },
@@ -177,8 +177,13 @@ const form = useForm({
     primary_color: props.settings.primary_color ?? '#0054A5',
     secondary_color: props.settings.secondary_color ?? '#F26F21',
     logo: null,
+    header_logo_height: props.settings.header_logo_height ?? '110px',
+    header_logo_width: props.settings.header_logo_width ?? 'auto',
     footer_logo: null,
     site_name: { ...emptyTranslatable(), ...props.settings.site_name },
+    site_title: { ...emptyTranslatable(), ...props.settings.site_title },
+    site_tagline: { ...emptyTranslatable(), ...props.settings.site_tagline },
+    meta_title: { ...emptyTranslatable(), ...props.settings.meta_title },
     address: { ...emptyTranslatable(), ...props.settings.address },
     phone: props.settings.phone ?? '',
     email: props.settings.email ?? '',
@@ -654,15 +659,67 @@ const submit = () => {
                         </section>
 
                         <section class="rounded-xl border border-slate-200 p-5">
-                            <h3 class="text-sm font-semibold text-slate-800 mb-3">Site name</h3>
-                            <div class="max-w-md">
-                                <InputText
-                                    v-model="form.site_name[activeLang]"
-                                    :dir="currentLang?.direction"
-                                    class="w-full"
-                                    :placeholder="currentLang?.is_default ? 'Required' : 'Optional'"
-                                />
-                                <p v-if="form.errors[`site_name.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`site_name.${activeLang}`] }}</p>
+                            <div class="mb-4">
+                                <h3 class="text-sm font-semibold text-slate-800">Site Branding & Titles</h3>
+                                <p class="text-xs text-slate-500">Configure the primary school name, optional header titles, and browser tab / SEO title.</p>
+                            </div>
+
+                            <div class="space-y-4 max-w-xl">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-700 mb-1">
+                                        Site Name (Applied Everywhere) <span v-if="currentLang?.is_default" class="text-red-500">*</span>
+                                    </label>
+                                    <InputText
+                                        v-model="form.site_name[activeLang]"
+                                        :dir="currentLang?.direction"
+                                        class="w-full"
+                                        placeholder="e.g. Sitakund Kamil M.A Madrasah"
+                                    />
+                                    <p class="text-[11px] text-slate-500 mt-1">Main institution name. Applied everywhere across the system (logo alt text, footer copyright, emails, login, and admin panel).</p>
+                                    <p v-if="form.errors[`site_name.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`site_name.${activeLang}`] }}</p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-700 mb-1">
+                                        Site Title (Header - Optional)
+                                    </label>
+                                    <InputText
+                                        v-model="form.site_title[activeLang]"
+                                        :dir="currentLang?.direction"
+                                        class="w-full"
+                                        placeholder="Leave empty to show only the logo without text"
+                                    />
+                                    <p class="text-[11px] text-slate-500 mt-1">Optional title displayed in the header next to the logo. If empty, nothing is displayed on the frontend.</p>
+                                    <p v-if="form.errors[`site_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`site_title.${activeLang}`] }}</p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-700 mb-1">
+                                        Site Tagline (Header - Optional)
+                                    </label>
+                                    <InputText
+                                        v-model="form.site_tagline[activeLang]"
+                                        :dir="currentLang?.direction"
+                                        class="w-full"
+                                        placeholder="Leave empty if not needed"
+                                    />
+                                    <p class="text-[11px] text-slate-500 mt-1">Optional tagline displayed beneath the header site title. If empty, nothing is displayed on the frontend.</p>
+                                    <p v-if="form.errors[`site_tagline.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`site_tagline.${activeLang}`] }}</p>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-700 mb-1">
+                                        Meta Title (Browser Tab Title - Optional)
+                                    </label>
+                                    <InputText
+                                        v-model="form.meta_title[activeLang]"
+                                        :dir="currentLang?.direction"
+                                        class="w-full"
+                                        placeholder="e.g. Sitakund Kamil M.A Madrasah - Home"
+                                    />
+                                    <p class="text-[11px] text-slate-500 mt-1">Default title shown in browser tabs and search engine snippets. If left empty, defaults to "[Site Name] - Home".</p>
+                                    <p v-if="form.errors[`meta_title.${activeLang}`]" class="text-xs text-red-500 mt-1">{{ form.errors[`meta_title.${activeLang}`] }}</p>
+                                </div>
                             </div>
                         </section>
 
@@ -690,6 +747,40 @@ const submit = () => {
                                         @remove="onFooterLogoRemoved"
                                     />
                                     <p v-if="form.errors.footer_logo" class="text-xs text-red-500 mt-1">{{ form.errors.footer_logo }}</p>
+                                </div>
+                            </div>
+
+                            <!-- Header Logo Dimensions -->
+                            <div class="mt-6 pt-5 border-t border-slate-100">
+                                <div class="mb-3">
+                                    <h4 class="text-xs font-semibold text-slate-700">Header Logo Size (Frontend Display)</h4>
+                                    <p class="text-[11px] text-slate-400">Control the exact height and width of the header logo in the public website header.</p>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg">
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1">
+                                            Header Logo Height
+                                        </label>
+                                        <InputText
+                                            v-model="form.header_logo_height"
+                                            class="w-full"
+                                            placeholder="e.g. 110px or 110"
+                                        />
+                                        <p class="text-[11px] text-slate-400 mt-1">Default: <strong>110px</strong> (accepts numbers or units, e.g. 110px, 90px)</p>
+                                        <p v-if="form.errors.header_logo_height" class="text-xs text-red-500 mt-1">{{ form.errors.header_logo_height }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-slate-600 mb-1">
+                                            Header Logo Width
+                                        </label>
+                                        <InputText
+                                            v-model="form.header_logo_width"
+                                            class="w-full"
+                                            placeholder="e.g. auto or 220px"
+                                        />
+                                        <p class="text-[11px] text-slate-400 mt-1">Default: <strong>auto</strong> (preserves natural aspect ratio)</p>
+                                        <p v-if="form.errors.header_logo_width" class="text-xs text-red-500 mt-1">{{ form.errors.header_logo_width }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </section>
