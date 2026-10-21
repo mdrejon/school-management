@@ -222,8 +222,8 @@ Route::get('/migration', function () {
     }
 
     $html .= '<div class="actions">
-        <a href="' . url('admin/auth/migration') . '" class="btn">🔄 Re-run Migration</a>
-        <a href="' . url('admin/auth/migration?seed=1') . '" class="btn btn-secondary">🌱 Migrate & Seed (?seed=1)</a>
+        <a href="' . url('migration') . '" class="btn">🔄 Re-run Migration</a>
+        <a href="' . url('migration?seed=1') . '" class="btn btn-secondary">🌱 Migrate & Seed (?seed=1)</a>
         <a href="' . url('admin/optimize') . '" class="btn btn-secondary">🚀 Server Optimize</a>
         <a href="' . url('/') . '" class="btn btn-secondary">🏠 Back to Homepage</a>
     </div>';

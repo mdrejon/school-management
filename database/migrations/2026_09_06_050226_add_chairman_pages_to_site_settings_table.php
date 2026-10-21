@@ -12,15 +12,33 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('site_settings', function (Blueprint $table) {
-            $table->string('chairman_photo')->nullable()->after('about_page_seo_keywords');
-            $table->json('chairman_name')->nullable()->after('chairman_photo');
-            $table->json('chairman_designation')->nullable()->after('chairman_name');
-            $table->json('chairman_message')->nullable()->after('chairman_designation');
-            $table->string('chairman_page_breadcrumb_image')->nullable()->after('chairman_message');
-            $table->json('chairman_page_breadcrumb_title')->nullable()->after('chairman_page_breadcrumb_image');
-            $table->json('chairman_page_seo_title')->nullable()->after('chairman_page_breadcrumb_title');
-            $table->json('chairman_page_seo_description')->nullable()->after('chairman_page_seo_title');
-            $table->json('chairman_page_seo_keywords')->nullable()->after('chairman_page_seo_description');
+            if (!Schema::hasColumn('site_settings', 'chairman_photo')) {
+                $table->string('chairman_photo')->nullable()->after('about_page_seo_keywords');
+            }
+            if (!Schema::hasColumn('site_settings', 'chairman_name')) {
+                $table->json('chairman_name')->nullable()->after('chairman_photo');
+            }
+            if (!Schema::hasColumn('site_settings', 'chairman_designation')) {
+                $table->json('chairman_designation')->nullable()->after('chairman_name');
+            }
+            if (!Schema::hasColumn('site_settings', 'chairman_message')) {
+                $table->json('chairman_message')->nullable()->after('chairman_designation');
+            }
+            if (!Schema::hasColumn('site_settings', 'chairman_page_breadcrumb_image')) {
+                $table->string('chairman_page_breadcrumb_image')->nullable()->after('chairman_message');
+            }
+            if (!Schema::hasColumn('site_settings', 'chairman_page_breadcrumb_title')) {
+                $table->json('chairman_page_breadcrumb_title')->nullable()->after('chairman_page_breadcrumb_image');
+            }
+            if (!Schema::hasColumn('site_settings', 'chairman_page_seo_title')) {
+                $table->json('chairman_page_seo_title')->nullable()->after('chairman_page_breadcrumb_title');
+            }
+            if (!Schema::hasColumn('site_settings', 'chairman_page_seo_description')) {
+                $table->json('chairman_page_seo_description')->nullable()->after('chairman_page_seo_title');
+            }
+            if (!Schema::hasColumn('site_settings', 'chairman_page_seo_keywords')) {
+                $table->json('chairman_page_seo_keywords')->nullable()->after('chairman_page_seo_description');
+            }
         });
     }
 

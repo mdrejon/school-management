@@ -13,13 +13,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('site_settings', function (Blueprint $table) {
-            $table->string('header_logo_height', 50)->nullable()->default('110px')->after('logo');
-            $table->string('header_logo_width', 50)->nullable()->default('auto')->after('header_logo_height');
+            if (!Schema::hasColumn('site_settings', 'header_logo_height')) {
+                $table->string('header_logo_height', 50)->nullable()->default('110px')->after('logo');
+            }
+            if (!Schema::hasColumn('site_settings', 'header_logo_width')) {
+                $table->string('header_logo_width', 50)->nullable()->default('auto')->after('header_logo_height');
+            }
         });
 
-        // Initialize default for existing row if present
-        DB::table('site_settings')->update([
+        // Initialize default for existing row if present and not set
+        DB::table('site_settings')->whereNull('header_logo_height')->orWhere('header_logo_height', '')->update([
             'header_logo_height' => '110px',
+        ]);
+        DB::table('site_settings')->whereNull('header_logo_width')->orWhere('header_logo_width', '')->update([
             'header_logo_width' => 'auto',
         ]);
     }
