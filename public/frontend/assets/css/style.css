@@ -1226,7 +1226,9 @@ label {
     border-radius: 0px;
     border-top: 4px solid var(--theme-color2);
     background: var(--theme-color);
-    width: 220px;
+    width: max-content;
+    min-width: 280px;
+    max-width: 480px;
     box-shadow: var(--box-shadow);
   }
 
@@ -1241,19 +1243,22 @@ label {
 
   .navbar .nav-item .dropdown-menu .dropdown-item {
     font-size: 16px;
-    padding: 8px 25px;
+    padding: 10px 24px;
     font-weight: 500;
     color:  var(--color-white);
     position: relative;
     overflow: hidden;
+    white-space: normal;
+    line-height: 1.45;
     text-transform: capitalize;
-    transition: all .3s ease-in-out;
+    transition: all .25s ease-in-out;
   }
 
   .navbar .nav-item .dropdown-menu .dropdown-item:hover {
     background: transparent;
     color: var(--theme-color2);
     padding-left: 32px;
+    padding-right: 16px;
   }
 
   .navbar .nav-item .dropdown-menu .dropdown-item::before {
@@ -1545,6 +1550,9 @@ label {
   left: 100%;
   opacity: 0;
   visibility: hidden;
+  width: max-content;
+  min-width: 260px;
+  max-width: 460px;
 }
 
 .navbar .nav-item .wexnix_dropdown-submenu:hover .dropdown-menu {
@@ -9287,13 +9295,21 @@ html, body {
   }
 
   .wexnix_main-navigation .navbar .nav-item .dropdown-menu {
-    min-width: 270px !important;
+    width: max-content !important;
+    min-width: 300px !important;
+    max-width: 540px !important;
   }
 
   .wexnix_main-navigation .navbar .nav-item .dropdown-menu .dropdown-item {
-    font-size: 20px !important;
-    padding: 10px 24px !important;
-    line-height: 1.5 !important;
+    font-size: 18px !important;
+    padding: 12px 26px !important;
+    line-height: 1.45 !important;
+    white-space: normal !important;
+  }
+
+  .wexnix_main-navigation .navbar .nav-item .dropdown-menu .dropdown-item:hover {
+    padding-left: 34px !important;
+    padding-right: 18px !important;
   }
 
   /* 2. Notice Marquee (Approved Specification) */

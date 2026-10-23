@@ -393,6 +393,35 @@
                 line-height: 1 !important;
                 margin: 0 !important;
             }
+
+            /* ── Dropdown Menu width & item sizing (dynamic width, no text truncation) ─── */
+            .wexnix_main-navigation .navbar .nav-item .dropdown-menu,
+            .navbar .nav-item .dropdown-menu {
+                width: max-content !important;
+                min-width: 280px !important;
+                max-width: 480px !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item .dropdown-menu .dropdown-item,
+            .navbar .nav-item .dropdown-menu .dropdown-item {
+                white-space: normal !important;
+                line-height: 1.45 !important;
+                padding: 10px 24px !important;
+                font-size: 16px !important;
+                transition: all .25s ease-in-out !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item .dropdown-menu .dropdown-item:hover,
+            .navbar .nav-item .dropdown-menu .dropdown-item:hover {
+                padding-left: 32px !important;
+                padding-right: 16px !important;
+            }
+
+            .navbar .nav-item .wexnix_dropdown-submenu .dropdown-menu {
+                width: max-content !important;
+                min-width: 260px !important;
+                max-width: 460px !important;
+            }
         }
 
         /* ── Copyright wrapper ────────────────────────────────────────────────────── */
@@ -513,13 +542,21 @@
             }
 
             .wexnix_main-navigation .navbar .nav-item .dropdown-menu {
-                min-width: 270px !important;
+                width: max-content !important;
+                min-width: 300px !important;
+                max-width: 540px !important;
             }
 
             .wexnix_main-navigation .navbar .nav-item .dropdown-menu .dropdown-item {
-                font-size: 20px !important;
-                padding: 10px 24px !important;
-                line-height: 1.5 !important;
+                font-size: 18px !important;
+                padding: 12px 26px !important;
+                line-height: 1.45 !important;
+                white-space: normal !important;
+            }
+
+            .wexnix_main-navigation .navbar .nav-item .dropdown-menu .dropdown-item:hover {
+                padding-left: 34px !important;
+                padding-right: 18px !important;
             }
 
             /* 2. Notice Marquee */

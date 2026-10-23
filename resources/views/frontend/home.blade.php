@@ -53,7 +53,7 @@
 
                     @if (($siteSettings->homepage_template ?? 'default') === 'index-2')
                     <!-- home content + sidebar layout grid (index-2) -->
-                    <div class="wexnix_home-content-area" style="padding-top: 80px;">
+                    <div class="wexnix_home-content-area pt-60 pb-60">
                         <div class="container-fluid">
                             <div class="row g-4">
                                 <div class="col-lg-12">

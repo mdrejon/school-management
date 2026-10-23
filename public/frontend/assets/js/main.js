@@ -26,6 +26,21 @@ Version         : 1.0
         return false;
     });
 
+    // Auto-align dropdown if it approaches the right edge of viewport
+    $('.navbar .nav-item.dropdown, .navbar .wexnix_dropdown-submenu').on('mouseenter', function () {
+        var $menu = $(this).children('.dropdown-menu');
+        if ($menu.length && window.innerWidth >= 992) {
+            $menu.removeClass('dropdown-menu-end');
+            var offset = $menu.offset();
+            if (offset && (offset.left + $menu.outerWidth() > $(window).width() - 15)) {
+                $menu.addClass('dropdown-menu-end');
+            }
+        }
+    });
+    $('.navbar .nav-item.dropdown').on('mouseleave', function () {
+        $(this).find('.dropdown-menu-end').removeClass('dropdown-menu-end');
+    });
+
 
     // data-background    
     $(document).on('ready', function () {

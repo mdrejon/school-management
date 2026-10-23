@@ -189,6 +189,71 @@ const toggleItem = (node) => {
 };
 
 /* ------------------------------------------------------------------ */
+/* Quick Hierarchy Adjustments (Move Up, Move Down, Nest, Outdent)    */
+/* ------------------------------------------------------------------ */
+
+const moveItemUp = (list, index) => {
+    if (index > 0 && Array.isArray(list)) {
+        const [item] = list.splice(index, 1);
+        list.splice(index - 1, 0, item);
+    }
+};
+
+const moveItemDown = (list, index) => {
+    if (Array.isArray(list) && index < list.length - 1) {
+        const [item] = list.splice(index, 1);
+        list.splice(index + 1, 0, item);
+    }
+};
+
+const indentItem = (list, index) => {
+    if (index > 0 && Array.isArray(list)) {
+        const targetParent = list[index - 1];
+        if (!targetParent.children) {
+            targetParent.children = [];
+        }
+        const [item] = list.splice(index, 1);
+        targetParent.children.push(item);
+        const parentName = targetParent.label?.[defaultLangCode.value] || Object.values(targetParent.label ?? {})[0] || 'item';
+        toast.add({
+            severity: 'info',
+            summary: 'Nested',
+            detail: `Nested under "${parentName}"`,
+            life: 2500,
+        });
+    }
+};
+
+const insertAfterNode = (nodes, targetId, itemToInsert) => {
+    const idx = nodes.findIndex((n) => n.id === targetId);
+    if (idx !== -1) {
+        nodes.splice(idx + 1, 0, itemToInsert);
+        return true;
+    }
+    for (const n of nodes) {
+        if (n.children && n.children.length) {
+            if (insertAfterNode(n.children, targetId, itemToInsert)) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
+const outdentItem = (list, index, parentNode) => {
+    if (parentNode && Array.isArray(list)) {
+        const [item] = list.splice(index, 1);
+        insertAfterNode(tree.value, parentNode.id, item);
+        toast.add({
+            severity: 'info',
+            summary: 'Moved out',
+            detail: 'Moved to parent level',
+            life: 2500,
+        });
+    }
+};
+
+/* ------------------------------------------------------------------ */
 /* Add items panel                                                      */
 /* ------------------------------------------------------------------ */
 
@@ -516,10 +581,32 @@ const targetOptions = [
                         item-key="id"
                         group="menu-items"
                         handle=".wexnix-drag-handle"
-                        class="flex flex-col gap-2"
+                        :animation="150"
+                        :empty-insert-threshold="40"
+                        :fallback-on-body="true"
+                        :swap-threshold="0.65"
+                        :invert-swap="true"
+                        ghost-class="wexnix-sortable-ghost"
+                        drag-class="wexnix-sortable-drag"
+                        class="flex flex-col gap-2 min-h-[120px]"
                     >
-                        <template #item="{ element }">
-                            <MenuItemNode :node="element" :languages="languages" :default-lang-code="defaultLangCode" @save="saveItem" @delete="deleteItem" @toggle="toggleItem" />
+                        <template #item="{ element, index }">
+                            <MenuItemNode
+                                :node="element"
+                                :index="index"
+                                :parent-list="tree"
+                                :parent-node="null"
+                                :depth="0"
+                                :languages="languages"
+                                :default-lang-code="defaultLangCode"
+                                @save="saveItem"
+                                @delete="deleteItem"
+                                @toggle="toggleItem"
+                                @move-up="moveItemUp"
+                                @move-down="moveItemDown"
+                                @indent="indentItem"
+                                @outdent="outdentItem"
+                            />
                         </template>
                     </draggable>
                 </template>
@@ -527,3 +614,19 @@ const targetOptions = [
         </div>
     </AdminLayout>
 </template>
+
+<style>
+.wexnix-sortable-ghost {
+    opacity: 0.45 !important;
+    background-color: #eef2ff !important;
+    border: 2px dashed #6366f1 !important;
+    border-radius: 0.5rem !important;
+}
+
+.wexnix-sortable-drag {
+    opacity: 0.95 !important;
+    transform: scale(1.015);
+    box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.18), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+    border-color: #6366f1 !important;
+}
+</style>
