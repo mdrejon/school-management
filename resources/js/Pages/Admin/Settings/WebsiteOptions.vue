@@ -24,10 +24,10 @@ const props = defineProps({
 });
 
 const page = usePage();
-const languages = computed(() => page.props.languages);
-const defaultLangCode = computed(() => languages.value.find((l) => l.is_default)?.code);
+const languages = computed(() => page.props.languages || []);
+const defaultLangCode = computed(() => languages.value?.find((l) => l.is_default)?.code || languages.value?.[0]?.code || 'bn');
 
-const emptyTranslatable = () => Object.fromEntries(languages.value.map((l) => [l.code, '']));
+const emptyTranslatable = () => Object.fromEntries((languages.value || []).map((l) => [l.code, '']));
 
 const normalizeInstituteInfo = (items) =>
     (items ?? []).map((item) => ({
@@ -108,8 +108,13 @@ const activeSection = computed(() => sections.find((s) => s.key === activeSectio
 // the content area, so every translatable field/card below (across every
 // section) reads/writes `activeLang` directly instead of each needing its
 // own <Tabs> language switcher.
-const activeLang = ref('');
-const currentLang = computed(() => languages.value.find((l) => l.code === activeLang.value));
+const activeLang = ref(defaultLangCode.value || 'bn');
+watch(defaultLangCode, (code) => {
+    if (!activeLang.value && code) {
+        activeLang.value = code;
+    }
+}, { immediate: true });
+const currentLang = computed(() => (languages.value || []).find((l) => l.code === activeLang.value));
 
 const logoPreview = ref(props.settings.logo_url);
 const footerLogoPreview = ref(props.settings.footer_logo_url);
@@ -372,7 +377,9 @@ watch(() => form.homepage_template, (newVal) => {
     }
 });
 
-activeLang.value = defaultLangCode.value;
+if (defaultLangCode.value) {
+    activeLang.value = defaultLangCode.value;
+}
 
 const onLogoSelected = (file) => {
     form.logo = file;
@@ -577,7 +584,7 @@ const submit = () => {
                     <div class="mb-6 pb-5 border-b border-slate-100">
                         <Tabs v-model:value="activeLang">
                             <TabList>
-                                <Tab v-for="lang in languages" :key="lang.code" :value="lang.code">{{ lang.native_name }}</Tab>
+                                <Tab v-for="lang in languages" :key="lang.code" :value="lang.code">{{ lang.native_name || lang.name || lang.code.toUpperCase() }}</Tab>
                             </TabList>
                         </Tabs>
                     </div>

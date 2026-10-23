@@ -19,7 +19,11 @@ class SetLocale
     {
         $activeCodes = Language::active()->pluck('code')->all();
 
-        $locale = $request->session()->get('locale');
+        $locale = $request->query('lang');
+
+        if (! in_array($locale, $activeCodes, true)) {
+            $locale = $request->session()->get('locale');
+        }
 
         if (! in_array($locale, $activeCodes, true)) {
             $locale = $request->cookie('locale');

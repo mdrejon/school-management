@@ -18,6 +18,31 @@ class UpdateSiteSettingRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     * Decodes any escaped unicode sequences (e.g. \u0995) to actual UTF-8 characters.
+     */
+    protected function prepareForValidation(): void
+    {
+        $input = $this->all();
+        $this->replace($this->unescapeUnicodeRecursively($input));
+    }
+
+    private function unescapeUnicodeRecursively(mixed $val): mixed
+    {
+        if (is_array($val)) {
+            return array_map([$this, 'unescapeUnicodeRecursively'], $val);
+        }
+
+        if (is_string($val) && str_contains($val, '\u')) {
+            return preg_replace_callback('/\\\\+u([0-9a-fA-F]{4})/', function ($matches) {
+                return mb_chr(hexdec($matches[1]), 'UTF-8');
+            }, $val);
+        }
+
+        return $val;
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, ValidationRule|array<mixed>|string>
@@ -56,31 +81,31 @@ class UpdateSiteSettingRequest extends FormRequest
 
             'footer_quick_links_title.*' => ['nullable', 'string', 'max:100'],
             'footer_quick_links' => ['nullable', 'array'],
-            "footer_quick_links.*.label.$default" => ['required', 'string', 'max:100'],
-            'footer_quick_links.*.label.*' => ['nullable', 'string', 'max:100'],
+            "footer_quick_links.*.label.$default" => ['required', 'string', 'max:255'],
+            'footer_quick_links.*.label.*' => ['nullable', 'string', 'max:255'],
             'footer_quick_links.*.url' => ['nullable', 'string', 'max:255'],
 
             'footer_campus_title.*' => ['nullable', 'string', 'max:100'],
             'footer_campus_links' => ['nullable', 'array'],
-            "footer_campus_links.*.label.$default" => ['required', 'string', 'max:100'],
-            'footer_campus_links.*.label.*' => ['nullable', 'string', 'max:100'],
+            "footer_campus_links.*.label.$default" => ['required', 'string', 'max:255'],
+            'footer_campus_links.*.label.*' => ['nullable', 'string', 'max:255'],
             'footer_campus_links.*.url' => ['nullable', 'string', 'max:255'],
 
             'footer_newsletter_title.*' => ['nullable', 'string', 'max:100'],
             'footer_newsletter_text.*' => ['nullable', 'string', 'max:255'],
 
             'institute_info' => ['nullable', 'array'],
-            "institute_info.*.label.$default" => ['required', 'string', 'max:100'],
-            'institute_info.*.label.*' => ['nullable', 'string', 'max:100'],
-            "institute_info.*.value.$default" => ['required', 'string', 'max:100'],
-            'institute_info.*.value.*' => ['nullable', 'string', 'max:100'],
+            "institute_info.*.label.$default" => ['required', 'string', 'max:255'],
+            'institute_info.*.label.*' => ['nullable', 'string', 'max:255'],
+            "institute_info.*.value.$default" => ['required', 'string', 'max:255'],
+            'institute_info.*.value.*' => ['nullable', 'string', 'max:255'],
 
             'cta_stats' => ['nullable', 'array'],
             'cta_stats.*.icon.source' => ['required', 'in:lucide,upload'],
             'cta_stats.*.icon.value' => ['required', $this->iconValueRule()],
             'cta_stats.*.value' => ['required', 'string', 'max:20'],
-            "cta_stats.*.label.$default" => ['required', 'string', 'max:100'],
-            'cta_stats.*.label.*' => ['nullable', 'string', 'max:100'],
+            "cta_stats.*.label.$default" => ['required', 'string', 'max:255'],
+            'cta_stats.*.label.*' => ['nullable', 'string', 'max:255'],
 
             'partner_logos' => ['nullable', 'array'],
             // Each row is either a freshly-picked file (new/replaced logo)
@@ -123,8 +148,8 @@ class UpdateSiteSettingRequest extends FormRequest
             'choose_features' => ['nullable', 'array'],
             'choose_features.*.icon.source' => ['required', 'in:lucide,upload'],
             'choose_features.*.icon.value' => ['required', $this->iconValueRule()],
-            "choose_features.*.title.$default" => ['required', 'string', 'max:100'],
-            'choose_features.*.title.*' => ['nullable', 'string', 'max:100'],
+            "choose_features.*.title.$default" => ['required', 'string', 'max:255'],
+            'choose_features.*.title.*' => ['nullable', 'string', 'max:255'],
             "choose_features.*.description.$default" => ['required', 'string', 'max:255'],
             'choose_features.*.description.*' => ['nullable', 'string', 'max:255'],
 
@@ -137,8 +162,8 @@ class UpdateSiteSettingRequest extends FormRequest
             'skill_button_text.*' => ['nullable', 'string', 'max:50'],
             'skill_button_url' => ['nullable', 'string', 'max:255'],
             'skill_items' => ['nullable', 'array'],
-            "skill_items.*.label.$default" => ['required', 'string', 'max:100'],
-            'skill_items.*.label.*' => ['nullable', 'string', 'max:100'],
+            "skill_items.*.label.$default" => ['required', 'string', 'max:255'],
+            'skill_items.*.label.*' => ['nullable', 'string', 'max:255'],
             'skill_items.*.percentage' => ['required', 'integer', 'between:0,100'],
 
             'about_image_1' => ['nullable', 'image', 'max:2048'],
@@ -151,14 +176,14 @@ class UpdateSiteSettingRequest extends FormRequest
             'about_quote.*' => ['nullable', 'string', 'max:300'],
             'about_button_text.*' => ['nullable', 'string', 'max:50'],
             'about_button_url' => ['nullable', 'string', 'max:255'],
-            'about_badge_text.*' => ['nullable', 'string', 'max:100'],
+            'about_badge_text.*' => ['nullable', 'string', 'max:255'],
             'about_badge_icon.source' => ['required', 'in:lucide,upload'],
             'about_badge_icon.value' => ['required', $this->iconValueRule()],
             'about_items' => ['nullable', 'array'],
             'about_items.*.icon.source' => ['required', 'in:lucide,upload'],
             'about_items.*.icon.value' => ['required', $this->iconValueRule()],
-            "about_items.*.title.$default" => ['required', 'string', 'max:100'],
-            'about_items.*.title.*' => ['nullable', 'string', 'max:100'],
+            "about_items.*.title.$default" => ['required', 'string', 'max:255'],
+            'about_items.*.title.*' => ['nullable', 'string', 'max:255'],
             "about_items.*.description.$default" => ['required', 'string', 'max:255'],
             'about_items.*.description.*' => ['nullable', 'string', 'max:255'],
 

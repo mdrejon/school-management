@@ -1,1 +1,0 @@
-import{t as e}from"./datepicker-d1YkA7f4.js";var t={name:`Calendar`,extends:e,mounted:function(){console.warn(`Deprecated since v4. Use DatePicker component instead.`)}};export{t};

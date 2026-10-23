@@ -31,6 +31,11 @@ class Language extends Model
 
     protected static $memoizedActive = null;
 
+    public function getNativeNameAttribute(?string $value): string
+    {
+        return !empty(trim((string) $value)) ? $value : ($this->name ?: strtoupper($this->code));
+    }
+
     /**
      * Active languages, ordered for display. Cached until the next
      * create/update/delete so this can be read on every request cheaply.
@@ -48,7 +53,16 @@ class Language extends Model
 
         $rows = Cache::rememberForever(
             'languages.active',
-            fn () => static::where('is_active', true)->orderBy('sort_order')->get()->toArray()
+            fn () => static::where('is_active', true)
+                ->orderBy('sort_order')
+                ->get()
+                ->map(function ($lang) {
+                    if (empty(trim((string) $lang->native_name))) {
+                        $lang->native_name = $lang->name ?: strtoupper($lang->code);
+                    }
+                    return $lang;
+                })
+                ->toArray()
         );
 
         static::$memoizedActive = static::hydrate($rows);
