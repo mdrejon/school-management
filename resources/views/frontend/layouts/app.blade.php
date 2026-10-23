@@ -73,16 +73,30 @@
             color: #fff;
         }
 
+        .wexnix_about-experience-icon {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
         .wexnix_about-experience-icon svg {
-            width: 49px;
-            height: 50px;
-            padding-top: 10px;
+            width: 48px !important;
+            height: 48px !important;
+            padding-top: 0 !important;
+            color: var(--theme-color) !important;
+        }
+
+        .wexnix_about-item-icon {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
         }
 
         .wexnix_about-item-icon svg {
-            width: 30px;
-            height: 30px;
-            color: #fff;
+            width: 32px !important;
+            height: 32px !important;
+            color: #fff !important;
         }
 
         .wexnix_feature-icon svg {

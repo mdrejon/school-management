@@ -2003,10 +2003,20 @@ label {
   background: var(--color-white);
   border-radius: 50px;
   margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .wexnix_about-experience-icon img{
   width: 65px;
+}
+
+.wexnix_about-experience-icon svg{
+  width: 48px;
+  height: 48px;
+  color: var(--theme-color);
 }
 
 .wexnix_about-right {
@@ -2038,11 +2048,21 @@ label {
   font-size: 45px;
   color: var(--theme-color);
   box-shadow: -5px 5px 0 var(--theme-color-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .wexnix_about-item-icon img{
   width: 45px;
   filter: brightness(0) invert(1);
+}
+
+.wexnix_about-item-icon svg{
+  width: 32px;
+  height: 32px;
+  color: #fff;
 }
 
 .wexnix_about-item-content {
